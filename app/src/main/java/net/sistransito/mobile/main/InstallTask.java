@@ -9,7 +9,7 @@ package net.sistransito.mobile.main;
 import android.os.AsyncTask;
 
 import net.sistransito.MainActivity;
-import net.sistransito.SistransitoApplication;
+import net.sistransito.Application;
 import net.sistransito.mobile.appobject.AppObject;
 import net.sqlcipher.database.SQLiteDatabase;
 
@@ -34,7 +34,7 @@ public class InstallTask extends AsyncTask<Void, Integer, Void> {
         try {
             SQLiteDatabase.loadLibs(mActivity);
             publishProgress(80);
-            AppObject.newInstance(SistransitoApplication.getAppContext());
+            AppObject.newInstance(Application.getAppContext());
         } catch (Exception e) {
 
         }

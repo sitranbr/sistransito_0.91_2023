@@ -54,7 +54,7 @@ public class TabAitConductorFragment extends Fragment implements
 			Bundle savedInstanceState) {
 		view = inflater.inflate(R.layout.ait_conductor_fragment, null, false);
 		initializedView();
-		getObjectAuto();
+		getAitObject();
 		return view;
 	}
 
@@ -108,12 +108,12 @@ public class TabAitConductorFragment extends Fragment implements
 		cbIfDriverForeign = (CheckBox) view.findViewById(R.id.cb_se_condutor_estrangeiro);
 		cbAitConfirm = (CheckBox) view.findViewById(R.id.cb_auto_confirmar);
 		tvSearchCNH = (TextView) view.findViewById(R.id.tv_auto_search_cnh);
-		tvSaveData = (TextView) view.findViewById(R.id.auto_fab);
+		tvSaveData = (TextView) view.findViewById(R.id.ait_fab);
 
 	}
 
-	private void getObjectAuto() {
-		aitData = ObjectAit.getAitData();
+	private void getAitObject() {
+		aitData = AitObject.getAitData();
 		if (aitData.isDataisNull()) {
 			addListener();
 		} else if (aitData.isStoreFullData()) {
@@ -164,9 +164,9 @@ public class TabAitConductorFragment extends Fragment implements
 						aitData.setDocumentType((String) parent
 								.getItemAtPosition(pos));
 
-						int realposition = listDocumentType.indexOf(aitData.getDocumentType());
+						int realPosition = listDocumentType.indexOf(aitData.getDocumentType());
 
-						if (realposition == 5) {
+						if (realPosition == 5) {
 							editDriverDocumentNumber.setVisibility(View.GONE);
 						} else {
 							editDriverDocumentNumber.setVisibility(View.VISIBLE);
@@ -268,11 +268,11 @@ public class TabAitConductorFragment extends Fragment implements
 						httpResultAnysTask.execute("");
 
 					} else {
-						Routine.showAlert(getResources().getString(R.string.sem_conexao), getActivity());
+						Routine.showAlert(getResources().getString(R.string.no_network_connection), getActivity());
 					}
 
 				} else {
-					Routine.showAlert(getResources().getString(R.string.titulo_tela_consulta_cnh), getActivity());
+					Routine.showAlert(getResources().getString(R.string.cnh_search_screen_title), getActivity());
 				}
 
 				Routine.closeKeyboard(editDriverDocument, getActivity());
@@ -295,7 +295,7 @@ public class TabAitConductorFragment extends Fragment implements
 				if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).updateAitDataConductor(aitData))
 					Routine.showAlert(getResources().getString(R.string.update_erro), getActivity());
 
-				((AitActivity) getActivity()).setTabAtual(2);
+				((AitActivity) getActivity()).setTabActual(2);
 
 			}
 		});
@@ -316,7 +316,7 @@ public class TabAitConductorFragment extends Fragment implements
 			spinnerStateDriver.setSelection(selection_1 + 1);
 
 		} else {
-			Routine.showAlert(getResources().getString(R.string.nehum_resultado_retornado), getActivity());
+			Routine.showAlert(getResources().getString(R.string.no_result_returned), getActivity());
 		}
 
 	}

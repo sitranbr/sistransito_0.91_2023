@@ -41,7 +41,6 @@ public class SectionsPagerAdapterLogin extends FragmentPagerAdapter {
 
 	@Override
 	public CharSequence getPageTitle(int position) {
-
 		return null;
 	}
 

@@ -5,9 +5,9 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.view.ViewGroup;
 
-import net.sistransito.mobile.aitcompany.TabPJCondutorSubTituloFragment;
-import net.sistransito.mobile.aitcompany.TabPJEnderecoSubTituloFragment;
-import net.sistransito.mobile.aitcompany.TabPJInfracaoSubTituloFragment;
+import net.sistransito.mobile.aitcompany.TabPJConductorSubTitleFragment;
+import net.sistransito.mobile.aitcompany.TabPJAddressSubTitleFragment;
+import net.sistransito.mobile.aitcompany.TabPJInfractionSubTitleFragment;
 
 public class TabPJSubTitleSectionsPagerAdapter extends FragmentPagerAdapter
 
@@ -32,11 +32,11 @@ public class TabPJSubTitleSectionsPagerAdapter extends FragmentPagerAdapter
 
         switch (index) {
             case 0:
-                return TabPJCondutorSubTituloFragment.newInstance();
+                return TabPJConductorSubTitleFragment.newInstance();
             case 1:
-                return TabPJEnderecoSubTituloFragment.newInstance();
+                return TabPJAddressSubTitleFragment.newInstance();
             case 2:
-                return TabPJInfracaoSubTituloFragment.newInstance();
+                return TabPJInfractionSubTitleFragment.newInstance();
         }
         return null;
     }

@@ -22,7 +22,7 @@ import net.sistransito.mobile.ait.AitActivity;
 import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.database.InfractionDatabaseHelper;
 import net.sistransito.mobile.database.DatabaseCreator;
-import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListerner;
+import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListener;
 import net.sistransito.mobile.rrd.RrdActivity;
 import net.sistransito.mobile.rrd.RrdData;
 import net.sistransito.mobile.tav.TavActivity;
@@ -33,15 +33,15 @@ import net.sistransito.R;
 
 public class AitListerExpandableAdapter extends CursorTreeAdapter {
 	private LayoutInflater mInflator;
-	private Context mycontext;
-	private BluetoothPrinterListerner printListener;
-	private String carPlate;
+	private Context context;
+	private BluetoothPrinterListener printListener;
+	private String vehiclePlate;
 
 	public AitListerExpandableAdapter(Cursor cursor, Context context) {
 		super(cursor, context);
-		mycontext = context;
+		this.context = context;
 		mInflator = LayoutInflater.from(context);
-		printListener = (BluetoothPrinterListerner) context;
+		printListener = (BluetoothPrinterListener) context;
 	}
 
 	@Override
@@ -68,7 +68,7 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		logAit.setText(cursor.getString(cursor
 				.getColumnIndex(InfractionDatabaseHelper.AIT_NUMBER)));
 
-		carPlate = cursor.getString(cursor
+		vehiclePlate = cursor.getString(cursor
 				.getColumnIndex(InfractionDatabaseHelper.PLATE));
 
 		/*TimeAndIme dozeHoras = new TimeAndIme(mycontext);
@@ -97,26 +97,26 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 			boolean isExpendable, ViewGroup parent) {
 		View view = mInflator.inflate(R.layout.ait_list_listview_parent,
 				null);
-		TextView logPlate, logModel, logArt, logAit;
-		ImageView imgSinc;
+		TextView logPlate, logModel, logArticle, logAit;
+		ImageView imgSync;
 
 		logPlate = (TextView) view.findViewById(R.id.log_plate);
 		logModel = (TextView) view.findViewById(R.id.log_model);
-		logArt = (TextView) view.findViewById(R.id.log_art);
+		logArticle = (TextView) view.findViewById(R.id.log_art);
 		logAit = (TextView) view.findViewById(R.id.log_ait);
-		imgSinc = (ImageView) view.findViewById(R.id.img_sinc);
+		imgSync = (ImageView) view.findViewById(R.id.img_sinc);
 
 		String sync = (cursor.getString(cursor
 				.getColumnIndex(InfractionDatabaseHelper.SYNC_STATUS)));
 
-		String plateCar = (cursor.getString(cursor
+		String plate = (cursor.getString(cursor
 				.getColumnIndex(InfractionDatabaseHelper.PLATE)));
 
-		//DatabaseCreator.getDatabaseAdapterAutoInfracao(context).autoUpdateSyncStatus("TL00006683");
+		//DatabaseCreator.getDatabaseAdapterAitInfraction(context).aitUpdateSyncStatus("TL00006683");
 
 		try {
 			if(sync.equals("0")) {
-				imgSinc.setImageDrawable(context.getDrawable(R.drawable.icons_sincronizar));
+				imgSync.setImageDrawable(context.getDrawable(R.drawable.icons_sincronizar));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -126,11 +126,10 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 				.getColumnIndex(InfractionDatabaseHelper.PLATE)));
 		logModel.setText(cursor.getString(cursor
 				.getColumnIndex(InfractionDatabaseHelper.VEHICLE_MODEL)));
-		logArt.setText(cursor.getString(cursor
+		logArticle.setText(cursor.getString(cursor
 				.getColumnIndex(InfractionDatabaseHelper.ARTICLE)));
 		logAit.setText(cursor.getString(cursor
 				.getColumnIndex(InfractionDatabaseHelper.AIT_NUMBER)));
-
 
 		return view;
 	}
@@ -139,7 +138,7 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 	protected Cursor getChildrenCursor(Cursor groupCursor) {
 		int groupId = groupCursor.getInt(groupCursor
 				.getColumnIndex(InfractionDatabaseHelper.COLUMN_ID));
-		return (DatabaseCreator.getInfractionDatabaseAdapter(mycontext))
+		return (DatabaseCreator.getInfractionDatabaseAdapter(context))
 				.getAitCursorFromID(groupId);
 	}
 
@@ -147,32 +146,27 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 	public View getChildView(int groupPosition, int childPosition,
 			boolean isLastChild, View view, ViewGroup parent) {
 		// final int gPosition = groupPosition;
-		TextView tvAutosChildView;
-		FrameLayout fragmentContainerAuto;
+		TextView tvAitChildView;
+		FrameLayout fragmentContainerAit;
 		Button btnOpenTav, btnOpenTca, btnOpenRrd, btnPrintAit, btnNewAit;
 
-		View mView = null;
-		if (view != null) {
-			mView = view;
-		} else {
-			mView = mInflator.inflate(R.layout.auto_lista_listview_child,
-					parent, false);
-		}
+		View mView = view != null ? view : mInflator.inflate(R.layout.ait_list_listview_child,
+				parent, false);
 
-		fragmentContainerAuto = (FrameLayout) mView.findViewById(R.id.fragment_container_list);
+		fragmentContainerAit = (FrameLayout) mView.findViewById(R.id.fragment_container_list);
 
-		tvAutosChildView = (TextView) mView.findViewById(R.id.tv_ver_dados_auto_childview);
+		tvAitChildView = (TextView) mView.findViewById(R.id.tv_ver_dados_auto_childview);
 
 		final AitData aitData = new AitData();
 
 		aitData.setAitDataFromCursor(getGroup(groupPosition));
 
-		/*fragmentContainerAuto.setVisibility(view.VISIBLE);
+		/*fragmentContainerAit.setVisibility(view.VISIBLE);
 		FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
 		fragmentManager.beginTransaction()
-				.replace(R.id.fragment_container_list, AutoPreviewFragment.newInstance()).commit();*/
+				.replace(R.id.fragment_container_list, AitPreviewFragment.newInstance()).commit();*/
 
-		tvAutosChildView.setText(aitData.getAutoListViewData(mycontext));
+		tvAitChildView.setText(aitData.getAitListViewData(context));
 
 		btnOpenTav = (Button) mView.findViewById(R.id.btn_open_tav);
 		btnOpenTca = (Button) mView.findViewById(R.id.btn_open_tca);
@@ -185,11 +179,11 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 			@Override
 			public void onClick(View arg0) {
 
-				/*openDadosAuto((DatabaseCreator
-						.getDatabaseAdapterAutoInfracao(mycontext))
-						.getDataAutoFromPlate(carPlate));*/
+				/*openAitData((DatabaseCreator
+						.getInfractionDatabaseAdapter(context))
+						.getAitDataFromPlate(vehiclePlate));*/
 
-				dialogNewAit("Deseja criar outro AIT para este veículo de placa " + carPlate + " ?", mycontext);
+				dialogNewAit(context.getString(R.string.question_new_ait) + vehiclePlate + " ?", context);
 
 			}
 
@@ -246,10 +240,9 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		});
 
 		btnPrintAit.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				dialogViaPrint(aitData, mycontext);
+				dialogPrintCopy(aitData, context);
 			}
 		});
 
@@ -259,17 +252,17 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 	public void dialogNewAit(String mgs, Context context) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context,
 				AlertDialog.THEME_HOLO_LIGHT);
-		builder.setTitle("Novo AIT");
+		builder.setTitle(context.getString(R.string.new_ait));
 		builder.setMessage(mgs);
-		builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+		builder.setPositiveButton(context.getString(R.string.new_ait_yes), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
-				openDadosAuto((DatabaseCreator
-						.getInfractionDatabaseAdapter(mycontext))
-						.getAitDataFromPlate(carPlate));
+				openAitData((DatabaseCreator
+						.getInfractionDatabaseAdapter(AitListerExpandableAdapter.this.context))
+						.getAitDataFromPlate(vehiclePlate));
 			}
 		});
-		builder.setNegativeButton("Sair", new DialogInterface.OnClickListener() {
+		builder.setNegativeButton(context.getString(R.string.new_ait_out), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.cancel();
@@ -280,32 +273,33 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		alertDialog.show();
 	}
 
-	public void dialogViaPrint(final AitData dados, Context context){
+	public void dialogPrintCopy(final AitData aitData, Context context){
 		LayoutInflater linear = LayoutInflater.from(context);
-		View view = linear.inflate(R.layout.layout_opcao_print, null);
-		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mycontext, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+		View view = linear.inflate(R.layout.layout_option_print, null);
+
+		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this.context, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
 		alertDialog.setView(view);
 
 		final AlertDialog dialog = alertDialog.create();
 		dialog.show();
 
-		Button btnViaAgente, btnViaCondutor;
+		Button btnAgentCopy, btnConductorCopy;
 
-		btnViaAgente = (Button) view.findViewById(R.id.btn_via_agente);
-		btnViaCondutor = (Button) view.findViewById(R.id.btn_via_condutor);
+		btnAgentCopy = (Button) view.findViewById(R.id.btn_via_agente);
+		btnConductorCopy = (Button) view.findViewById(R.id.btn_via_condutor);
 
-		btnViaAgente.setOnClickListener(new OnClickListener() {
+		btnAgentCopy.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				printListener.print(dados, null, "AGENTE");
+				printListener.print(aitData, null, context.getString(R.string.capital_agent_copy));
 				dialog.dismiss();
 			}
 		});
 
-		btnViaCondutor.setOnClickListener(new OnClickListener() {
+		btnConductorCopy.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				printListener.print(dados, null, "CONDUTOR");
+				printListener.print(aitData, null, context.getString(R.string.capital_driver_copy));
 				dialog.dismiss();
 			}
 		});
@@ -313,39 +307,39 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 	}
 
 	private void openRRD(RrdData data) {
-		Intent intent = new Intent(mycontext, RrdActivity.class);
+		Intent intent = new Intent(context, RrdActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(RrdData.getRRDId(), data);
 		intent.putExtras(bundle);
-		mycontext.startActivity(intent);
-		((Activity) mycontext).finish();
+		context.startActivity(intent);
+		((Activity) context).finish();
 	}
 
 	private void openTCA(TcaData data) {
-		Intent intent = new Intent(mycontext, TcaActivity.class);
+		Intent intent = new Intent(context, TcaActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(TcaData.getTcaId(), data);
 		intent.putExtras(bundle);
-		mycontext.startActivity(intent);
-		((Activity) mycontext).finish();
+		context.startActivity(intent);
+		((Activity) context).finish();
 	}
 
 	private void openTAV(TavData data) {
-		Intent intent = new Intent(mycontext, TavActivity.class);
+		Intent intent = new Intent(context, TavActivity.class);
 		Bundle bundle = new Bundle();
 		bundle.putSerializable(TavData.getTavId(), data);
 		intent.putExtras(bundle);
-		mycontext.startActivity(intent);
-		((Activity) mycontext).finish();
+		context.startActivity(intent);
+		((Activity) context).finish();
 	}
 
-	private void openDadosAuto(AitData aitData) {
-		Intent intent = new Intent(mycontext, AitActivity.class);
+	private void openAitData(AitData aitData) {
+		Intent intent = new Intent(context, AitActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(AitData.getIDAuto(), aitData);
+		bundle.putSerializable(AitData.getAitID(), aitData);
 		intent.putExtras(bundle);
-		mycontext.startActivity(intent);
-		((Activity) mycontext).finish();
+		context.startActivity(intent);
+		((Activity) context).finish();
 	}
 
 }

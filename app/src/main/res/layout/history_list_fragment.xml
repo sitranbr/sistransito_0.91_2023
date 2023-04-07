@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_2"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/layout_margin_buttom"
+    android:paddingLeft="@dimen/layout_margin_left_right"
+    android:paddingRight="@dimen/layout_margin_left_right"
+    android:paddingTop="@dimen/layout_margin_top" >
+
+    <com.rey.material.widget.Button
+        style="@style/Material.Drawable.Ripple.Wave"
+        android:id="@+id/btn_list_plate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/width_margin_top"
+        android:layout_marginTop="@dimen/width_margin_top"
+        android:background="@drawable/btn_orange"
+        android:drawableLeft="@drawable/ic_lister_placa"
+        android:drawablePadding="@dimen/width_padding"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/width_padding"
+        android:text="@string/list_plate_consulted"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white" />
+
+    <com.rey.material.widget.Button
+        style="@style/Material.Drawable.Ripple.Wave"
+        android:id="@+id/btn_list_ait"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/width_margin_top"
+        android:layout_marginTop="@dimen/width_margin_top"
+        android:background="@drawable/btn_orange"
+        android:drawableLeft="@drawable/ic_lister_autos"
+        android:drawablePadding="@dimen/width_padding"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/width_padding"
+        android:text="@string/list_ait_issued"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white" />
+
+    <com.rey.material.widget.Button
+        style="@style/Material.Drawable.Ripple.Wave"
+        android:id="@+id/btn_list_tav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/width_margin_top"
+        android:layout_marginTop="@dimen/width_margin_top"
+        android:background="@drawable/btn_orange"
+        android:drawableLeft="@drawable/ic_lister_tav"
+        android:drawablePadding="@dimen/width_padding"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/width_padding"
+        android:text="@string/list_tav_issued"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white" />
+
+    <com.rey.material.widget.Button
+        style="@style/Material.Drawable.Ripple.Wave"
+        android:id="@+id/btn_list_tca"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/width_margin_top"
+        android:layout_marginTop="@dimen/width_margin_top"
+        android:background="@drawable/btn_orange"
+        android:drawableLeft="@drawable/ic_lister_tc"
+        android:drawablePadding="@dimen/width_padding"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/width_padding"
+        android:text="@string/list_tca_issued"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white" />
+
+    <com.rey.material.widget.Button
+        style="@style/Material.Drawable.Ripple.Wave"
+        android:id="@+id/btn_list_rrd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/width_margin_top"
+        android:layout_marginTop="@dimen/width_margin_top"
+        android:background="@drawable/btn_orange"
+        android:drawableLeft="@drawable/ic_lister_rrd"
+        android:drawablePadding="@dimen/width_padding"
+        android:gravity="left|center_vertical"
+        android:padding="@dimen/width_padding"
+        android:text="@string/list_rrd_issued"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/white" />
+
+</LinearLayout>

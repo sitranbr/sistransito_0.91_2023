@@ -175,7 +175,7 @@ public class ImageFragment extends Fragment implements
                 pDialog = new ProgressDialog(getActivity());
                 pDialog.setMax(100);
                 pDialog.setCancelable(false);
-                pDialog.setMessage(getActivity().getResources().getString(R.string.sincronizacao_mgs));
+                pDialog.setMessage(getActivity().getResources().getString(R.string.message_synchronize));
                 pDialog.show();
             }
 
@@ -238,7 +238,7 @@ public class ImageFragment extends Fragment implements
                 sync.uploadImage("TL00007114", "/storage/emulated/0/storage/emulated/0/SistransitoMobile");*/
                 uploadImage();
             } else {
-                Toast.makeText(getContext(),getResources().getString(R.string.sem_conexao),Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(),getResources().getString(R.string.no_network_connection),Toast.LENGTH_LONG).show();
             }
         }
 

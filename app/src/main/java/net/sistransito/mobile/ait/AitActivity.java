@@ -12,8 +12,8 @@ import android.widget.ImageView;
 
 import com.viewpagerindicator.UnderlinePageIndicator;
 
-import net.sistransito.mobile.adapter.TabAutoStartSectionsPagerAdapter;
-import net.sistransito.mobile.adapter.TabAutoSubTitleSectionsPagerAdapter;
+import net.sistransito.mobile.adapter.TabAitStartSectionsPagerAdapter;
+import net.sistransito.mobile.adapter.TabAitSubTitleSectionsPagerAdapter;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyAlertDialog;
 import net.sistransito.mobile.fragment.UpdateFragment;
@@ -34,20 +34,19 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	private UnderlinePageIndicator indicator;
 	private ImageView imBtnTabVehicle, imBtnTabConductor, imBtnTabAddress, imBtnTabInfraction,
 			imBtnTabGeneration, imBtnBack;
-	private TabAutoStartSectionsPagerAdapter adapter;
+	private TabAitStartSectionsPagerAdapter adapter;
 	private AitData aitData;
 
-	private int tabAtual;
+	private int tabActual;
 
-	String tabCondutor;
+	String tabConductor;
 
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setContentView(R.layout.auto_de_main);
+		setContentView(R.layout.ait_main);
 
 		getAitObject();
-		//enviarParaFragment("Enviado de AutoActiviy");
 		initializedView();
 		setMainPager();
 		setPagerSubtitle();
@@ -59,8 +58,8 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 
 	private void getAitObject() {
 		Bundle bundle = getIntent().getExtras();
-		ObjectAit.setAitData((AitData) bundle.getSerializable(AitData.getIDAuto()));
-		aitData = ObjectAit.getAitData();
+		AitObject.setAitData((AitData) bundle.getSerializable(AitData.getAitID()));
+		aitData = AitObject.getAitData();
 	}
 
 	private void setIndicatorTitle() {
@@ -71,11 +70,11 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 		indicator.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
-			public void onPageSelected(int positon) {
+			public void onPageSelected(int position) {
 
-				if (positon == 4) {
+				if (position == 4) {
 					UpdateFragment fragment = (UpdateFragment) adapter
-							.instantiateItem(pager, positon);
+							.instantiateItem(pager, position);
 					fragment.Update();
 				}
 			}
@@ -93,9 +92,9 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	}
 
 	private void setPagerSubtitle() {
-		pageSubtitle = (AnySwipeableViewPager) findViewById(R.id.auto_title_pager);
+		pageSubtitle = (AnySwipeableViewPager) findViewById(R.id.ait_title_pager);
 		pageSubtitle.setSwipeable(false);
-		pageSubtitle.setAdapter(new TabAutoSubTitleSectionsPagerAdapter(
+		pageSubtitle.setAdapter(new TabAitSubTitleSectionsPagerAdapter(
 				getSupportFragmentManager()));
 		pageSubtitle.setPageMargin(20);
 		pageSubtitle.setPageTransformer(true,
@@ -111,9 +110,9 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	}
 
 	private void setMainPager() {
-		adapter = new TabAutoStartSectionsPagerAdapter(
+		adapter = new TabAitStartSectionsPagerAdapter(
 				getSupportFragmentManager());
-		pager = (AnySwipeableViewPager) findViewById(R.id.auto_start_pager);
+		pager = (AnySwipeableViewPager) findViewById(R.id.ait_start_pager);
 		pager.setSwipeable(false);
 		pager.setPageMargin(20);
 		pager.setPageTransformer(true, new DepthPageTransformer());
@@ -133,15 +132,15 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	}
 
 	public void sendToFragment(String tab){
-		TabAitVehicleFragment veiculoFragment = new TabAitVehicleFragment();
+		TabAitVehicleFragment vehicleFragment = new TabAitVehicleFragment();
 		Bundle args = new Bundle();
 		args.putString("idTag",tab);
-		veiculoFragment.setArguments(args);
+		vehicleFragment.setArguments(args);
 	}
 
-	public void setCancel(Context mycontext, String reason){
-		if (!DatabaseCreator.getInfractionDatabaseAdapter(mycontext).cancelAit(aitData, reason))
-			Routine.showAlert(getResources().getString(R.string.update_erro), mycontext);
+	public void setCancel(Context context, String reason){
+		if (!DatabaseCreator.getInfractionDatabaseAdapter(context).cancelAit(aitData, reason))
+			Routine.showAlert(getResources().getString(R.string.update_erro), context);
 	}
 
 	@Override
@@ -153,7 +152,7 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 			case R.id.im_btn_tab_conductor:
 				setPagerPosition(1);
 				break;
-			case R.id.im_btn_tab_end:
+			case R.id.im_btn_tab_address:
 				setPagerPosition(2);
 				break;
 			case R.id.im_btn_tab_infraction:
@@ -162,8 +161,8 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 			case R.id.im_btn_tab_generation:
 				setPagerPosition(4);
 				break;
-			case R.id.im_auto_btn_back:
-				AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.titulo_cancelar), "auto");
+			case R.id.im_ait_btn_back:
+				AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), "ait");
 				break;
 		}
 	}
@@ -172,13 +171,13 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 		if (aitData.isStoreFullData() && position == 0) {
 			return;
 		}
-		setCurrentTabSelectedIteams(position);
+		setCurrentTabSelectedItens(position);
 		pageSubtitle.setCurrentItem(position);
 		pager.setCurrentItem(position);
 	}
 
-	private void setCurrentTabSelectedIteams(int positon) {
-		switch (positon) {
+	private void setCurrentTabSelectedItens(int position) {
+		switch (position) {
 		case 0:
       		imBtnTabVehicle.setSelected(true);
 			imBtnTabConductor.setSelected(false);
@@ -220,7 +219,7 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	private void initializedView() {
         imBtnTabVehicle = (ImageView) findViewById(R.id.im_btn_tab_vehicle);
         imBtnTabConductor = (ImageView) findViewById(R.id.im_btn_tab_conductor);
-		imBtnTabAddress = (ImageView) findViewById(R.id.im_btn_tab_end);
+		imBtnTabAddress = (ImageView) findViewById(R.id.im_btn_tab_address);
 		imBtnTabInfraction = (ImageView) findViewById(R.id.im_btn_tab_infraction);
 		imBtnTabGeneration = (ImageView) findViewById(R.id.im_btn_tab_generation);
 
@@ -230,11 +229,11 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 		imBtnTabInfraction.setOnClickListener(this);
 		imBtnTabGeneration.setOnClickListener(this);
 
-		imBtnBack = (ImageView) findViewById(R.id.im_auto_btn_back);
+		imBtnBack = (ImageView) findViewById(R.id.im_ait_btn_back);
 		imBtnBack.setOnClickListener(this);
 	}
 
-	public void setTabAtual(int tabAtual) { setPagerPosition(tabAtual); }
+	public void setTabActual(int tabActual) { setPagerPosition(tabActual); }
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {

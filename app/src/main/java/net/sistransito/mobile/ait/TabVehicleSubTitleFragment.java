@@ -16,7 +16,7 @@ public class TabVehicleSubTitleFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.auto_veiculo_fragment_subtitulo, null, false);
+		view = inflater.inflate(R.layout.ait_vehicle_fragment_subtitle, null, false);
 		return view;
 	}
 	public static TabVehicleSubTitleFragment newInstance() {

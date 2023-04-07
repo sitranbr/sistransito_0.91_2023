@@ -24,7 +24,7 @@ import net.sistransito.mobile.adapter.AnyArrayAdapter;
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyAlertDialog;
-import net.sistransito.mobile.tav.lister.TAVLister;
+import net.sistransito.mobile.tav.lister.TavLister;
 import net.sistransito.R;
 
 import java.util.Arrays;
@@ -56,7 +56,7 @@ public class TavGenerateFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.tav_geral_fragment, null, false);
+		view = inflater.inflate(R.layout.tav_generation_fragment, null, false);
 		initializedView();
 		getAitObject();
 		return view;
@@ -220,7 +220,7 @@ public class TavGenerateFragment extends Fragment implements
 			(DatabaseCreator.getTavDatabaseAdapter(getActivity()))
 					.setData(tavData);
 			getActivity().startActivity(
-					new Intent(getActivity(), TAVLister.class));
+					new Intent(getActivity(), TavLister.class));
 
 			getActivity().finish();
 
@@ -230,7 +230,7 @@ public class TavGenerateFragment extends Fragment implements
 
 			AnyAlertDialog.dialogShow(tavData.getTAVListerView(getActivity()),
 					getActivity(), getResources()
-							.getString(R.string.listar_tav));
+							.getString(R.string.list_tav_issued));
 
 			break;
 		}

@@ -73,7 +73,7 @@ public class PlateListerDeleteExpendableAdapter extends CursorTreeAdapter {
 			boolean isExpanded, ViewGroup parent) {
 
 		View view = mInflator.inflate(
-				R.layout.placa_lista_delete_listview_parent, null);
+				R.layout.plate_list_delete_listview_parent, null);
 		ImageView imageView;
 
 		TextView tvLogPlate, tvLogTime, tvLogLicenseStatus;
@@ -98,7 +98,7 @@ public class PlateListerDeleteExpendableAdapter extends CursorTreeAdapter {
 			ViewGroup parent) {
 		final int position = groupPosition;
 
-		view = mInflator.inflate(R.layout.placa_lista_delete_listview_parent,
+		view = mInflator.inflate(R.layout.plate_list_delete_listview_parent,
 				null);
 
 		TextView tvLogPlate, tvLogTime, tvLogLicenseStatus;

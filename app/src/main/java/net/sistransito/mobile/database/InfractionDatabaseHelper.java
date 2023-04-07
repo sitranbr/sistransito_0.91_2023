@@ -10,15 +10,15 @@ public class InfractionDatabaseHelper extends SQLiteOpenHelper {
 
 	public static final String DATABASE_NAME = "database_ait.db";
 	public static final int VERSION = 1;
-	public static final String TABLE_NAME = "tb_ait";
+	public static final String TABLE_NAME = "tb_infraction";
 
 	// conductor TAB
 	public static final String COLUMN_ID = "_id";
-	public static final String AIT_NUMBER = "ait";
+	public static final String AIT_NUMBER = "ait_number";
 	public static final String PLATE = "plate";
 	public static final String VEHICLE_STATE = "state_vehicle";
 	public static final String CHASSI = "chassi";
-	public static final String RENAVAN = "renavam";
+	public static final String RENAVAM = "renavam";
 	public static final String VEHICLE_BRAND = "vehicle_brand";
 	public static final String VEHICLE_MODEL = "vehicle_model";
 	public static final String COUNTRY = "country";
@@ -36,7 +36,7 @@ public class InfractionDatabaseHelper extends SQLiteOpenHelper {
 	public static final String DOCUMENT_NUMBER = "document_number";
 
 	// infration TAB
-	public static final String INFRATION = "infration";
+	public static final String INFRACTION = "infraction";
 	public static final String FLAMING_CODE = "framing_code";
 	public static final String UNFOLDING = "unfolding";
 	public static final String ARTICLE = "article";
@@ -85,14 +85,14 @@ public class InfractionDatabaseHelper extends SQLiteOpenHelper {
 	public static final String TABLE_SQL = "CREATE TABLE " + TABLE_NAME + " ("
 			+ COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
 			+ AIT_NUMBER + " TEXT UNIQUE, " + PLATE + " TEXT, " + VEHICLE_STATE + " TEXT, "
-			+ RENAVAN + " TEXT, "  + CHASSI + " TEXT, " + COUNTRY + " TEXT, " + VEHICLE_BRAND + " TEXT, "
+			+ RENAVAM + " TEXT, "  + CHASSI + " TEXT, " + COUNTRY + " TEXT, " + VEHICLE_BRAND + " TEXT, "
 			+ VEHICLE_MODEL + " TEXT, " + VEHICLE_COLOR + " TEXT, "
 			+ SPECIES + " TEXT, " + CATEGORY + " TEXT, " + APPROACH + " TEXT, "
 			+ DRIVER_NAME + " TEXT, " + DRIVER_FOREIGN + " TEXT, "
 			+ DRIVER_COUNTRY + " TEXT, " + ENABLED_DRIVER + " TEXT, "
 			+ DRIVER_LICENSE + " TEXT, " + DRIVER_LICENSE_STATE + " TEXT, "
 			+ DOCUMENT_TYPE + " TEXT, " + DOCUMENT_NUMBER + " TEXT, "
-			+ INFRATION + " TEXT, " + FLAMING_CODE + " TEXT, " + UNFOLDING + " TEXT, "
+			+ INFRACTION + " TEXT, " + FLAMING_CODE + " TEXT, " + UNFOLDING + " TEXT, "
 			+ ARTICLE + " TEXT, " + TCA_NUMBER + " TEXT, " + CITY_CODE + " TEXT, "
 			+ CITY + " TEXT, " + STATE + " TEXT, "
 			+ ADDRESS + " TEXT, " + AIT_DATE + " TEXT, "

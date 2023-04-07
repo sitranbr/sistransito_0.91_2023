@@ -235,7 +235,7 @@ public class RrdData implements Serializable {
 	public String getRRDListViewData(Context context) {
 		String rrd =
 
-		context.getResources().getString(R.string.rrd_numero_auto)
+		context.getResources().getString(R.string.rrd_ait_number)
 				+ getNewline()
 				+ aitNumber
 				+ getNewline_2()
@@ -247,7 +247,7 @@ public class RrdData implements Serializable {
 				+ getNewline()
 				+ driverName
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_numero_crlv)
+				+ context.getResources().getString(R.string.rrd_crlv_number)
 				+ getNewline()
 				+ crlvNumber
 				+ getNewline_2()
@@ -259,17 +259,17 @@ public class RrdData implements Serializable {
 				+ getNewline()
 				+ validity
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_uf)
+				+ context.getResources().getString(R.string.rrd_state)
 				+ getNewline()
 				+ plateState
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.rrd_qtd_de_dias_para_regularizacao)
+						R.string.rrd_qty_of_days_to_regularization)
 				+ getNewline()
 				+ daysForRegularization
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.rrd_motivo_para_recolhimento) + getNewline()
+						R.string.ait_reason_for_collection) + getNewline()
 				+ reasonCollected + getNewline_2();
 
 		return rrd;

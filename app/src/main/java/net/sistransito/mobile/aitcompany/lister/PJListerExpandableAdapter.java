@@ -19,20 +19,20 @@ import net.sistransito.mobile.aitcompany.AitCompanyActivity;
 import net.sistransito.mobile.aitcompany.pjData;
 import net.sistransito.mobile.database.AitPJDatabaseHelper;
 import net.sistransito.mobile.database.DatabaseCreator;
-import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListerner;
+import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListener;
 import net.sistransito.R;
 
 public class PJListerExpandableAdapter extends CursorTreeAdapter {
     private LayoutInflater mInflator;
     private Context mycontext;
-    private BluetoothPrinterListerner printListener;
+    private BluetoothPrinterListener printListener;
     private String cpfCnpj;
 
     public PJListerExpandableAdapter(Cursor cursor, Context context) {
         super(cursor, context);
         mycontext = context;
         mInflator = LayoutInflater.from(context);
-        printListener = (BluetoothPrinterListerner) context;
+        printListener = (BluetoothPrinterListener) context;
     }
 
     @Override
@@ -70,7 +70,7 @@ public class PJListerExpandableAdapter extends CursorTreeAdapter {
     @Override
     protected View newGroupView(Context context, Cursor cursor,
                                 boolean isExpendable, ViewGroup parent) {
-        View view = mInflator.inflate(R.layout.autopj_lista_listview_parent,
+        View view = mInflator.inflate(R.layout.ait_pj_list_listview_parent,
                 null);
         TextView logInfrator, logCpfCnpj, logArt, logAit;
 
@@ -110,7 +110,7 @@ public class PJListerExpandableAdapter extends CursorTreeAdapter {
         if (view != null) {
             mView = view;
         } else {
-            mView = mInflator.inflate(R.layout.autopj_lista_listview_child,
+            mView = mInflator.inflate(R.layout.ait_pj_list_listview_child,
                     parent, false);
         }
 
@@ -185,7 +185,7 @@ public class PJListerExpandableAdapter extends CursorTreeAdapter {
 
     public void dialogViaPrint(final pjData dados, Context context){
         LayoutInflater linear = LayoutInflater.from(context);
-        View view = linear.inflate(R.layout.layout_opcao_print, null);
+        View view = linear.inflate(R.layout.layout_option_print, null);
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mycontext, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
         alertDialog.setView(view);
 

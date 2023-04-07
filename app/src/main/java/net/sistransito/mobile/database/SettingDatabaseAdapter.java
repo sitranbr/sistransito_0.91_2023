@@ -3,7 +3,7 @@ package net.sistransito.mobile.database;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.util.Log;
+
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.timeandime.TimeAndIme;
 import android.database.sqlite.SQLiteDatabase;
@@ -22,13 +22,13 @@ public class SettingDatabaseAdapter {
 		checkTable();
 	}
 
-	private String getNumero(String table_name, String filed_name) {
-		Cursor myCursor = this.database.query(table_name, null, null, null,
-				null, null, filed_name + " DESC");
+	private String getNumber(String tableName, String filedName) {
+		Cursor myCursor = this.database.query(tableName, null, null, null,
+				null, null, filedName + " DESC");
 		if (myCursor.getCount() > 0) {
 			myCursor.moveToLast();
 			String num = myCursor
-					.getString(myCursor.getColumnIndex(filed_name));
+					.getString(myCursor.getColumnIndex(filedName));
 			myCursor.close();
 			return num;
 		} else {
@@ -44,8 +44,8 @@ public class SettingDatabaseAdapter {
 		return myCursor;
 	}
 
-	public String getSettingNumero() {
-		return getNumero(SetttingDatabaseHelper.SETTING_TABLE_NAME,
+	public String getSettingNumber() {
+		return getNumber(SetttingDatabaseHelper.SETTING_TABLE_NAME,
 				SetttingDatabaseHelper.SETTING_ID);
 	}
 
@@ -72,7 +72,7 @@ public class SettingDatabaseAdapter {
 
 	}
 
-	public Boolean getAutobackup() {
+	public Boolean getAutoBackup() {
 		Cursor cursor = database.query(
 				SetttingDatabaseHelper.SETTING_TABLE_NAME, null, null, null,
 				null, null, null);
@@ -132,8 +132,6 @@ public class SettingDatabaseAdapter {
 		int w = database.update(SetttingDatabaseHelper.SETTING_TABLE_NAME,
 				values, SetttingDatabaseHelper.SETTING_ID + "= ? ",
 				new String[] { "1" });
-		Log.d("setVibrator", w + "");
-
 	}
 
 	public void setRingtone(boolean check) {
@@ -151,7 +149,7 @@ public class SettingDatabaseAdapter {
 
 	}
 
-	public void setAutobackup(boolean check) {
+	public void setAutoBackup(boolean check) {
 		String value;
 		if (check) {
 			value = AppConstants.TRUE;
@@ -166,15 +164,13 @@ public class SettingDatabaseAdapter {
 
 	}
 
-	public boolean setUpdatePrinterUf(String uf, String printer) {
+	public boolean setUpdatePrinterState(String uf, String printer) {
 		ContentValues values = new ContentValues();
-		values.put(SetttingDatabaseHelper.SETTING_UF, uf);
+		values.put(SetttingDatabaseHelper.SETTING_STATE, uf);
 		values.put(SetttingDatabaseHelper.SETTING_PRINTER, printer);
 		int update = database.update(SetttingDatabaseHelper.SETTING_TABLE_NAME, values,
                 SetttingDatabaseHelper.SETTING_ID + "= ? ",
                 new String[] { "1" });
-
-        Log.d("setPrinter", update + "|Uf: " +uf + "|Printer: " + printer);
 
 		if (update > 0) {
 			return true;
@@ -207,7 +203,7 @@ public class SettingDatabaseAdapter {
 					AppConstants.TRUE);
 			values.put(SetttingDatabaseHelper.SETTING_FONT, AppConstants.FONT_1);
 			values.put(SetttingDatabaseHelper.SETTING_PRINTER, SetttingDatabaseHelper.SETTING_PRINTER);
-			values.put(SetttingDatabaseHelper.SETTING_UF, SetttingDatabaseHelper.SETTING_UF);
+			values.put(SetttingDatabaseHelper.SETTING_STATE, SetttingDatabaseHelper.SETTING_STATE);
 
 			database.insert(SetttingDatabaseHelper.SETTING_TABLE_NAME, null,
 					values);

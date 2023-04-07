@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class AitData implements Serializable {
 
 	public boolean isStoreFullData;
-	public boolean isDataisNull=false;
+	public boolean isDataisNull = false;
 
 	public boolean isDataisNull() {
 		return isDataisNull;
@@ -559,7 +559,7 @@ public class AitData implements Serializable {
 		this.cnpjCarrier = cnpjCarrier;
 	}
 
-	public static String getIDAuto() {
+	public static String getAitID() {
 		return IDAuto;
 	}
 
@@ -569,7 +569,7 @@ public class AitData implements Serializable {
 
 	public AitData() {
 		super();
-		initializedAllData();
+		initializeAllData();
 	}
 
 	public boolean isStoreFullData() {
@@ -588,7 +588,7 @@ public class AitData implements Serializable {
 		this.idAit = idAit;
 	}
 
-	public void initializedAllData() {
+	public void initializeAllData() {
 		address = aitDate = aitTime = idAit = plate = vehicleModel = chassi = renavam = vehycleColor = vehicleSpecies = vehicleCategory = approach = conductorName =
 				foreignDriver = driverCountry = qualifiedDriver = documentNumber = cnhPpd = cnhState = documentType = infraction =
 						framingCode = unfolding = article = cityCode =
@@ -608,7 +608,7 @@ public class AitData implements Serializable {
 		this.setStateVehicle(myCursor.getString(myCursor
 				.getColumnIndex(InfractionDatabaseHelper.VEHICLE_STATE)));
 		this.setRenavam(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.RENAVAN)));
+				.getColumnIndex(InfractionDatabaseHelper.RENAVAM)));
 		this.setChassi(myCursor.getString(myCursor
 				.getColumnIndex(InfractionDatabaseHelper.CHASSI)));
 		this.setCountry(myCursor.getString(myCursor
@@ -642,7 +642,7 @@ public class AitData implements Serializable {
 		this.setDocumentNumber(myCursor.getString(myCursor
 				.getColumnIndex(InfractionDatabaseHelper.DOCUMENT_NUMBER)));
 		this.setInfraction(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.INFRATION)));
+				.getColumnIndex(InfractionDatabaseHelper.INFRACTION)));
 		this.setFramingCode(myCursor.getString(myCursor
 				.getColumnIndex(InfractionDatabaseHelper.FLAMING_CODE)));
 		this.setUnfolding(myCursor.getString(myCursor
@@ -720,9 +720,9 @@ public class AitData implements Serializable {
 
 	}
 
-	public String getAutoListViewData(Context context) {
-		String dadosAutoConferir =
-				context.getResources().getString(R.string.placa)
+	public String getAitListViewData(Context context) {
+		String aitCheckData =
+				context.getResources().getString(R.string.plate_title)
 						+ getNewLine()
 						+ plate
 						+ getTwoLines()
@@ -734,195 +734,175 @@ public class AitData implements Serializable {
 				+ getNewLine()
 				+ chassi
 				+ getTwoLines()
-		        + context.getResources().getString(R.string.rrd_uf)
+		        + context.getResources().getString(R.string.rrd_state)
 				+ getNewLine()
 				+ state
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.auto_pais)
+				+ context.getResources().getString(R.string.ait_country_name)
 				+ getNewLine()
 				+ country
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.auto_de_cor_do_veiculo)
+						R.string.ait_vehicle_color)
 				+ getNewLine()
 				+ vehycleColor
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.especie)
+				+ context.getResources().getString(R.string.species)
 				+ getNewLine()
 				+ vehicleSpecies
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.categoria)
+				+ context.getResources().getString(R.string.category)
 				+ getNewLine()
 				+ vehicleCategory
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.nome_condutor)
+				+ context.getResources().getString(R.string.driver_name)
 				+ getNewLine()
 				+ conductorName
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.se_condutor_estrangeiro)
+				+ context.getResources().getString(R.string.case_driver_is_foreign)
 				+ getNewLine()
 				+ foreignDriver
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.pais_do_condutor)
+				+ context.getResources().getString(R.string.driver_country)
 				+ getNewLine()
 				+ driverCountry
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.se_condutor_habilitado)
+				+ context.getResources().getString(R.string.case_driver_qualified)
 				+ getNewLine()
 				+ qualifiedDriver
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.CNH_PPD)
+				+ context.getResources().getString(R.string.ait_cnh_ppd)
 				+ getNewLine()
 				+ cnhPpd
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.uf_cnh)
+				+ context.getResources().getString(R.string.ait_state_cnh)
 				+ getNewLine()
 				+ cnhState
 				+ getTwoLines()
 
 				+ context.getResources().getString(
-						R.string.tipo_documento_apresentado)
+						R.string.type_document_presented)
 				+ getNewLine()
 				+ documentType
 				+ getNewLine()
 				+ documentNumber
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.infracao)
+				+ context.getResources().getString(R.string.infraction)
 				+ getNewLine()
 				+ infraction
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.enquadra)
+				+ context.getResources().getString(R.string.ait_framing_code)
 				+ getNewLine()
 				+ framingCode
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.desdob)
+				+ context.getResources().getString(R.string.ait_unfold_code)
 				+ getNewLine()
 				+ unfolding
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.amparo_legal)
+				+ context.getResources().getString(R.string.ait_legal_support)
 				+ getNewLine()
 				+ article
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.auto_de_municipio)
+				+ context.getResources().getString(R.string.ait_city_name)
 				+ getNewLine()
 				+ city
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.auto_de_codigo_do_municipio)
+						R.string.ait_city_code)
 				+ getNewLine()
 				+ cityCode
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.auto_uf)
+				+ context.getResources().getString(R.string.ait_state)
 				+ getNewLine()
 				+ state
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.local)
+				+ context.getResources().getString(R.string.ait_location)
 				+ getNewLine()
 				+ address
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.data)
+				+ context.getResources().getString(R.string.date_field)
 				+ getNewLine()
 				+ aitDate
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.hora)
+				+ context.getResources().getString(R.string.time_field)
 				+ getNewLine()
 				+ aitTime
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.descricao_do_equipamento)
+						R.string.ait_equipment_description)
 				+ getNewLine()
 				+ description
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.auto_de_marca)
+				+ context.getResources().getString(R.string.ait_equipment_brand)
 				+ getNewLine()
 				+ equipmentBrand
 				+ getTwoLines()
 
-				+ context.getResources().getString(R.string.auto_de_modelo)
+				+ context.getResources().getString(R.string.ait_equipment_model)
 				+ getNewLine()
 				+ equipmentModel
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.auto_de_numero_de_serie)
+						R.string.ait_serial_number)
 				+ getNewLine()
 				+ serialNumber
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.medicao_realizada)
+				+ context.getResources().getString(R.string.ait_measuremet_performed)
 				+ getNewLine()
 				+ measurementPerformed
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.auto_de_valor_considerado)
+						R.string.ait_considered_value)
 				+ getNewLine()
 				+ valueConsidered
 						+ getTwoLines()
 						+ context.getResources().getString(
-						R.string.auto_numero_tca)
+						R.string.ait_tca_number)
 						+ getNewLine()
 						+ tcaNumber
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.auto_numero_da_amostra)
+						R.string.ait_sample_number_in_tca)
 				+ getNewLine()
 				+ alcoholTestNumber
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.recolhimento_de_documentos)
+						R.string.collection_documents)
 				+ getNewLine()
 				+ retreat
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.procedimentos)
+				+ context.getResources().getString(R.string.procedures)
 				+ getNewLine()
 				+ procedures
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.observacao)
+				+ context.getResources().getString(R.string.observations)
 				+ getNewLine()
 				+ observation
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.identificacao_do_embarcador)
+						R.string.ait_shipper_identification)
 				+ getNewLine()
 				+ shipperIdentification
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.CNPJ_CPF)
+				+ context.getResources().getString(R.string.ait_cnpj_cpf_text)
 				+ getNewLine()
 				+ cpfShipper
 				+ getTwoLines()
 				+ context.getResources().getString(
-						R.string.identificacao_transportador)
+						R.string.carrier_identification)
 				+ getTwoLines()
 				+ carrierIdentification
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.CNPJ_CPF)
+				+ context.getResources().getString(R.string.ait_cnpj_cpf_text)
 				+ getTwoLines()
 				+ cpfCarrier
 				+ getTwoLines()
-				+ context.getResources().getString(R.string.titulo_cancelar)
+				+ context.getResources().getString(R.string.cancel_ait_title)
 				+ getTwoLines()
 				+ reasonForCancellation +
 				getNewLine();
-		return dadosAutoConferir;
+		return aitCheckData;
 	}
-
-	/*public String getAutoViewData(Context context) {
-
-		String dadosAit = context.getResources().getString(R.string.numero_auto) + getNewLine() + numeroAuto + getTwoLines()
-				+ context.getResources().getString(R.string.placa) + getNewLine() + placa + getTwoLines()
-				//+ context.getResources().getString(R.string.auto_de_UF) + getNewLine() + uf_placa + getTwoLines()
-				+ context.getResources().getString(R.string.model) + getNewLine() + modeloVeiculo + getTwoLines()
-				+ getAutoListViewData(context);
-		return dadosAit;
-	}
-
-    public String getAutoPreViewData(Context context) {
-
-        String dadosAit = context.getResources().getString(R.string.numero_auto) + getNewLine() + numeroAuto + getTwoLines()
-                + context.getResources().getString(R.string.placa) + getNewLine() + placa + getTwoLines()
-                //+ context.getResources().getString(R.string.auto_de_UF) + getNewLine() + uf_placa + getTwoLines()
-                + context.getResources().getString(R.string.model) + getNewLine() + modeloVeiculo + getTwoLines()
-                + getAutoListViewData(context);
-        return dadosAit;
-    }*/
 
 	public String getNewLine() {
 		return AppConstants.NEW_LINE;

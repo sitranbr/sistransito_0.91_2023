@@ -40,7 +40,7 @@ public class AnyDialogFragmentForFragment extends DialogFragment {
 		if (!isNetConnected) {
 			mgs = getResources().getString(intMessageId) + AppConstants.NEW_LINE
 					+ AppConstants.NEW_LINE
-					+ getResources().getString(R.string.sem_conexao);
+					+ getResources().getString(R.string.no_network_connection);
 
 		} else {
 

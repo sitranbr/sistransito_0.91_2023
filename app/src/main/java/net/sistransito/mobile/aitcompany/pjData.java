@@ -302,7 +302,7 @@ public class pjData implements Serializable {
 
     public String getAutoListViewData(Context context) {
         String sPjAitCheck =
-                context.getResources().getString(R.string.pj_nome)
+                context.getResources().getString(R.string.pj_name)
                         + getNewLine()
                         + companySocial
                         + getTwoLines()
@@ -310,49 +310,49 @@ public class pjData implements Serializable {
                         + getNewLine()
                         + cpf
                         + getTwoLines()
-                        + context.getResources().getString(R.string.tca_endereco)
+                        + context.getResources().getString(R.string.tca_address)
                         + getNewLine()
                         + address
                         + getTwoLines()
-                        + context.getResources().getString(R.string.auto_municipio)
+                        + context.getResources().getString(R.string.capital_city_state)
                         + getNewLine()
                         + city
                         + getTwoLines()
                         + context.getResources().getString(
-                        R.string.auto_uf)
+                        R.string.ait_state)
                         + getNewLine()
                         + state
                         + getTwoLines()
-                        + context.getResources().getString(R.string.local)
+                        + context.getResources().getString(R.string.ait_location)
                         + getNewLine()
                         + place
                         + getTwoLines()
-                        + context.getResources().getString(R.string.data)
+                        + context.getResources().getString(R.string.date_field)
                         + getNewLine()
                         + aitDate
                         + getTwoLines()
-                        + context.getResources().getString(R.string.hora)
+                        + context.getResources().getString(R.string.time_field)
                         + getNewLine()
                         + aitTime
                         + getTwoLines()
-                        + context.getResources().getString(R.string.descricao_da_infracao)
+                        + context.getResources().getString(R.string.ait_infraction_description)
                         + getNewLine()
                         + infration
                         + getTwoLines()
-                        + context.getResources().getString(R.string.desdob)
+                        + context.getResources().getString(R.string.ait_unfold_code)
                         + getNewLine()
                         + unfolding
                         + getTwoLines()
                         + context.getResources().getString(
-                        R.string.enquadra)
+                        R.string.ait_framing_code)
                         + getNewLine()
                         + framingCode
                         + getTwoLines()
-                        + context.getResources().getString(R.string.amparo_legal)
+                        + context.getResources().getString(R.string.ait_legal_support)
                         + getNewLine()
                         + article
                         + getTwoLines()
-                        + context.getResources().getString(R.string.observacao)
+                        + context.getResources().getString(R.string.observations)
                         + getNewLine()
                         + observation
                         + getTwoLines()
@@ -363,8 +363,8 @@ public class pjData implements Serializable {
 
     public String getAitDataView(Context context) {
 
-        String aitData = context.getResources().getString(R.string.numero_auto) + getNewLine() + aitNumber + getTwoLines()
-                + context.getResources().getString(R.string.pj_nome) + getNewLine() + companySocial + getTwoLines()
+        String aitData = context.getResources().getString(R.string.capital_number) + getNewLine() + aitNumber + getTwoLines()
+                + context.getResources().getString(R.string.pj_name) + getNewLine() + companySocial + getTwoLines()
                 //+ context.getResources().getString(R.string.auto_de_UF) + getNewLine() + uf_placa + getTwoLines()
                 //+ context.getResources().getString(R.string.model) + getNewLine() + modelo_veiculo + getTwoLines()
                 + getAutoListViewData(context);
@@ -373,8 +373,8 @@ public class pjData implements Serializable {
 
     public String getAitDataPreview(Context context) {
 
-        String aitData = context.getResources().getString(R.string.numero_auto) + getNewLine() + aitNumber + getTwoLines()
-                + context.getResources().getString(R.string.pj_nome) + getNewLine() + companySocial + getTwoLines()
+        String aitData = context.getResources().getString(R.string.capital_number) + getNewLine() + aitNumber + getTwoLines()
+                + context.getResources().getString(R.string.pj_name) + getNewLine() + companySocial + getTwoLines()
                 //+ context.getResources().getString(R.string.auto_de_UF) + getNewLine() + uf_placa + getTwoLines()
                 //+ context.getResources().getString(R.string.model) + getNewLine() + modelo_veiculo + getTwoLines()
                 + getAutoListViewData(context);

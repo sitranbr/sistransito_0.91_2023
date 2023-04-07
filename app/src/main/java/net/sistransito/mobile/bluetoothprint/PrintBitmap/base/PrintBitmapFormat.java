@@ -5,7 +5,11 @@ import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PrintBitmapFormat extends BasePaint {
@@ -20,6 +24,8 @@ public class PrintBitmapFormat extends BasePaint {
     public static final float NORMAL_FONT = 18;
     public static final float MEDIO_FONT = 20;
     public static final float MAIOR_FONT = 25;
+
+    private static final int MARGIN_RIGHT = 10;
 
     public PrintBitmapFormat(Context context) {
         super(context);
@@ -118,62 +124,139 @@ public class PrintBitmapFormat extends BasePaint {
 //        System.gc();
 //    }
 
-    public void createNameTable(String title1, String value1, String title2, String value2, boolean isAdd, TableCellAlign align, float nameFont, float valuefont) {
+    public void createNameTable22(String title1, String value1, String title2, String value2, boolean isAdd, TableCellAlign align, float titleFontSize, float valueFontSize, TableCellAlign value1Align) {
         if (!isAdd) {
             yPosition += TABLE_BORDER;
         }
-        int y_int = yPosition;
-        int x2 = 0;
+        int topRowY = yPosition;
+        int secondColumnX = 0;
         if (TableCellAlign.MIDDLE == align) {
-            x2 = PAGE_WIDTH / 2;
+            secondColumnX = PAGE_WIDTH / 2;
 
         } else if (TableCellAlign.LEFT == align) {
             setPaintNormal();
-            paint.setTextSize(nameFont);
+            paint.setTextSize(titleFontSize);
 
-            int w1 = TextFormat.getTextBoundWidth(title1, paint);
+            int title1Width = TextFormat.getTextBoundWidth(title1, paint);
             setPaintBold();
-            paint.setTextSize(valuefont);
-            int w2 = TextFormat.getTextBoundWidth(value1, paint);
-            int width_1 = Math.max(w1, w2);
+            paint.setTextSize(valueFontSize);
+            int value1Width = TextFormat.getTextBoundWidth(value1, paint);
+            int firstColumnWidth = Math.max(title1Width, value1Width);
 
-            x2 = width_1 + MARGIN_LARGE + MARGIN_LARGE + MARGIN_LARGE; // width_1 + 10 + 10 + 10
+            secondColumnX = firstColumnWidth + MARGIN_LARGE + MARGIN_LARGE + MARGIN_LARGE; // firstColumnWidth + 10 + 10 + 10
 
         } else if (TableCellAlign.RIGHT == align) {
             setPaintNormal();
-            paint.setTextSize(nameFont);
+            paint.setTextSize(titleFontSize);
 
-            int w1 = TextFormat.getTextBoundWidth(title2, paint);
+            int title2Width = TextFormat.getTextBoundWidth(title2, paint);
             setPaintBold();
-            paint.setTextSize(valuefont);
-            int w2 = TextFormat.getTextBoundWidth(value2, paint);
-            int width_1 = Math.max(w1, w2);
+            paint.setTextSize(valueFontSize);
+            int value2Width = TextFormat.getTextBoundWidth(value2, paint);
+            int firstColumnWidth = Math.max(title2Width, value2Width);
 
-            x2 = xPositionEnd - (width_1 + MARGIN_LARGE + MARGIN_LARGE + MARGIN_LARGE);
+            secondColumnX = xPositionEnd - (firstColumnWidth + MARGIN_LARGE + MARGIN_LARGE + MARGIN_LARGE);
         }
         setPaintNormal();
-        paint.setTextSize(nameFont);
+        paint.setTextSize(titleFontSize);
         setNewLine(1);
-        drawText(title1, xTextStart, x2, yPosition, Paint.Align.LEFT);
-        yPosition = drawText(title2, x2 + MARGIN_LARGE, xPositionEnd, yPosition, Paint.Align.LEFT);
+        drawText(title1, xTextStart, secondColumnX, yPosition, Paint.Align.LEFT);
+        yPosition = drawText(title2, secondColumnX + MARGIN_LARGE, xPositionEnd, yPosition, Paint.Align.LEFT);
         setNewLine(2);
 
         setPaintBold();
-        paint.setTextSize(valuefont);
-        drawText(value1, xPositionStart, x2, yPosition, Paint.Align.CENTER);
-        yPosition = drawText(value2, x2, xPositionEnd, yPosition, Paint.Align.CENTER);
+        paint.setTextSize(valueFontSize);
+        if (value1Align == TableCellAlign.LEFT) {
+            drawText(value1, xPositionStart + 15, secondColumnX, yPosition, Paint.Align.LEFT);
+        } else if (value1Align == TableCellAlign.MIDDLE) {
+            drawText(value1, xPositionStart, secondColumnX, yPosition, Paint.Align.CENTER);
+        }
+        yPosition = drawText(value2, secondColumnX, xPositionEnd, yPosition, Paint.Align.CENTER);
         setNewLine(2);
 
-        drawBox(new Rect(xPositionStart, y_int, x2, yPosition));
-        drawBox(new Rect(x2, y_int, xPositionEnd, yPosition));
+        drawBox(new Rect(xPositionStart, topRowY, secondColumnX, yPosition));
+        drawBox(new Rect(secondColumnX, topRowY, xPositionEnd, yPosition));
         System.gc();
     }
 
-    public void createStructureTable(String title_1, String value_1, String title_2, String value_2, boolean isAdd, TableCellAlign align, float titleFont, float valueFont) {
-        //int widthHeight = 200;
-
+    public void createNameTable(String title1, String value1, String title2, String value2, boolean isAdd, TableCellAlign align, float titleFontSize, float valueFontSize, TableCellAlign value1Align) {
         if (!isAdd) {
-            yPosition += TABLE_BORDER; // 15 += 2 = 17;
+            yPosition += TABLE_BORDER;
+        }
+        int topRowY = yPosition;
+        int secondColumnX = 0;
+        // Restante do código para definir secondColumnX com base no alinhamento...
+
+        setPaintNormal();
+        paint.setTextSize(titleFontSize);
+        setNewLine(1);
+        drawText(title1, xTextStart, secondColumnX, yPosition, Paint.Align.LEFT);
+        yPosition = drawText(title2, secondColumnX + MARGIN_LARGE, xPositionEnd, yPosition, Paint.Align.LEFT);
+
+        setNewLine(2);
+
+        setPaintBold();
+        paint.setTextSize(valueFontSize);
+
+        float value1MaxWidth = secondColumnX - xPositionStart - 15;
+        Paint.Align value1PaintAlign = getPaintAlign(value1Align);
+
+        yPosition = drawAlignedText(value1, xPositionStart + 15, yPosition, value1MaxWidth, value1PaintAlign, paint);
+        yPosition = drawAlignedText(value2, secondColumnX, yPosition, xPositionEnd - secondColumnX, Paint.Align.CENTER, paint);
+
+        setNewLine(2);
+
+        drawBox(new Rect(xPositionStart, topRowY, secondColumnX, yPosition));
+        drawBox(new Rect(secondColumnX, topRowY, xPositionEnd, yPosition));
+        System.gc();
+    }
+
+    private Paint.Align getPaintAlign(TableCellAlign align) {
+        switch (align) {
+            case LEFT:
+                return Paint.Align.LEFT;
+            case MIDDLE:
+                return Paint.Align.CENTER;
+            case RIGHT:
+                return Paint.Align.RIGHT;
+            default:
+                return Paint.Align.LEFT;
+        }
+    }
+
+
+    private int drawAlignedText(String text, int xPosition, int yPosition, float maxWidth, Paint.Align align, Paint paint) {
+        List<String> lines = breakTextIntoLines(text, maxWidth, paint);
+        int originalYPosition = yPosition;
+
+        for (String line : lines) {
+            yPosition = drawText(line, xPosition, xPosition + (int) maxWidth, yPosition, align);
+            setNewLine(1);
+        }
+
+        return yPosition;
+    }
+
+    private List<String> breakTextIntoLines(String text, float maxWidth, Paint paint) {
+        List<String> lines = new ArrayList<>();
+        int length = text.length();
+        int start = 0;
+
+        while (start < length) {
+            int breakIndex = paint.breakText(text, start, length, true, maxWidth, null);
+            if (breakIndex == 0) {
+                break;
+            }
+            lines.add(text.substring(start, start + breakIndex));
+            start += breakIndex;
+        }
+
+        return lines;
+    }
+
+    public void createStructureTable(String title_1, String value_1, String title_2, String value_2, boolean isAdd, TableCellAlign align, float titleFont, float valueFont) {
+        if (!isAdd) {
+            yPosition += TABLE_BORDER;
         }
 
         int y_int = yPosition;
@@ -181,7 +264,7 @@ public class PrintBitmapFormat extends BasePaint {
         int y2 = 7;
 
         if (TableCellAlign.MIDDLE == align) {
-            x2 = PAGE_WIDTH / 2; //x2 = 576/2 = 288
+            x2 = PAGE_WIDTH / 2;
         }
 
         setPaintNormal();
@@ -191,6 +274,14 @@ public class PrintBitmapFormat extends BasePaint {
         drawText(title_1, xTextStart, x2, yPosition, Paint.Align.CENTER);
         yPosition = drawText(title_2, x2 + MARGIN_LARGE, xPositionEnd, yPosition, Paint.Align.CENTER);
 
+        // Add some space between the titles and the border
+        yPosition += 10; // Increase this value to add more space
+
+        // Draw border bottom for title_1 and title_2
+        int borderBottomHeight = 2;
+        canvas.drawRect(xPositionStart, yPosition, xPositionEnd, yPosition + borderBottomHeight, paint);
+
+        yPosition += borderBottomHeight;
         y2 += yPosition;
 
         setPaintBold();
@@ -204,14 +295,37 @@ public class PrintBitmapFormat extends BasePaint {
         String[] tValue_2 = TextFormat.split(value_2);
 
         for (String mText : tValue_1) {
-            yPosition = drawText(mText.trim(), xPositionStart, x2, yPosition, Paint.Align.CENTER);
+            String[] splitText = mText.trim().split("/");
+            if (splitText.length == 2) {
+                float leftWidth = x2 * 0.85f; // 80% of the width for the left-aligned text
+                int tempY = yPosition;
+                float paddingLeft = x2 * 0.05f; // 5% padding on the left
+
+                yPosition = drawText(splitText[0].trim(), (int) (xPositionStart + paddingLeft), (int) leftWidth, tempY, Paint.Align.LEFT);
+                yPosition = drawText(splitText[1].trim(), (int) leftWidth, x2, tempY, Paint.Align.RIGHT);
+            } else {
+                yPosition = drawText(mText.trim(), xPositionStart, x2, yPosition, Paint.Align.CENTER);
+            }
         }
+
+
 
         setNewLine(1);
 
         for (String mText2 : tValue_2) {
-            y2 = drawText(mText2.trim(), x2, xPositionEnd, y2, Paint.Align.CENTER);
+            String[] splitText = mText2.trim().split("/");
+            if (splitText.length == 2) {
+                float leftWidth = (xPositionEnd - x2) * 0.85f; // 80% of the width for the left-aligned text
+                int tempY = y2;
+                float paddingLeft = (xPositionEnd - x2) * 0.05f; // 5% padding on the left
+
+                y2 = drawText(splitText[0].trim(), (int) (x2 + paddingLeft), (int) (x2 + leftWidth), tempY, Paint.Align.LEFT);
+                y2 = drawText(splitText[1].trim(), (int) (x2 + leftWidth), xPositionEnd, tempY, Paint.Align.RIGHT);
+            } else {
+                y2 = drawText(mText2.trim(), x2, xPositionEnd, y2, Paint.Align.CENTER);
+            }
         }
+
 
         setNewLine(10);
 
@@ -475,7 +589,38 @@ public class PrintBitmapFormat extends BasePaint {
         createQuotes(s, align, false, true, fontSize);
     }
 
-    public void createQuotes(String s, Paint.Align align, boolean isBold, boolean isLineAdd, float fontSize) {
+    public void createQuotes22(Context context, String s, Paint.Align align, boolean isBold, boolean isLineAdd, float fontSize) {
+
+        if (isBold) {
+            setPaintBold();
+        } else {
+            setPaintNormal();
+        }
+        paint.setTextSize(fontSize);
+
+        setNewLine(1);
+        if (isLineAdd) yPosition += MARGIN_SMALL;
+
+        // Adiciona um deslocamento de 5dp à borda esquerda
+        float xTextStartOffset = xTextStart + convertDpToPixel(context, 5);
+
+        List<CharSequence> mTitle = TextFormat.getTextLine(s, paint, (int) (xPositionEnd - xTextStartOffset));
+
+        for (CharSequence mText : mTitle) {
+            // Usa a nova posição x com o deslocamento de 5dp
+            yPosition = drawText(mText.toString(), (int) xTextStartOffset, xPositionEnd, yPosition, align);
+            setNewLine(1);
+        }
+
+        if (isLineAdd) yPosition += MARGIN_SMALL;
+    }
+
+    private float convertDpToPixel(Context context, float dp) {
+        return dp * context.getResources().getDisplayMetrics().density;
+    }
+
+
+    public void createQuotes_refactor(String s, Paint.Align align, boolean isBold, boolean isLineAdd, float fontSize) {
 
         if (isBold) {
             setPaintBold();
@@ -488,10 +633,57 @@ public class PrintBitmapFormat extends BasePaint {
         if (isLineAdd) yPosition += MARGIN_SMALL;
         List<CharSequence> mTitle = TextFormat.getTextLine(s, paint, xPositionEnd - xTextStart);
         for (CharSequence mText : mTitle) {
-            yPosition = drawText(mText.toString(), xTextStart, xPositionEnd,
-                    yPosition, align);
+            yPosition = drawText(mText.toString(), xTextStart + 5, xPositionEnd, yPosition, align);
             setNewLine(1);
         }
         if (isLineAdd) yPosition += MARGIN_SMALL;
     }
+
+    public void createQuotes(String s, Paint.Align align, boolean isBold, boolean isLineAdd, float fontSize) {
+        if (isBold) {
+            setPaintBold();
+        } else {
+            setPaintNormal();
+        }
+        paint.setTextSize(fontSize);
+
+        setNewLine(1);
+        if (isLineAdd) yPosition += MARGIN_SMALL;
+
+        int startPosition = 0;
+        float maxWidth = xPositionEnd - xTextStart - MARGIN_RIGHT;
+
+        while (startPosition < s.length()) {
+            int lineBreak = breakTextRespectingWords(s, startPosition, maxWidth, paint);
+
+            if (lineBreak == 0) {
+                break; // Caso não consiga quebrar a linha, evita loop infinito
+            }
+
+            String line = s.substring(startPosition, startPosition + lineBreak).trim();
+            yPosition = drawText(line, xTextStart + 5, xPositionEnd, yPosition, align);
+            setNewLine(1);
+
+            startPosition += lineBreak;
+        }
+
+        if (isLineAdd) yPosition += MARGIN_SMALL;
+    }
+
+    private int breakTextRespectingWords(String text, int startPosition, float maxWidth, Paint paint) {
+        int lineBreak = paint.breakText(text, startPosition, text.length(), true, maxWidth, null);
+
+        if (startPosition + lineBreak < text.length()) {
+            int lastSpaceIndex = text.lastIndexOf(' ', startPosition + lineBreak);
+            if (lastSpaceIndex > startPosition) {
+                lineBreak = lastSpaceIndex - startPosition;
+            }
+        }
+
+        return lineBreak;
+    }
+
+
+
+
 }

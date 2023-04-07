@@ -61,7 +61,7 @@ public class TcaLister extends BasePrintActivity implements OnClickListener {
         cursor.close();
         TextView tvMessage = new TextView(this);
         tvMessage.setText(getResources().getString(
-                R.string.nehum_resultado_retornado));
+                R.string.no_result_returned));
         tvMessage.setGravity(Gravity.CENTER);
         tvMessage.setTextAppearance(this, android.R.style.TextAppearance_Large);
         LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,

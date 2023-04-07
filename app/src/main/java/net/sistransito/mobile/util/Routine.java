@@ -3,10 +3,23 @@ package net.sistransito.mobile.util;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
+import android.text.Editable;
+import android.text.Layout;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.text.style.AlignmentSpan;
+import android.text.style.ParagraphStyle;
+import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import net.sistransito.mobile.ait.AitData;
@@ -103,6 +116,64 @@ public class Routine {
         byte[] imageBytes = baos.toByteArray();
         String encodedImage = Base64.encodeToString(imageBytes, Base64.DEFAULT);
         return encodedImage;
+    }
+
+    public enum TextAlignment {
+        CENTER,
+        NORMAL
+    }
+
+    public static SpannableString textWithBoldAndCenter(String boldText, String secondText, boolean isBold, TextAlignment alignment) {
+        // Create a centered paragraph style
+        ParagraphStyle centerStyle = new AlignmentSpan.Standard(alignment == TextAlignment.CENTER ? Layout.Alignment.ALIGN_CENTER : Layout.Alignment.ALIGN_NORMAL);
+
+        // Create a new SpannableString to format the text
+        SpannableString spannableString = new SpannableString(boldText + "\n" + secondText);
+
+        // Apply bold formatting to the appropriate text
+        int boldStart = isBold ? 0 : boldText.length() + 1;
+        int boldEnd = isBold ? boldText.length() + 1 : spannableString.length();
+        spannableString.setSpan(new StyleSpan(Typeface.BOLD), boldStart, boldEnd, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Apply centered paragraph style to the second text
+        spannableString.setSpan(centerStyle, boldText.length() + 1, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Return the centered text
+        return spannableString;
+    }
+
+    public static SpannableString applyBoldToString(String text) {
+        // Create the instance of SpannableString
+        SpannableString spannableString = new SpannableString(text);
+
+        // apply bold to all string
+        StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);
+        spannableString.setSpan(styleSpan, 0, text.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // Return the format string
+        return spannableString;
+    }
+
+    public static SpannableString applyBold(String text) {
+        // Finds the position of the colon character
+        int startPosition = text.indexOf(":");
+
+        // Create an object SpannableString
+        SpannableString spannableString = new SpannableString(text);
+
+        // Create an object StyleSpan with bold style
+        StyleSpan styleSpan = new StyleSpan(Typeface.BOLD);
+
+        // Applies the bold style starting from the colon character
+        if (startPosition >= 0) {
+            spannableString.setSpan(styleSpan, 0, startPosition, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        }
+        // Applies the bold style starting from the colon character
+        /*if (startPosition >= 0) {
+            spannableString.setSpan(styleSpan, startPosition + 1, text.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        }*/
+
+        return spannableString;
     }
 
 }

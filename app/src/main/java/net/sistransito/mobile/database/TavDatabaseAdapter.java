@@ -80,21 +80,21 @@ public class TavDatabaseAdapter {
 
 		// Estrutur Veiculo
 
-		values.put(TavDatabaseHelper.CABECA_DE_ALAVANCA,
+		values.put(TavDatabaseHelper.LEVER_HEAD,
 				data.getLeverHead());
-		values.put(TavDatabaseHelper.CARROCERIA, data.getCarBody());
-		values.put(TavDatabaseHelper.FORRO, data.getLining());
-		values.put(TavDatabaseHelper.LATARIA_CAPO, data.getHoodBody());
-		values.put(TavDatabaseHelper.LATARIA_LADO_DIREITO,
-				data.getRightSideBody());
-		values.put(TavDatabaseHelper.LATARIA_LADO_ESQUERDO,
-				data.getLeftSideBody());
-		values.put(TavDatabaseHelper.LATARIA_TAPA_PORTA_MALA,
+		values.put(TavDatabaseHelper.BODYWORK, data.getCarBody());
+		values.put(TavDatabaseHelper.CEILING, data.getCeiling());
+		values.put(TavDatabaseHelper.HOOD_BODYWORK, data.getHoodBody());
+		values.put(TavDatabaseHelper.BODYWORK_RIGHT_SIDE,
+				data.getBodyworkRightSide());
+		values.put(TavDatabaseHelper.BODYWORK_LEFT_SIDE,
+				data.getBodyWorkLeftSide());
+		values.put(TavDatabaseHelper.TRUNK_BODYWORK,
 				data.getTrunkBodywork());
-		values.put(TavDatabaseHelper.LATARIA_TETO, data.getRoofBodywork());
+		values.put(TavDatabaseHelper.ROOF_BODYWORK, data.getRoofBodywork());
 
 		// public static final String MOTOR = "motor";
-		// public static final String PAINEL = "painel";
+		// public static final String PAINEL = "panel";
 		// public static final String PINTURA_CAPO = "pintura_capo";
 		// public static final String PINTURA_LADO_DIREITO =
 		// "pintura_lado_direito";
@@ -107,95 +107,95 @@ public class TavDatabaseAdapter {
 		// public static final String VIDRO_PARA_BRISA = "vidro_para_brisa";
 		// public static final String VIDRO_TRASEIRO = "vidro_traseiro";
 
-		values.put(TavDatabaseHelper.MOTOR, data.getEnginer());
-		values.put(TavDatabaseHelper.PAINEL, data.getDashboard());
-		values.put(TavDatabaseHelper.PINTURA_CAPO, data.getHoodPaint());
-		values.put(TavDatabaseHelper.PINTURA_LADO_DIREITO,
+		values.put(TavDatabaseHelper.ENGINE, data.getEngine());
+		values.put(TavDatabaseHelper.DASHBOARD, data.getDashboard());
+		values.put(TavDatabaseHelper.HOOD_PAINTING, data.getHoodPaint());
+		values.put(TavDatabaseHelper.WRIGHT_PAINTING,
 				data.getRightSidePaint());
-		values.put(TavDatabaseHelper.PINTURA_LADO_ESQUERDO,
+		values.put(TavDatabaseHelper.LEFT_PAINTING,
 				data.getLeftSidePaint());
-		values.put(TavDatabaseHelper.PINTURA_PORTA_MALA,
+		values.put(TavDatabaseHelper.TRUNK_PAINTING,
 				data.getTrunkPainting());
-		values.put(TavDatabaseHelper.PINTURA_TETO, data.getCeilingPainting());
-		values.put(TavDatabaseHelper.RADIADOR, data.getRadiator());
-		values.put(TavDatabaseHelper.VIDROS_LATERAIS, data.getSideWindows());
-		values.put(TavDatabaseHelper.VIDRO_PARA_BRISA,
-				data.getWindShieldGlass());
-		values.put(TavDatabaseHelper.VIDRO_TRASEIRO, data.getRearWindow());
+		values.put(TavDatabaseHelper.HOOF_PAINTING, data.getHoodPainting());
+		values.put(TavDatabaseHelper.RADIATOR, data.getRadiator());
+		values.put(TavDatabaseHelper.SIDE_GLASS, data.getSideGlass());
+		values.put(TavDatabaseHelper.WINDSHIELD,
+				data.getWindShield());
+		values.put(TavDatabaseHelper.HEAR_WINDSHIELD, data.getRearWindshield());
 
 		// Ve�culo
 		// Acess�rios
-		// public static final String ANTENA_DE_RADIO = "antena_de_radio";
-		// public static final String BAGAGEIRO = "bagageiro";
-		// public static final String BANCOS = "bancos";
-		// public static final String BATERIA = "bateria";
-		// public static final String CALOTA = "calota";
-		values.put(TavDatabaseHelper.ANTENA_DE_RADIO, data.getAntenna());
-		values.put(TavDatabaseHelper.BAGAGEIRO, data.getTrunk());
-		values.put(TavDatabaseHelper.BANCOS, data.getSeats());
-		values.put(TavDatabaseHelper.BATERIA, data.getBaterry());
-		values.put(TavDatabaseHelper.CALOTA, data.getWheelCover());
+		// public static final String ANTENA_DE_RADIO = "sp_radio_antenna";
+		// public static final String BAGAGEIRO = "sp_baggage_handler";
+		// public static final String BANCOS = "sp_seat";
+		// public static final String BATERIA = "sp_battery";
+		// public static final String CALOTA = "sp_hubcap";
+		values.put(TavDatabaseHelper.RADIO_ANTENNA, data.getAntenna());
+		values.put(TavDatabaseHelper.TRUNK, data.getTrunk());
+		values.put(TavDatabaseHelper.SEAT, data.getSeats());
+		values.put(TavDatabaseHelper.BATTERY, data.getBaterry());
+		values.put(TavDatabaseHelper.HUBCAP, data.getWheelCover());
 
 		// public static final String CONDICIONADOR_DE_AR =
-		// "condicionador_de_ar";
+		// "sp_air_conditioner";
 		// public static final String EXTINTOR_DE_INCENDIO =
-		// "extintor_de_incendio";
-		// public static final String FAROLETE_DIANTEIRO = "farolete_dianteiro";
-		// public static final String FAROLETE_TRASEIRO = "farolete_traseiro";
-		// public static final String MACACO = "macaco";
+		// "sp_fire_extinguisher";
+		// public static final String FAROLETE_DIANTEIRO = "sp_headlight";
+		// public static final String FAROLETE_TRASEIRO = "rear_light";
+		// public static final String MACACO = "sp_wheel_jack";
 
-		values.put(TavDatabaseHelper.CONDICIONADOR_DE_AR,
+		values.put(TavDatabaseHelper.AIR_CONDITIONER,
 				data.getAirConditioner());
-		values.put(TavDatabaseHelper.EXTINTOR_DE_INCENDIO,
+		values.put(TavDatabaseHelper.FIRE_EXTINGUISHER,
 				data.getFireExtinguisher());
-		values.put(TavDatabaseHelper.FAROLETE_DIANTEIRO,
+		values.put(TavDatabaseHelper.HEADLIGHT,
 				data.getHeadLight());
-		values.put(TavDatabaseHelper.FAROLETE_TRASEIRO,
-				data.getTaiLight());
-		values.put(TavDatabaseHelper.MACACO, data.getEnginer());
+		values.put(TavDatabaseHelper.REAR_LIGHT,
+				data.getRearLight());
+		values.put(TavDatabaseHelper.JACK, data.getEngine());
 
 		// public static final String PARA_CHOQUE_DIANTEIRO =
-		// "para_choque_dianteiro";
+		// "sp_front_bumper";
 		// public static final String PARA_CHOQUE_TRASEIRO =
-		// "para_choque_traseiro";
+		// "sp_rear_bumper";
 		// public static final String PARA_SOL_DO_CONDUTOR =
-		// "para_sol_do_condutor";
-		// public static final String PNEUS = "pneus";
-		// public static final String PNEUS_ESTEPE = "pneus_estepe";
+		// "sp_driver_sunshade";
+		// public static final String PNEUS = "sp_tires";
+		// public static final String PNEUS_ESTEPE = "sp_step_tire";
 
-		values.put(TavDatabaseHelper.PARA_CHOQUE_DIANTEIRO,
+		values.put(TavDatabaseHelper.FRONT_BUMPER,
 				data.getFrontBumper());
-		values.put(TavDatabaseHelper.PARA_CHOQUE_TRASEIRO,
-				data.getBackBumper());
-		values.put(TavDatabaseHelper.PARA_SOL_DO_CONDUTOR,
+		values.put(TavDatabaseHelper.REAR_BUMPER,
+				data.getHearBumper());
+		values.put(TavDatabaseHelper.DRIVER_SUNSHADE,
 				data.getDriverSunVisor());
-		values.put(TavDatabaseHelper.PNEUS, data.getTires());
-		values.put(TavDatabaseHelper.PNEUS_ESTEPE, data.getSpareTire());
+		values.put(TavDatabaseHelper.TIRES, data.getTires());
+		values.put(TavDatabaseHelper.SPARE_TIRE, data.getSpareTire());
 
 		// public static final String RADIO = "radio";
-		// public static final String RETROVISOR_INTERNO = "retrovisor_interno";
+		// public static final String RETROVISOR_INTERNO = "sp_internal_rearview";
 		// public static final String RETROVISOR_EXTERNO_DIREITO =
-		// "retrovisor_externo_direito";
-		// public static final String TAPETE = "tapete";
-		// public static final String TRIANGULO = "triangulo";
-		// public static final String VOLANTE = "volante";
-		// public static final String GUIDAM = "guidam";
+		// "sp_right_outside_mirror";
+		// public static final String TAPETE = "sp_carpet";
+		// public static final String TRIANGULO = "sp_triangle";
+		// public static final String VOLANTE = "sp_steering_wheel";
+		// public static final String GUIDAM = "sp_handlebars";
 
 		values.put(TavDatabaseHelper.RADIO, data.getRadio());
-		values.put(TavDatabaseHelper.RETROVISOR_INTERNO,
+		values.put(TavDatabaseHelper.REARVIEW_MIRROR,
 				data.getRearviewMirror());
-		values.put(TavDatabaseHelper.RETROVISOR_EXTERNO_DIREITO,
-				data.getRightSideMirror());
-		values.put(TavDatabaseHelper.TAPETE, data.getCarpet());
-		values.put(TavDatabaseHelper.TRIANGULO, data.getTriangle());
-		values.put(TavDatabaseHelper.VOLANTE, data.getSteeringWheel());
-		values.put(TavDatabaseHelper.GUIDAM, data.getMotorcycleHandlebar());
+		values.put(TavDatabaseHelper.OUTSIDE_MIRROR,
+				data.getOutsideMirror());
+		values.put(TavDatabaseHelper.CARPET, data.getCarpet());
+		values.put(TavDatabaseHelper.TRIANGLE, data.getTriangle());
+		values.put(TavDatabaseHelper.STEERING_WHEEL, data.getSteeringWheel());
+		values.put(TavDatabaseHelper.HANDLEBARS, data.getMotorcycleHandlebar());
 
 		// // Geral
 		// public static final String ODOMETRO = "odometro";
 		// public static final String MARCADOR_DE_CONBUTIVEL =
 		// "marcador_de_conbutivel";
-		// public static final String REMOCAO_ATRAVES_DE = "remocao_atraves_de";
+		// public static final String REMOCAO_ATRAVES_DE = "removal_through_of";
 		// public static final String OBSERVACAO = "observacao";
 		//
 		// public static final String NOME_DA_EMPRESA = "nome_da_empresa";
@@ -203,13 +203,13 @@ public class TavDatabaseAdapter {
 		// "nome_condutor_guincho";
 
 		values.put(TavDatabaseHelper.ODOMETRO, data.getOdometer());
-		values.put(TavDatabaseHelper.MARCADOR_DE_CONBUTIVEL,
+		values.put(TavDatabaseHelper.FUEL_MARKER,
 				data.getFuelGauge());
-		values.put(TavDatabaseHelper.REMOCAO_ATRAVES_DE,
+		values.put(TavDatabaseHelper.REMOVAL_THROUGH_OF,
 				data.getRemovedVia());
-		values.put(TavDatabaseHelper.OBSERVACAO, data.getObservation());
-		values.put(TavDatabaseHelper.NOME_DA_EMPRESA, data.getCompanyName());
-		values.put(TavDatabaseHelper.NOME_DO_CONDUTOR_DO_GUINCHO,
+		values.put(TavDatabaseHelper.OBSERVATION, data.getObservation());
+		values.put(TavDatabaseHelper.COMPANY_NAME, data.getCompanyName());
+		values.put(TavDatabaseHelper.TOW_TRUCK_DRIVER_NAME,
 				data.getWinchDriverName());
 
 		values.put(TavDatabaseHelper.TAV_NUMBER, data.getTavNumber());
@@ -275,82 +275,82 @@ public class TavDatabaseAdapter {
 						data.getChassisNumber());
 				// Ve�culo
 				// Estrutur
-				map.put(TavDatabaseHelper.CABECA_DE_ALAVANCA,
+				map.put(TavDatabaseHelper.LEVER_HEAD,
 						data.getLeverHead());
-				map.put(TavDatabaseHelper.CARROCERIA, data.getCarBody());
-				map.put(TavDatabaseHelper.FORRO, data.getLining());
-				map.put(TavDatabaseHelper.LATARIA_CAPO, data.getHoodBody());
-				map.put(TavDatabaseHelper.LATARIA_LADO_DIREITO,
-						data.getRightSideBody());
-				map.put(TavDatabaseHelper.LATARIA_LADO_ESQUERDO,
-						data.getLeftSideBody());
-				map.put(TavDatabaseHelper.LATARIA_TAPA_PORTA_MALA,
+				map.put(TavDatabaseHelper.BODYWORK, data.getCarBody());
+				map.put(TavDatabaseHelper.CEILING, data.getCeiling());
+				map.put(TavDatabaseHelper.HOOD_BODYWORK, data.getHoodBody());
+				map.put(TavDatabaseHelper.BODYWORK_RIGHT_SIDE,
+						data.getBodyworkRightSide());
+				map.put(TavDatabaseHelper.BODYWORK_LEFT_SIDE,
+						data.getBodyWorkLeftSide());
+				map.put(TavDatabaseHelper.TRUNK_BODYWORK,
 						data.getTrunkBodywork());
-				map.put(TavDatabaseHelper.LATARIA_TETO, data.getRoofBodywork());
-				map.put(TavDatabaseHelper.MOTOR, data.getEnginer());
-				map.put(TavDatabaseHelper.PAINEL, data.getDashboard());
-				map.put(TavDatabaseHelper.PINTURA_CAPO, data.getHoodPaint());
-				map.put(TavDatabaseHelper.PINTURA_LADO_DIREITO,
+				map.put(TavDatabaseHelper.ROOF_BODYWORK, data.getRoofBodywork());
+				map.put(TavDatabaseHelper.ENGINE, data.getEngine());
+				map.put(TavDatabaseHelper.DASHBOARD, data.getDashboard());
+				map.put(TavDatabaseHelper.HOOD_PAINTING, data.getHoodPaint());
+				map.put(TavDatabaseHelper.WRIGHT_PAINTING,
 						data.getRightSidePaint());
-				map.put(TavDatabaseHelper.PINTURA_LADO_ESQUERDO,
+				map.put(TavDatabaseHelper.LEFT_PAINTING,
 						data.getLeftSidePaint());
-				map.put(TavDatabaseHelper.PINTURA_PORTA_MALA,
+				map.put(TavDatabaseHelper.TRUNK_PAINTING,
 						data.getTrunkPainting());
-				map.put(TavDatabaseHelper.PINTURA_TETO, data.getCeilingPainting());
-				map.put(TavDatabaseHelper.RADIADOR, data.getRadiator());
-				map.put(TavDatabaseHelper.VIDROS_LATERAIS,
-						data.getSideWindows());
-				map.put(TavDatabaseHelper.VIDRO_PARA_BRISA,
-						data.getWindShieldGlass());
-				map.put(TavDatabaseHelper.VIDRO_TRASEIRO,
-						data.getRearWindow());
+				map.put(TavDatabaseHelper.HOOF_PAINTING, data.getHoodPainting());
+				map.put(TavDatabaseHelper.RADIATOR, data.getRadiator());
+				map.put(TavDatabaseHelper.SIDE_GLASS,
+						data.getSideGlass());
+				map.put(TavDatabaseHelper.WINDSHIELD,
+						data.getWindShield());
+				map.put(TavDatabaseHelper.HEAR_WINDSHIELD,
+						data.getRearWindshield());
 
 				// Ve�culo
 				// Acess�rios
 
-				map.put(TavDatabaseHelper.ANTENA_DE_RADIO,
+				map.put(TavDatabaseHelper.RADIO_ANTENNA,
 						data.getAntenna());
-				map.put(TavDatabaseHelper.BAGAGEIRO, data.getSeats());
-				map.put(TavDatabaseHelper.BANCOS, data.getSeats());
-				map.put(TavDatabaseHelper.BATERIA, data.getBaterry());
-				map.put(TavDatabaseHelper.CALOTA, data.getWheelCover());
-				map.put(TavDatabaseHelper.CONDICIONADOR_DE_AR,
+				map.put(TavDatabaseHelper.TRUNK, data.getSeats());
+				map.put(TavDatabaseHelper.SEAT, data.getSeats());
+				map.put(TavDatabaseHelper.BATTERY, data.getBaterry());
+				map.put(TavDatabaseHelper.HUBCAP, data.getWheelCover());
+				map.put(TavDatabaseHelper.AIR_CONDITIONER,
 						data.getAirConditioner());
-				map.put(TavDatabaseHelper.EXTINTOR_DE_INCENDIO,
+				map.put(TavDatabaseHelper.FIRE_EXTINGUISHER,
 						data.getFireExtinguisher());
-				map.put(TavDatabaseHelper.FAROLETE_DIANTEIRO,
+				map.put(TavDatabaseHelper.HEADLIGHT,
 						data.getHeadLight());
-				map.put(TavDatabaseHelper.FAROLETE_TRASEIRO,
-						data.getTaiLight());
-				map.put(TavDatabaseHelper.MACACO, data.getJack());
-				map.put(TavDatabaseHelper.PARA_CHOQUE_DIANTEIRO,
+				map.put(TavDatabaseHelper.REAR_LIGHT,
+						data.getRearLight());
+				map.put(TavDatabaseHelper.JACK, data.getJack());
+				map.put(TavDatabaseHelper.FRONT_BUMPER,
 						data.getFrontBumper());
-				map.put(TavDatabaseHelper.PARA_CHOQUE_TRASEIRO,
-						data.getBackBumper());
-				map.put(TavDatabaseHelper.PARA_SOL_DO_CONDUTOR,
+				map.put(TavDatabaseHelper.REAR_BUMPER,
+						data.getHearBumper());
+				map.put(TavDatabaseHelper.DRIVER_SUNSHADE,
 						data.getDriverSunVisor());
-				map.put(TavDatabaseHelper.PNEUS, data.getTires());
-				map.put(TavDatabaseHelper.PNEUS_ESTEPE, data.getSpareTire());
+				map.put(TavDatabaseHelper.TIRES, data.getTires());
+				map.put(TavDatabaseHelper.SPARE_TIRE, data.getSpareTire());
 				map.put(TavDatabaseHelper.RADIO, data.getRadio());
-				map.put(TavDatabaseHelper.RETROVISOR_INTERNO,
+				map.put(TavDatabaseHelper.REARVIEW_MIRROR,
 						data.getRearviewMirror());
-				map.put(TavDatabaseHelper.RETROVISOR_EXTERNO_DIREITO,
-						data.getRightSideMirror());
-				map.put(TavDatabaseHelper.TAPETE, data.getCarpet());
-				map.put(TavDatabaseHelper.TRIANGULO, data.getTriangle());
-				map.put(TavDatabaseHelper.VOLANTE, data.getSteeringWheel());
-				map.put(TavDatabaseHelper.GUIDAM, data.getMotorcycleHandlebar());
+				map.put(TavDatabaseHelper.OUTSIDE_MIRROR,
+						data.getOutsideMirror());
+				map.put(TavDatabaseHelper.CARPET, data.getCarpet());
+				map.put(TavDatabaseHelper.TRIANGLE, data.getTriangle());
+				map.put(TavDatabaseHelper.STEERING_WHEEL, data.getSteeringWheel());
+				map.put(TavDatabaseHelper.HANDLEBARS, data.getMotorcycleHandlebar());
 
 				// Geral
 				map.put(TavDatabaseHelper.ODOMETRO, data.getOdometer());
-				map.put(TavDatabaseHelper.MARCADOR_DE_CONBUTIVEL,
+				map.put(TavDatabaseHelper.FUEL_MARKER,
 						data.getFuelGauge());
-				map.put(TavDatabaseHelper.REMOCAO_ATRAVES_DE,
+				map.put(TavDatabaseHelper.REMOVAL_THROUGH_OF,
 						data.getRemovedVia());
-				map.put(TavDatabaseHelper.OBSERVACAO, data.getObservation());
-				map.put(TavDatabaseHelper.NOME_DA_EMPRESA,
+				map.put(TavDatabaseHelper.OBSERVATION, data.getObservation());
+				map.put(TavDatabaseHelper.COMPANY_NAME,
 						data.getCompanyName());
-				map.put(TavDatabaseHelper.NOME_DO_CONDUTOR_DO_GUINCHO,
+				map.put(TavDatabaseHelper.TOW_TRUCK_DRIVER_NAME,
 						data.getWinchDriverName());
 				map.put(TavDatabaseHelper.TAV_NUMBER, data.getTavNumber());
 	

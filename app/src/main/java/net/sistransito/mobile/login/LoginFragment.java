@@ -62,7 +62,6 @@ public class LoginFragment extends Fragment implements OnClickListener {
         initializedView();
         return view;
     }
-
     private void initializedView() {
         ime = new TimeAndIme(getActivity());
         btnRegister = (TextView) view.findViewById(R.id.btn_register);
@@ -87,7 +86,7 @@ public class LoginFragment extends Fragment implements OnClickListener {
                         Routine.closeKeyboard(btnLogin,getActivity());
                         userLogin();
                     } else {
-                        DialogMaterial.getBottomSheet(getResources().getString(R.string.sem_conexao), Color.RED, getActivity()).show();
+                        DialogMaterial.getBottomSheet(getResources().getString(R.string.no_network_connection), Color.RED, getActivity()).show();
                     }
                 }
                 break;
@@ -97,12 +96,12 @@ public class LoginFragment extends Fragment implements OnClickListener {
     private boolean checkInput() {
         if (etEmail.getText().toString().equals("")) {
             etEmail.setError(getResources().getString(
-                    R.string.texto_inserir_email));
+                    R.string.insert_email_text));
             etEmail.requestFocus();
             return false;
         } else if (etPassword.getText().toString().equals("")) {
             etPassword.setError(getResources().getString(
-                    R.string.texto_inserir_senha));
+                    R.string.insert_password_text));
             etPassword.requestFocus();
             return false;
         } else {

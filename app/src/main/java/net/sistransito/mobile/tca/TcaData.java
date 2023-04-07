@@ -392,110 +392,110 @@ public class TcaData implements Serializable {
 	}
 
 	public String getPlateViewData(Context context) {
-		return context.getResources().getString(R.string.placa) + getNewline()
+		return context.getResources().getString(R.string.plate_title) + getNewline()
 				+ plate + getNewline_2();
 
 	}
 
 	public String getNameViewData(Context context) {
-		return context.getResources().getString(R.string.tca_nome)
+		return context.getResources().getString(R.string.tca_name)
 				+ getNewline() + driverName + getNewline_2();
 
 	}
 
 	public String getCnhPpdViewData(Context context) {
-		return context.getResources().getString(R.string.tca_CNH_PPD)
+		return context.getResources().getString(R.string.tca_cnh_ppd)
 				+ getNewline() + cnhPpd + getNewline_2();
 
 	}
 
 	private String getFilterViewData(Context context, boolean isLister) {
 
-		String viewTca = context.getResources().getString(R.string.tca_CPF)
+		String viewTca = context.getResources().getString(R.string.tca_cpf)
 				+ getNewline() + cpf + getNewline_2()
-				+ context.getResources().getString(R.string.tca_endereco)
+				+ context.getResources().getString(R.string.tca_address)
 				+ getNewline() + address + getNewline_2()
-				+ context.getResources().getString(R.string.tca_bairro)
+				+ context.getResources().getString(R.string.tca_district)
 				+ getNewline() + district + getNewline_2()
-				+ context.getResources().getString(R.string.tca_municipio)
+				+ context.getResources().getString(R.string.tca_city_name)
 				+ getNewline() + city + getNewline_2()
-				+ context.getResources().getString(R.string.tca_UF)
+				+ context.getResources().getString(R.string.tca_state)
 				+ getNewline() + state + getNewline_2();
 
 		// if (!isLister) {
 		viewTca += getPlateViewData(context);
 		// }
 
-		viewTca += context.getResources().getString(R.string.tca_UF)
+		viewTca += context.getResources().getString(R.string.tca_state)
 				+ getNewline()
 				+ plateState
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.tca_condutor_1)
+				+ context.getResources().getString(R.string.tca_driver_quiz_1)
 				+ getNewline()
 				+ driverInvolvedInCarAccident
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.tca_condutor_2)
+				+ context.getResources().getString(R.string.tca_driver_quiz_2)
 				+ getNewline()
 				+ driverClaimsToHaveDrunkAlcohol
 				+ getNewline()
-				+ context.getResources().getString(R.string.data)
+				+ context.getResources().getString(R.string.date_field)
 				+ getNewline()
 				+ dateThatDrankAlcohol
 				+ getNewline()
-				+ context.getResources().getString(R.string.hora)
+				+ context.getResources().getString(R.string.time_field)
 				+ getNewline()
 				+ timeThatDrankAlcohol
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.tca_condutor_3)
+				+ context.getResources().getString(R.string.tca_driver_quiz_3)
 				+ getNewline()
 				+ driverClaimsToHaveUsedToxicSubstance
 				+ getNewline()
-				+ context.getResources().getString(R.string.data)
+				+ context.getResources().getString(R.string.date_field)
 				+ getNewline()
 				+ dateIngestedSubstance
 				+ getNewline()
-				+ context.getResources().getString(R.string.hora)
+				+ context.getResources().getString(R.string.time_field)
 				+ getNewline()
 				+ timeIngestedSubstance
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.tca_o_condutor_apresenta)
+						R.string.tca_the_driver_presents)
 				+ getNewline()
 				+ driverShowsSignsOf
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.tca_em_sua_atitude_ocorre)
+						R.string.tca_in_your_attitude_occurs)
 				+ getNewline()
 				+ inHisAttitudeOccurs
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.tca_sabe_onde_esta)
+				+ context.getResources().getString(R.string.tca_know_place_where_is)
 				+ getNewline()
 				+ knowsWhereItIs
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.tca_sabe_a_data_e_a_hora)
+						R.string.tca_know_date_and_time)
 				+ getNewline()
 				+ knowsTheDateAndTime
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.tca_sabe_seu_enderecao)
+						R.string.tca_know_your_address)
 				+ getNewline()
 				+ knowsItsAddress
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.tca_lembra_dos_atos_cometidos)
+						R.string.tca_remember_actions_committed)
 				+ getNewline()
 				+ rememberTheActsCommitted
 				+ getNewline_2()
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.tca_em_relacao_a_sua_verbal_ocorre)
+						R.string.tca_in_relation_motor_ability)
 				+ getNewline()
 				+ inRelationToTheirMotorAndVerbalAbilityOccurs
 				+ getNewline_2() + getNewline_2()
-				+ context.getResources().getString(R.string.tca_se_constatei)
+				+ context.getResources().getString(R.string.tca_if_blood_alcohol_found)
 				+ getNewline() + conclusion + getNewline_2()
-				+ context.getResources().getString(R.string.numero_tca)
+				+ context.getResources().getString(R.string.tca_number)
 				+ getNewline() + tcaNumber + getNewline_2();
 
 		return viewTca;

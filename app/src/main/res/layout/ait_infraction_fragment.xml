@@ -1,0 +1,850 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_2"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical"
+    android:padding="@dimen/width_padding" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="@dimen/width_padding" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical" >
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary"
+                    app:errorEnabled="true"
+                    android:layout_marginTop="@dimen/layout_margin_top"
+                    android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                    <AutoCompleteTextView
+                        android:id="@+id/tv_autocomplete_infracao"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionThreshold="3"
+                        android:gravity="left|center_vertical"
+                        android:inputType="textCapCharacters|textMultiLine"
+                        android:hint="@string/search_infraction"
+                        android:paddingStart="@dimen/width_padding"
+                        android:paddingEnd="@dimen/width_padding_15"
+                        android:paddingTop="@dimen/width_padding_2"
+                        android:paddingBottom="@dimen/width_padding_15"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/gray_5"
+                        android:imeOptions="actionDone"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textCursorDrawable="@null" >
+                    </AutoCompleteTextView>
+
+                </android.support.design.widget.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/tv_clear_search"
+                    android:layout_width="32dip"
+                    android:layout_height="32dip"
+                    android:layout_marginEnd="-6dip"
+                    android:layout_gravity="right|center_vertical"
+                    android:visibility="gone"
+                    android:background="@drawable/btn_clear_text" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_enquadramento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/indicator_width" >
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary"
+                    android:gravity="left"
+                    android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                    <EditText
+                        android:id="@+id/et_auto_enquadramento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:inputType="textCapSentences"
+                        android:paddingBottom="@dimen/width_padding_15"
+                        android:hint="@string/ait_framing_code"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/gray_5"
+                        android:textCursorDrawable="@null" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/indicator_width"
+                android:paddingEnd="@dimen/indicator_width" >
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary"
+                    android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                    <EditText
+                        android:id="@+id/et_auto_desdobramento"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:hint="@string/ait_unfold_code"
+                        android:inputType="textCapSentences"
+                        android:paddingBottom="@dimen/width_padding_15"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/gray_5"
+                        android:textCursorDrawable="@null" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="4"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/indicator_width"
+                android:paddingEnd="@dimen/indicator_width" >
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary"
+                    android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                    <EditText
+                        android:id="@+id/et_auto_amparo_legal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:hint="@string/ait_legal_support"
+                        android:inputType="textCapSentences"
+                        android:paddingBottom="@dimen/width_padding_15"
+                        android:backgroundTint="@color/primary"
+                        android:textColor="@color/gray_5"
+                        android:textCursorDrawable="@null" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_ait_observation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left|center_vertical"
+            android:hint="@string/rb_tca"
+            android:visibility="gone"
+            android:paddingBottom="@dimen/width_padding_15"
+            android:backgroundTint="@color/primary"
+            android:textColor="@color/gray_5" />
+
+        <FrameLayout
+            android:id="@+id/fl_auto_obs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_observacao"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/width_padding_15"
+                    android:ellipsize="start"
+                    android:ems="10"
+                    android:scrollbars="vertical"
+                    android:hint="@string/observations"
+                    android:gravity="top"
+                    android:inputType="textMultiLine|textCapCharacters"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:paddingStart="@dimen/width_padding"
+                    android:paddingEnd="@dimen/width_padding_15"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5"
+                    android:textCursorDrawable="@null" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_clear_obs"
+                android:layout_width="32dip"
+                android:layout_height="32dip"
+                android:layout_marginEnd="-6dip"
+                android:layout_gravity="right|center_vertical"
+                android:visibility="gone"
+                android:background="@drawable/btn_clear_text" />
+
+        </FrameLayout>
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/cb_auto_tca"
+            style="@style/Material.Drawable.CheckBox"
+            app:cbd_strokeColor="@color/yellow_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:layout_marginBottom="@dimen/width_padding_2"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/rb_tca"
+            android:textColor="@color/primary" />
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/til_auto_tca"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/primary"
+            android:layout_marginBottom="@dimen/padding_top_edit" >
+
+            <EditText
+                android:id="@+id/et_auto_numero_tca"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left|center_vertical"
+                android:inputType="number"
+                android:hint="@string/rb_tca"
+                android:paddingBottom="@dimen/width_padding_15"
+                android:backgroundTint="@color/primary"
+                android:textColor="@color/gray_5" />
+
+        </android.support.design.widget.TextInputLayout>
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/cb_procedimentos"
+            style="@style/Material.Drawable.CheckBox"
+            app:cbd_strokeColor="@color/yellow_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:checked="false"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/width_padding_2"
+            android:text="@string/ait_cb_procedures"
+            android:textColor="@color/primary" />
+
+        <LinearLayout
+            android:id="@+id/ll_auto_procedimentos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:baselineAligned="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical">
+                android:padding="@dimen/widght_padding" >
+
+                <RadioGroup
+                    android:id="@+id/rg_recolhimento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <RadioButton
+                        android:id="@+id/radio0"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/ait_crlv_collection"
+                        android:buttonTint="@color/primary"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/radio1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/ait_cnh_collection"
+                        android:buttonTint="@color/primary"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/radio2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/ait_ppd_collection"
+                        android:buttonTint="@color/primary"
+                        android:textColor="@color/primary" />
+                </RadioGroup>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/indicator_height_1"
+                    android:background="@color/yellow_deep_2" />
+
+                <RadioGroup
+                    android:id="@+id/rg_procedimentos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <RadioButton
+                        android:id="@+id/radio4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vehicle_retention"
+                        android:buttonTint="@color/primary"
+                        android:textColor="@color/primary" />
+
+                    <RadioButton
+                        android:id="@+id/radio5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/vehicle_removal"
+                        android:buttonTint="@color/primary"
+                        android:textColor="@color/primary" />
+
+                </RadioGroup>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/cb_equipamento_afericao"
+            style="@style/Material.Drawable.CheckBox"
+            app:cbd_strokeColor="@color/yellow_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/ait_used_measurement_equipment"
+            android:textColor="@color/primary"
+            android:layout_marginBottom="@dimen/width_padding_2" />
+
+        <LinearLayout
+            android:id="@+id/ll_auto_equipamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:baselineAligned="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <fr.ganfra.materialspinner.MaterialSpinner
+                android:id="@+id/spinner_auto_descricao_equipamento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                app:ms_arrowColor="@color/primary"
+                app:ms_arrowSize="12dp"
+                app:ms_floatingLabelColor="@color/primary"
+                app:ms_floatingLabelText="@string/ait_used_measurement_equipment"
+                app:ms_alignLabels="true"
+                app:ms_hintColor="@color/primary"
+                app:ms_hint="@string/ait_select_measurement_equipment"
+                app:ms_multiline="true"
+                app:ms_baseColor="@color/primary" />
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_marca_equipamento"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/ait_equipment_brand"
+                    android:inputType="textCapSentences"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5"
+                    android:textCursorDrawable="@null" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_modelo_equipamento"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/ait_equipment_model"
+                    android:inputType="textCapSentences"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_numero_de_serie"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/ait_serial_number"
+                    android:gravity="left|center_vertical"
+                    android:inputType="textCapSentences"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:baselineAligned="false" >
+
+                <LinearLayout
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    android:paddingEnd="@dimen/indicator_width" >
+
+                    <android.support.design.widget.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/primary"
+                        android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                        <EditText
+                            android:id="@+id/et_ait_measurement_performed"
+                            android:layout_width="fill_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="left|center_vertical"
+                            android:hint="@string/ait_measuremet_performed"
+                            android:inputType="numberDecimal"
+                            android:paddingBottom="@dimen/width_padding_15"
+                            android:backgroundTint="@color/primary"
+                            android:textColor="@color/gray_5" />
+
+                    </android.support.design.widget.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:orientation="vertical"
+                    android:paddingStart="@dimen/indicator_width" >
+
+                    <fr.ganfra.materialspinner.MaterialSpinner
+                        android:id="@+id/spinner_medicao_unidade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:ms_arrowColor="@color/primary"
+                        app:ms_arrowSize="12dp"
+                        app:ms_floatingLabelColor="@color/primary"
+                        app:ms_floatingLabelText="@string/ait_measurement_unit"
+                        app:ms_alignLabels="true"
+                        app:ms_hintColor="@color/primary"
+                        app:ms_hint="@string/ait_measurement_unit"
+                        app:ms_multiline="true"
+                        app:ms_baseColor="@color/primary" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_limite_regulamentado"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/regulated_limit"
+                    android:inputType="textCapSentences"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_valor_medicao"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/ait_considered_value"
+                    android:inputType="textCapSentences"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_ait_sample_number"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:inputType="number"
+                    android:hint="@string/ait_sample_number"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/cb_transportador"
+            style="@style/Material.Drawable.CheckBox"
+            app:cbd_strokeColor="@color/yellow_light"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/layout_margin_top"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/ait_carrier_identification"
+            android:textColor="@color/primary"
+            android:layout_marginBottom="@dimen/width_padding_15" />
+
+        <LinearLayout
+            android:id="@+id/ll_auto_transportador"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:baselineAligned="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_nome_embarcador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:inputType="textCapCharacters"
+                    android:hint="@string/ait_shipper_name"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_tipo_documento_embarcador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/width_padding_2" >
+
+                <RadioButton
+                    android:id="@+id/rg_cpf_embarcador"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rb_shipper_cpf"
+                    android:textColor="@color/primary"
+                    android:buttonTint="@color/primary" />
+
+                <RadioButton
+                    android:id="@+id/rg_cnpj_embarcador"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rb_shipper_cnpj"
+                    android:textColor="@color/primary"
+                    android:buttonTint="@color/primary" />
+
+            </RadioGroup>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_cpf_embarcador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_cpf_embarcador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/shipper_number_cpf"
+                    android:maxLength="11"
+                    android:inputType="number"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_cnpj_embarcador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_cnpj_embarcador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:hint="@string/shipper_number_cnpj"
+                    android:maxLength="14"
+                    android:inputType="number"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_auto_nome_transportador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:inputType="textCapCharacters"
+                    android:hint="@string/ait_carrier_name"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <RadioGroup
+                android:id="@+id/rg_tipo_documento_transportador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="@dimen/width_padding_2" >
+
+                <RadioButton
+                    android:id="@+id/rg_cpf_transportador"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rb_carrier_cpf"
+                    android:textColor="@color/primary"
+                    android:buttonTint="@color/primary" />
+
+                <RadioButton
+                    android:id="@+id/rg_cnpj_transportador"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rb_carrier_cnpj"
+                    android:textColor="@color/primary"
+                    android:buttonTint="@color/primary" />
+
+            </RadioGroup>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_cpf_transportador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_cfp_transportador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:inputType="number"
+                    android:maxLength="11"
+                    android:hint="@string/carrier_number_cpf"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5" />
+
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_cnpj_transportador"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColorHint="@color/primary"
+                android:layout_marginTop="@dimen/padding_top_edit" >
+
+                <EditText
+                    android:id="@+id/et_cnpj_transportador"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="left|center_vertical"
+                    android:inputType="number"
+                    android:maxLength="14"
+                    android:hint="@string/carrier_number_cnpj"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:backgroundTint="@color/primary"
+                    android:textColor="@color/gray_5"
+                    android:layout_marginBottom="@dimen/padding_top_edit" />
+
+            </android.support.design.widget.TextInputLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/separador"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/primary"
+            android:layout_marginBottom="@dimen/padding_top_edit" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false" >
+
+            <LinearLayout
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingEnd="@dimen/indicator_width" >
+
+                <com.rey.material.widget.CheckBox
+                    android:id="@+id/cb_auto_confirmar"
+                    style="@style/Material.Drawable.CheckBox"
+                    app:cbd_strokeColor="@color/yellow_light"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/layout_margin_top"
+                    android:layout_marginBottom="@dimen/padding_top_edit"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:padding="0dip"
+                    android:text="@string/cb_check_data"
+                    android:textColor="@color/primary" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight=".3"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/indicator_width" >
+
+                <TextView
+                    android:id="@+id/ait_fab"
+                    android:layout_width="65dp"
+                    android:layout_height="65dp"
+                    android:layout_gravity="end|bottom"
+                    android:visibility="gone"
+                    android:background="@drawable/ic_salvar_round_72"
+                    android:layout_marginBottom="@dimen/width_padding_2"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -11,6 +11,7 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import net.sistransito.R;
 import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.database.sync.SyncFiles;
 import net.sistransito.mobile.network.NetworkConnection;
@@ -85,6 +86,7 @@ public class InfractionDatabaseAdapter {
 				data.getAitNumber());
 		values.put(InfractionDatabaseHelper.PLATE, data.getPlate());
 		values.put(InfractionDatabaseHelper.VEHICLE_STATE, data.getStateVehicle());
+		values.put(InfractionDatabaseHelper.RENAVAM, data.getRenavam());
 		values.put(InfractionDatabaseHelper.CHASSI, data.getChassi());
 		values.put(InfractionDatabaseHelper.COUNTRY, data.getCountry());
 		values.put(InfractionDatabaseHelper.VEHICLE_MODEL,
@@ -107,7 +109,7 @@ public class InfractionDatabaseAdapter {
 				data.getDocumentType());
 		values.put(InfractionDatabaseHelper.DOCUMENT_NUMBER,
 				data.getDocumentNumber());
-		values.put(InfractionDatabaseHelper.INFRATION, data.getInfraction());
+		values.put(InfractionDatabaseHelper.INFRACTION, data.getInfraction());
 		values.put(InfractionDatabaseHelper.FLAMING_CODE, data.getFramingCode());
 		values.put(InfractionDatabaseHelper.UNFOLDING, data.getUnfolding());
 		values.put(InfractionDatabaseHelper.ARTICLE, data.getArticle());
@@ -247,22 +249,21 @@ public class InfractionDatabaseAdapter {
 
 	}
 
-	public boolean insertAidData(AitData aitData) {
+	public boolean insertAitData(AitData aitData) {
 
 		ContentValues values = new ContentValues();
 
 		String country;
 
-		if(aitData.getCountry() == null){
-			country = "BR";
-		}else{
-			country = aitData.getCountry();
-		}
+		country = (aitData.getCountry() == null) ? context.getString(R.string.capital_country_acronym) : aitData.getCountry();
 
 		values.put(InfractionDatabaseHelper.PLATE, aitData.getPlate());
 		values.put(InfractionDatabaseHelper.VEHICLE_STATE, aitData.getStateVehicle());
+		values.put(InfractionDatabaseHelper.RENAVAM, aitData.getRenavam());
 		values.put(InfractionDatabaseHelper.CHASSI, aitData.getChassi());
 		values.put(InfractionDatabaseHelper.COUNTRY, country);
+		values.put(InfractionDatabaseHelper.VEHICLE_BRAND,
+				aitData.getVehicleBrand());
 		values.put(InfractionDatabaseHelper.VEHICLE_MODEL,
 				aitData.getVehicleModel());
 		values.put(InfractionDatabaseHelper.VEHICLE_COLOR,
@@ -353,7 +354,7 @@ public class InfractionDatabaseAdapter {
 
 		ContentValues values = new ContentValues();
 
-		values.put(InfractionDatabaseHelper.INFRATION, data.getInfraction());
+		values.put(InfractionDatabaseHelper.INFRACTION, data.getInfraction());
 		values.put(InfractionDatabaseHelper.FLAMING_CODE, data.getFramingCode());
 		values.put(InfractionDatabaseHelper.UNFOLDING, data.getUnfolding());
 		values.put(InfractionDatabaseHelper.ARTICLE, data.getArticle());
@@ -380,7 +381,7 @@ public class InfractionDatabaseAdapter {
 				values, InfractionDatabaseHelper.AIT_NUMBER + "= ? ",
 				new String[] { data.getAitNumber() });
 
-		Log.d("set infration ", update + " - " + data);
+		Log.d("set infraction ", update + " - " + data);
 
 		if (update > 0) {
 			return true;
@@ -431,7 +432,7 @@ public class InfractionDatabaseAdapter {
 				values, InfractionDatabaseHelper.AIT_NUMBER + "= ? ",
 				new String[] { aitData.getAitNumber() });
 
-		//Log.d("set photos ", update + " - " + dadosAuto);
+		//Log.d("set photos ", update + " - " + aitData);
 
 		if (update > 0 && NetworkConnection.isInternetConnected(context)) {
 			SyncFiles sync = new SyncFiles(context);
@@ -634,7 +635,7 @@ public class InfractionDatabaseAdapter {
 		return resultSet;
 	}
 
-	public String aitComposeJSONfromSQLite() {
+	public String aitComposeJsonFromSqLite() {
 
 		ArrayList<HashMap<String, String>> arrayListAit = new ArrayList<HashMap<String, String>>();
 
@@ -655,8 +656,11 @@ public class InfractionDatabaseAdapter {
 						aitData.getAitNumber());
 				map.put(InfractionDatabaseHelper.PLATE, aitData.getPlate());
 				map.put(InfractionDatabaseHelper.VEHICLE_STATE, aitData.getStateVehicle());
+				map.put(InfractionDatabaseHelper.RENAVAM, aitData.getRenavam());
 				map.put(InfractionDatabaseHelper.CHASSI, aitData.getChassi());
 				map.put(InfractionDatabaseHelper.COUNTRY, aitData.getCountry());
+				map.put(InfractionDatabaseHelper.VEHICLE_BRAND,
+						aitData.getVehicleBrand());
 				map.put(InfractionDatabaseHelper.VEHICLE_MODEL,
 						aitData.getVehicleModel());
 				map.put(InfractionDatabaseHelper.VEHICLE_COLOR,
@@ -673,9 +677,9 @@ public class InfractionDatabaseAdapter {
 				map.put(InfractionDatabaseHelper.DOCUMENT_NUMBER,
 						aitData.getDocumentNumber());
 
-				// infration
+				// infraction
 
-				map.put(InfractionDatabaseHelper.INFRATION, aitData.getInfraction());
+				map.put(InfractionDatabaseHelper.INFRACTION, aitData.getInfraction());
 				map.put(InfractionDatabaseHelper.FLAMING_CODE, aitData.getFramingCode());
 				map.put(InfractionDatabaseHelper.UNFOLDING, aitData.getUnfolding());
 				map.put(InfractionDatabaseHelper.ARTICLE, aitData.getArticle());
@@ -690,8 +694,8 @@ public class InfractionDatabaseAdapter {
 
 				map.put(InfractionDatabaseHelper.EQUIPMENT_DESCRIPTION,
 						aitData.getDescription());
-				map.put(InfractionDatabaseHelper.EQUIPMENT_BRAND, aitData.getVehicleBrand());
-				map.put(InfractionDatabaseHelper.EQUIPMENT_MODEL, aitData.getVehicleModel());
+				map.put(InfractionDatabaseHelper.EQUIPMENT_BRAND, aitData.getEquipmentBrand());
+				map.put(InfractionDatabaseHelper.EQUIPMENT_MODEL, aitData.getEquipmentModel());
 				map.put(InfractionDatabaseHelper.EQUIPMENT_SERIAL,
 						aitData.getSerialNumber());
 				map.put(InfractionDatabaseHelper.MEASUREMENT_PERFORMED,
@@ -756,8 +760,6 @@ public class InfractionDatabaseAdapter {
 		byte[] imageBytes = baos.toByteArray();
 		return Base64.encodeToString(imageBytes, Base64.DEFAULT);
 	}
-
-
 
 	public void aitUpdateSyncStatus(String ait) {
 		this.database.delete(InfractionDatabaseHelper.TABLE_NAME,

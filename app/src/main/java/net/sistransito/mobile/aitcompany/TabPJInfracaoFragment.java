@@ -52,7 +52,7 @@ public class TabPJInfracaoFragment extends Fragment implements View.OnClickListe
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.autopj_infracao_fragment, null, false);
+        view = inflater.inflate(R.layout.ait_pj_infraction_fragment, null, false);
         initializedView();
         getAutoObject();
         return view;
@@ -85,7 +85,7 @@ public class TabPJInfracaoFragment extends Fragment implements View.OnClickListe
 
         tvClearSearch = (TextView) view.findViewById(R.id.tv_clear_search);
         tvClearObs = (TextView) view.findViewById(R.id.tv_clear_obs);
-        tvAutoObs = (TextView) view.findViewById(R.id.tv_auto_obs);
+        tvAutoObs = (TextView) view.findViewById(R.id.tv_ait_observation);
         tvSalvarDados = (TextView) view.findViewById(R.id.auto_pj_fab);
 
         frameLayoutObs.setVisibility(view.GONE);
@@ -242,7 +242,7 @@ public class TabPJInfracaoFragment extends Fragment implements View.OnClickListe
                 if (checkInput()) {
 
                     if (!DatabaseCreator.getAitPJDatabaseAdapter(getActivity()).setDadosPJInfracao(dadosAuto))
-                        Routine.showAlert(getResources().getString(R.string.update_infracao), getActivity());
+                        Routine.showAlert(getResources().getString(R.string.update_infraction), getActivity());
 
                     startActivity(new Intent(getActivity(), PJLister.class));
                     getActivity().finish();
@@ -257,7 +257,7 @@ public class TabPJInfracaoFragment extends Fragment implements View.OnClickListe
 
         if (autoCompleteInfracao.getText().toString().isEmpty()) {
             autoCompleteInfracao.setError(getResources().getString(
-                    R.string.texto_inserir_infracao));
+                    R.string.insert_infraction));
             autoCompleteInfracao.requestFocus();
             return false;
         } else {

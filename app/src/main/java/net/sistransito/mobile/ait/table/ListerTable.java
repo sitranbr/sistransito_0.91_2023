@@ -21,13 +21,13 @@ public class ListerTable extends AppCompatActivity implements View.OnClickListen
     private ImageButton im_btn_delete, im_btn_back;
     public static Boolean CallSecondActivity = false;
     private TextView tvMessage;
-    private RelativeLayout placa_lister_layout;
+    private RelativeLayout plateListerLayout;
     private Cursor cursor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tabela_fragment);
+        setContentView(R.layout.table_fragment);
         initializedView();
     }
 
@@ -50,11 +50,11 @@ public class ListerTable extends AppCompatActivity implements View.OnClickListen
     }
 
     private void addNoResultView() {
-        placa_lister_layout = (RelativeLayout) findViewById(R.id.tabela_lister_layout);
+        plateListerLayout = (RelativeLayout) findViewById(R.id.lister_layout_table);
         im_btn_delete.setEnabled(false);
         cursor.close();
         tvMessage = new TextView(this);
-        tvMessage.setText(getResources().getString(R.string.nehum_resultado_retornado));
+        tvMessage.setText(getResources().getString(R.string.no_result_returned));
         tvMessage.setGravity(Gravity.CENTER);
         tvMessage.setTextAppearance(this, android.R.style.TextAppearance_Large);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -62,14 +62,14 @@ public class ListerTable extends AppCompatActivity implements View.OnClickListen
         tvMessage.setLayoutParams(params);
         tvMessage.setTextColor(getResources().getColor(R.color.line_color));
         if (tvMessage.getParent() == null) {
-            placa_lister_layout.addView(tvMessage);
+            plateListerLayout.addView(tvMessage);
         }
     }
 
     private void addResultView() {
         expandableAdapter = new ListerExpandableAdapterTable(cursor,
                 ListerTable.this);
-        expandableListView = (ExpandableListView) findViewById(R.id.expandable_listview_tabela);
+        expandableListView = (ExpandableListView) findViewById(R.id.expandable_listview_table);
         expandableListView.setAdapter(expandableAdapter);
     }
 
@@ -81,7 +81,6 @@ public class ListerTable extends AppCompatActivity implements View.OnClickListen
                 break;
             case R.id.im_btn_delete:
                 finish();
-                //startActivity(new Intent(TabelaLister.this, PlacaListerDelete.class));
                 break;
 
         }

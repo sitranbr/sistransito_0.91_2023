@@ -31,7 +31,7 @@ public class TavStructureFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.tav_veiculo_estrutura_fragment, null,
+		view = inflater.inflate(R.layout.tav_vehicle_structure_fragment, null,
 				false);
 		filterName = new FilterName(getActivity());
 		initializedView();
@@ -200,7 +200,7 @@ public class TavStructureFragment extends Fragment implements
 			tavData.setCarBody(value);
 			break;
 		case R.id.forro:
-			tavData.setLining(value);
+			tavData.setCeiling(value);
 			break;
 
 		case R.id.lataria_capo:
@@ -208,10 +208,10 @@ public class TavStructureFragment extends Fragment implements
 			break;
 
 		case R.id.lataria_lado_direito:
-			tavData.setRightSideBody(value);
+			tavData.setBodyworkRightSide(value);
 			break;
 		case R.id.lataria_lado_esquerdo:
-			tavData.setLeftSideBody(value);
+			tavData.setBodyWorkLeftSide(value);
 			break;
 		case R.id.lataria_tapa_porta_mala:
 			tavData.setTrunkBodywork(value);
@@ -220,7 +220,7 @@ public class TavStructureFragment extends Fragment implements
 			tavData.setRoofBodywork(value);
 			break;
 		case R.id.motor:
-			tavData.setEnginer(value);
+			tavData.setEngine(value);
 			break;
 		case R.id.painel:
 			tavData.setDashboard(value);
@@ -238,19 +238,19 @@ public class TavStructureFragment extends Fragment implements
 			tavData.setTrunkPainting(value);
 			break;
 		case R.id.pintura_teto:
-			tavData.setCeilingPainting(value);
+			tavData.setHoodPainting(value);
 			break;
 		case R.id.radiador:
 			tavData.setRadiator(value);
 			break;
 		case R.id.vidros_laterais:
-			tavData.setSideWindows(value);
+			tavData.setSideGlass(value);
 			break;
 		case R.id.vidro_para_brisa:
-			tavData.setWindShieldGlass(value);
+			tavData.setWindShield(value);
 			break;
 		case R.id.vidro_traseiro:
-			tavData.setRearWindow(value);
+			tavData.setRearWindshield(value);
 			break;
 
 		}

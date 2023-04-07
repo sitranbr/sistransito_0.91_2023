@@ -12,7 +12,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/include_top"
-        android:background="@color/bacground_color" />
+        android:background="@color/background_color" />
 
     <net.sistransito.mobile.viewpager.AnySwipeableViewPager
         android:id="@+id/start_pager"
@@ -22,6 +22,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
         android:layout_below="@+id/title_pager"
-        android:background="@color/bacground_color" />
+        android:background="@color/background_color" />
 
 </RelativeLayout>

@@ -123,7 +123,7 @@ public class AitPJDatabaseAdapter {
                 values, InfractionDatabaseHelper.AIT_NUMBER + "= ? ",
                 new String[] { data.getAitNumber() });
 
-        Log.d("setCancelamento", update + "-" + motivo + " | numero Ait: " + data.getAitNumber());
+        Log.d("setCancelamento", update + "-" + motivo + " | number Ait: " + data.getAitNumber());
 
         if (update > 0) {
             return true;
@@ -192,7 +192,7 @@ public class AitPJDatabaseAdapter {
 
         ContentValues values = new ContentValues();
 
-        values.put(InfractionDatabaseHelper.INFRATION, dadosAuto.getInfration());
+        values.put(InfractionDatabaseHelper.INFRACTION, dadosAuto.getInfration());
         values.put(InfractionDatabaseHelper.FLAMING_CODE, dadosAuto.getFramingCode());
         values.put(InfractionDatabaseHelper.UNFOLDING, dadosAuto.getUnfolding());
         values.put(InfractionDatabaseHelper.ARTICLE, dadosAuto.getArticle());

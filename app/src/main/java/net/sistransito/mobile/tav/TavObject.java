@@ -11,12 +11,11 @@ public class TavObject {
 
 		if (data == null)
 			data = new TavData();
-		
 		return data;
+
 	}
 
 	public static void setTAVObject(TavData tcaData) {
-
 		data = tcaData;
 	}
 }

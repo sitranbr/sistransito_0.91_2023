@@ -2,55 +2,56 @@ package net.sistransito.mobile.ait.table;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.text.SpannableString;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CursorTreeAdapter;
 import android.widget.TextView;
+
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
 import net.sistransito.R;
-
-/**
- * Created by SANDRO on 04/12/2018.
- */
+import net.sistransito.mobile.util.Routine;
 
 public class ListerExpandableAdapterTable extends CursorTreeAdapter {
-    private LayoutInflater mInflator;
-    private Context mycontext;
+    private LayoutInflater layoutInflater;
+    private final Context context;
 
     public ListerExpandableAdapterTable(Cursor cursor, Context context) {
         super(cursor, context);
-        mycontext = context;
-        mInflator = LayoutInflater.from(context);
+        this.context = context;
+        layoutInflater = LayoutInflater.from(context);
     }
 
     @Override
     protected void bindChildView(View arg0, Context arg1, Cursor arg2,
                                  boolean arg3) {
+
     }
 
     @Override
     protected void bindGroupView(View view, Context arg1, Cursor cursor,
                                  boolean arg3) {
 
-        TextView tvTabelaArt, tvTabelaCodigo, tvTabelaDesdob, tvTabelaInfracao;
+       /* TextView tvArticle, tvCode, tvUnfolding, tvDescription;
 
-        tvTabelaArt = (TextView) view.findViewById(R.id.tv_tabela_art);
-        tvTabelaCodigo = (TextView) view.findViewById(R.id.tv_tabela_codigo);
-        tvTabelaDesdob = (TextView) view.findViewById(R.id.tv_tabela_desdob);
-        tvTabelaInfracao = (TextView) view.findViewById(R.id.tv_tabela_descricao);
+        tvArticle = (TextView) view.findViewById(R.id.tv_article_table);
+        tvCode = (TextView) view.findViewById(R.id.tv_code_table);
+        tvUnfolding = (TextView) view.findViewById(R.id.tv_unfolding_table);
+        tvDescription = (TextView) view.findViewById(R.id.tv_description_table);
 
-        tvTabelaCodigo
+        tvCode
                 .setText(cursor.getString(cursor
                         .getColumnIndex(PrepopulatedDBOpenHelper.AIT_FLAMING_CODE)));
-        tvTabelaDesdob
+        tvUnfolding
                 .setText("-" + cursor.getString(cursor
                         .getColumnIndex(PrepopulatedDBOpenHelper.AIT_UNFOLDING)));
-        tvTabelaArt.setText("Art. " + cursor.getString(cursor
+        tvArticle.setText("Art. " + cursor.getString(cursor
                 .getColumnIndex(PrepopulatedDBOpenHelper.AIT_ARTICLE)));
-        tvTabelaInfracao.setText(cursor.getString(cursor
-                .getColumnIndex(PrepopulatedDBOpenHelper.AIT_DESCRIPTION)));
+        tvDescription.setText(cursor.getString(cursor
+                .getColumnIndex(PrepopulatedDBOpenHelper.AIT_DESCRIPTION)));*/
 
     }
 
@@ -63,25 +64,26 @@ public class ListerExpandableAdapterTable extends CursorTreeAdapter {
     @Override
     protected View newGroupView(Context context, Cursor cursor,
                                 boolean isExpendable, ViewGroup parent) {
-        View view = mInflator.inflate(R.layout.tabela_infracao_listview_parent,
+        View view = layoutInflater.inflate(R.layout.table_infraction_listview_parent,
                 null);
 
-        TextView tvTabelaArt, tvTabelaCodigo, tvTabelaDesdob, tvTabelaInfracao;
+        TextView tvArticle, tvFraming, tvUnfolding, tvDescription;
 
-        tvTabelaArt = (TextView) view.findViewById(R.id.tv_tabela_art);
-        tvTabelaCodigo = (TextView) view.findViewById(R.id.tv_tabela_codigo);
-        tvTabelaDesdob = (TextView) view.findViewById(R.id.tv_tabela_desdob);
-        tvTabelaInfracao = (TextView) view.findViewById(R.id.tv_tabela_descricao);
+        tvArticle = (TextView) view.findViewById(R.id.tv_article_table);
+        tvFraming = (TextView) view.findViewById(R.id.tv_framing_table);
+        tvUnfolding = (TextView) view.findViewById(R.id.tv_unfolding_table);
+        tvDescription = (TextView) view.findViewById(R.id.tv_description_table);
 
-        tvTabelaCodigo
+        tvArticle.setText(cursor.getString(cursor
+                .getColumnIndex(PrepopulatedDBOpenHelper.AIT_ARTICLE)));
+        tvFraming
                 .setText(cursor.getString(cursor
                         .getColumnIndex(PrepopulatedDBOpenHelper.AIT_FLAMING_CODE)));
-        tvTabelaDesdob
+        tvUnfolding
                 .setText(cursor.getString(cursor
                         .getColumnIndex(PrepopulatedDBOpenHelper.AIT_UNFOLDING)));
-        tvTabelaArt.setText(cursor.getString(cursor
-                .getColumnIndex(PrepopulatedDBOpenHelper.AIT_ARTICLE)));
-        tvTabelaInfracao.setText(cursor.getString(cursor
+
+        tvDescription.setText(cursor.getString(cursor
                 .getColumnIndex(PrepopulatedDBOpenHelper.AIT_DESCRIPTION)));
 
         return view;
@@ -93,7 +95,7 @@ public class ListerExpandableAdapterTable extends CursorTreeAdapter {
         int groupId = groupCursor.getInt(groupCursor
                 .getColumnIndex(PrepopulatedDBOpenHelper.AIT_ID));
 
-        return (DatabaseCreator.getPrepopulatedDBOpenHelper(mycontext))
+        return (DatabaseCreator.getPrepopulatedDBOpenHelper(context))
                 .getInfrationCursor(groupId);
     }
 
@@ -102,35 +104,35 @@ public class ListerExpandableAdapterTable extends CursorTreeAdapter {
                              boolean isLastChild, View view, ViewGroup parent) {
         final int gPosition = groupPosition;
 
-        final String gravidade = getGroup(gPosition).getString(
+        final String gravity = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_GRAVITY));
 
-        final String responsavel = getGroup(gPosition).getString(
+        final String responsible = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_RESPONSIBLE));
 
-        final String pontos = getGroup(gPosition).getString(
+        final String points = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_POINTS));
 
-        final String valor = getGroup(gPosition).getString(
+        final String amount = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_AMOUNT));
 
-        final String competencia = getGroup(gPosition).getString(
+        final String transitCompetency = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_TRANSIT_AUTHORITY));
 
-        final String medidas = getGroup(gPosition).getString(
+        String procedures = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_ADMINISTRATIVE_PROCEDURE));
 
-        final String observacao = getGroup(gPosition).getString(
+        String observations = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_OBSERVATION));
 
-        final String notas = getGroup(gPosition).getString(
+        String notes = getGroup(gPosition).getString(
                 getGroup(gPosition).getColumnIndex(
                         PrepopulatedDBOpenHelper.AIT_ANNOTATIONS));
 
@@ -138,33 +140,65 @@ public class ListerExpandableAdapterTable extends CursorTreeAdapter {
         if (view != null) {
             mView = view;
         } else {
-            mView = mInflator.inflate(R.layout.tabela_listview_child,
+            mView = layoutInflater.inflate(R.layout.table_listview_child,
                     parent, false);
         }
 
-        TextView tvTabelaGravidade, tvTabelaPontuacao, tvTabelaValor, tvTabelaResponsavel,
-                tvTabelaCompete, tvTabelaMedidas, tvTabelaObs, tvTabelaNotas;
+        final TextView tvGravity, tvPoints, tvAmount, tvResponsible,
+                tvCompetency, tvProcedures, tvObservation, tvNotes;
 
-        tvTabelaGravidade = (TextView) mView.findViewById(R.id.tv_tabela_gravidade);
-        tvTabelaPontuacao = (TextView) mView.findViewById(R.id.tv_tabela_pontuacao);
-        tvTabelaValor = (TextView) mView.findViewById(R.id.tv_tabela_valor);
-        tvTabelaResponsavel = (TextView) mView.findViewById(R.id.tv_tabela_responsavel);
-        tvTabelaCompete = (TextView) mView.findViewById(R.id.tv_tabela_competencia);
-        tvTabelaMedidas = (TextView) mView.findViewById(R.id.tv_tabela_medidas);
-        tvTabelaObs = (TextView) mView.findViewById(R.id.tv_tabela_obs);
-        tvTabelaNotas = (TextView) mView.findViewById(R.id.tv_tabela_notas);
+        tvGravity = (TextView) mView.findViewById(R.id.tv_gravity_table);
+        tvPoints = (TextView) mView.findViewById(R.id.tv_points_table);
+        tvAmount = (TextView) mView.findViewById(R.id.tv_amount_table);
+        tvResponsible = (TextView) mView.findViewById(R.id.tv_responsible_table);
+        tvCompetency = (TextView) mView.findViewById(R.id.tv_competency_table);
+        tvProcedures = (TextView) mView.findViewById(R.id.tv_procedure_table);
+        tvObservation = (TextView) mView.findViewById(R.id.tv_observation_table);
+        tvNotes = (TextView) mView.findViewById(R.id.tv_notes_table);
 
-        tvTabelaGravidade.setText(gravidade);
-        tvTabelaPontuacao.setText(pontos);
-        tvTabelaValor.setText(mycontext.getResources().getString(R.string.cifrao_format) + valor);
-        tvTabelaResponsavel.setText(responsavel);
-        tvTabelaCompete.setText(competencia);
-        tvTabelaMedidas.setText(medidas);
-        tvTabelaObs.setText(observacao);
-        tvTabelaNotas.setText(notas);
+        // Call method to apply bold to string
+
+        final String NO_INFORMATION_AVAILABLE = context.getString(R.string.no_information_available);
+
+        if (TextUtils.isEmpty(procedures)) {
+            procedures = NO_INFORMATION_AVAILABLE;
+        }
+
+        if (TextUtils.isEmpty(observations)) {
+            observations = NO_INFORMATION_AVAILABLE;
+        }
+
+        if (TextUtils.isEmpty(notes)) {
+            notes = NO_INFORMATION_AVAILABLE;
+        }
+
+        Routine.TextAlignment normal = Routine.TextAlignment.NORMAL;
+        Routine.TextAlignment center = Routine.TextAlignment.CENTER;
+
+        SpannableString boldGravity = Routine.textWithBoldAndCenter((context.getString(R.string.nature_format).toString()), gravity, true, center);
+        SpannableString boldPoint = Routine.textWithBoldAndCenter((context.getString(R.string.points_format).toString()), points, true, center);
+        SpannableString boldAmount = Routine.textWithBoldAndCenter((context.getString(R.string.value_format).toString()), context.getResources().getString(R.string.coin_format) + amount, true, center);
+        SpannableString boldResponsible = Routine.textWithBoldAndCenter((context.getString(R.string.responsible_format).toString()), responsible, true, center);
+        SpannableString boldTransitCompetency = Routine.textWithBoldAndCenter((context.getString(R.string.competency_format).toString()), transitCompetency, true, center);
+
+        SpannableString boldProcedures = Routine.applyBold(context.getString(R.string.administrative_measure_format) + procedures);
+        SpannableString boldObservation = Routine.applyBold(context.getResources().getString(R.string.observation_format) + observations);
+        SpannableString boldNotes = Routine.applyBold(context.getResources().getString(R.string.notes_format) + notes);
+
+
+        tvGravity.setText(boldGravity);
+        tvPoints.setText(boldPoint);
+        tvAmount.setText(boldAmount);
+        tvResponsible.setText(boldResponsible);
+        tvCompetency.setText(boldTransitCompetency);
+        tvProcedures.setText(boldProcedures);
+        tvObservation.setText(boldObservation);
+        tvNotes.setText(boldNotes);
 
         return mView;
+
     }
+
 
 }
 

@@ -16,7 +16,7 @@ public class TabAddressSubTitleFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.auto_endereco_fragment_subtitulo, null, false);
+		view = inflater.inflate(R.layout.ait_address_fragment_subtitle, null, false);
 		return view;
 	}
 	public static TabAddressSubTitleFragment newInstance() {

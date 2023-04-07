@@ -41,7 +41,7 @@ public class ConsultPlateFragment extends Fragment implements
     private Button btnCreateAit, btnPlateSearch;
     private EditText etPlateLetters, etPlateNumbers, etChassi, etPlateMercosul, etVisNumber,
             etSealNumber, etEngineNumber;
-    private CheckBox cbOfflineSerach;
+    private CheckBox cbOfflineSearch;
     private RadioButton rbPlateSearch, rbChassiSearch, rbMercosulPlateSearch, rbVisNumber,
             rbSealNumber, rbEngineNumber;
     private RadioGroup rgTypeSearch, rgVisTypeSearch, rgSealTypeSearch;
@@ -50,11 +50,11 @@ public class ConsultPlateFragment extends Fragment implements
     private final int LENGTH_PLATE_NUMBER = 4;
     private final int LENGTH_CHASSI = 17;
     private final int LENGTH_PLATE_MERCOSUL = 7;
-    private final int NUMERO_VIS = 8;
+    private final int VIS_NUMBER = 8;
     private PlateHttpResultAsyncTask httpResultAnysTask;
-    private EditTextChange etCharater, etNumber;
+    private EditTextChange etCharacter, etNumber;
     private Boolean textChangeState = true;
-    private DataFromPlate dataPlate;
+    private DataFromPlate dataFromPlate;
 
     //private GPSTracker gps;
 
@@ -65,13 +65,13 @@ public class ConsultPlateFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.consulta_placa_fragment, null, false);
-        //checkCancelAutos();
+        view = inflater.inflate(R.layout.plate_search_fragment, null, false);
+        //checkAitCancel();
         initilizedView();
         return view;
     }
 
-    private void checkCancelAutos() {
+    private void checkAitCancel() {
 
         String idAuto = (DatabaseCreator.getNumberDatabaseAdapter(getActivity()))
                 .getAitNumber();
@@ -95,9 +95,9 @@ public class ConsultPlateFragment extends Fragment implements
                 .findViewById(R.id.ll_child_result_view);
         tvResultShow = (TextView) view.findViewById(R.id.tv_result_placa_show);
         tvResultShow.setOnClickListener(this);
-        btnCreateAit = (Button) view.findViewById(R.id.btn_autuar);
+        btnCreateAit = (Button) view.findViewById(R.id.btn_create_ait);
         btnCreateAit.setOnClickListener(this);
-        btnPlateSearch = (Button) view.findViewById(R.id.btn_consultar_placa);
+        btnPlateSearch = (Button) view.findViewById(R.id.btn_search_plate);
         btnPlateSearch.setOnClickListener(this);
         etPlateLetters = (EditText) view
                 .findViewById(R.id.et_letras_da_placa);
@@ -108,7 +108,7 @@ public class ConsultPlateFragment extends Fragment implements
         etVisNumber = (EditText) view.findViewById(R.id.et_vis_input);
         etSealNumber = (EditText) view.findViewById(R.id.et_lacre_input);
         etEngineNumber = (EditText) view.findViewById(R.id.et_motor_input);
-        cbOfflineSerach = (CheckBox) view
+        cbOfflineSearch = (CheckBox) view
                 .findViewById(R.id.cb_pesquisa_offline);
         rgTypeSearch = (RadioGroup) view.findViewById(R.id.rg_type_search);
         rgVisTypeSearch = (RadioGroup) view.findViewById(R.id.rg_type_search_two);
@@ -119,7 +119,7 @@ public class ConsultPlateFragment extends Fragment implements
         rbVisNumber = (RadioButton) view.findViewById(R.id.rb_search_vis);
         rbSealNumber = (RadioButton) view.findViewById(R.id.rb_search_lacre);
         rbEngineNumber = (RadioButton) view.findViewById(R.id.rb_search_motor);
-        etCharater = new EditTextChange(R.id.et_letras_da_placa);
+        etCharacter = new EditTextChange(R.id.et_letras_da_placa);
         etNumber = new EditTextChange(R.id.et_numeros_da_placa);
 
         etChassi.addTextChangedListener(new EditTextChange(
@@ -131,15 +131,15 @@ public class ConsultPlateFragment extends Fragment implements
         etVisNumber.addTextChangedListener(new EditTextChange(
                 R.id.et_vis_input));
 
-        etPlateLetters.addTextChangedListener(etCharater);
+        etPlateLetters.addTextChangedListener(etCharacter);
         etPlateNumbers.addTextChangedListener(etNumber);
 
 
 
-        cbOfflineSerach.setOnClickListener(new OnClickListener() {
+        cbOfflineSearch.setOnClickListener(new OnClickListener() {
                  @Override
                  public void onClick(View v) {
-                     Routine.openKeyboard(cbOfflineSerach, getActivity());
+                     Routine.openKeyboard(cbOfflineSearch, getActivity());
                      etPlateLetters.requestFocus();
                  }
              }
@@ -303,7 +303,7 @@ public class ConsultPlateFragment extends Fragment implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_consultar_placa:
+            case R.id.btn_search_plate:
                 if (iSVehicleSearch()) {
                     getVehicleResult();
                       //Log.d("Latitude", gps.getLocation().getLatitude() + " ");
@@ -317,30 +317,31 @@ public class ConsultPlateFragment extends Fragment implements
                 Routine.closeKeyboard(tvResultShow, getActivity());
                 break;
 
-            case R.id.btn_autuar:
-                if (dataPlate != null) {
+            case R.id.btn_create_ait:
+                if (dataFromPlate != null) {
 
                     if ((DatabaseCreator
                             .getInfractionDatabaseAdapter(getActivity()))
-                            .isSamePlateExist(dataPlate.getPlate())) {
+                            .isSamePlateExist(dataFromPlate.getPlate())) {
 
-                        openAit(DatabaseCreator.getInfractionDatabaseAdapter(getActivity())
-                                .getAitDataFromPlate(dataPlate.getPlate()));
+                                openAitFragment(DatabaseCreator.getInfractionDatabaseAdapter(getActivity())
+                                        .getAitDataFromPlate(dataFromPlate.getPlate()));
 
                     } else {
                         AitData aitData = new AitData();
-                        aitData.setPlate(dataPlate.getPlate());
-                        aitData.setChassi(dataPlate.getChassi());
-                        aitData.setStateVehicle(dataPlate.getState());
-                        aitData.setVehicleModel(dataPlate.getModel());
-                        aitData.setVehicleBrand(dataPlate.getBrand());
-                        aitData.setVehycleColor(dataPlate.getColor());
-                        aitData.setVehicleSpecies(dataPlate.getSpecies().toUpperCase());
-                        aitData.setVehicleCategory(dataPlate.getCategory().toUpperCase());
+                        aitData.setPlate(dataFromPlate.getPlate());
+                        aitData.setRenavam(dataFromPlate.getRenavam());
+                        aitData.setChassi(dataFromPlate.getChassi());
+                        aitData.setStateVehicle(dataFromPlate.getState());
+                        aitData.setVehicleModel(dataFromPlate.getModel());
+                        aitData.setVehicleBrand(dataFromPlate.getBrand());
+                        aitData.setVehycleColor(dataFromPlate.getColor());
+                        aitData.setVehicleSpecies(dataFromPlate.getSpecies().toUpperCase());
+                        aitData.setVehicleCategory(dataFromPlate.getCategory().toUpperCase());
                         aitData.setStoreFullData(false);
-                        openAit(aitData);
+                        openAitFragment(aitData);
 
-                        //Log.d("DadosAuto: ", String.valueOf(dataPlate.getCATEGORY().toUpperCase()));
+                        //Log.d("aidData: ", String.valueOf(dataPlate.getCATEGORY().toUpperCase()));
                     }
                 }
         }
@@ -386,7 +387,7 @@ public class ConsultPlateFragment extends Fragment implements
                         return true;
                     } else {
                         AnyAlertDialog.dialogShow(
-                                getResources().getString(R.string.sem_conexao),
+                                getResources().getString(R.string.no_network_connection),
                                 getActivity(), "info");
                         return false;
                     }
@@ -401,7 +402,7 @@ public class ConsultPlateFragment extends Fragment implements
     }
 
     private boolean isOfflineSearch() {
-        return cbOfflineSerach.isChecked();
+        return cbOfflineSearch.isChecked();
     }
 
     private boolean isInternetConnected() {
@@ -409,14 +410,14 @@ public class ConsultPlateFragment extends Fragment implements
     }
 
     public void resultCallBack(DataFromPlate dataPlate, boolean isOffline) {
-        this.dataPlate = null;
+        this.dataFromPlate = null;
         //     gps.stopUsingGPS();
 
         //Log.d("resultCallBack", String.valueOf(dataPlate));
 
         if (dataPlate != null) {
 
-            this.dataPlate = dataPlate;
+            this.dataFromPlate = dataPlate;
             PlateViewFormat plateViewFormat = new PlateViewFormat(
                     dataPlate, getActivity());
             addResultView();
@@ -430,7 +431,7 @@ public class ConsultPlateFragment extends Fragment implements
 
         } else {
             tvResultShow.setText(getResources().getString(
-                    R.string.nehum_resultado_retornado));
+                    R.string.no_result_returned));
             btnCreateAit.setEnabled(false);
             addResultView();
             disableSearch();
@@ -490,22 +491,22 @@ public class ConsultPlateFragment extends Fragment implements
         String character = etPlateLetters.getText().toString().trim();
         String number = etPlateNumbers.getText().toString().trim();
         String chassi = etChassi.getText().toString().trim();
-        String placaMercosul = etPlateMercosul.getText().toString().trim();
-        String numeroVis = etVisNumber.getText().toString().trim();
-        String numeroLacre = etSealNumber.getText().toString().trim();
-        String numeroMotor = etEngineNumber.getText().toString().trim();
+        String mercosulPlate = etPlateMercosul.getText().toString().trim();
+        String visNumber = etVisNumber.getText().toString().trim();
+        String sealNumber = etSealNumber.getText().toString().trim();
+        String engineNumber = etEngineNumber.getText().toString().trim();
 
         if (rbPlateSearch.isChecked()){
             plateOrChassis = character + number;
             typeSearch = "plate";
             if (character.length() != LENGTH_PLATE_CHARACTER) {
                 etPlateLetters.setError(getResources().getString(
-                        R.string.letras_da_placa));
+                        R.string.license_plate_letters));
                 etPlateLetters.requestFocus();
                 return false;
             } else if (number.length() != LENGTH_PLATE_NUMBER) {
                 etPlateNumbers.setError(getResources().getString(
-                        R.string.numeros_da_placa));
+                        R.string.plate_numbers));
                 etPlateNumbers.requestFocus();
                 return false;
             } else {
@@ -523,20 +524,20 @@ public class ConsultPlateFragment extends Fragment implements
                 return true;
             }
         } else if (rbMercosulPlateSearch.isChecked()){
-            plateOrChassis = placaMercosul;
-            typeSearch = "placa";
-            if (placaMercosul.length() != LENGTH_PLATE_MERCOSUL) {
+            plateOrChassis = mercosulPlate;
+            typeSearch = "plate";
+            if (mercosulPlate.length() != LENGTH_PLATE_MERCOSUL) {
                 etPlateMercosul.setError(getResources().getString(
-                        R.string.placa_mercosul_field));
+                        R.string.plate_mercosul_field));
                 etPlateMercosul.requestFocus();
                 return false;
             } else {
                 return true;
             }
         } else if (rbVisNumber.isChecked()){
-            plateOrChassis = numeroVis;
+            plateOrChassis = visNumber;
             typeSearch = "vis";
-            if (numeroVis.length() != NUMERO_VIS) {
+            if (visNumber.length() != VIS_NUMBER) {
                 etVisNumber.setError(getResources().getString(
                         R.string.vis_field));
                 etVisNumber.requestFocus();
@@ -545,22 +546,22 @@ public class ConsultPlateFragment extends Fragment implements
                 return true;
             }
         }else if (rbSealNumber.isChecked()){
-            plateOrChassis = numeroLacre;
-            typeSearch = "lacre";
-            if (numeroLacre.equals(null)) {
+            plateOrChassis = sealNumber;
+            typeSearch = "seal";
+            if (sealNumber == null) {
                 etSealNumber.setError(getResources().getString(
-                        R.string.lacre_field));
+                        R.string.seal_field));
                 etSealNumber.requestFocus();
                 return false;
             } else {
                 return true;
             }
         }else if (rbEngineNumber.isChecked()){
-            plateOrChassis = numeroMotor;
-            typeSearch = "motor";
-            if (numeroMotor.equals(null)) {
+            plateOrChassis = engineNumber;
+            typeSearch = "engine";
+            if (engineNumber == null) {
                 etEngineNumber.setError(getResources().getString(
-                        R.string.motor_field));
+                        R.string.engine_field));
                 etEngineNumber.requestFocus();
                 return false;
             } else {
@@ -639,8 +640,8 @@ public class ConsultPlateFragment extends Fragment implements
                         break;
                     case R.id.et_vis_input:
                         etVisNumber.setError(null);
-                        if (text.toString().length() == NUMERO_VIS) {
-                            if (etVisNumber.getText().toString().length() != NUMERO_VIS) {
+                        if (text.toString().length() == VIS_NUMBER) {
+                            if (etVisNumber.getText().toString().length() != VIS_NUMBER) {
                                 etVisNumber.requestFocus();
                             } else {
                                 if (iSVehicleSearch()) {
@@ -664,10 +665,10 @@ public class ConsultPlateFragment extends Fragment implements
         }
     }
 
-    private void openAit(AitData aitData) {
+    private void openAitFragment(AitData aitData) {
         Intent intent = new Intent(getActivity(), AitActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(AitData.getIDAuto(), aitData);
+        bundle.putSerializable(AitData.getAitID(), aitData);
         intent.putExtras(bundle);
         startActivity(intent);
     }

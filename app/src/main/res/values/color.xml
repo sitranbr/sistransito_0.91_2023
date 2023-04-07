@@ -10,6 +10,7 @@
     <color name="icons">#FFFFFF</color>
     <color name="divider">#B6B6B6</color>
     <color name="background_auto">#F6EBBC</color>
+    <color name="table_border">#D0CFCC</color>
 
     <!-- Material DEFAULT colors -->
     <color name="material_drawer_primary">#2196F3</color>
@@ -54,6 +55,7 @@
     <color name="yellow_deep">#ff9702</color>
     <color name="yellow_deep_2">#f67a00</color>
     <color name="yellow_gray">#fedcb2</color>
+    <color name="yellow_white">#F7F0E8</color>
     <color name="gray_1">#999999</color>
     <color name="gray_2">#f6f6f6</color>
     <color name="gray_3">#e7e8e9</color>
@@ -61,7 +63,7 @@
     <color name="gray_5">#646464</color>
     <color name="white">#ffffff</color>
     <color name="line_color">#c5c5c5</color>
-    <color name="bacground_color">#e4e4e4</color>
+    <color name="background_color">#e4e4e4</color>
     <color name="pink">#f94877</color>
     <color name="yellow_line_color">#fe8f18</color>
     <color name="yellow_action_bar_color">#fc8900</color>
@@ -74,8 +76,8 @@
     <color name="blue_p">#39579b</color>
     <color name="green">#83bf12</color>
     <color name="green_p">#72ab00</color>
-    <color name="organge">#ffa71c</color>
-    <color name="organge_p">#e69b33</color>
+    <color name="orange">#ffa71c</color>
+    <color name="orange_p">#e69b33</color>
     <color name="lobster">#ff6267</color>
     <color name="lobster_p">#c94a4e</color>
     <color name="yellow_btn">#ffcc03</color>

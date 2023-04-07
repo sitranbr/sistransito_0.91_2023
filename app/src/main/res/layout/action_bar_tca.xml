@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:gravity="start"
-        android:paddingBottom="@dimen/widght_padding_2"
+        android:paddingBottom="@dimen/width_padding_2"
         android:paddingStart="@dimen/padding_left_tab_titulo"
-        android:paddingEnd="@dimen/widght_padding_2"
-        android:paddingTop="@dimen/widght_padding_2"
-        android:text="@string/titulo_texto_tca"
+        android:paddingEnd="@dimen/width_padding_2"
+        android:paddingTop="@dimen/width_padding_2"
+        android:text="@string/tca_title_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
@@ -26,40 +26,40 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_back_background"
-        android:contentDescription="@string/login"
-        android:padding="@dimen/widght_margin_top"
+        android:contentDescription="@string/login_two"
+        android:padding="@dimen/width_margin_top"
         android:src="@drawable/btn_back" />
 
     <LinearLayout
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/widght_margin"
+        android:layout_marginRight="@dimen/width_margin_8"
         android:layout_below="@+id/tv_tca_titulo"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/widght_padding"
-        android:paddingRight="@dimen/widght_padding"
-        android:paddingTop="@dimen/widght_padding" >
+        android:paddingLeft="@dimen/width_padding"
+        android:paddingRight="@dimen/width_padding"
+        android:paddingTop="@dimen/width_padding" >
 
         <ImageView
             android:id="@+id/im_btn_tab_conductor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/widght_margin"
-            android:padding="@dimen/widght_padding_4"
-            android:src="@drawable/tca_condutor_indicator" />
+            android:layout_marginLeft="@dimen/width_margin_8"
+            android:padding="@dimen/width_padding_4"
+            android:src="@drawable/tca_driver_indicator" />
 
         <View
             android:layout_width="@dimen/indicator_width"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/widght_margin"
+            android:layout_margin="@dimen/width_margin_8"
             android:background="@color/yellow_line_color" />
 
         <ImageView
             android:id="@+id/im_btn_tab_questionario"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/widght_padding_4"
+            android:padding="@dimen/width_padding_4"
             android:src="@drawable/tca_question_indicator" />
     </LinearLayout>
 
@@ -71,9 +71,9 @@
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/widght_padding"
-        android:paddingRight="@dimen/widght_padding"
-        android:paddingTop="@dimen/widght_padding" >
+        android:paddingLeft="@dimen/width_padding"
+        android:paddingRight="@dimen/width_padding"
+        android:paddingTop="@dimen/width_padding" >
 
         <com.viewpagerindicator.UnderlinePageIndicator
             android:id="@+id/indicator"

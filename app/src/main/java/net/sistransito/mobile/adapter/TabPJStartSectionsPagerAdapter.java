@@ -4,9 +4,9 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
-import net.sistransito.mobile.aitcompany.TabPJEnderecoFragment;
+import net.sistransito.mobile.aitcompany.TabPJAddressFragment;
 import net.sistransito.mobile.aitcompany.TabPJInfracaoFragment;
-import net.sistransito.mobile.aitcompany.TabPJCondutorFragment;
+import net.sistransito.mobile.aitcompany.TabPJConductorFragment;
 
 public class TabPJStartSectionsPagerAdapter extends FragmentPagerAdapter {
 
@@ -19,9 +19,9 @@ public class TabPJStartSectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int index) {
         switch (index) {
             case 0:
-                return TabPJCondutorFragment.newInstance();
+                return TabPJConductorFragment.newInstance();
             case 1:
-                return TabPJEnderecoFragment.newInstance();
+                return TabPJAddressFragment.newInstance();
             case 2:
                 return TabPJInfracaoFragment.newInstance();
         }

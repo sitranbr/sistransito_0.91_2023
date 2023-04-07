@@ -64,14 +64,14 @@ public class SettingFragment extends Fragment implements
                 .getSettingCursor();
 
         etSettingState.setText(cursor.getString(cursor
-                .getColumnIndex(SetttingDatabaseHelper.SETTING_UF)));
+                .getColumnIndex(SetttingDatabaseHelper.SETTING_STATE)));
         etSettingPrinter.setText(cursor.getString(cursor
                 .getColumnIndex(SetttingDatabaseHelper.SETTING_PRINTER)));
 
         btnSync.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
 
-        if (database.getAutobackup()) {
+        if (database.getAutoBackup()) {
             checkBoxAutoBackup.setChecked(true);
         } else {
             checkBoxAutoBackup.setChecked(false);
@@ -100,9 +100,9 @@ public class SettingFragment extends Fragment implements
         switch (view.getId()) {
             case R.id.checkBoxAutoBackup:
                 if (isChecked) {
-                    database.setAutobackup(true);
+                    database.setAutoBackup(true);
                 } else {
-                    database.setAutobackup(false);
+                    database.setAutoBackup(false);
                 }
                 break;
             case R.id.checkBoxRington:
@@ -130,9 +130,9 @@ public class SettingFragment extends Fragment implements
             case R.id.btn_update:
                 etSettingState.setText(etSettingState.getText().toString());
                 etSettingPrinter.setText(etSettingPrinter.getText().toString());
-                if (database.setUpdatePrinterUf(etSettingState.getText().toString(),
+                if (database.setUpdatePrinterState(etSettingState.getText().toString(),
                         etSettingPrinter.getText().toString())) {
-                    Routine.showAlert(getResources().getString(R.string.update_sucess), getActivity());
+                    Routine.showAlert(getResources().getString(R.string.update_success), getActivity());
                 } else {
                     Routine.showAlert(getResources().getString(R.string.update_erro), getActivity());
                 }
@@ -142,7 +142,7 @@ public class SettingFragment extends Fragment implements
                     SyncDataInformation information = new SyncDataInformation(getActivity());
                     information.execute("");
                 } else {
-                    Routine.showAlert(getResources().getString(R.string.sem_conexao), getActivity());
+                    Routine.showAlert(getResources().getString(R.string.no_network_connection), getActivity());
                 }
 
                 break;

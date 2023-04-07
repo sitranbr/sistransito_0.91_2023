@@ -12,6 +12,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.JsonObject;
@@ -25,6 +26,8 @@ import net.sistransito.mobile.http.WebClient;
 import net.sistransito.mobile.util.Routine;
 import net.sistransito.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -147,7 +150,7 @@ public class SyncFiles {
                     params.put(InfractionDatabaseHelper.AIT_NUMBER, aitData.getAitNumber());
                     params.put(InfractionDatabaseHelper.PLATE, aitData.getPlate());
                     params.put(InfractionDatabaseHelper.VEHICLE_STATE, aitData.getStateVehicle());
-                    params.put(InfractionDatabaseHelper.RENAVAN, aitData.getRenavam());
+                    params.put(InfractionDatabaseHelper.RENAVAM, aitData.getRenavam());
                     params.put(InfractionDatabaseHelper.CHASSI, aitData.getChassi());
                     params.put(InfractionDatabaseHelper.COUNTRY, aitData.getCountry());
                     params.put(InfractionDatabaseHelper.VEHICLE_MODEL, aitData.getVehicleModel());
@@ -173,7 +176,7 @@ public class SyncFiles {
                     params.put(InfractionDatabaseHelper.CITY_CODE, aitData.getCityCode());
                     params.put(InfractionDatabaseHelper.CITY, aitData.getCity());
                     params.put(InfractionDatabaseHelper.STATE, aitData.getState());
-                    params.put(InfractionDatabaseHelper.INFRATION, aitData.getInfraction());
+                    params.put(InfractionDatabaseHelper.INFRACTION, aitData.getInfraction());
                     params.put(InfractionDatabaseHelper.FLAMING_CODE, aitData.getFramingCode());
                     params.put(InfractionDatabaseHelper.UNFOLDING, aitData.getUnfolding());
                     params.put(InfractionDatabaseHelper.ARTICLE, aitData.getArticle());
@@ -209,55 +212,89 @@ public class SyncFiles {
 
     }
 
-    /*params.put(AutoInfracaoDatabaseHelper.NUMERO_AUTO, dadosAuto.getNumeroAuto());
-    params.put(AutoInfracaoDatabaseHelper.PLACA, dadosAuto.getPlaca());
-    params.put(AutoInfracaoDatabaseHelper.UF_VEICULO, dadosAuto.getUfVeiculo());
-    params.put(AutoInfracaoDatabaseHelper.CHASSI, dadosAuto.getChassi());
-    params.put(AutoInfracaoDatabaseHelper.PAIS, dadosAuto.getPais());
-    params.put(AutoInfracaoDatabaseHelper.MODELO_DO_VEICULO, dadosAuto.getModeloVeiculo());
-    params.put(AutoInfracaoDatabaseHelper.COR_DO_VEICULO, dadosAuto.getCorVeiculo());
-    params.put(AutoInfracaoDatabaseHelper.ESPECIE, dadosAuto.getEspecie());
-    params.put(AutoInfracaoDatabaseHelper.CATEGORIA, dadosAuto.getCategoria());
-    params.put(AutoInfracaoDatabaseHelper.STATUS_CANCELAMENTO, dadosAuto.getStatusCancelameto());
-    params.put(AutoInfracaoDatabaseHelper.MOTIVO_CANCELAMENTO, dadosAuto.getMotivoCancelamento());
-    params.put(AutoInfracaoDatabaseHelper.STATUS_SINCRONIZACAO, dadosAuto.getStatusSincronizacao());
-    params.put(AutoInfracaoDatabaseHelper.LATITUDE_AUTO, dadosAuto.getLatitudeAuto());
-    params.put(AutoInfracaoDatabaseHelper.LONGITUDE_AUTO, dadosAuto.getLongitudeAuto());
-    params.put(AutoInfracaoDatabaseHelper.DATA_HORA_AUTO, dadosAuto.getDataHoraAuto());
-    params.put(AutoInfracaoDatabaseHelper.STATUS_CONCLUIDO, dadosAuto.getStatusConcluido());
-    params.put(AutoInfracaoDatabaseHelper.NOME_DO_CONDUTOR, dadosAuto.getNomeCondutor());
-    params.put(AutoInfracaoDatabaseHelper.CNH_PPD, dadosAuto.getCnhPpd());
-    params.put(AutoInfracaoDatabaseHelper.UF_CNH, dadosAuto.getUfCnh());
-    params.put(AutoInfracaoDatabaseHelper.TIPO_DE_DOCUMENTO, dadosAuto.getTipoDocumento());
-    params.put(AutoInfracaoDatabaseHelper.NUMERO_DOCUMENTO, dadosAuto.getNumeroDocumento());
-    params.put(AutoInfracaoDatabaseHelper.LOCAL, dadosAuto.getLocal());
-    params.put(AutoInfracaoDatabaseHelper.DATA, dadosAuto.getData());
-    params.put(AutoInfracaoDatabaseHelper.HORA, dadosAuto.getHora());
-    params.put(AutoInfracaoDatabaseHelper.CODIGO_DO_MUNICIPIO, dadosAuto.getCodigo_do_municipio());
-    params.put(AutoInfracaoDatabaseHelper.MUNICIPIO, dadosAuto.getMunicipio());
-    params.put(AutoInfracaoDatabaseHelper.UF, dadosAuto.getUf());
-    params.put(AutoInfracaoDatabaseHelper.INFRACAO, dadosAuto.getInfracao());
-    params.put(AutoInfracaoDatabaseHelper.ENQUADRA, dadosAuto.getEnquadra());
-    params.put(AutoInfracaoDatabaseHelper.DESDOB, dadosAuto.getDesdob());
-    params.put(AutoInfracaoDatabaseHelper.ART, dadosAuto.getAmparoLegal());
-    params.put(AutoInfracaoDatabaseHelper.NUMERO_TCA, dadosAuto.getNumeroTca());
-    params.put(AutoInfracaoDatabaseHelper.DESCRICAO, dadosAuto.getDescricao());
-    params.put(AutoInfracaoDatabaseHelper.MARCA, dadosAuto.getMarcaDoEquipamento());
-    params.put(AutoInfracaoDatabaseHelper.MODELO, dadosAuto.getModeloDoEquipamento());
-    params.put(AutoInfracaoDatabaseHelper.NUMERO_DE_SERIE, dadosAuto.getNumeroDeSerie());
-    params.put(AutoInfracaoDatabaseHelper.MEDICAO_REALIZADA, dadosAuto.getMedicaoRealizada());
-    params.put(AutoInfracaoDatabaseHelper.VALOR_REGULAMENTADO, dadosAuto.getValorRegulamentado());
-    params.put(AutoInfracaoDatabaseHelper.VALOR_CONSIDERADA, dadosAuto.getValorConsiderada());
-    params.put(AutoInfracaoDatabaseHelper.NUMERO_AMOSTRA, dadosAuto.getNumeroAmostra());
-    params.put(AutoInfracaoDatabaseHelper.RECOLHIMENTO, dadosAuto.getRecolhimento());
-    params.put(AutoInfracaoDatabaseHelper.PROCEDIMENTOS, dadosAuto.getProcedimentos());
-    params.put(AutoInfracaoDatabaseHelper.OBSERVACAO, dadosAuto.getObservacao());
-    params.put(AutoInfracaoDatabaseHelper.IDENTIFICACAO_EMBARCADOR, dadosAuto.getIdetificacaoEmbarcador());
-    params.put(AutoInfracaoDatabaseHelper.CPF_EMBARCADOR, dadosAuto.getCpfEmbarcador());
-    params.put(AutoInfracaoDatabaseHelper.CNPJ_EMBARCADOR, dadosAuto.getCnpjEmbarcador());
-    params.put(AutoInfracaoDatabaseHelper.IDENTIFICACAO_DO_TRANSPORTADOR, dadosAuto.getIdentificacaoTransportador());
-    params.put(AutoInfracaoDatabaseHelper.CPF_TRANSPORTADOR, dadosAuto.getCpfTransportador());
-    params.put(AutoInfracaoDatabaseHelper.CNPJ_TRANSPORTADOR, dadosAuto.getCnpjTransportador());
-    params.put(AutoInfracaoDatabaseHelper.STATUS_CONCLUIDO, dadosAuto.getStatusConcluido());*/
+    public void sendAitDataJson(final String ait) {
+
+        requestQueue = Volley.newRequestQueue(context.getApplicationContext());
+
+        stringRequest = new StringRequest(Request.Method.POST, WebClient.URL_REQUEST_SSL,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+
+                            JSONObject jsonObject = new JSONObject(response);
+                            String isSucess = jsonObject.getString("success");
+
+                            if (isSucess.equals("true")) {
+                                Log.v("Response: ", String.valueOf(isSucess));
+                                DatabaseCreator.getInfractionDatabaseAdapter(context).synchronizeAit(ait);
+                            } else {
+                                Log.v("Response: ", String.valueOf(isSucess));
+                            }
+
+                        } catch (Exception e) {
+                            Log.v("Erro: ", e.getMessage());
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Log.v("Error 109: ", error.getMessage());
+                    }
+                }) {
+            @Override
+            protected Map<String, String> getParams() {
+
+                String root = Environment.getExternalStorageDirectory().toString() + "/" + context.getApplicationContext().getString(R.string.folder_app) + "/";
+                int lengthRoot = root.length();
+
+                AitData aitData = DatabaseCreator
+                        .getInfractionDatabaseAdapter(context.getApplicationContext())
+                        .getDataFromAitNumber(ait);
+
+                Map<String, String> params = new HashMap<>();
+
+                JSONObject aitDataJson = new JSONObject();
+                JSONArray photosJsonArray = new JSONArray();
+
+                try {
+                    // Incluir todos os campos da infração no objeto JSON aitDataJson
+                    aitDataJson.put(InfractionDatabaseHelper.AIT_NUMBER, aitData.getAitNumber());
+                    aitDataJson.put(InfractionDatabaseHelper.PLATE, aitData.getPlate());
+                    // Outros campos da infração
+
+                    // Adicionar fotos ao JSONArray
+                    for (int i = 1; i <= 4; i++) {
+                        String photoPath = (String) AitData.class.getMethod("getPhoto" + i).invoke(aitData);
+                        if (photoPath != null) {
+                            Bitmap bitmap = BitmapFactory.decodeFile(photoPath);
+                            String base64Image = Routine.getStringImage(bitmap);
+
+                            JSONObject photoJson = new JSONObject();
+                            photoJson.put("name", "foto" + i + ".jpg");
+                            photoJson.put("data", base64Image);
+
+                            photosJsonArray.put(photoJson);
+                        }
+                    }
+
+                    // Adicionar aitDataJson e photosJsonArray ao objeto params
+                    params.put("aitdata", aitDataJson.toString());
+                    params.put("photos", photosJsonArray.toString());
+
+                } catch (Exception e) {
+                    Log.v("Erro: ", e.getMessage());
+                }
+
+                return params;
+            }
+        };
+
+        requestQueue.add(stringRequest);
+    }
+
 
 }

@@ -35,7 +35,7 @@ public class TavVehicleFragment extends Fragment implements
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		view = inflater
-				.inflate(R.layout.tav_veiculo_main_fragment, null, false);
+				.inflate(R.layout.tav_vehicle_main_fragment, null, false);
 
 		initializedView();
 		return view;

@@ -62,7 +62,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 	@Override
 	protected View newGroupView(Context context, Cursor cursor,
 			boolean isExpendable, ViewGroup parent) {
-		View view = mInflator.inflate(R.layout.placa_lista_listview_parent,
+		View view = mInflator.inflate(R.layout.plate_list_listview_parent,
 				null);
 
 		TextView logPlate, logTime, logLicenseStatus;
@@ -133,7 +133,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 		if (view != null) {
 			mView = view;
 		} else {
-			mView = mInflator.inflate(R.layout.placa_lista_listview_child,
+			mView = mInflator.inflate(R.layout.plate_list_listview_child,
 					parent, false);
 		}
 
@@ -142,7 +142,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 		Button btnCreateNewAit, btnCreateAit;
 
 		btnCreateNewAit = (Button) mView
-				.findViewById(R.id.btn_plate_criar_novo_auto);
+				.findViewById(R.id.btn_plate_create_other_ait);
 		btnCreateAit = (Button) mView.findViewById(R.id.btn_plate_criar_auto);
 
 		if ((DatabaseCreator.getInfractionDatabaseAdapter(mycontext))
@@ -158,7 +158,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 
 			@Override
 			public void onClick(View v) {
-				openDadosAuto((DatabaseCreator
+				openAitData((DatabaseCreator
 						.getInfractionDatabaseAdapter(mycontext))
 						.getAitDataFromPlate(PLATE));
 			}
@@ -179,7 +179,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 				aitData.setVehicleSpecies(SPECIES.toUpperCase());
 				aitData.setVehicleCategory(CATEGORY.toUpperCase());
 				aitData.setStoreFullData(false);
-				openDadosAuto(aitData);
+				openAitData(aitData);
 			}
 		});
 
@@ -196,32 +196,32 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 		tvRestrictions = (TextView) mView.findViewById(R.id.log_restriction);
 
 		tvMarca.setText(mycontext.getResources().getString(
-				R.string.marca_format)
+				R.string.brand_format)
 		        + getGroup(G_POSITION)
 				.getString(
 						getGroup(G_POSITION)
 								.getColumnIndex(
 										PlateSearchDatabaseHelper.BRAND)));
 		tvModel.setText(mycontext.getResources().getString(
-				R.string.modelo_format)
+				R.string.model_format)
 				+ MODEL);
 
-		tvColor.setText(mycontext.getResources().getString(R.string.cor_format)
+		tvColor.setText(mycontext.getResources().getString(R.string.color_format)
 				+ COLOR);
 
-		tvType.setText(mycontext.getResources().getString(R.string.tipo_format)
+		tvType.setText(mycontext.getResources().getString(R.string.type_format)
 				+ getGroup(G_POSITION).getString(
 						getGroup(G_POSITION).getColumnIndex(
 								PlateSearchDatabaseHelper.TYPE)));
 
-		tvCategory.setText(mycontext.getResources().getString(R.string.categoria_format)
+		tvCategory.setText(mycontext.getResources().getString(R.string.category_format)
 				+ getGroup(G_POSITION).getString(
 				getGroup(G_POSITION).getColumnIndex(
 						PlateSearchDatabaseHelper.CATEGORY)));
 
 		tvLicenseYear
 				.setText(mycontext.getResources().getString(
-						R.string.ano_licenciamento_format)
+						R.string.licensing_year_format)
 						+ getGroup(G_POSITION)
 								.getString(
 										getGroup(G_POSITION)
@@ -230,7 +230,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 
 		tvLicenseDate
 				.setText(mycontext.getResources().getString(
-						R.string.data_licenciamento_format)
+						R.string.licensing_date_format)
 						+ getGroup(G_POSITION)
 								.getString(
 										getGroup(G_POSITION)
@@ -242,19 +242,19 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 								PlateSearchDatabaseHelper.IPVA)));
 
 		tvInsurance.setText(mycontext.getResources().getString(
-				R.string.seguro_format)
+				R.string.insurance_format)
 				+ getGroup(G_POSITION).getString(
 						getGroup(G_POSITION).getColumnIndex(
 								PlateSearchDatabaseHelper.INSURANCE)));
 
 		tvIntraction.setText(mycontext.getResources().getString(
-				R.string.multas_format)
+				R.string.assessment_format)
 				+ getGroup(G_POSITION).getString(
 						getGroup(G_POSITION).getColumnIndex(
 								PlateSearchDatabaseHelper.INFRATIONS)));
 
 		tvRestrictions.setText(mycontext.getResources().getString(
-				R.string.restricoes_format)
+				R.string.restriction_format)
 				+ getGroup(G_POSITION).getString(
 						getGroup(G_POSITION).getColumnIndex(
 								PlateSearchDatabaseHelper.RESTRICTIONS)));
@@ -262,10 +262,10 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 		return mView;
 	}
 
-	private void openDadosAuto(AitData data) {
+	private void openAitData(AitData data) {
 		Intent intent = new Intent(mycontext, AitActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putSerializable(AitData.getIDAuto(), data);
+		bundle.putSerializable(AitData.getAitID(), data);
 		intent.putExtras(bundle);
 		mycontext.startActivity(intent);
 		((Activity) mycontext).finish();

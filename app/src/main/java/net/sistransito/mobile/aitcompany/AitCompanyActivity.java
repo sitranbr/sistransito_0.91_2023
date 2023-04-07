@@ -33,38 +33,38 @@ public class AitCompanyActivity extends AppCompatActivity implements OnClickList
     private Field mScroller;
     private FixedSpeedScroller scroller;
     private UnderlinePageIndicator indicator;
-    private ImageView imBtnTabCondutor, imBtnTabEnd, imBtnTabInfracao, imBtnBack;
+    private ImageView imBtnTabConductor, imBtnTabAddress, imBtnTabInfraction, imBtnBack;
     private TabPJStartSectionsPagerAdapter adapter;
-    private pjData dadosAuto;
+    private pjData pjData;
 
     private int tabAtual;
 
-    String tabCondutor;
+    String tabConductor;
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
-        setContentView(R.layout.autopj_main);
+        setContentView(R.layout.ait_pj_main);
 
-        getObjectAuto();
+        getAitObject();
         initializedView();
         setMainPager();
-        setSubTitlePager();
-        setTitleIndicator();
+        setPagerSubTitle();
+        setIndicatorTitle();
 
-        if (dadosAuto.isStorePJFullData()) {
+        if (pjData.isStorePJFullData()) {
             setPagerPosition(2);
         }
 
     }
 
-    private void getObjectAuto() {
+    private void getAitObject() {
         Bundle bundle = getIntent().getExtras();
         ObjectAutoPJ.setDadosAuto((pjData) bundle.getSerializable(pjData.getIDAuto()));
-        dadosAuto = ObjectAutoPJ.getDadosAuto();
+        pjData = ObjectAutoPJ.getDadosAuto();
     }
 
-    private void setTitleIndicator() {
+    private void setIndicatorTitle() {
         indicator = (UnderlinePageIndicator) findViewById(R.id.indicator);
         indicator.setViewPager(pager);
         indicator.setFades(false);
@@ -93,9 +93,9 @@ public class AitCompanyActivity extends AppCompatActivity implements OnClickList
         });
     }
 
-    private void setSubTitlePager() {
+    private void setPagerSubTitle() {
 
-        subTituloDaPagina = (AnySwipeableViewPager) findViewById(R.id.auto_title_pager);
+        subTituloDaPagina = (AnySwipeableViewPager) findViewById(R.id.ait_title_pager);
         subTituloDaPagina.setSwipeable(false);
         subTituloDaPagina.setAdapter(new TabPJSubTitleSectionsPagerAdapter(
                 getSupportFragmentManager()));
@@ -116,7 +116,7 @@ public class AitCompanyActivity extends AppCompatActivity implements OnClickList
 
         adapter = new TabPJStartSectionsPagerAdapter(
                 getSupportFragmentManager());
-        pager = (AnySwipeableViewPager) findViewById(R.id.auto_start_pager);
+        pager = (AnySwipeableViewPager) findViewById(R.id.ait_start_pager);
         pager.setSwipeable(false);
         pager.setPageMargin(20);
         pager.setPageTransformer(true, new DepthPageTransformer());
@@ -136,35 +136,35 @@ public class AitCompanyActivity extends AppCompatActivity implements OnClickList
 
     }
 
-    public void setCancelar(Context mycontext, String motivo){
-        if (!DatabaseCreator.getAitPJDatabaseAdapter(mycontext).setCancelarAuto(dadosAuto, motivo))
-            Routine.showAlert(getResources().getString(R.string.update_erro), mycontext);
+    public void setCancel(Context context, String motive){
+        if (!DatabaseCreator.getAitPJDatabaseAdapter(context).setCancelarAuto(pjData, motive))
+            Routine.showAlert(getResources().getString(R.string.update_erro), context);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.img_pj_btn_tab_condutor:
+            case R.id.img_pj_btn_tab_conductor:
                 setPagerPosition(0);
                 break;
-            case R.id.img_pj_btn_tab_end:
+            case R.id.img_pj_btn_tab_address:
                 setPagerPosition(1);
                 break;
-            case R.id.img_pj_btn_tab_infracao:
+            case R.id.img_pj_btn_tab_infraction:
                 setPagerPosition(2);
                 break;
             case R.id.im_pj_btn_back:
-                AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.titulo_cancelar), null);
+                AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), null);
                 break;
         }
     }
 
     private void setPagerPosition(int position) {
 
-        if (dadosAuto.isStorePJFullData() && position == 0) {
+        if (pjData.isStorePJFullData() && position == 0) {
             return;
         }
-        Log.d("isStore ? ", String.valueOf(dadosAuto.isStorePJFullData()));
+        Log.d("isStore ? ", String.valueOf(pjData.isStorePJFullData()));
         setCurrentTabSelectedIteams(position);
         subTituloDaPagina.setCurrentItem(position);
         pager.setCurrentItem(position);
@@ -173,31 +173,31 @@ public class AitCompanyActivity extends AppCompatActivity implements OnClickList
     private void setCurrentTabSelectedIteams(int positon) {
         switch (positon) {
             case 0:
-                imBtnTabCondutor.setSelected(true);
-                imBtnTabEnd.setSelected(false);
-                imBtnTabInfracao.setSelected(false);
+                imBtnTabConductor.setSelected(true);
+                imBtnTabAddress.setSelected(false);
+                imBtnTabInfraction.setSelected(false);
                 break;
             case 1:
-                imBtnTabCondutor.setSelected(false);
-                imBtnTabEnd.setSelected(true);
-                imBtnTabInfracao.setSelected(false);
+                imBtnTabConductor.setSelected(false);
+                imBtnTabAddress.setSelected(true);
+                imBtnTabInfraction.setSelected(false);
                 break;
             case 2:
-                imBtnTabCondutor.setSelected(false);
-                imBtnTabEnd.setSelected(false);
-                imBtnTabInfracao.setSelected(true);
+                imBtnTabConductor.setSelected(false);
+                imBtnTabAddress.setSelected(false);
+                imBtnTabInfraction.setSelected(true);
                 break;
         }
     }
 
     private void initializedView() {
-        imBtnTabCondutor = (ImageView) findViewById(R.id.img_pj_btn_tab_condutor);
-        imBtnTabEnd = (ImageView) findViewById(R.id.img_pj_btn_tab_end);
-        imBtnTabInfracao = (ImageView) findViewById(R.id.img_pj_btn_tab_infracao);
+        imBtnTabConductor = (ImageView) findViewById(R.id.img_pj_btn_tab_conductor);
+        imBtnTabAddress = (ImageView) findViewById(R.id.img_pj_btn_tab_address);
+        imBtnTabInfraction = (ImageView) findViewById(R.id.img_pj_btn_tab_infraction);
 
-        imBtnTabCondutor.setOnClickListener(this);
-        imBtnTabEnd.setOnClickListener(this);
-        imBtnTabInfracao.setOnClickListener(this);
+        imBtnTabConductor.setOnClickListener(this);
+        imBtnTabAddress.setOnClickListener(this);
+        imBtnTabInfraction.setOnClickListener(this);
 
         imBtnBack = (ImageView) findViewById(R.id.im_pj_btn_back);
         imBtnBack.setOnClickListener(this);

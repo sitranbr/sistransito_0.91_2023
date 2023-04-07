@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray_2"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/layout_margin_buttom"
+    android:paddingLeft="@dimen/layout_margin_left_right"
+    android:paddingRight="@dimen/layout_margin_left_right"
+    android:paddingTop="@dimen/layout_margin_top" >
+
+    <LinearLayout
+        android:id="@+id/ll_result_parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/result_layout_background"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/tv_show_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/width_margin_8"
+            android:padding="@dimen/width_padding"
+            android:text=""
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_radio"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/widght_margin_top_2"
+        android:orientation="horizontal" >
+
+        <RadioGroup
+            android:id="@+id/rg_cnh_type_search"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|start"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rb_cnh_number"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cnh_register"
+                android:checked="true"
+                android:buttonTint="@color/yellow_light"
+                android:textColor="@color/yellow_light" />
+
+            <RadioButton
+                android:id="@+id/rb_cnh_register"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cnh_driver_rg"
+                android:buttonTint="@color/yellow_light"
+                android:textColor="@color/yellow_light" />
+
+            <RadioButton
+                android:id="@+id/rb_cnh_cpf"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cpf_driver"
+                android:buttonTint="@color/yellow_light"
+                android:textColor="@color/yellow_light" />
+
+            <RadioButton
+                android:id="@+id/rb_cnh_name"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/cnh_name_driver"
+                android:buttonTint="@color/yellow_light"
+                android:textColor="@color/yellow_light" />
+        </RadioGroup>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/layout_margin_top"
+        android:orientation="vertical" >
+
+        <EditText
+            android:id="@+id/et_register_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/width_margin_top"
+            android:layout_marginTop="@dimen/width_margin_top"
+            android:background="@drawable/edittext_bacground"
+            android:drawableStart="@drawable/ic_character"
+            android:drawablePadding="@dimen/width_padding"
+            android:ems="10"
+            android:maxLength="11"
+            android:hint="@string/cnh_register"
+            android:inputType="number"
+            android:padding="@dimen/width_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@null" />
+
+        <EditText
+            android:id="@+id/et_cnh_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/width_margin_top"
+            android:layout_marginTop="@dimen/width_margin_top"
+            android:background="@drawable/edittext_bacground"
+            android:drawableStart="@drawable/ic_character"
+            android:drawablePadding="@dimen/width_padding"
+            android:ems="10"
+            android:maxLength="11"
+            android:hint="@string/cnh_driver_rg"
+            android:inputType="number"
+            android:padding="@dimen/width_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@null" />
+
+        <EditText
+            android:id="@+id/et_cpf_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/width_margin_top"
+            android:layout_marginTop="@dimen/width_margin_top"
+            android:background="@drawable/edittext_bacground"
+            android:drawableStart="@drawable/ic_character"
+            android:drawablePadding="@dimen/width_padding"
+            android:ems="10"
+            android:maxLength="11"
+            android:hint="@string/cpf_driver"
+            android:inputType="number"
+            android:padding="@dimen/width_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@null" />
+
+        <EditText
+            android:id="@+id/et_name_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/width_margin_top"
+            android:layout_marginTop="@dimen/width_margin_top"
+            android:background="@drawable/edittext_bacground"
+            android:drawableStart="@drawable/ic_character"
+            android:drawablePadding="@dimen/width_padding"
+            android:ems="10"
+            android:hint="@string/cnh_name_driver"
+            android:inputType="textCapSentences"
+            android:padding="@dimen/width_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@null" />
+
+        <EditText
+            android:id="@+id/et_mother_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/width_margin_top"
+            android:layout_marginTop="@dimen/width_margin_top"
+            android:background="@drawable/edittext_bacground"
+            android:drawableStart="@drawable/ic_character"
+            android:drawablePadding="@dimen/width_padding"
+            android:ems="10"
+            android:hint="@string/cnh_mother_driver"
+            android:inputType="textCapSentences"
+            android:padding="@dimen/width_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@null" />
+
+        <EditText
+            android:id="@+id/et_date_birth"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/width_margin_top"
+            android:layout_marginTop="@dimen/width_margin_top"
+            android:background="@drawable/edittext_bacground"
+            android:drawableStart="@drawable/ic_number"
+            android:drawablePadding="@dimen/width_padding"
+            android:ems="10"
+            android:hint="@string/date_birth_driver"
+            android:inputType="date"
+            android:maxLength="10"
+            android:padding="@dimen/width_padding"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textCursorDrawable="@null" />
+
+        <com.rey.material.widget.CheckBox
+            android:id="@+id/cb_cnh_offline"
+            style="@style/Material.Drawable.CheckBox"
+            app:cbd_strokeColor="@color/primary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/width_margin_top"
+            android:checked="false"
+            android:gravity="center"
+            android:padding="0dip"
+            android:text="@string/search_off_line"
+            android:textColor="@color/primary"
+            />
+
+        <com.rey.material.widget.Button
+            style="@style/Material.Drawable.Ripple.Wave"
+            android:id="@+id/btn_search_cnh"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_green"
+            android:drawableStart="@drawable/ic_send"
+            android:drawablePadding="@dimen/width_padding"
+            android:gravity="start|center_vertical"
+            android:padding="@dimen/width_padding"
+            android:text="@string/btn_search_fragment"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
+    </LinearLayout>
+
+</LinearLayout>

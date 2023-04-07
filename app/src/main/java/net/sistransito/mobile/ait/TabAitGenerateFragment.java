@@ -37,13 +37,13 @@ public class TabAitGenerateFragment extends DebugFragment implements
     private View view;
     private Button btnCheckAit, btnGenerationAit, btnCancelAit;
     private ImageView imgViewPhoto1, imgViewPhoto2, imgViewPhoto3, imgViewPhoto4;
-    private FrameLayout flAitContainer;
+    private FrameLayout frameLayout;
     private AitData aitData;
     private String numberAitRetained, photo1Retained, photo2Retained, photo3Retained, photo4Retained;
 
     private int REQUEST_CAMERA = 100, SELECT_FILE = 1;
     private String userChoosenTask;
-    private int numberPhotos;
+    private int photoNumber;
     public static String pastaRoot;
 
     public static TabAitGenerateFragment newInstance() {
@@ -89,33 +89,33 @@ public class TabAitGenerateFragment extends DebugFragment implements
         btnCheckAit.setOnClickListener(this);
         btnGenerationAit.setOnClickListener(this);
         btnCancelAit.setOnClickListener(this);
-        flAitContainer.setOnClickListener(this);
+        frameLayout.setOnClickListener(this);
 
         imgViewPhoto1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numberPhotos = 1;
+                photoNumber = 1;
                 selectImage();
             }
         });
         imgViewPhoto2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numberPhotos = 2;
+                photoNumber = 2;
                 selectImage();
             }
         });
         imgViewPhoto3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numberPhotos = 3;
+                photoNumber = 3;
                 selectImage();
             }
         });
         imgViewPhoto4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                numberPhotos = 4;
+                photoNumber = 4;
                 selectImage();
             }
         });
@@ -123,7 +123,7 @@ public class TabAitGenerateFragment extends DebugFragment implements
     }
 
     private void getAitObject() {
-        aitData = ObjectAit.getAitData();
+        aitData = AitObject.getAitData();
         if (aitData.isDataisNull()) {
             addListener();
         } else if (aitData.isStoreFullData()) {
@@ -142,14 +142,14 @@ public class TabAitGenerateFragment extends DebugFragment implements
 
         btnCheckAit = (Button) view.findViewById(R.id.btn_check_ait);
         btnGenerationAit = (Button) view.findViewById(R.id.btn_generation_ait);
-        flAitContainer = (FrameLayout) view.findViewById(R.id.fragment_container_ait);
+        frameLayout = (FrameLayout) view.findViewById(R.id.fragment_container_ait);
         btnCancelAit = (Button) view.findViewById(R.id.btn_discard_ait);
 
         imgViewPhoto2.setVisibility(View.GONE);
         imgViewPhoto3.setVisibility(View.GONE);
         imgViewPhoto4.setVisibility(View.GONE);
 
-        if(numberAitRetained != null) {
+        /*if(numberAitRetained != null) {
 
             if(photo1Retained != null) {
                 File imageFile1 = new File(photo1Retained);
@@ -171,6 +171,20 @@ public class TabAitGenerateFragment extends DebugFragment implements
                 imgViewPhoto4.setImageBitmap(BitmapFactory.decodeFile(imageFile4.getAbsolutePath()));
             }
 
+        }*/
+
+        if(numberAitRetained != null) {
+            String[] photoPaths = {photo1Retained, photo2Retained, photo3Retained, photo4Retained};
+            ImageView[] imageViews = {imgViewPhoto1, imgViewPhoto2, imgViewPhoto3, imgViewPhoto4};
+
+            for (int i = 0; i < photoPaths.length; i++) {
+                if (photoPaths[i] != null) {
+                    File imageFile = new File(photoPaths[i]);
+                    if (imageFile.exists()) {
+                        imageViews[i].setImageBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
+                    }
+                }
+            }
         }
 
     }
@@ -179,22 +193,22 @@ public class TabAitGenerateFragment extends DebugFragment implements
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btn_check_ait:
-                flAitContainer.setVisibility(view.VISIBLE);
+                frameLayout.setVisibility(view.VISIBLE);
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 fragmentManager.beginTransaction()
                         .replace(R.id.fragment_container_ait, AitPreviewFragment.newInstance()).commit();
                 break;
             case R.id.btn_generation_ait:
                 if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).updateAitDataPhotos(aitData))
-                    Routine.showAlert(getResources().getString(R.string.update_fotos), getActivity());
+                    Routine.showAlert(getResources().getString(R.string.update_photos), getActivity());
                 startActivity(new Intent(getActivity(), AitLister.class));
                 getActivity().finish();
                 break;
             case R.id.btn_discard_ait:
-                AnyAlertDialog.dialogView(getActivity(), this.getResources().getString(R.string.titulo_cancelar), "auto");
+                AnyAlertDialog.dialogView(getActivity(), this.getResources().getString(R.string.alert_motive), "auto");
                 break;
             case R.id.fragment_container_ait:
-                flAitContainer.setVisibility(view.GONE);
+                frameLayout.setVisibility(view.GONE);
                 break;
         }
     }
@@ -234,16 +248,17 @@ public class TabAitGenerateFragment extends DebugFragment implements
                 boolean result = Utility.checkPermission(getContext());
 
                 if (items[item].equals("Câmera")) {
-                    userChoosenTask ="Câmera";
+                    userChoosenTask = "Câmera";
                     if(result)
                         cameraIntent();
                 } else if (items[item].equals("Galeria")) {
-                    userChoosenTask ="Galeria";
+                    userChoosenTask = "Galeria";
                     if(result)
                         galleryIntent();
                 } else if (items[item].equals("Cancelar")) {
                     dialog.dismiss();
                 }
+
             }
         });
         builder.show();
@@ -317,9 +332,9 @@ public class TabAitGenerateFragment extends DebugFragment implements
             myDir.mkdirs();
         }
 
-        String fName = aitData.getAitNumber() + "_photo_" + numberPhotos + ".jpg";
-        String fullName = myDir + "/" + fName;
-        File destination = new File(myDir, fName);
+        String photoName = aitData.getAitNumber() + "_photo_" + photoNumber + ".jpg";
+        String fullName = myDir + "/" + photoName;
+        File destination = new File(myDir, photoName);
 
         //Log.i("Photo", root + "- full way: " + fullName + " - Ait: " + dadosAuto.getNumeroAuto());
 
@@ -336,17 +351,17 @@ public class TabAitGenerateFragment extends DebugFragment implements
             e.printStackTrace();
         }
 
-        if(numberPhotos == 1){
+        if(photoNumber == 1){
             imgViewPhoto1.setImageBitmap(thumbnail);
             aitData.setPhoto1(fullName);
             saveAitImage(aitData.getAitNumber(),"1", fullName);
             imgViewPhoto2.setVisibility(View.VISIBLE);
-        } else if(numberPhotos == 2){
+        } else if(photoNumber == 2){
             imgViewPhoto2.setImageBitmap(thumbnail);
             aitData.setPhoto2(fullName);
             saveAitImage(aitData.getAitNumber(),"2", fullName);
             imgViewPhoto3.setVisibility(View.VISIBLE);
-        } else if(numberPhotos == 3){
+        } else if(photoNumber == 3){
             imgViewPhoto3.setImageBitmap(thumbnail);
             aitData.setPhoto3(fullName);
             saveAitImage(aitData.getAitNumber(),"3", fullName);
@@ -417,7 +432,7 @@ public class TabAitGenerateFragment extends DebugFragment implements
     public void saveAitImage(String ait, String local, String photo){
 
         if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).insertAitDataPhotos(ait, local, photo))
-            Routine.showAlert(getResources().getString(R.string.update_fotos), getActivity());
+            Routine.showAlert(getResources().getString(R.string.update_photos), getActivity());
 
     }
 

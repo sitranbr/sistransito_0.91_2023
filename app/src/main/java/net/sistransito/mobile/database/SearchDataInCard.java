@@ -180,7 +180,7 @@ public class SearchDataInCard extends SQLiteOpenHelper {
                                 + " INDEXED BY " + indexedField + " WHERE " + fieldToSearch + "=?",
                         new String[] { sPlate }, null);
                 break;
-            case "chassis":
+            case "chassi":
                 fieldToSearch = CHASSIS;
                 indexedField = "chassi";
 
@@ -189,7 +189,7 @@ public class SearchDataInCard extends SQLiteOpenHelper {
                                 + " INDEXED BY " + indexedField + " WHERE " + fieldToSearch + "=?",
                         new String[] { sPlate }, null);
                 break;
-            case "lacre":
+            case "seal":
                 fieldToSearch = NUMBER_SEAL;
                 indexedField = "seal";
 
@@ -197,7 +197,7 @@ public class SearchDataInCard extends SQLiteOpenHelper {
                                 + TABLE_NAME
                                 + " INDEXED BY " + indexedField + " WHERE " + fieldToSearch + "=?",
                         new String[] { sPlate }, null);
-            case "motor":
+            case "engine":
                 fieldToSearch = NUMBER_ENGINER;
                 indexedField = "engine";
 
@@ -363,48 +363,48 @@ public class SearchDataInCard extends SQLiteOpenHelper {
 
     private String getCityName(String id) {
 
-        String sCityName = null;
+        String cityName = null;
 
         PrepopulatedDBOpenHelper database = new PrepopulatedDBOpenHelper(context);
 
         try {
-            sCityName = database.getCityNameCursor(id);
+            cityName = database.getCityNameCursor(id);
         }
         catch(ArrayIndexOutOfBoundsException exception) {
-            Log.d("Erro city: ", String.valueOf(exception));
+            Log.d("Error city: ", String.valueOf(exception));
         }
 
-        return sCityName;
+        return cityName;
 
     }
 
     private String filter(String filterData, String xml) {
 
         String[] listXml;
-        String texto = null;
-        int valorFilter;
+        String spinnerText = null;
+        int filterValue;
 
         switch (xml) {
             case LICENSING_STATUS:
                 listXml = context.getResources().getStringArray(R.array.filter_vehicle_licensing_status);
                 //Log.d("xmlStatus: ", String.valueOf(listXml) + " - Filter: " + filterData);
-                texto = listXml[Integer.parseInt(filterData)];
+                spinnerText = listXml[Integer.parseInt(filterData)];
                 break;
             case TYPE:
                 listXml = context.getResources().getStringArray(R.array.filter_vehicle_type);
                 //Log.d("xmlTipo: ", String.valueOf(listXml) + " - Filter: " + filterData);
                 try {
-                    texto = listXml[Integer.parseInt(filterData)];
+                    spinnerText = listXml[Integer.parseInt(filterData)];
                 }
                 catch(ArrayIndexOutOfBoundsException exception) {
                     Log.d("Erro: ", String.valueOf(exception));
                 }
                 break;
             case SPECIES:
-                listXml = context.getResources().getStringArray(R.array.auto_species);
+                listXml = context.getResources().getStringArray(R.array.ait_species);
                 //Log.d("xmlEspecie: ", String.valueOf(listXml) + " - Filter: " + filterData);
                 try {
-                    texto = listXml[Integer.parseInt(filterData)];
+                    spinnerText = listXml[Integer.parseInt(filterData)];
                 }
                 catch(ArrayIndexOutOfBoundsException exception) {
                     Log.d("Erro: ", String.valueOf(exception));
@@ -414,7 +414,7 @@ public class SearchDataInCard extends SQLiteOpenHelper {
                 listXml = context.getResources().getStringArray(R.array.filter_color);
                 //Log.d("xmlCor: ", String.valueOf(listXml) + " - Filter: " + filterData);
                 try {
-                    texto = listXml[Integer.parseInt(filterData)];
+                    spinnerText = listXml[Integer.parseInt(filterData)];
                 }
                 catch(ArrayIndexOutOfBoundsException exception) {
                     Log.d("Erro: ", String.valueOf(exception));
@@ -424,7 +424,7 @@ public class SearchDataInCard extends SQLiteOpenHelper {
                 listXml = context.getResources().getStringArray(R.array.state_array);
                 //Log.d("xmlUf: ", String.valueOf(listXml) + " - Filter: " + filterData);
                 try {
-                    texto = listXml[Integer.parseInt(filterData)];
+                    spinnerText = listXml[Integer.parseInt(filterData)];
                 }
                 catch(ArrayIndexOutOfBoundsException exception) {
                     Log.d("Erro: ", String.valueOf(exception));
@@ -432,9 +432,9 @@ public class SearchDataInCard extends SQLiteOpenHelper {
                 break;
             case CNH_STATE:
                 listXml = context.getResources().getStringArray(R.array.state_array);
-                texto = listXml[Integer.parseInt(filterData)];
+                spinnerText = listXml[Integer.parseInt(filterData)];
                 /*try {
-                    texto = listXml[Integer.parseInt(filterData)];
+                    spinnerText = listXml[Integer.parseInt(filterData)];
                 }
                 catch(ArrayIndexOutOfBoundsException exception) {
                     Log.d("Erro: ", String.valueOf(exception));
@@ -443,13 +443,13 @@ public class SearchDataInCard extends SQLiteOpenHelper {
             case IMPEDIMENT_INDICATOR:
                 listXml = context.getResources().getStringArray(R.array.filter_theft_occurrence);
                 //Log.d("xmlImpedimento: ", String.valueOf(listXml) + " - Filter: " + filterData);
-                texto = listXml[Integer.parseInt(filterData)];
+                spinnerText = listXml[Integer.parseInt(filterData)];
                 break;
             case OCCURRENCE_INDICATOR:
                 listXml = context.getResources().getStringArray(R.array.filter_theft_occurrence);
                 //Log.d("xmlOcorrencia: ", String.valueOf(listXml) + " - Filter: " + filterData);
                 try {
-                    texto = listXml[Integer.parseInt(filterData)];
+                    spinnerText = listXml[Integer.parseInt(filterData)];
                 }
                 catch(ArrayIndexOutOfBoundsException exception) {
                     Log.d("Erro: ", String.valueOf(exception));
@@ -458,10 +458,10 @@ public class SearchDataInCard extends SQLiteOpenHelper {
             case CATEGORY:
                 listXml = context.getResources().getStringArray(R.array.list_category);
                 //Log.d("xmlCategoria: ", String.valueOf(listXml) + " - Filter: " + filterData);
-                valorFilter = Integer.parseInt(filterData);
-                valorFilter = valorFilter/10;
+                filterValue = Integer.parseInt(filterData);
+                filterValue = filterValue/10;
                 try {
-                    texto = listXml[valorFilter];
+                    spinnerText = listXml[filterValue];
                 }
                 catch(ArrayIndexOutOfBoundsException exception) {
                     Log.d("Erro: ", String.valueOf(exception));
@@ -469,7 +469,7 @@ public class SearchDataInCard extends SQLiteOpenHelper {
                 break;
         }
 
-        return texto;
+        return spinnerText;
 
     }
 

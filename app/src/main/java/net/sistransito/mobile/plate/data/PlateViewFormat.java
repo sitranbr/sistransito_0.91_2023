@@ -24,11 +24,11 @@ public class PlateViewFormat {
     public PlateViewFormat(DataFromPlate dataPlate, Context context) {
         this.context = context;
 
-        this.plate = context.getResources().getString(R.string.placa_format)
+        this.plate = context.getResources().getString(R.string.plate_format)
                 + dataPlate.getPlate() + "  ";
 
         this.city = AppConstants.NEW_LINE
-                + context.getResources().getString(R.string.municipio_format)
+                + context.getResources().getString(R.string.city_name_format)
                 + dataPlate.getCity();
 
         this.statePlate = "/" + dataPlate.getState();
@@ -42,60 +42,60 @@ public class PlateViewFormat {
                 + dataPlate.getChassi();
 
         this.brand = AppConstants.NEW_LINE
-                + context.getResources().getString(R.string.marca_format)
+                + context.getResources().getString(R.string.brand_format)
                 + dataPlate.getBrand();
 
         this.model = AppConstants.NEW_LINE
-                + context.getResources().getString(R.string.modelo_format)
+                + context.getResources().getString(R.string.model_format)
                 + dataPlate.getModel() + AppConstants.NEW_LINE;
 
-        this.color = context.getResources().getString(R.string.cor_format)
+        this.color = context.getResources().getString(R.string.color_format)
                 + dataPlate.getColor() + AppConstants.NEW_LINE;
 
-        this.type = context.getResources().getString(R.string.tipo_format)
+        this.type = context.getResources().getString(R.string.type_format)
                 + dataPlate.getType() + AppConstants.NEW_LINE;
 
-        this.species = context.getResources().getString(R.string.especie_format)
+        this.species = context.getResources().getString(R.string.specie_format)
                 + dataPlate.getSpecies() + AppConstants.NEW_LINE;
 
-        this.category = context.getResources().getString(R.string.categoria_format)
+        this.category = context.getResources().getString(R.string.category_format)
                 + dataPlate.getCategory() + AppConstants.NEW_LINE;
 
-        this.yearModel = context.getResources().getString(R.string.ano_modelo_format)
+        this.yearModel = context.getResources().getString(R.string.model_year_format)
                 + dataPlate.getYearManufacture() + "/" + dataPlate.getYearModel() + AppConstants.NEW_LINE;
 
-        this.licenseYear = context.getResources().getString(R.string.ano_licenciamento_format)
+        this.licenseYear = context.getResources().getString(R.string.licensing_year_format)
                 + dataPlate.getLicenceYear() + AppConstants.NEW_LINE;
 
         this.licenseDate = context.getResources().getString(
-                R.string.data_licenciamento_format)
+                R.string.licensing_date_format)
                 + dataPlate.getLicenceData() + AppConstants.NEW_LINE;
 
         this.licenseStatus = dataPlate.getLicenceStatus();
 
-        this.sealNumber = context.getResources().getString(R.string.lacre_format)
+        this.sealNumber = context.getResources().getString(R.string.seal_format)
                 + dataPlate.getSealNumber() + AppConstants.NEW_LINE;
 
-        this.engineNumber = context.getResources().getString(R.string.motor_format)
+        this.engineNumber = context.getResources().getString(R.string.engine_format)
                 + dataPlate.getEngineNumber() + AppConstants.TWO_LINES;
 
-        this.impediment = context.getResources().getString(R.string.impedimento_format)
+        this.impediment = context.getResources().getString(R.string.impediment_format)
                 + dataPlate.getOffSideRecord() + AppConstants.NEW_LINE;
 
         this.theft = context.getResources().getString(
-                R.string.furto_format)
+                R.string.theft_format)
                 + dataPlate.getTheftRecord() + AppConstants.NEW_LINE;
 
         this.infractions = context.getResources().getString(
-                R.string.multas_format)
+                R.string.assessment_format)
                 + dataPlate.getInfractions() + AppConstants.NEW_LINE;
 
         this.infrationAmout = context.getResources().getString(
-                R.string.valor_multas_format)
+                R.string.assessment_amout_format)
                 + dataPlate.getInfrationAmout() + AppConstants.NEW_LINE;
 
         this.restrictions = context.getResources().getString(
-                R.string.restricoes_format)
+                R.string.restriction_format)
                 + dataPlate.getRestrictions() + AppConstants.NEW_LINE;
 
         this.dateStatus = context.getResources().getString(R.string.date_format)

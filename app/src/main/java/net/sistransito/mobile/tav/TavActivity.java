@@ -11,7 +11,7 @@ import android.widget.ImageView;
 
 import com.viewpagerindicator.UnderlinePageIndicator;
 
-import net.sistransito.mobile.adapter.TabAutoSubTitleSectionsPagerAdapter;
+import net.sistransito.mobile.adapter.TabAitSubTitleSectionsPagerAdapter;
 import net.sistransito.mobile.adapter.TavStartSectionsPagerAdapter;
 import net.sistransito.mobile.viewpager.AnySwipeableViewPager;
 import net.sistransito.mobile.viewpager.DepthPageTransformer;
@@ -82,7 +82,7 @@ public class TavActivity extends AppCompatActivity implements
 	private void setSubTitlePager() {
 		subTitlePager = (AnySwipeableViewPager) findViewById(R.id.tav_title_pager);
 		subTitlePager.setSwipeable(false);
-		subTitlePager.setAdapter(new TabAutoSubTitleSectionsPagerAdapter(
+		subTitlePager.setAdapter(new TabAitSubTitleSectionsPagerAdapter(
 				getSupportFragmentManager()));
 		subTitlePager.setPageMargin(20);
 		subTitlePager.setPageTransformer(true, new ZoomOutPageTransformer());

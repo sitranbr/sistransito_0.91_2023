@@ -67,7 +67,7 @@ public class VolleyFragment extends Fragment{
                     validUser();
                 } else {
                     //Toast.makeText(getContext(),getResources().getString(R.string.sem_conexao),Toast.LENGTH_LONG).show();
-                    Routine.showAlert(getActivity().getResources().getString(R.string.sem_conexao), getActivity());
+                    Routine.showAlert(getActivity().getResources().getString(R.string.no_network_connection), getActivity());
                     //Criar um alarm para enviar assim que houver conexão
                 }
 

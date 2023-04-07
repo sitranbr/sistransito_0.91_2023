@@ -39,7 +39,7 @@ public class PlateListerDelete extends AppCompatActivity implements OnClickListe
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.placa_lista_delete_main);
+		setContentView(R.layout.plate_list_delete_main);
 		expandableListView = ((ExpandableListView) findViewById(R.id.remove_expandableListView));
 		cbCheckAll = (CheckBox) findViewById(R.id.cb_check_all);
 		cbCheckAll.setOnCheckedChangeListener(this);
@@ -66,7 +66,7 @@ public class PlateListerDelete extends AppCompatActivity implements OnClickListe
 			plateListerLayout.removeView(expandableListView);
 		}
 		tvMessage = new TextView(this);
-		tvMessage.setText(getResources().getString(R.string.nehum_resultado_retornado));
+		tvMessage.setText(getResources().getString(R.string.no_result_returned));
 		tvMessage.setGravity(Gravity.CENTER);
 		tvMessage.setTextAppearance(this, android.R.style.TextAppearance_Large);
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,

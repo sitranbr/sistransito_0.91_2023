@@ -19,7 +19,7 @@ public class SubTitleTavGenerateFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.tav_gerar_fragment_subtitulo, null, false);
+		view = inflater.inflate(R.layout.tav_generation_fragment_subtitle, null, false);
 		return view;
 	}
 

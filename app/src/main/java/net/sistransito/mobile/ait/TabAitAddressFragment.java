@@ -38,7 +38,7 @@ public class TabAitAddressFragment extends
 	private View view;
 	private AutoCompleteTextView cityAutoComplete;
 	private AitData aitData;
-	private EditText editAddressInfration, editCityCode, editState;
+	private EditText etAddressInfration, etCityCode, etState;
 	private Button btnAitDate, btnAitTime;
 	private LinearLayout llCityState;
 	private TextView tvSaveData;
@@ -56,7 +56,7 @@ public class TabAitAddressFragment extends
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 							 Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.auto_endereco_fragment, null, false);
+		view = inflater.inflate(R.layout.ait_address_fragment, null, false);
 		initializedView();
 		getAitObject();
 		return view;
@@ -69,21 +69,21 @@ public class TabAitAddressFragment extends
 		cityAutoComplete = (AutoCompleteTextView) view
 				.findViewById(R.id.auto_auto_municipio);
 
-		editCityCode = (EditText) view
+		etCityCode = (EditText) view
 				.findViewById(R.id.et_auto_end_codigo_municipio);
-		editState = (EditText) view.findViewById(R.id.et_auto_end_uf);
+		etState = (EditText) view.findViewById(R.id.et_auto_end_uf);
 
-		editAddressInfration = (EditText) view.findViewById(R.id.et_auto_local_infracao);
+		etAddressInfration = (EditText) view.findViewById(R.id.et_ait_local);
 		btnAitDate = (Button) view
-				.findViewById(R.id.btn_end_data_infracao);
+				.findViewById(R.id.btn_ait_pj_date);
 		btnAitTime = (Button) view
-				.findViewById(R.id.btn_end_hora_infracao);
+				.findViewById(R.id.btn_ait_pj_time);
 
-		tvSaveData = (TextView) view.findViewById(R.id.auto_fab);
+		tvSaveData = (TextView) view.findViewById(R.id.ait_fab);
 		cbConfirm = (CheckBox) view.findViewById(R.id.cb_auto_confirmar);
 
-		editCityCode.setEnabled(false);
-		editState.setEnabled(false);
+		etCityCode.setEnabled(false);
+		etState.setEnabled(false);
 
 		setCityAutoComplete();
 		hideComponents();
@@ -114,7 +114,7 @@ public class TabAitAddressFragment extends
 				.getSettingDatabaseAdapter(getActivity()))
 				.getSettingCursor();
 
-		String stateCity = cursor.getString(cursor.getColumnIndex(SetttingDatabaseHelper.SETTING_UF));
+		String stateCity = cursor.getString(cursor.getColumnIndex(SetttingDatabaseHelper.SETTING_STATE));
 
 		//Log.d("UfLocal", stateCity);
 
@@ -148,10 +148,10 @@ public class TabAitAddressFragment extends
 				int real_position = cityArray.indexOf(parent.getItemAtPosition(pos));
 
 				aitData.setCityCode(codeArray.get(real_position));
-				editCityCode.setText(aitData.getCityCode());
+				etCityCode.setText(aitData.getCityCode());
 
 				aitData.setState(stateArray.get(real_position));
-				editState.setText(aitData.getState());
+				etState.setText(aitData.getState());
 
 				showComponents();
 
@@ -161,8 +161,8 @@ public class TabAitAddressFragment extends
 
 	private void addListener() {
 
-		editAddressInfration.addTextChangedListener(new ChangeText(
-				R.id.et_auto_local_infracao));
+		etAddressInfration.addTextChangedListener(new ChangeText(
+				R.id.et_ait_local));
 
 		btnAitDate.setOnClickListener(this);
 		btnAitTime.setOnClickListener(this);
@@ -190,7 +190,7 @@ public class TabAitAddressFragment extends
 					if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).updateAitDataAddress(aitData))
 						Routine.showAlert(getResources().getString(R.string.update_erro), getActivity());
 
-					((AitActivity) getActivity()).setTabAtual(3);
+					((AitActivity) getActivity()).setTabActual(3);
 
 				}
 
@@ -204,22 +204,22 @@ public class TabAitAddressFragment extends
 		//Log.d("TextoData", btnDataInfracao.getText().toString());
 		//Log.d("TextoHora", btnHoraInfracao.getText().toString());
 
-		if (editAddressInfration.getText().toString().isEmpty()) {
-			editAddressInfration.setError(getResources().getString(
-					R.string.texto_inserir_local));
-			editAddressInfration.requestFocus();
+		if (etAddressInfration.getText().toString().isEmpty()) {
+			etAddressInfration.setError(getResources().getString(
+					R.string.alert_insert_address));
+			etAddressInfration.requestFocus();
 			return false;
 		} else if (cityAutoComplete.getText().toString().isEmpty()) {
 			cityAutoComplete.setError(getResources().getString(
-					R.string.texto_inserir_municipio));
+					R.string.alert_insert_city_name));
 			cityAutoComplete.requestFocus();
 			return false;
 		} else if (btnAitDate.getText().toString().equals("Data")) {
-			Routine.showAlert(getActivity().getString(R.string.texto_inserir_data), getActivity());
+			Routine.showAlert(getActivity().getString(R.string.alert_insert_date), getActivity());
 			btnAitDate.requestFocus();
 			return false;
 		} else if (btnAitTime.getText().toString().equals("Hora")) {
-				Routine.showAlert(getActivity().getString(R.string.texto_inserir_hora), getActivity());
+				Routine.showAlert(getActivity().getString(R.string.alert_insert_time), getActivity());
 				btnAitTime.requestFocus();
 				return false;
 		} else {
@@ -229,7 +229,7 @@ public class TabAitAddressFragment extends
 	}
 
 	private void getAitObject() {
-		aitData = ObjectAit.getAitData();
+		aitData = AitObject.getAitData();
 
 		if (aitData.isDataisNull()) {
 			addListener();
@@ -257,9 +257,9 @@ public class TabAitAddressFragment extends
 
 	private void getRecomandedUpdate() {
 
-		editCityCode.setText(aitData.getCityCode());
-		editState.setText(aitData.getState());
-		editAddressInfration.setText(aitData.getAddress());
+		etCityCode.setText(aitData.getCityCode());
+		etState.setText(aitData.getState());
+		etAddressInfration.setText(aitData.getAddress());
 
 	}
 
@@ -274,7 +274,7 @@ public class TabAitAddressFragment extends
 		public void afterTextChanged(Editable edit) {
 			String s = (edit.toString()).trim();
 			switch (id) {
-				case R.id.et_auto_local_infracao:
+				case R.id.et_ait_local:
 					aitData.setAddress(s.toString());
 					break;
 			}
@@ -295,21 +295,21 @@ public class TabAitAddressFragment extends
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-			case R.id.btn_end_data_infracao:
+			case R.id.btn_ait_pj_date:
 				MyDatePicker pickerdate = new MyDatePicker();
 				bundle = new Bundle();
 				bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID,
-						R.id.btn_end_data_infracao);
+						R.id.btn_ait_pj_date);
 				pickerdate.setArguments(bundle);
 				pickerdate.setTargetFragment(this, 0);
 				pickerdate.show(getActivity().getSupportFragmentManager(), "date");
 				break;
 
-			case R.id.btn_end_hora_infracao:
+			case R.id.btn_ait_pj_time:
 				MyTimePicker picker = new MyTimePicker();
 				bundle = new Bundle();
 				bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID,
-						R.id.btn_end_hora_infracao);
+						R.id.btn_ait_pj_time);
 				picker.setArguments(bundle);
 				picker.setTargetFragment(this, 0);
 				picker.show(getActivity().getSupportFragmentManager(), "time");
@@ -339,8 +339,8 @@ public class TabAitAddressFragment extends
 	private void setNewAitView() {
 
 		cityAutoComplete.setVisibility(AutoCompleteTextView.GONE);
-		editCityCode.setVisibility(EditText.GONE);
-		editState.setVisibility(EditText.GONE);
+		etCityCode.setVisibility(EditText.GONE);
+		etState.setVisibility(EditText.GONE);
 		btnAitDate.setVisibility(Button.GONE);
 		btnAitTime.setVisibility(Button.GONE);
 

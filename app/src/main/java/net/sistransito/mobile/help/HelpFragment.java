@@ -29,7 +29,7 @@ public class HelpFragment extends Fragment {
 
 	private void actionbarSetup() {
 		tv_title = (TextView)view.findViewById(R.id.tv_title);
-		tv_title.setText(getResources().getString(R.string.ajuda_sobre_app));
+		tv_title.setText(getResources().getString(R.string.app_help));
 		im_btn_back = (ImageButton)view. findViewById(R.id.im_btn_back);
 
 	}

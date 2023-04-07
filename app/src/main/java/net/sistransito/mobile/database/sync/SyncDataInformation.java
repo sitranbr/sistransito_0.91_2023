@@ -62,7 +62,7 @@ public class SyncDataInformation extends AsyncTask<String, String, String> {
 		pDialog = new ProgressDialog(context);
 		pDialog.setMax(100);
 		pDialog.setCancelable(false);
-		pDialog.setMessage(context.getResources().getString(R.string.sincronizacao_mgs));
+		pDialog.setMessage(context.getResources().getString(R.string.message_synchronize));
 		pDialog.show();
 	}
 
@@ -70,7 +70,7 @@ public class SyncDataInformation extends AsyncTask<String, String, String> {
 	protected String doInBackground(String... arg0) {
 
 		autoJson = (DatabaseCreator.getInfractionDatabaseAdapter(context))
-				.aitComposeJSONfromSQLite();
+				.aitComposeJsonFromSqLite();
 
 		/*autoJson = (DatabaseCreator.getDatabaseAdapterAutoInfracao(context))
 				.getResults();*/
@@ -132,14 +132,14 @@ public class SyncDataInformation extends AsyncTask<String, String, String> {
 		}
 		if (syncStatus) {
 			AnyAlertDialog.dialogShow(
-					context.getResources().getString(R.string.sincronizacao_concluida),
+					context.getResources().getString(R.string.concluded_synchronization),
 					context,
-					context.getResources().getString(R.string.titulo_sincronizacao));
+					context.getResources().getString(R.string.title_sinchronization));
 		} else {
 			AnyAlertDialog.dialogShow(
-					context.getResources().getString(R.string.nao_precisa_sincronizar),
+					context.getResources().getString(R.string.no_need_synchronize),
 					context,
-					context.getResources().getString(R.string.titulo_sincronizacao));
+					context.getResources().getString(R.string.title_sinchronization));
 		}
 		Log.d("syncStatus", String.valueOf(syncStatus));
 		super.onPostExecute(result);
@@ -251,11 +251,11 @@ public class SyncDataInformation extends AsyncTask<String, String, String> {
 					urlRrdSync);
 
 			JSONArray resultJsonArray = new JSONArray(userResponse);
-			Log.d("jason aaray ",
+			Log.d("json array ",
 					resultJsonArray + " " + resultJsonArray.length());
 			for (int loparg = 0; loparg < resultJsonArray.length(); loparg++) {
 				JSONObject obj = (JSONObject) resultJsonArray.get(loparg);
-				Log.d("ssssssssssss",
+				Log.d("obj.getString",
 						obj.getString("id") + " " + obj.getString("status"));
 				if ((obj.getString("status")).equals("yes")) {
 					(DatabaseCreator.getNumberDatabaseAdapter(context))

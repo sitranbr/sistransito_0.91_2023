@@ -35,7 +35,7 @@ public class RrdActivity extends AppCompatActivity implements
 	@Override
 	protected void onCreate(Bundle arg0) {
 		super.onCreate(arg0);
-		setContentView(R.layout.rrd_lista_main);
+		setContentView(R.layout.rrd_list_main);
 		getRrdObject();
 		initializedView();
 		setMainPager();

@@ -42,7 +42,7 @@ public class TabRrdInformationFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.rrd_informacoes_fragment, null, false);
+		view = inflater.inflate(R.layout.rrd_information_fragment, null, false);
 		initializedView();
 		getAitObject();
 		return view;
@@ -123,7 +123,7 @@ public class TabRrdInformationFragment extends Fragment {
 			public void onClick(View arg0) {
 				AnyAlertDialog.dialogShow(rrdData.getRRDListViewData(getActivity()),
 						getActivity(), getResources()
-								.getString(R.string.listar_rrd));
+								.getString(R.string.list_rrd_issued));
 			}
 		});
 

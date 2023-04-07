@@ -27,7 +27,7 @@ public class CreateNumberDataFromJson {
 
 	}
 
-	public boolean saveNumeroData() {
+	public boolean saveDataNumber() {
 		if (jsonString != null) {
 			try {
 				jsonArray = new JSONArray(jsonString);

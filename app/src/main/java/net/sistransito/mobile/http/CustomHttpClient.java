@@ -24,7 +24,7 @@ public class CustomHttpClient {
 	public final String NORMAL = "NORMAL";
 	public final int HTTP_TIMEOUT = 30 * 1000;
 	private HttpClient mHttpClient;
-	//public String placa, modelo_veiculo, cor_veiculo;
+	//public String sPlate, sVehicleModel, sVehicleColor;
 
 	public HttpClient getHttpClient() {
 		if (mHttpClient == null) {

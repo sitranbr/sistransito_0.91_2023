@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/yellow"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/layout2"
+        android:id="@+id/scrollView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:paddingBottom="@dimen/layout_margin_buttom">
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/yellow_light"
+                android:drawableLeft="@drawable/signup_name"
+                android:drawablePadding="@dimen/width_padding"
+                android:ems="10"
+                android:hint="@string/name"
+                android:inputType="textCapCharacters"
+                android:padding="@dimen/width_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@null"></EditText>
+
+            <EditText
+                android:id="@+id/et_autority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widght_margin_top_3"
+                android:background="@color/yellow_light"
+                android:drawableLeft="@drawable/ic_authority"
+                android:drawablePadding="@dimen/width_padding"
+                android:ems="10"
+                android:hint="@string/transit_organ"
+                android:inputType="text"
+                android:padding="@dimen/width_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@null"></EditText>
+
+            <EditText
+                android:id="@+id/et_matricula"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widght_margin_top_3"
+                android:background="@color/yellow_light"
+                android:drawableLeft="@drawable/ic_registation"
+                android:drawablePadding="@dimen/width_padding"
+                android:ems="10"
+                android:hint="@string/agent_code"
+                android:inputType="number"
+                android:padding="@dimen/width_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@null"></EditText>
+
+            <EditText
+                android:id="@+id/et_cpf"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widght_margin_top_3"
+                android:background="@color/yellow_light"
+                android:drawableLeft="@drawable/ic_cpf"
+                android:drawablePadding="@dimen/width_padding"
+                android:ems="10"
+                android:hint="@string/cpf"
+                android:inputType="number"
+                android:padding="@dimen/width_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@null"></EditText>
+
+            <EditText
+                android:id="@+id/et_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widght_margin_top_3"
+                android:background="@color/yellow_light"
+                android:drawableLeft="@drawable/signup_email"
+                android:drawablePadding="@dimen/width_padding"
+                android:ems="10"
+                android:hint="@string/login_register"
+                android:inputType="text"
+                android:padding="@dimen/width_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@null"></EditText>
+
+            <EditText
+                android:id="@+id/et_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/widght_margin_top_3"
+                android:background="@color/yellow_light"
+                android:drawableLeft="@drawable/signup_password"
+                android:drawablePadding="@dimen/width_padding"
+                android:ems="10"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:padding="@dimen/width_padding"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textCursorDrawable="@null"></EditText>
+        </LinearLayout>
+    </ScrollView>
+
+    <LinearLayout
+        android:id="@+id/layout2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/widght_margin_top_2"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/im_prifile_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/login_two"
+            android:src="@drawable/ic_account_circle" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrollView"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <com.rey.material.widget.Button
+            style="@style/Material.Drawable.Ripple.Wave"
+            android:id="@+id/btn_sign_up"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_whight"
+            android:padding="@dimen/width_padding"
+            android:text="@string/new_register"
+            android:textColor="@color/yellow" />
+    </LinearLayout>
+
+    <com.rey.material.widget.TextView
+        android:id="@+id/btn_back_login"
+        style="@style/Material.Drawable.Ripple.Wave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginStart="@dimen/width_margin_8"
+        android:layout_marginTop="@dimen/width_margin_8"
+        android:layout_marginEnd="@dimen/width_margin_8"
+        android:layout_marginBottom="@dimen/width_margin_8"
+        android:background="@null"
+        android:gravity="center"
+        android:text="@string/login_two"
+        android:textColor="@color/color_state_tv" />
+</RelativeLayout>

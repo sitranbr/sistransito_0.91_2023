@@ -4,7 +4,6 @@ import com.google.gson.InstanceCreator;
 
 import java.lang.reflect.Type;
 
-
 public class User implements InstanceCreator<User> {
 
     private String employeeName;

@@ -60,7 +60,7 @@ public class ActivityLogin extends AppCompatActivity implements
         if (id == 0) {
             toolbar.setTitle(R.string.login_hint);
         } else {
-            toolbar.setTitle(R.string.registro_hint);
+            toolbar.setTitle(R.string.register_hint);
         }
         pager.setCurrentItem(id);
     }

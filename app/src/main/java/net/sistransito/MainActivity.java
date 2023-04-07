@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private void startViewAnimation() {
         linearLayout = (LinearLayout) findViewById(R.id.linear_layour);
         linearLayout.startAnimation(AppObject
-                .getSlideAndScaleAnimition(this));
+                .getSlideAndScaleAnimation(this));
     }
 
     public void updateProgress(Integer integer) {

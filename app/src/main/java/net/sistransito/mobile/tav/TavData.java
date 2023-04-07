@@ -17,16 +17,16 @@ public class TavData implements Serializable {
 
 	private String plate, aitNumber, ownerName, cpfCnpj,
 			renavamNumber, chassisNumber, leverHead,
-			carBody, lining, hoodBody, rightSideBody,
-			leftSideBody, trunkBodywork, roofBodywork,
-			enginer, dashboard, hoodPaint, rightSidePaint,
-			leftSidePaint, trunkPainting, ceilingPainting, radiator,
-			sideWindows, windShieldGlass, rearWindow, antenna,
+			carBody, ceiling, hoodBody, bodyworkRightSide,
+			bodyWorkLeftSide, trunkBodywork, roofBodywork,
+			engine, dashboard, hoodPaint, rightSidePaint,
+			leftSidePaint, trunkPainting, hoodPainting, radiator,
+			sideGlass, windShield, rearWindshield, antenna,
 			trunk, seats, baterry, wheelCover, airConditioner,
-			fireExtinguisher, headLight, taiLight,
-			jack, frontBumper, backBumper,
+			fireExtinguisher, headLight, rearLight,
+			jack, frontBumper, hearBumper,
 			driverSunVisor, tires, spareTire, radio,
-			rearviewMirror, rightSideMirror, carpet, triangle,
+			rearviewMirror, outsideMirror, carpet, triangle,
 			steeringWheel, motorcycleHandlebar, odometer, fuelGauge,
 			removedVia, companyName, winchDriverName,
 			observation, tavNumber, tavType;
@@ -100,20 +100,20 @@ public class TavData implements Serializable {
 		return carBody;
 	}
 
-	public String getLining() {
-		return lining;
+	public String getCeiling() {
+		return ceiling;
 	}
 
 	public String getHoodBody() {
 		return hoodBody;
 	}
 
-	public String getRightSideBody() {
-		return rightSideBody;
+	public String getBodyworkRightSide() {
+		return bodyworkRightSide;
 	}
 
-	public String getLeftSideBody() {
-		return leftSideBody;
+	public String getBodyWorkLeftSide() {
+		return bodyWorkLeftSide;
 	}
 
 	public String getTrunkBodywork() {
@@ -124,8 +124,8 @@ public class TavData implements Serializable {
 		return roofBodywork;
 	}
 
-	public String getEnginer() {
-		return enginer;
+	public String getEngine() {
+		return engine;
 	}
 
 	public String getDashboard() {
@@ -148,24 +148,24 @@ public class TavData implements Serializable {
 		return trunkPainting;
 	}
 
-	public String getCeilingPainting() {
-		return ceilingPainting;
+	public String getHoodPainting() {
+		return hoodPainting;
 	}
 
 	public String getRadiator() {
 		return radiator;
 	}
 
-	public String getSideWindows() {
-		return sideWindows;
+	public String getSideGlass() {
+		return sideGlass;
 	}
 
-	public String getWindShieldGlass() {
-		return windShieldGlass;
+	public String getWindShield() {
+		return windShield;
 	}
 
-	public String getRearWindow() {
-		return rearWindow;
+	public String getRearWindshield() {
+		return rearWindshield;
 	}
 
 	public String getAntenna() {
@@ -200,8 +200,8 @@ public class TavData implements Serializable {
 		return headLight;
 	}
 
-	public String getTaiLight() {
-		return taiLight;
+	public String getRearLight() {
+		return rearLight;
 	}
 
 	public String getJack() {
@@ -212,8 +212,8 @@ public class TavData implements Serializable {
 		return frontBumper;
 	}
 
-	public String getBackBumper() {
-		return backBumper;
+	public String getHearBumper() {
+		return hearBumper;
 	}
 
 	public String getDriverSunVisor() {
@@ -236,8 +236,8 @@ public class TavData implements Serializable {
 		return rearviewMirror;
 	}
 
-	public String getRightSideMirror() {
-		return rightSideMirror;
+	public String getOutsideMirror() {
+		return outsideMirror;
 	}
 
 	public String getCarpet() {
@@ -300,20 +300,20 @@ public class TavData implements Serializable {
 		this.carBody = carBody;
 	}
 
-	public void setLining(String lining) {
-		this.lining = lining;
+	public void setCeiling(String ceiling) {
+		this.ceiling = ceiling;
 	}
 
 	public void setHoodBody(String hoodBody) {
 		this.hoodBody = hoodBody;
 	}
 
-	public void setRightSideBody(String rightSideBody) {
-		this.rightSideBody = rightSideBody;
+	public void setBodyworkRightSide(String bodyworkRightSide) {
+		this.bodyworkRightSide = bodyworkRightSide;
 	}
 
-	public void setLeftSideBody(String leftSideBody) {
-		this.leftSideBody = leftSideBody;
+	public void setBodyWorkLeftSide(String bodyWorkLeftSide) {
+		this.bodyWorkLeftSide = bodyWorkLeftSide;
 	}
 
 	public void setTrunkBodywork(String trunkBodywork) {
@@ -324,8 +324,8 @@ public class TavData implements Serializable {
 		this.roofBodywork = roofBodywork;
 	}
 
-	public void setEnginer(String enginer) {
-		this.enginer = enginer;
+	public void setEngine(String engine) {
+		this.engine = engine;
 	}
 
 	public void setDashboard(String dashboard) {
@@ -348,24 +348,24 @@ public class TavData implements Serializable {
 		this.trunkPainting = trunkPainting;
 	}
 
-	public void setCeilingPainting(String ceilingPainting) {
-		this.ceilingPainting = ceilingPainting;
+	public void setHoodPainting(String hoodPainting) {
+		this.hoodPainting = hoodPainting;
 	}
 
 	public void setRadiator(String radiator) {
 		this.radiator = radiator;
 	}
 
-	public void setSideWindows(String sideWindows) {
-		this.sideWindows = sideWindows;
+	public void setSideGlass(String sideGlass) {
+		this.sideGlass = sideGlass;
 	}
 
-	public void setWindShieldGlass(String windShieldGlass) {
-		this.windShieldGlass = windShieldGlass;
+	public void setWindShield(String windShield) {
+		this.windShield = windShield;
 	}
 
-	public void setRearWindow(String rearWindow) {
-		this.rearWindow = rearWindow;
+	public void setRearWindshield(String rearWindshield) {
+		this.rearWindshield = rearWindshield;
 	}
 
 	public void setAntenna(String antenna) {
@@ -400,8 +400,8 @@ public class TavData implements Serializable {
 		this.headLight = headLight;
 	}
 
-	public void setTaiLight(String taiLight) {
-		this.taiLight = taiLight;
+	public void setRearLight(String rearLight) {
+		this.rearLight = rearLight;
 	}
 
 	public void setJack(String jack) {
@@ -412,8 +412,8 @@ public class TavData implements Serializable {
 		this.frontBumper = frontBumper;
 	}
 
-	public void setBackBumper(String backBumper) {
-		this.backBumper = backBumper;
+	public void setHearBumper(String hearBumper) {
+		this.hearBumper = hearBumper;
 	}
 
 	public void setDriverSunVisor(String driverSunVisor) {
@@ -436,8 +436,8 @@ public class TavData implements Serializable {
 		this.rearviewMirror = rearviewMirror;
 	}
 
-	public void setRightSideMirror(String rightSideMirror) {
-		this.rightSideMirror = rightSideMirror;
+	public void setOutsideMirror(String outsideMirror) {
+		this.outsideMirror = outsideMirror;
 	}
 
 	public void setCarpet(String carpet) {
@@ -474,7 +474,7 @@ public class TavData implements Serializable {
 
 	public TavData() {
 
-		aitNumber = ownerName = cpfCnpj = renavamNumber = chassisNumber = leverHead = carBody = lining = hoodBody = rightSideBody = leftSideBody = trunkBodywork = roofBodywork = enginer = dashboard = hoodPaint = rightSidePaint = leftSidePaint = trunkPainting = ceilingPainting = radiator = sideWindows = windShieldGlass = rearWindow = antenna = trunk = seats = baterry = wheelCover = airConditioner = fireExtinguisher = headLight = taiLight = jack = frontBumper = backBumper = driverSunVisor = tires = spareTire = radio = rearviewMirror = rightSideMirror = carpet = triangle = steeringWheel = motorcycleHandlebar = odometer = fuelGauge = removedVia = companyName = winchDriverName = observation = tavNumber = tavType = "";
+		aitNumber = ownerName = cpfCnpj = renavamNumber = chassisNumber = leverHead = carBody = ceiling = hoodBody = bodyworkRightSide = bodyWorkLeftSide = trunkBodywork = roofBodywork = engine = dashboard = hoodPaint = rightSidePaint = leftSidePaint = trunkPainting = hoodPainting = radiator = sideGlass = windShield = rearWindshield = antenna = trunk = seats = baterry = wheelCover = airConditioner = fireExtinguisher = headLight = rearLight = jack = frontBumper = hearBumper = driverSunVisor = tires = spareTire = radio = rearviewMirror = outsideMirror = carpet = triangle = steeringWheel = motorcycleHandlebar = odometer = fuelGauge = removedVia = companyName = winchDriverName = observation = tavNumber = tavType = "";
 
 	}
 
@@ -488,12 +488,12 @@ public class TavData implements Serializable {
 
 	public String getTAVListerView(Context context) {
 		String tav = "";
-		tav = context.getResources().getString(R.string.numero_do_auto)
+		tav = context.getResources().getString(R.string.tav_ait_number)
 				+ getNewline()
 				+ aitNumber
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.nome_do_proprietario) + getNewline()
+						R.string.tav_owner_name) + getNewline()
 				+ ownerName + getNewline_2() + getviewData(context);
 
 		return tav;
@@ -514,7 +514,7 @@ public class TavData implements Serializable {
 				.getColumnIndex(TavDatabaseHelper.PLATE));
 		
 		
-		Log.d("placa", plate);
+		Log.d("plate", plate);
 		aitNumber = myCursor.getString(myCursor
 				.getColumnIndex(TavDatabaseHelper.AIT_NUMBER));
 		ownerName = myCursor.getString(myCursor
@@ -526,111 +526,111 @@ public class TavData implements Serializable {
 		chassisNumber = myCursor.getString(myCursor
 				.getColumnIndex(TavDatabaseHelper.CHASSI_NUMBER));
 		leverHead = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.CABECA_DE_ALAVANCA));
+				.getColumnIndex(TavDatabaseHelper.LEVER_HEAD));
 		carBody = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.CARROCERIA));
-		lining = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.FORRO));
+				.getColumnIndex(TavDatabaseHelper.BODYWORK));
+		ceiling = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.CEILING));
 		hoodBody = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.LATARIA_CAPO));
+				.getColumnIndex(TavDatabaseHelper.HOOD_BODYWORK));
 
-		rightSideBody = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.LATARIA_LADO_DIREITO));
-		leftSideBody = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.LATARIA_LADO_ESQUERDO));
+		bodyworkRightSide = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.BODYWORK_RIGHT_SIDE));
+		bodyWorkLeftSide = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.BODYWORK_LEFT_SIDE));
 		trunkBodywork = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.LATARIA_TAPA_PORTA_MALA));
+				.getColumnIndex(TavDatabaseHelper.TRUNK_BODYWORK));
 		roofBodywork = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.LATARIA_TETO));
+				.getColumnIndex(TavDatabaseHelper.ROOF_BODYWORK));
 
-		enginer = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.MOTOR));
+		engine = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.ENGINE));
 		dashboard = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PAINEL));
+				.getColumnIndex(TavDatabaseHelper.DASHBOARD));
 		hoodPaint = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PINTURA_CAPO));
+				.getColumnIndex(TavDatabaseHelper.HOOD_PAINTING));
 		rightSidePaint = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PINTURA_LADO_DIREITO));
+				.getColumnIndex(TavDatabaseHelper.WRIGHT_PAINTING));
 		leftSidePaint = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PINTURA_LADO_ESQUERDO));
+				.getColumnIndex(TavDatabaseHelper.LEFT_PAINTING));
 		trunkPainting = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PINTURA_PORTA_MALA));
+				.getColumnIndex(TavDatabaseHelper.TRUNK_PAINTING));
 
-		ceilingPainting = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PINTURA_TETO));
+		hoodPainting = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.HOOD_PAINTING));
 		radiator = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.RADIADOR));
-		sideWindows = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.VIDROS_LATERAIS));
+				.getColumnIndex(TavDatabaseHelper.RADIATOR));
+		sideGlass = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.SIDE_GLASS));
 
-		windShieldGlass = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.VIDRO_PARA_BRISA));
-		rearWindow = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.VIDRO_TRASEIRO));
+		windShield = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.WINDSHIELD));
+		rearWindshield = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.HEAR_WINDSHIELD));
 
 		antenna = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.ANTENA_DE_RADIO));
+				.getColumnIndex(TavDatabaseHelper.RADIO_ANTENNA));
 		trunk = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.BAGAGEIRO));
+				.getColumnIndex(TavDatabaseHelper.TRUNK));
 		seats = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.BANCOS));
+				.getColumnIndex(TavDatabaseHelper.SEAT));
 		baterry = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.BATERIA));
+				.getColumnIndex(TavDatabaseHelper.BATTERY));
 		wheelCover = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.CALOTA));
+				.getColumnIndex(TavDatabaseHelper.HUBCAP));
 
 		airConditioner = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.CONDICIONADOR_DE_AR));
+				.getColumnIndex(TavDatabaseHelper.AIR_CONDITIONER));
 
 		fireExtinguisher = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.EXTINTOR_DE_INCENDIO));
+				.getColumnIndex(TavDatabaseHelper.FIRE_EXTINGUISHER));
 		headLight = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.FAROLETE_DIANTEIRO));
-		taiLight = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.FAROLETE_TRASEIRO));
+				.getColumnIndex(TavDatabaseHelper.HEADLIGHT));
+		rearLight = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.REAR_LIGHT));
 		jack = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.MACACO));
+				.getColumnIndex(TavDatabaseHelper.JACK));
 
 		frontBumper = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PARA_CHOQUE_DIANTEIRO));
-		backBumper = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PARA_CHOQUE_TRASEIRO));
+				.getColumnIndex(TavDatabaseHelper.FRONT_BUMPER));
+		hearBumper = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.REAR_BUMPER));
 		driverSunVisor = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PARA_SOL_DO_CONDUTOR));
+				.getColumnIndex(TavDatabaseHelper.DRIVER_SUNSHADE));
 		tires = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PNEUS));
+				.getColumnIndex(TavDatabaseHelper.TIRES));
 
 		spareTire = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.PNEUS_ESTEPE));
+				.getColumnIndex(TavDatabaseHelper.SPARE_TIRE));
 		radio = myCursor.getString(myCursor
 				.getColumnIndex(TavDatabaseHelper.RADIO));
 		rearviewMirror = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.RETROVISOR_INTERNO));
+				.getColumnIndex(TavDatabaseHelper.REARVIEW_MIRROR));
 
-		rightSideMirror = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.RETROVISOR_EXTERNO_DIREITO));
+		outsideMirror = myCursor.getString(myCursor
+				.getColumnIndex(TavDatabaseHelper.OUTSIDE_MIRROR));
 		carpet = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.TAPETE));
+				.getColumnIndex(TavDatabaseHelper.CARPET));
 		triangle = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.TRIANGULO));
+				.getColumnIndex(TavDatabaseHelper.TRIANGLE));
 
 		steeringWheel = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.VOLANTE));
+				.getColumnIndex(TavDatabaseHelper.STEERING_WHEEL));
 		motorcycleHandlebar = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.GUIDAM));
+				.getColumnIndex(TavDatabaseHelper.HANDLEBARS));
 		odometer = myCursor.getString(myCursor
 				.getColumnIndex(TavDatabaseHelper.ODOMETRO));
 
 		fuelGauge = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.MARCADOR_DE_CONBUTIVEL));
+				.getColumnIndex(TavDatabaseHelper.FUEL_MARKER));
 		removedVia = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.REMOCAO_ATRAVES_DE));
+				.getColumnIndex(TavDatabaseHelper.REMOVAL_THROUGH_OF));
 		companyName = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.NOME_DA_EMPRESA));
+				.getColumnIndex(TavDatabaseHelper.COMPANY_NAME));
 		winchDriverName = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.NOME_DO_CONDUTOR_DO_GUINCHO));
+				.getColumnIndex(TavDatabaseHelper.TOW_TRUCK_DRIVER_NAME));
 		observation = myCursor.getString(myCursor
-				.getColumnIndex(TavDatabaseHelper.OBSERVACAO));
+				.getColumnIndex(TavDatabaseHelper.OBSERVATION));
 		tavNumber = myCursor.getString(myCursor
 				.getColumnIndex(TavDatabaseHelper.TAV_NUMBER));
 
@@ -643,7 +643,7 @@ public class TavData implements Serializable {
 
 	private String getviewData(Context context) {
 
-		String data = context.getResources().getString(R.string.CPF_CNPJ)
+		String data = context.getResources().getString(R.string.tav_cpf_cnpj)
 				+ getNewline()
 				+ cpfCnpj
 				+ getNewline_2()
@@ -655,149 +655,149 @@ public class TavData implements Serializable {
 				+ getNewline()
 				+ chassisNumber
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.cabeca_de_alavanca)
+				+ context.getResources().getString(R.string.shift_lever)
 				+ getNewline()
 				+ leverHead
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.carroceria)
+				+ context.getResources().getString(R.string.bodywork)
 				+ getNewline()
 				+ carBody
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.forro)
+				+ context.getResources().getString(R.string.ceiling)
 				+ getNewline()
-				+ lining
+				+ ceiling
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.lataria_capo)
+				+ context.getResources().getString(R.string.hood_bodywork)
 				+ getNewline()
 				+ hoodBody
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.lataria_lado_direito)
+						R.string.bodywork_right_side)
 				+ getNewline()
-				+ rightSideBody
+				+ bodyworkRightSide
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.lataria_lado_esquerdo)
+						R.string.bodywork_left_side)
 				+ getNewline()
-				+ leftSideBody
+				+ bodyWorkLeftSide
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.lataria_tapa_porta_mala)
+						R.string.trunk_tinwork)
 				+ getNewline()
 				+ trunkBodywork
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.lataria_teto)
+				+ context.getResources().getString(R.string.roof_bodywork)
 				+ getNewline()
 				+ roofBodywork
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.motor)
+				+ context.getResources().getString(R.string.engine)
 				+ getNewline()
-				+ enginer
+				+ engine
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.painel)
+				+ context.getResources().getString(R.string.dashboard)
 				+ getNewline()
 				+ dashboard
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.pintura_capo)
+				+ context.getResources().getString(R.string.hood_painting)
 				+ getNewline()
 				+ hoodPaint
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.pintura_lado_direito)
+						R.string.wright_painting)
 				+ getNewline()
 				+ rightSidePaint
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.pintura_lado_esquerdo)
+						R.string.left_painting)
 				+ getNewline()
 				+ leftSidePaint
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.pintura_porta_mala)
+				+ context.getResources().getString(R.string.trunk_painting)
 				+ getNewline()
 				+ trunkPainting
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.pintura_teto)
+				+ context.getResources().getString(R.string.hoof_painting)
 				+ getNewline()
-				+ ceilingPainting
+				+ hoodPainting
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.radiador)
+				+ context.getResources().getString(R.string.radiator)
 				+ getNewline()
 				+ radiator
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.vidros_laterais)
+				+ context.getResources().getString(R.string.side_glass)
 				+ getNewline()
-				+ sideWindows
+				+ sideGlass
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.vidro_para_brisa)
+				+ context.getResources().getString(R.string.windshield)
 				+ getNewline()
-				+ windShieldGlass
+				+ windShield
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.vidro_traseiro)
+				+ context.getResources().getString(R.string.back_windshield)
 				+ getNewline()
-				+ rearWindow
+				+ rearWindshield
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.antena_de_radio)
+				+ context.getResources().getString(R.string.radio_antenna)
 				+ getNewline()
 				+ antenna
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.bagageiro)
+				+ context.getResources().getString(R.string.baggage_handler)
 				+ getNewline()
 				+ trunk
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.bancos)
+				+ context.getResources().getString(R.string.seat)
 				+ getNewline()
 				+ seats
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.bateria)
+				+ context.getResources().getString(R.string.battery)
 				+ getNewline()
 				+ baterry
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.calota)
+				+ context.getResources().getString(R.string.hubcap)
 				+ getNewline()
 				+ wheelCover
 				+ getNewline_2()
 				+ context.getResources()
-						.getString(R.string.condicionador_de_ar)
+						.getString(R.string.air_conditioner)
 				+ getNewline()
 				+ airConditioner
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.extintor_de_incendio)
+						R.string.fire_extinguisher)
 				+ getNewline()
 				+ fireExtinguisher
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.farolete_dianteiro)
+				+ context.getResources().getString(R.string.headlight)
 				+ getNewline()
 				+ headLight
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.farolete_traseiro)
+				+ context.getResources().getString(R.string.rear_light)
 				+ getNewline()
-				+ taiLight
+				+ rearLight
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.macaco)
+				+ context.getResources().getString(R.string.jack)
 				+ getNewline()
 				+ jack
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.para_choque_dianteiro)
+						R.string.front_bumper)
 				+ getNewline()
 				+ frontBumper
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.para_choque_traseiro)
+						R.string.rear_bumper)
 				+ getNewline()
-				+ backBumper
+				+ hearBumper
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.para_sol_do_condutor)
+						R.string.driver_sunshade)
 				+ getNewline()
 				+ driverSunVisor
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.pneus)
+				+ context.getResources().getString(R.string.tires)
 				+ getNewline()
 				+ tires
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.pneus_estepe)
+				+ context.getResources().getString(R.string.stepe_tire)
 				+ getNewline()
 				+ spareTire
 				+ getNewline_2()
@@ -805,28 +805,28 @@ public class TavData implements Serializable {
 				+ getNewline()
 				+ radio
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.retrovisor_interno)
+				+ context.getResources().getString(R.string.rearview_mirror)
 				+ getNewline()
 				+ rearviewMirror
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.retrovisor_externo_direito)
+						R.string.right_outside_mirror)
 				+ getNewline()
-				+ rightSideMirror
+				+ outsideMirror
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.tapete)
+				+ context.getResources().getString(R.string.carpet)
 				+ getNewline()
 				+ carpet
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.triangulo)
+				+ context.getResources().getString(R.string.triangle)
 				+ getNewline()
 				+ triangle
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.volante)
+				+ context.getResources().getString(R.string.steering_wheel)
 				+ getNewline()
 				+ steeringWheel
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.guidam)
+				+ context.getResources().getString(R.string.handlebars)
 				+ getNewline()
 				+ motorcycleHandlebar
 				+ getNewline_2()
@@ -835,24 +835,24 @@ public class TavData implements Serializable {
 				+ odometer
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.marcador_de_combustivel)
+						R.string.fuel_marker)
 				+ getNewline()
 				+ fuelGauge
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.remocao_atraves_de)
+				+ context.getResources().getString(R.string.removal_through_of)
 				+ getNewline()
 				+ removedVia
 				+ getNewline_2()
-				+ context.getResources().getString(R.string.nome_da_empresa)
+				+ context.getResources().getString(R.string.tav_company_name)
 				+ getNewline()
 				+ companyName
 				+ getNewline_2()
 				+ context.getResources().getString(
-						R.string.nome_do_condutor_do_guincho) + getNewline()
+						R.string.tav_tow_truck_driver_name) + getNewline()
 				+ winchDriverName + getNewline_2()
-				+ context.getResources().getString(R.string.observacao)
+				+ context.getResources().getString(R.string.observations)
 				+ getNewline() + observation + getNewline_2()
-				+ context.getResources().getString(R.string.numero_tav)
+				+ context.getResources().getString(R.string.tav_number)
 				+ getNewline() + tavNumber + getNewline_2();
 
 		return data;

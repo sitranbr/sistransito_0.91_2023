@@ -30,11 +30,11 @@ public class TavAccessoriesFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.tav_veiculo_acessorios_fragment, null,
+		view = inflater.inflate(R.layout.tav_vehicle_accessories_fragment, null,
 				false);
 		filterName = new FilterName(getActivity());
 		initializedView();
-		getAutodeObject();
+		getAitObject();
 		return view;
 	}
 
@@ -64,42 +64,43 @@ public class TavAccessoriesFragment extends Fragment implements
 
 	}
 
-	private void getAutodeObject() {
+	private void getAitObject() {
+
 		data = TavObject.getTAVObject();
 
 	}
 
 	private void initializedView() {
-		antenna = (Spinner) view.findViewById(R.id.antena_de_radio);
-		trunck = (Spinner) view.findViewById(R.id.bagageiro);
-		seats = (Spinner) view.findViewById(R.id.bancos);
-		baterry = (Spinner) view.findViewById(R.id.bateria);
-		wheelCover = (Spinner) view.findViewById(R.id.calota);
+		antenna = (Spinner) view.findViewById(R.id.sp_radio_antenna);
+		trunck = (Spinner) view.findViewById(R.id.sp_baggage_handler);
+		seats = (Spinner) view.findViewById(R.id.sp_seat);
+		baterry = (Spinner) view.findViewById(R.id.sp_battery);
+		wheelCover = (Spinner) view.findViewById(R.id.sp_hubcap);
 		airConditioner = (Spinner) view
-				.findViewById(R.id.condicionador_de_ar);
+				.findViewById(R.id.sp_air_conditioner);
 		fireExtinguisher = (Spinner) view
-				.findViewById(R.id.extintor_de_incendio);
+				.findViewById(R.id.sp_fire_extinguisher);
 		headLight = (Spinner) view
-				.findViewById(R.id.farolete_dianteiro);
-		taiLight = (Spinner) view.findViewById(R.id.farolete_traseiro);
-		jack = (Spinner) view.findViewById(R.id.macaco);
+				.findViewById(R.id.sp_headlight);
+		taiLight = (Spinner) view.findViewById(R.id.rear_light);
+		jack = (Spinner) view.findViewById(R.id.sp_wheel_jack);
 		frontBumper = (Spinner) view
-				.findViewById(R.id.para_choque_dianteiro);
+				.findViewById(R.id.sp_front_bumper);
 		backBumper = (Spinner) view
-				.findViewById(R.id.para_choque_traseiro);
+				.findViewById(R.id.sp_rear_bumper);
 		driverHood = (Spinner) view
-				.findViewById(R.id.para_sol_do_condutor);
-		tires = (Spinner) view.findViewById(R.id.pneus);
-		spareTire = (Spinner) view.findViewById(R.id.pneus_estepe);
-		radio = (Spinner) view.findViewById(R.id.radio);
+				.findViewById(R.id.sp_driver_sunshade);
+		tires = (Spinner) view.findViewById(R.id.sp_tires);
+		spareTire = (Spinner) view.findViewById(R.id.sp_step_tire);
+		radio = (Spinner) view.findViewById(R.id.sp_radio);
 		rearviewMirror = (Spinner) view
-				.findViewById(R.id.retrovisor_interno);
+				.findViewById(R.id.sp_internal_rearview);
 		rightOutsideMirror = (Spinner) view
-				.findViewById(R.id.retrovisor_externo_direito);
-		carpet = (Spinner) view.findViewById(R.id.tapete);
-		triangle = (Spinner) view.findViewById(R.id.triangulo);
-		steeringWheel = (Spinner) view.findViewById(R.id.volante);
-		motorcycleHandlebar = (Spinner) view.findViewById(R.id.guidam);
+				.findViewById(R.id.sp_right_outside_mirror);
+		carpet = (Spinner) view.findViewById(R.id.sp_carpet);
+		triangle = (Spinner) view.findViewById(R.id.sp_triangle);
+		steeringWheel = (Spinner) view.findViewById(R.id.sp_steering_wheel);
+		motorcycleHandlebar = (Spinner) view.findViewById(R.id.sp_handlebars);
 		addAdapter();
 		addListener();
 	}
@@ -188,70 +189,70 @@ public class TavAccessoriesFragment extends Fragment implements
 		String value = (String) parent.getItemAtPosition(pos);
 		value = filterName.filter(value);
 		switch (parent.getId()) {
-		case R.id.antena_de_radio:
+		case R.id.sp_radio_antenna:
 			data.setAntenna(value);
 			break;
-		case R.id.bagageiro:
+		case R.id.sp_baggage_handler:
 			data.setTrunk(value);
 			break;
-		case R.id.bancos:
+		case R.id.sp_seat:
 			data.setSeats(value);
 			break;
-		case R.id.bateria:
+		case R.id.sp_battery:
 			data.setBaterry(value);
 			break;
-		case R.id.calota:
+		case R.id.sp_hubcap:
 			data.setWheelCover(value);
 			break;
-		case R.id.condicionador_de_ar:
+		case R.id.sp_air_conditioner:
 			data.setAirConditioner(value);
 			break;
-		case R.id.extintor_de_incendio:
+		case R.id.sp_fire_extinguisher:
 			data.setFireExtinguisher(value);
 			break;
-		case R.id.farolete_dianteiro:
+		case R.id.sp_headlight:
 			data.setHeadLight(value);
 			break;
-		case R.id.farolete_traseiro:
-			data.setTaiLight(value);
+		case R.id.rear_light:
+			data.setRearLight(value);
 			break;
-		case R.id.macaco:
+		case R.id.sp_wheel_jack:
 			data.setJack(value);
 			break;
-		case R.id.para_choque_dianteiro:
+		case R.id.sp_front_bumper:
 			data.setFrontBumper(value);
 			break;
-		case R.id.para_choque_traseiro:
-			data.setBackBumper(value);
+		case R.id.sp_rear_bumper:
+			data.setHearBumper(value);
 			break;
-		case R.id.para_sol_do_condutor:
+		case R.id.sp_driver_sunshade:
 			data.setDriverSunVisor(value);
 			break;
-		case R.id.pneus:
+		case R.id.sp_tires:
 			data.setTires(value);
 			break;
-		case R.id.pneus_estepe:
+		case R.id.sp_step_tire:
 			data.setSpareTire(value);
 			break;
-		case R.id.radio:
+		case R.id.sp_radio:
 			data.setRadio(value);
 			break;
-		case R.id.retrovisor_interno:
+		case R.id.sp_internal_rearview:
 			data.setRearviewMirror(value);
 			break;
-		case R.id.retrovisor_externo_direito:
-			data.setRightSideMirror(value);
+		case R.id.sp_right_outside_mirror:
+			data.setOutsideMirror(value);
 			break;
-		case R.id.tapete:
+		case R.id.sp_carpet:
 			data.setCarpet(value);
 			break;
-		case R.id.triangulo:
+		case R.id.sp_triangle:
 			data.setTriangle(value);
 			break;
-		case R.id.volante:
+		case R.id.sp_steering_wheel:
 			data.setSteeringWheel(value);
 			break;
-		case R.id.guidam:
+		case R.id.sp_handlebars:
 			data.setMotorcycleHandlebar(value);
 			break;
 

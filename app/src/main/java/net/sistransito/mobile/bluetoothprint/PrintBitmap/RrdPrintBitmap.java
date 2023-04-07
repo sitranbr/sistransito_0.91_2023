@@ -40,11 +40,11 @@ public class RrdPrintBitmap extends BasePrintBitmap {
         if(rrdData.getRrdType().equals("avulso")) {
             bitmapFormat.createNameTable("NÚMERO DO RRD", rrdData.getRrdNumber(), "NÚMERO DO AIT", "",
                     true, PrintBitmapFormat.TableCellAlign.MIDDLE,
-                    PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+                    PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
         }else{
             bitmapFormat.createNameTable("NÚMERO DO RRD", rrdData.getRrdNumber(), "NÚMERO DO AIT", aitData.getAitNumber(),
                     true, PrintBitmapFormat.TableCellAlign.MIDDLE,
-                    PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+                    PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
         }
 
         bitmapFormat.createQuotes("RECEBEMOS DE:", rrdData.getDriverName(), true, false, PrintBitmapFormat.NORMAL_FONT);
@@ -63,14 +63,14 @@ public class RrdPrintBitmap extends BasePrintBitmap {
         bitmapFormat.createQuotes("MOTIVO PARA O RECOLHIMENTO", rrdData.getReasonCollected().toUpperCase(), true, false, PrintBitmapFormat.NORMAL_FONT);
         bitmapFormat.createQuotes("DATA DO RECOLHIMENTO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
         bitmapFormat.createNameTable("DATA", rrdData.getDateCollected(), "HORA", rrdData.getTimeCollected(),
-        true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
         bitmapFormat.createNameTable("MUNICÍPIO", rrdData.getCityCollected(), "UF", rrdData.getStateCollected(),
-                true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+                true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
 
         bitmapFormat.createQuotes("RESPONSÁVEL PELO RECOLHIMENTO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
         bitmapFormat.createNameTable("NOME", user.getEmployeeName().toUpperCase(), "MATRÍCULA", user.getRegistration(),
                 false, PrintBitmapFormat.TableCellAlign.LEFT,
-                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.LEFT);
         bitmapFormat.createSignatureQuotes("ASSINATURA", "\n\n\n", true, PrintBitmapFormat.NORMAL_FONT);
 
         bitmapFormat.setNewLine(2);

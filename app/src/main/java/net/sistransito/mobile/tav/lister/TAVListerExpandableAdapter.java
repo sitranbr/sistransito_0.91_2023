@@ -14,20 +14,20 @@ import android.widget.TextView;
 import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.TavDatabaseHelper;
-import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListerner;
+import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListener;
 import net.sistransito.mobile.tav.TavData;
 import net.sistransito.R;
 
 public class TAVListerExpandableAdapter extends CursorTreeAdapter {
 	private LayoutInflater mInflator;
 	private Context mycontext;
-	private BluetoothPrinterListerner printListener;
+	private BluetoothPrinterListener printListener;
 
 	public TAVListerExpandableAdapter(Cursor cursor, Context context) {
 		super(cursor, context);
 		mycontext = context;
 		mInflator = LayoutInflater.from(context);
-		printListener = (BluetoothPrinterListerner) context;
+		printListener = (BluetoothPrinterListener) context;
 	}
 
 	@Override

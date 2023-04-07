@@ -44,7 +44,7 @@ public class FragmentLoginRegister extends Fragment implements
         OnClickListener {
     private View view;
     private Button btnSignUp;
-    private TextView btnLogin;
+    private TextView btnBackLogin;
     private AnyPageChangeListener anyPageChangeListener;
     private EditText etName, etOrgao, etLogin, etMatricula, etCpf,
             etPassword;
@@ -66,7 +66,7 @@ public class FragmentLoginRegister extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.tela_cadastrar_fragment, null, false);
+        view = inflater.inflate(R.layout.registration_screen_fragment, null, false);
         initializedView();
         return view;
     }
@@ -75,8 +75,8 @@ public class FragmentLoginRegister extends Fragment implements
         ime = new TimeAndIme(getActivity());
         imPrifileImage = (ImageView) view.findViewById(R.id.im_prifile_image);
         imPrifileImage.setOnClickListener(this);
-        btnLogin = (TextView) view.findViewById(R.id.btn_login);
-        btnLogin.setOnClickListener(this);
+        btnBackLogin = (TextView) view.findViewById(R.id.btn_back_login);
+        btnBackLogin.setOnClickListener(this);
         btnSignUp = (Button) view.findViewById(R.id.btn_sign_up);
         btnSignUp.setOnClickListener(this);
         etPassword = (EditText) view.findViewById(R.id.et_password);
@@ -92,16 +92,15 @@ public class FragmentLoginRegister extends Fragment implements
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_login:
+            case R.id.btn_back_login:
                 anyPageChangeListener.onPageChange(AppConstants.LONGIN_FRAGMENT_0);
                 break;
             case R.id.btn_sign_up:
                 if (NetworkConnection.isNetworkAvailable(getActivity())) {
                     if (checkInput())
                         userSingUp();
-
                 } else {
-                    DialogMaterial.getBottomSheet(getResources().getString(R.string.sem_conexao), Color.RED, getActivity()).show();
+                    DialogMaterial.getBottomSheet(getResources().getString(R.string.no_network_connection), Color.RED, getActivity()).show();
                 }
                 break;
             case R.id.im_prifile_image:
@@ -151,7 +150,7 @@ public class FragmentLoginRegister extends Fragment implements
                                   JSONObject response) {
                 if (response.toString().contains("1")) {
 
-                    final BottomSheetDialog dialog = DialogMaterial.getBottomSheet(getResources().getString(R.string.registro_concluido), Color.RED, getActivity());
+                    final BottomSheetDialog dialog = DialogMaterial.getBottomSheet(getResources().getString(R.string.register_completed), Color.RED, getActivity());
                     dialog.show();
                     Handler handler = new Handler();
                     handler.postDelayed(new Runnable() {
@@ -163,7 +162,7 @@ public class FragmentLoginRegister extends Fragment implements
                         }
                     }, 3000);
                 } else {
-                    DialogMaterial.getBottomSheet(getResources().getString(R.string.registro_nao_concluido), Color.RED, getActivity()).show();
+                    DialogMaterial.getBottomSheet(getResources().getString(R.string.register_no_completed), Color.RED, getActivity()).show();
                 }
 
             }
@@ -174,8 +173,8 @@ public class FragmentLoginRegister extends Fragment implements
     private void setMessage() {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity(),
                 AlertDialog.THEME_HOLO_LIGHT);
-        builder.setTitle(getResources().getString(R.string.registro_hint));
-        builder.setMessage(getResources().getString(R.string.registro_concluido));
+        builder.setTitle(getResources().getString(R.string.register_hint));
+        builder.setMessage(getResources().getString(R.string.register_completed));
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {

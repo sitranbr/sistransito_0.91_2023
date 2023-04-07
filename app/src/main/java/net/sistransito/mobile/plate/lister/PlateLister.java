@@ -30,7 +30,7 @@ public class PlateLister extends AppCompatActivity implements OnClickListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.placa_lista_main);
+		setContentView(R.layout.plate_list_main);
 		initializedView();
 	}
 
@@ -57,7 +57,7 @@ public class PlateLister extends AppCompatActivity implements OnClickListener {
 		imBtnDelete.setEnabled(false);
 		cursor.close();
 		tvMessage = new TextView(this);
-		tvMessage.setText(getResources().getString(R.string.nehum_resultado_retornado));
+		tvMessage.setText(getResources().getString(R.string.no_result_returned));
 		tvMessage.setGravity(Gravity.CENTER);
 		tvMessage.setTextAppearance(this, android.R.style.TextAppearance_Large);
 		LayoutParams params = new LayoutParams(LayoutParams.MATCH_PARENT,

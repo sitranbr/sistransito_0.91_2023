@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_2"
+    android:orientation="vertical"
+    android:padding="@dimen/width_padding" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical"
+        android:padding="@dimen/width_padding" >
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/width_margin_8"
+            android:gravity="center"
+            android:text="@string/tca_report_condition_driver"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_driver_quiz_1"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_condutor_transito"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rd_condutor_transito_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_condutor_transito_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_driver_quiz_2"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_condutor_alcoolica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rd_condutor_alcoolica_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_condutor_alcoolica_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_alcoolica_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linear_layout_alcoolica_child"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/width_margin_8"
+                android:layout_marginTop="@dimen/width_margin_8"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/width_padding_15" >
+
+                <Button
+                    android:id="@+id/btn_tca_date_picker_drunk_driver"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/indicator_width"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_yellow_2"
+                    android:padding="@dimen/width_padding"
+                    android:text="@string/date_field"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_tca_time_picker_drunk_driver"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/indicator_width"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_yellow_2"
+                    android:padding="@dimen/width_padding"
+                    android:text="@string/time_field"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_driver_quiz_3"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_condutor_toxica"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rd_condutor_toxica_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_condutor_toxica_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/linear_layout_toxica_parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/linear_layout_toxica_child"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/width_margin_8"
+                android:layout_marginTop="@dimen/width_margin_8"
+                android:baselineAligned="false"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/width_padding_15" >
+
+                <Button
+                    android:id="@+id/btn_tca_date_picker_intoxicated_driver"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/indicator_width"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_yellow_2"
+                    android:padding="@dimen/width_padding"
+                    android:text="@string/date_field"
+                    android:textColor="@color/white" />
+
+                <Button
+                    android:id="@+id/btn_tca_time_picker_intoxicated_driver"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="0dip"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/indicator_width"
+                    android:layout_weight="1"
+                    android:background="@drawable/btn_yellow_2"
+                    android:padding="@dimen/width_padding"
+                    android:text="@string/time_field"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_the_driver_presents"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/width_padding_15" >
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/checkBox_condutor_apresenta_1"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin_top"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_somnolence"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/checkBox_condutor_apresenta_2"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_hiccups"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/checkBox_condutor_apresenta_3"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_red_eyes"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/checkBox_condutor_apresenta_4"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_desorder_in_clothes"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/checkBox_condutor_apresenta_5"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_vomiting"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/checkBox_condutor_apresenta_6"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_odor_alcohol_on_the_breath"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_in_your_attitude_occurs"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/width_padding_15" >
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_atitude_ocorre_1"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin_top"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_aggressiveness"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_atitude_ocorre_2"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_ironic"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_atitude_ocorre_3"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_arrogance"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_atitude_ocorre_4"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_speaker"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_atitude_ocorre_5"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_exaltation"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_atitude_ocorre_6"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_dispersion"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_regarding_your_orientation"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_know_place_where_is"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_sabe_onde_esta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rd_sabe_onde_esta_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_sabe_onde_esta_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_know_date_and_time"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_sabe_a_data_e_a_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rd_sabe_a_data_e_a_hora_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_sabe_a_data_e_a_hora_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_regarding_your_memory"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_know_your_address"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_sabe_seu_enderecao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/width_padding_15" >
+
+            <RadioButton
+                android:id="@+id/rd_sabe_seu_enderecao_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_sabe_seu_enderecao_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_remember_actions_committed"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_lembra_dos_atos_cometidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/width_padding_15" >
+
+            <RadioButton
+                android:id="@+id/rd_lembra_dos_atos_cometidos_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_lembra_dos_atos_cometidos_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_in_relation_motor_ability"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingTop="@dimen/width_padding_15" >
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_tca_em_relacao_a_sua_verbal_ocorre_1"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/layout_margin_top"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_difficult_in_balance"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+            <com.rey.material.widget.CheckBox
+                android:id="@+id/cb_tca_em_relacao_a_sua_verbal_ocorre_2"
+                style="@style/Material.Drawable.CheckBox"
+                app:cbd_strokeColor="@color/yellow_light"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="false"
+                android:gravity="center"
+                android:text="@string/tca_altered_speech"
+                android:textColor="@color/yellow"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_conclusion"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingTop="@dimen/width_padding_15"
+            android:text="@string/tca_if_blood_alcohol_found"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow" />
+
+        <RadioGroup
+            android:id="@+id/rg_conclusao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center|left"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/width_padding_15" >
+
+            <RadioButton
+                android:id="@+id/rd_conclusao_sim"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_yes"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+
+            <RadioButton
+                android:id="@+id/rd_conclusao_nao"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/tca_no_text_title"
+                android:buttonTint="@color/yellow"
+                android:textColor="@color/yellow" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:paddingTop="@dimen/widght_margin_top_2"
+            android:layout_height="@dimen/indicator_height_1"
+            android:background="@color/yellow_deep_2" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/layout_margin_top"
+            android:paddingBottom="15dip" >
+
+            <Button
+                android:id="@+id/btn_tca_check"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/indicator_width"
+                android:layout_weight="1"
+                android:background="@drawable/btn_yellow_2"
+                android:padding="@dimen/width_padding"
+                android:text="@string/tca_check"
+                android:textColor="@color/white" />
+
+            <Button
+                android:id="@+id/btn_tca_generation"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="0dip"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/indicator_width"
+                android:layout_weight="1"
+                android:background="@drawable/btn_yellow_2"
+                android:padding="@dimen/width_padding"
+                android:text="@string/btn_generation"
+                android:textColor="@color/white" />
+        </LinearLayout>
+    </LinearLayout>
+
+</ScrollView>

@@ -22,7 +22,6 @@ public class CheckNumber {
 
         if ((DatabaseCreator.getNumberDatabaseAdapter(context))
                 .isNeedUpdateAit()) {
-
             try {
                 jsonText = AppObject.getHttpClient().executeHttpGet(
                         WebClient.URL_AIT_NUMBER);
@@ -31,13 +30,11 @@ public class CheckNumber {
             }
             numberDataFromJson = new CreateNumberDataFromJson(
                     AppConstants.AIT_NUMBER, context, jsonText);
-            numberDataFromJson.saveNumeroData();
+            numberDataFromJson.saveDataNumber();
 
         }
         if ((DatabaseCreator.getNumberDatabaseAdapter(context))
                 .isNeedTavUpdate()) {
-
-
             try {
                 jsonText = AppObject.getHttpClient().executeHttpGet(
                         WebClient.URL_TAV_NUMBER);
@@ -45,7 +42,7 @@ public class CheckNumber {
             }
             numberDataFromJson = new CreateNumberDataFromJson(
                     AppConstants.TAV_NUMBER, context, jsonText);
-            numberDataFromJson.saveNumeroData();
+            numberDataFromJson.saveDataNumber();
 
         }
         if ((DatabaseCreator.getNumberDatabaseAdapter(context))
@@ -58,12 +55,11 @@ public class CheckNumber {
             }
             numberDataFromJson = new CreateNumberDataFromJson(
                     AppConstants.TCA_NUMBER, context, jsonText);
-            numberDataFromJson.saveNumeroData();
+            numberDataFromJson.saveDataNumber();
 
         }
         if ((DatabaseCreator.getNumberDatabaseAdapter(context))
                 .isNeedRrdUpdate()) {
-
             try {
                 jsonText = AppObject.getHttpClient().executeHttpGet(
                         WebClient.URL_RRD_NUMBER);
@@ -72,7 +68,7 @@ public class CheckNumber {
             }
             numberDataFromJson = new CreateNumberDataFromJson(
                     AppConstants.RRD_NUMBER, context, jsonText);
-            numberDataFromJson.saveNumeroData();
+            numberDataFromJson.saveDataNumber();
         }
     }
 }

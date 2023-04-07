@@ -17,8 +17,8 @@ import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyDialogFragment;
 import net.sistransito.mobile.fragment.AnyDialogListener;
-import net.sistransito.mobile.number.NumberAnysListerner;
-import net.sistransito.mobile.number.NumberHttpResultAnysTask;
+import net.sistransito.mobile.number.AsyncListernerNumber;
+import net.sistransito.mobile.number.NumberHttpResultAsyncTask;
 import net.sistransito.R;
 
 import java.util.Arrays;
@@ -46,7 +46,7 @@ public class TcaConductorFragment extends Fragment implements
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.tca_condutor_fragment, null, false);
+        view = inflater.inflate(R.layout.tca_driver_fragment, null, false);
         initializedView();
         getTCAObject();
         addListener();
@@ -61,8 +61,8 @@ public class TcaConductorFragment extends Fragment implements
             diaglogFragmentForFragment = new AnyDialogFragment();
             diaglogFragmentForFragment.setTargetFragment(this, 0);
             bundle = new Bundle();
-            bundle.putInt(AppConstants.DIALOG_TITLE_ID, R.string.titulo_tela_sincronizacao);
-            bundle.putInt(AppConstants.DIALOG_MGS_ID, R.string.mgs_sincronizacao);
+            bundle.putInt(AppConstants.DIALOG_TITLE_ID, R.string.synchronization_screen_title);
+            bundle.putInt(AppConstants.DIALOG_MGS_ID, R.string.message_need_synchronize_ait_number);
             diaglogFragmentForFragment.setArguments(bundle);
             diaglogFragmentForFragment.setCancelable(false);
             diaglogFragmentForFragment
@@ -192,10 +192,10 @@ public class TcaConductorFragment extends Fragment implements
     public void onDialogTaskWork(boolean isWork) {
         if (isWork) {
 
-            (new NumberHttpResultAnysTask(new NumberAnysListerner() {
+            (new NumberHttpResultAsyncTask(new AsyncListernerNumber() {
 
                 @Override
-                public void anysTaskComplete(boolean isComplete) {
+                public void asyncTaskComplete(boolean isComplete) {
                     if (isComplete) {
                         checkAitNumber();
                     }

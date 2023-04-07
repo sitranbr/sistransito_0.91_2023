@@ -152,35 +152,35 @@ public class BalanceDatabaseAdapter {
 
 	public String getShowView() {
 		String data = AppConstants.NEW_LINE
-				+ context.getResources().getString(R.string.autos_de_Infracao)
+				+ context.getResources().getString(R.string.ait_remain_title)
 				+ AppConstants.NEW_LINE + AppConstants.NEW_LINE
-				+ context.getResources().getString(R.string.autos_realizados)
+				+ context.getResources().getString(R.string.ait_completed)
 				+ getAitPerformed() + "     "
-				+ context.getResources().getString(R.string.restante)
+				+ context.getResources().getString(R.string.remaining)
 				+ getAitRemaining() + AppConstants.NEW_LINE;
 
 		data += AppConstants.NEW_LINE
 				+ context.getResources().getString(R.string.tav)
 				+ AppConstants.NEW_LINE + AppConstants.NEW_LINE
-				+ context.getResources().getString(R.string.tav_realizados)
+				+ context.getResources().getString(R.string.tav_completed)
 				+ getTavPerformed() + "     "
-				+ context.getResources().getString(R.string.restante)
+				+ context.getResources().getString(R.string.remaining)
 				+ getTavRemaining() + AppConstants.NEW_LINE;
 
 		data += AppConstants.NEW_LINE
 				+ context.getResources().getString(R.string.tca)
 				+ AppConstants.NEW_LINE + AppConstants.NEW_LINE
-				+ context.getResources().getString(R.string.tca_realizados)
+				+ context.getResources().getString(R.string.tca_completed)
 				+ getTcaPerformed() + "     "
-				+ context.getResources().getString(R.string.restante)
+				+ context.getResources().getString(R.string.remaining)
 				+ getTcaRemaining() + AppConstants.NEW_LINE;
 
 		data += AppConstants.NEW_LINE
 				+ context.getResources().getString(R.string.rrd)
 				+ AppConstants.NEW_LINE + AppConstants.NEW_LINE
-				+ context.getResources().getString(R.string.rrd_realizados)
+				+ context.getResources().getString(R.string.rrd_completed)
 				+ getRrdPerformed() + "     "
-				+ context.getResources().getString(R.string.restante)
+				+ context.getResources().getString(R.string.remaining)
 				+ getRrdRemaining() + AppConstants.NEW_LINE;
 
 		return data;

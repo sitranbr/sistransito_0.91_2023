@@ -15,20 +15,20 @@ import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.database.InfractionDatabaseHelper;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.RrdDatabaseHelper;
-import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListerner;
+import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListener;
 import net.sistransito.mobile.rrd.RrdData;
 import net.sistransito.R;
 
 public class RrdListerExpandableAdapter extends CursorTreeAdapter {
 	private LayoutInflater mInflator;
 	private Context mycontext;
-	private BluetoothPrinterListerner printListener;
+	private BluetoothPrinterListener printListener;
 
 	public RrdListerExpandableAdapter(Cursor cursor, Context context) {
 		super(cursor, context);
 		mycontext = context;
 		mInflator = LayoutInflater.from(context);
-		printListener = (BluetoothPrinterListerner) context;
+		printListener = (BluetoothPrinterListener) context;
 	}
 
 	@Override
@@ -65,7 +65,7 @@ public class RrdListerExpandableAdapter extends CursorTreeAdapter {
 	protected View newGroupView(Context context, Cursor cursor,
 			boolean isExpendable, ViewGroup parent) {
 		View view = mInflator
-				.inflate(R.layout.rrd_lista_listview_parent, null);
+				.inflate(R.layout.rrd_list_listview_parent, null);
 		TextView tvLogPlate, tvLogDocument;
 		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
 		tvLogDocument = (TextView) view.findViewById(R.id.log_documento);
@@ -95,7 +95,7 @@ public class RrdListerExpandableAdapter extends CursorTreeAdapter {
 		if (view != null) {
 			mView = view;
 		} else {
-			mView = mInflator.inflate(R.layout.rrd_lista_listview_child,
+			mView = mInflator.inflate(R.layout.rrd_list_listview_child,
 					parent, false);
 		}
 		verRrdChildview = (TextView) mView

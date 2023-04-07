@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/log_list_selector"
     android:orientation="horizontal"
-    android:padding="@dimen/widght_padding" >
+    android:padding="@dimen/width_padding" >
 
     <TextView
         android:id="@+id/log_placa"

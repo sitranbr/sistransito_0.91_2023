@@ -1,11 +1,17 @@
 package net.sistransito.mobile.ait;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import net.sistransito.mobile.appconstants.AppConstants;
+import net.sistransito.mobile.appobject.AppObject;
+import net.sistransito.mobile.util.Routine;
 import net.sistransito.mobile.util.User;
 
 import net.sistransito.R;
@@ -16,6 +22,8 @@ public class AitPreviewFragment extends Fragment {
     private AitData aitData;
     private User user;
 
+    private Context context;
+
     public static AitPreviewFragment newInstance() {
         return new AitPreviewFragment();
     }
@@ -23,7 +31,7 @@ public class AitPreviewFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.auto_preview, null, false);
+        view = inflater.inflate(R.layout.ait_preview, null, false);
 
         getAitObject();
 
@@ -31,7 +39,7 @@ public class AitPreviewFragment extends Fragment {
     }
 
     private void getAitObject() {
-        aitData = ObjectAit.getAitData();
+        aitData = AitObject.getAitData();
         addListener();
     }
 
@@ -39,60 +47,90 @@ public class AitPreviewFragment extends Fragment {
 
         TextView tvCompanyCode, tvAitNumber, tvPlate, tvStateVehicle, tvChassi,
                  tvVehicleBrand, tvVehicleModel, tvConductorName, tvCnh, tvStateCnh,
-                 tvVehicleSpecies, tvVehicleCategory, tvAddress, tvCity, tvAitDate, tvAitTime,
-                 tvAitCode, tvLegalProtection, tvDescription, tMeasures, tvObservations, tvAgent,
-                 tvRegistrationAgent;
+                 tvVehicleSpecies, tvVehicleCategory, tvAddress, tvCityCode, tvCity, tvAitDate, tvAitTime,
+                 tvAitCode, tvLegalSupport, tvDescription, tvMeasuresAndProcedures, tvObservations, tvAgent,
+                 tvRegistrationAgent, tvApproach;
 
-        tvCompanyCode = (TextView) view.findViewById(R.id.tv_auto_orgao);
-        tvAitNumber = (TextView) view.findViewById(R.id.tv_auto_numero_ait);
-        tvPlate = (TextView) view.findViewById(R.id.tv_auto_placa);
-        tvStateVehicle = (TextView) view.findViewById(R.id.tv_auto_uf_veiculo);
-        tvChassi = (TextView) view.findViewById(R.id.tv_auto_chassi);
-        tvVehicleBrand = (TextView) view.findViewById(R.id.tv_auto_marca);
-        tvVehicleModel = (TextView) view.findViewById(R.id.tv_auto_modelo);
-        tvVehicleSpecies = (TextView) view.findViewById(R.id.tv_auto_especie);
-        tvVehicleCategory = (TextView) view.findViewById(R.id.tv_auto_categoria);
-        tvConductorName = (TextView) view.findViewById(R.id.tv_auto_condutor);
-        tvCnh = (TextView) view.findViewById(R.id.tv_auto_registro_cnh);
-        tvStateCnh = (TextView) view.findViewById(R.id.tv_auto_uf_cnh);
-        tvAddress = (TextView) view.findViewById(R.id.tv_auto_local);
-        tvCity = (TextView) view.findViewById(R.id.tv_auto_municipio);
-        tvAitDate = (TextView) view.findViewById(R.id.tv_auto_data);
-        tvAitTime = (TextView) view.findViewById(R.id.tv_auto_hora);
-        tMeasures = (TextView) view.findViewById(R.id.tv_auto_medidas);
-        tvAitCode = (TextView) view.findViewById(R.id.tv_auto_codigo);
-        tvLegalProtection = (TextView) view.findViewById(R.id.tv_auto_amparo);
-        tvDescription = (TextView) view.findViewById(R.id.tv_auto_descricao);
-        tvObservations  = (TextView) view.findViewById(R.id.tv_auto_obs);
+        tvCompanyCode = (TextView) view.findViewById(R.id.tv_ait_organ);
+        tvAitNumber = (TextView) view.findViewById(R.id.tv_ait_number);
+        tvPlate = (TextView) view.findViewById(R.id.tv_ait_plate);
+        tvStateVehicle = (TextView) view.findViewById(R.id.tv_ait_vehicle_state);
+        tvChassi = (TextView) view.findViewById(R.id.tv_ait_chassi);
+        tvVehicleBrand = (TextView) view.findViewById(R.id.tv_ait_brand);
+        tvVehicleModel = (TextView) view.findViewById(R.id.tv_ait_model);
+        tvVehicleSpecies = (TextView) view.findViewById(R.id.tv_ait_specie);
+        tvVehicleCategory = (TextView) view.findViewById(R.id.tv_ait_category);
+        tvConductorName = (TextView) view.findViewById(R.id.tv_ait_driver_name);
+        tvCnh = (TextView) view.findViewById(R.id.tv_ait_cnh_number);
+        tvStateCnh = (TextView) view.findViewById(R.id.tv_ait_cnh_state);
+        tvAddress = (TextView) view.findViewById(R.id.tv_ait_address);
+        tvCityCode = (TextView) view.findViewById(R.id.tv_ait_city_code);
+        tvCity = (TextView) view.findViewById(R.id.tv_ait_city);
+        tvAitDate = (TextView) view.findViewById(R.id.tv_ait_date);
+        tvAitTime = (TextView) view.findViewById(R.id.tv_ait_time);
+        tvMeasuresAndProcedures = (TextView) view.findViewById(R.id.tv_ait_measures_procedures);
+        tvAitCode = (TextView) view.findViewById(R.id.tv_ait_code);
+        tvLegalSupport = (TextView) view.findViewById(R.id.tv_ait_legal_support);
+        tvDescription = (TextView) view.findViewById(R.id.tv_ait_description);
+        tvObservations  = (TextView) view.findViewById(R.id.tv_ait_observation);
+        tvApproach = (TextView) view.findViewById(R.id.tv_ait_approach);
 
-       // tvCompanyCode.setText(user.getCodigoOrgao());
-        tvAitNumber.setText(aitData.getAitNumber());
-        tvPlate.setText(aitData.getPlate());
-        tvStateVehicle.setText(aitData.getStateVehicle());
-        tvChassi.setText(aitData.getChassi());
-        tvVehicleBrand.setText(aitData.getVehicleBrand());
-        tvVehicleModel.setText(aitData.getVehicleModel());
-        tvVehicleSpecies.setText(aitData.getVehicleSpecies());
-        tvVehicleCategory.setText(aitData.getVehicleCategory());
-        tvConductorName.setText(aitData.getConductorName());
+        Routine.TextAlignment normal = Routine.TextAlignment.NORMAL;
+        Routine.TextAlignment center = Routine.TextAlignment.CENTER;
+
+        user = AppObject.getTinyDB(context).getObject(AppConstants.user, User.class);
+
+        SpannableString boldCompanyCode = Routine.textWithBoldAndCenter(getString(R.string.capital_transit_agency_code), user.getCompanyCode(), false, center);
+        SpannableString boldAit = Routine.textWithBoldAndCenter(getString(R.string.capital_number), aitData.getAitNumber(), false, center);
+        SpannableString boldPlate = Routine.textWithBoldAndCenter(getString(R.string.capital_vehicle_plate), aitData.getPlate(), false, center);
+
+        SpannableString boldStateVehicle = Routine.textWithBoldAndCenter(getString(R.string.capital_cnh_state), aitData.getStateVehicle(), false, center);
+        SpannableString boldChassi = Routine.textWithBoldAndCenter(getString(R.string.capital_chassi), aitData.getChassi(), false, center);
+        SpannableString boldVehicleBrand = Routine.textWithBoldAndCenter(getString(R.string.capital_brand), aitData.getVehicleBrand(), false, center);
+        SpannableString boldVehicleModel = Routine.textWithBoldAndCenter(getString(R.string.capital_model), aitData.getVehicleModel(), false, center);
+        SpannableString boldVehicleSpecies = Routine.textWithBoldAndCenter(getString(R.string.capital_specie), aitData.getVehicleSpecies(), false, center);
+        SpannableString boldVehicleCategory = Routine.textWithBoldAndCenter(getString(R.string.capital_category), aitData.getVehicleCategory(), false, center);
+        SpannableString boldConductorName = Routine.textWithBoldAndCenter(getString(R.string.capital_driver_name), aitData.getConductorName(), false, normal);
+
+        tvCompanyCode.setText(boldCompanyCode);
+        tvAitNumber.setText(boldAit);
+        tvPlate.setText(boldPlate);
+        tvStateVehicle.setText(boldStateVehicle);
+        tvChassi.setText(boldChassi);
+        tvVehicleBrand.setText(boldVehicleBrand);
+        tvVehicleModel.setText(boldVehicleModel);
+        tvVehicleSpecies.setText(boldVehicleSpecies);
+        tvVehicleCategory.setText(boldVehicleCategory);
+        tvConductorName.setText(boldConductorName);
         tvCnh.setText(aitData.getCnhPpd());
         tvStateCnh.setText(aitData.getCnhState());
         tvAddress.setText(aitData.getAddress());
+        tvCityCode.setText(aitData.getCityCode());
         tvCity.setText(aitData.getCity() + "/" + aitData.getState());
         tvAitDate.setText(aitData.getAitDate());
         tvAitTime.setText(aitData.getAitTime());
         tvAitCode.setText(aitData.getFramingCode() + "-" + aitData.getUnfolding());
-        tvLegalProtection.setText(aitData.getArticle());
+        tvLegalSupport.setText(aitData.getArticle());
         tvDescription.setText(aitData.getInfraction());
         tvObservations.setText(aitData.getObservation());
+        tvApproach.setText(aitData.getApproach());
 
-        if(aitData.getRetreat() == null){
+        /*if(aitData.getRetreat() == null) {
             tMeasures.setText(aitData.getProcedures());
-        } else if (aitData.getProcedures() == null){
+        } else if (aitData.getProcedures() == null) {
             tMeasures.setText(aitData.getRetreat());
-        } else if (aitData.getProcedures() != null && aitData.getRetreat() != null){
+        } else if (aitData.getProcedures() != null && aitData.getRetreat() != null) {
             tMeasures.setText(aitData.getRetreat() + ", " + aitData.getProcedures());
-        }
+        }*/
+
+        String retreat = aitData.getRetreat();
+        String procedures = aitData.getProcedures();
+
+        String measures = (retreat == null) ? procedures :
+                (procedures == null) ? retreat :
+                        retreat + ", " + procedures;
+
+        tvMeasuresAndProcedures.setText(measures);
 
     }
 

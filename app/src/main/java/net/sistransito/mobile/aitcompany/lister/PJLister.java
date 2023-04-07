@@ -67,7 +67,7 @@ public class PJLister extends BasePrintActivity implements View.OnClickListener 
         cursor.close();
         tvMessage = new TextView(this);
         tvMessage.setText(getResources().getString(
-                R.string.nehum_resultado_retornado));
+                R.string.no_result_returned));
         tvMessage.setGravity(Gravity.CENTER);
         tvMessage.setTextAppearance(this, android.R.style.TextAppearance_Large);
         ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,

@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:padding="@dimen/widght_padding" >
+    android:padding="@dimen/width_padding" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,15 +16,15 @@
         android:focusableInTouchMode="true"
         android:orientation="vertical"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:padding="@dimen/widght_padding" >
+        android:padding="@dimen/width_padding" >
 
         <TextView
-            android:id="@+id/tv_id_auto"
+            android:id="@+id/tv_ait_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/widght_padding"
+            android:padding="@dimen/width_padding"
             android:gravity="right"
-            android:text="@string/valor_format"
+            android:text="@string/value_format"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/primary" />
 
@@ -40,7 +40,7 @@
             android:checked="false"
             android:gravity="center"
             android:padding="0dip"
-            android:text="@string/veiculo_estrangeiro"
+            android:text="@string/foreign_vehicle"
             android:textColor="@color/primary"
             />
 
@@ -67,17 +67,17 @@
                     android:layout_marginBottom="@dimen/padding_top_edit" >
 
                     <EditText
-                        android:id="@+id/edit_placa_veiculo"
+                        android:id="@+id/edit_vehicle_plate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/widght_padding_3"
+                        android:layout_marginTop="@dimen/width_padding_15"
                         android:gravity="left"
                         android:maxLength="7"
-                        android:hint="@string/auto_placa"
+                        android:hint="@string/ait_vehicle_plate"
                         android:inputType="textCapCharacters"
                         android:backgroundTint="@color/primary"
                         android:textColor="@color/gray_5"
-                        android:paddingBottom="@dimen/widght_padding_3" />
+                        android:paddingBottom="@dimen/width_padding_15" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -118,10 +118,10 @@
                     app:ms_arrowColor="@color/primary"
                     app:ms_arrowSize="12dp"
                     app:ms_floatingLabelColor="@color/primary"
-                    app:ms_floatingLabelText="@string/auto_uf"
+                    app:ms_floatingLabelText="@string/ait_state"
                     app:ms_alignLabels="true"
                     app:ms_hintColor="@color/primary"
-                    app:ms_hint="@string/auto_uf"
+                    app:ms_hint="@string/ait_state"
                     app:ms_multiline="true"
                     app:ms_baseColor="@color/primary" />
 
@@ -145,10 +145,10 @@
                     app:ms_arrowColor="@color/primary"
                     app:ms_arrowSize="12dp"
                     app:ms_floatingLabelColor="@color/primary"
-                    app:ms_floatingLabelText="@string/auto_pais"
+                    app:ms_floatingLabelText="@string/ait_country_name"
                     app:ms_alignLabels="true"
                     app:ms_hintColor="@color/primary"
-                    app:ms_hint="@string/auto_pais"
+                    app:ms_hint="@string/ait_country_name"
                     app:ms_multiline="true"
                     app:ms_baseColor="@color/primary" />
 
@@ -173,7 +173,7 @@
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
                 android:inputType="textCapCharacters"
-                android:paddingBottom="@dimen/widght_padding_3" />
+                android:paddingBottom="@dimen/width_padding_15" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -184,7 +184,7 @@
             android:layout_marginBottom="@dimen/padding_top_edit" >
 
             <EditText
-                android:id="@+id/edit_chassi_veiculo"
+                android:id="@+id/edit_vehicle_chassi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -193,7 +193,7 @@
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
                 android:inputType="textCapCharacters"
-                android:paddingBottom="@dimen/widght_padding_3" />
+                android:paddingBottom="@dimen/width_padding_15" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -204,15 +204,15 @@
             android:layout_marginBottom="@dimen/padding_top_edit" >
 
             <EditText
-                android:id="@+id/edit_marca_veiculo"
+                android:id="@+id/edit_vehicle_brand"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:hint="@string/marca"
+                android:hint="@string/brand"
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
                 android:inputType="textCapCharacters"
-                android:paddingBottom="@dimen/widght_padding_3" />
+                android:paddingBottom="@dimen/width_padding_15" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -223,7 +223,7 @@
             android:layout_marginBottom="@dimen/padding_top_edit" >
 
             <EditText
-                android:id="@+id/edit_modelo_veiculo"
+                android:id="@+id/edit_vehicle_model"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
@@ -231,7 +231,7 @@
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
                 android:inputType="textCapCharacters"
-                android:paddingBottom="@dimen/widght_padding_3" />
+                android:paddingBottom="@dimen/width_padding_15" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -242,15 +242,15 @@
             android:layout_marginBottom="@dimen/padding_top_edit">
 
             <EditText
-                android:id="@+id/edit_cor_veiculo"
+                android:id="@+id/edit_vehicle_color"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/auto_de_cor_do_veiculo"
+                android:hint="@string/ait_vehicle_color"
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
                 android:gravity="left|center_vertical"
                 android:inputType="textCapCharacters"
-                android:paddingBottom="@dimen/widght_padding_3" />
+                android:paddingBottom="@dimen/width_padding_15" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -261,10 +261,10 @@
             app:ms_arrowColor="@color/primary"
             app:ms_arrowSize="12dp"
             app:ms_floatingLabelColor="@color/primary"
-            app:ms_floatingLabelText="@string/especie"
+            app:ms_floatingLabelText="@string/species"
             app:ms_alignLabels="true"
             app:ms_hintColor="@color/primary"
-            app:ms_hint="@string/spinner_especie"
+            app:ms_hint="@string/spinner_species"
             app:ms_baseColor="@color/primary"
             app:ms_multiline="true" />
 
@@ -275,10 +275,10 @@
             app:ms_arrowColor="@color/primary"
             app:ms_arrowSize="12dp"
             app:ms_floatingLabelColor="@color/primary"
-            app:ms_floatingLabelText="@string/categoria"
+            app:ms_floatingLabelText="@string/category"
             app:ms_alignLabels="true"
             app:ms_hintColor="@color/primary"
-            app:ms_hint="@string/spinner_categoria"
+            app:ms_hint="@string/spinner_category"
             app:ms_multiline="true"
             app:ms_baseColor="@color/primary"
             android:layout_marginBottom="@dimen/padding_top_edit" />
@@ -308,7 +308,7 @@
                     android:checked="false"
                     android:gravity="center"
                     android:padding="0dip"
-                    android:text="@string/cb_confirmar"
+                    android:text="@string/cb_check_data"
                     android:textColor="@color/primary" />
 
             </LinearLayout>
@@ -323,13 +323,13 @@
                 android:paddingStart="@dimen/indicator_width" >
 
                 <TextView
-                    android:id="@+id/auto_fab"
+                    android:id="@+id/ait_fab"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:layout_gravity="end|bottom"
                     android:visibility="gone"
                     android:background="@drawable/ic_salvar_round_72"
-                    android:layout_marginBottom="@dimen/widght_padding_2"/>
+                    android:layout_marginBottom="@dimen/width_padding_2"/>
 
             </LinearLayout>
 

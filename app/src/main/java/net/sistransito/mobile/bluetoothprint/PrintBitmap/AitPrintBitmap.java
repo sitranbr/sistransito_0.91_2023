@@ -3,6 +3,7 @@ package net.sistransito.mobile.bluetoothprint.PrintBitmap;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Paint;
+import android.text.TextUtils;
 
 import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.BasePrintBitmap;
@@ -10,18 +11,18 @@ import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.PrintBitmapFormat;
 import net.sistransito.R;
 
 public class AitPrintBitmap extends BasePrintBitmap {
-    private AitData aData;
+    private AitData aitData;
     private net.sistransito.mobile.aitcompany.pjData pjData;
     private String copy;
 
-    public AitPrintBitmap(Context context, AitData autoData) {
+    public AitPrintBitmap(Context context, AitData aitData) {
         super(context);
-        this.aData = autoData;
+        this.aitData = aitData;
     }
 
     public AitPrintBitmap(Context context, AitData autoData, String copy) {
         super(context);
-        this.aData = autoData;
+        this.aitData = autoData;
         this.copy = copy;
     }
 
@@ -34,13 +35,11 @@ public class AitPrintBitmap extends BasePrintBitmap {
     @Override
     public Bitmap getBitmap() {
 
-        String descriptionText, documentTitleDescription, titleStateIdentity, fieldTitle, fieldText, tipoAbordagem, docProcedimentos;
-
         PrintBitmapFormat bitmapFormat = new PrintBitmapFormat(context);
-        String title = "NOME DO ESTADO\n" +
-                "NOME DA SECRETARIA\n" +
-                "DEPARTAMENTO DE TRÂNSITO";
-        String subTitle = "AUTO DE INFRAÇÃO DE TRÂNSITO (AIT)";
+        String title = context.getString(R.string.capital_government_title) + "\n" +
+                context.getString(R.string.capital_security_department) + "\n" +
+                context.getString(R.string.capital_transit_department);
+        String subTitle = context.getString(R.string.capital_infraction_title);
 
         bitmapFormat.createTitle(title, subTitle, "ic_left_title.png", "ic_right_title.png", PrintBitmapFormat.TITLE_FONT_SIZE, PrintBitmapFormat.TITLE_FONT_SIZE);
         bitmapFormat.createQuotes("1-IDENTIFICAÇÃO DA AUTUAÇÃO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
@@ -48,119 +47,120 @@ public class AitPrintBitmap extends BasePrintBitmap {
         /*bitmapFormat.createTitle("ÓRGÃO AUTUADOR", user.getCodigoOrgao(), "NÚMERO DO AIT", aData.getNumeroAuto(), PrintBitmapFormat.NORMAL_FONT,
                PrintBitmapFormat.MAIOR_FONT);*/
 
-        bitmapFormat.createNameTable("ÓRGÃO AUTUADOR", "114100", "NÚMERO DO AIT", aData.getAitNumber(),
+        bitmapFormat.createNameTable("ÓRGÃO AUTUADOR", "114100", "NÚMERO DO AIT", aitData.getAitNumber(),
                 true, PrintBitmapFormat.TableCellAlign.MIDDLE,
-                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
 
         bitmapFormat.createQuotes("2-IDENTIFICAÇÃO DO VEÍCULO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
 
-        if (aData.getCountry() == null) {
-            bitmapFormat.createTable("PLACA", aData.getPlate(), "UF",
-                    aData.getStateVehicle(), "CHASSI", aData.getChassi(), false,
+        /*if (aitData.getCountry() == null) {
+            bitmapFormat.createTable("PLACA", aitData.getPlate(), "UF",
+                    aitData.getStateVehicle(), "CHASSI", aitData.getChassi(), false,
                     PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
         }else{
-            bitmapFormat.createTable("PLACA", aData.getPlate(), "UF",
-                    aData.getStateVehicle(), "PAIS", "BR",
-                    "CHASSI", aData.getChassi(), false,
+            bitmapFormat.createTable("PLACA", aitData.getPlate(), "UF",
+                    aitData.getStateVehicle(), "PAIS", "BR",
+                    "CHASSI", aitData.getChassi(), false,
                     PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-        }
+        }*/
 
-        bitmapFormat.createTable("MARCA/MODELO", aData.getVehicleModel(),
-                "ESPÉCIE", aData.getVehicleSpecies(),
+        final String LICENSE_PLATE_COLUMN = "PLACA";
+        final String STATE_COLUMN = "UF";
+        final String COUNTRY_COLUMN = "PAIS";
+        final String CHASSI_COLUMN = "CHASSI";
+        final String BRAZIL_COUNTRY = "BR";
+
+        String country = aitData.getCountry() == null ? BRAZIL_COUNTRY : aitData.getCountry();
+        String licensePlate = aitData.getPlate();
+        String state = aitData.getStateVehicle();
+        String chassi = aitData.getChassi();
+
+        bitmapFormat.createTable(LICENSE_PLATE_COLUMN, licensePlate, STATE_COLUMN, state,
+                COUNTRY_COLUMN, country, CHASSI_COLUMN, chassi, false,
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+
+
+        bitmapFormat.createTable("MARCA/MODELO", aitData.getVehicleModel(),
+                "ESPÉCIE", aitData.getVehicleSpecies(),
                 true, PrintBitmapFormat.TableCellAlign.MIDDLE,
                 PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
         bitmapFormat.createQuotes("3-IDENTIFICAÇÃO DO CONDUTOR", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createQuotes("NOME", aData.getConductorName(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createQuotes("NOME", aitData.getConductorName(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
-        if (aData.getDocumentType().contains("CPF") || aData.getDocumentType().contains("RG") || aData.getDocumentType().contains("OUTROS")) {
-            documentTitleDescription = aData.getDocumentType();
-            titleStateIdentity = null;
-        } else {
-            documentTitleDescription = "RG/CPF/OUTROS";
-            titleStateIdentity = aData.getCnhState();
+        String documentType = aitData.getDocumentType();
+        String documentTitleDescription;
+        String titleStateIdentity = null;
+
+        switch (documentType) {
+            case "CPF":
+            case "RG":
+            case "OUTROS":
+                documentTitleDescription = documentType;
+                break;
+            default:
+                documentTitleDescription = "RG/CPF/OUTROS";
+                titleStateIdentity = aitData.getCnhState();
+                break;
         }
-        bitmapFormat.createTable("REGISTRO CNH/PPD/ACC", aData.getCnhPpd(), "UF", aData.getCnhState(), documentTitleDescription, aData.getDocumentNumber(), true,
+
+        bitmapFormat.createTable("REGISTRO CNH/PPD/ACC", aitData.getCnhPpd(), "UF", aitData.getCnhState(), documentTitleDescription, aitData.getDocumentNumber(), true,
                 PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
         bitmapFormat.createQuotes("4-IDENTIFICAÇÃO DO LOCAL, DATA E HORA", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createQuotes("LOCAL", aData.getAddress(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-        bitmapFormat.createNameTable("CÓD. MUNICÍPIO", aData.getCityCode(), "MUNICÍPIO/UF", aData.getCity() + "/" + aData.getState(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-        bitmapFormat.createNameTable("DATA", aData.getAitDate(), "HORA", aData.getAitTime(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createQuotes("LOCAL", aitData.getAddress(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createNameTable("CÓD. MUNICÍPIO", aitData.getCityCode(), "MUNICÍPIO/UF", aitData.getCity() + "/" + aitData.getState(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
+        bitmapFormat.createNameTable("DATA", aitData.getAitDate(), "HORA", aitData.getAitTime(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
         bitmapFormat.createQuotes("5-TIPIFICAÇÃO DA INFRAÇÃO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createTable("CÓD. INFRAÇÃO", aData.getFramingCode(),
-                "DESDOB.", aData.getUnfolding(),
-                "AMPARO LEGAL", "Art." + aData.getArticle() + " da Lei 9.503/97", true, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-        bitmapFormat.createQuotes("DESCRIÇÃO DA INFRAÇÃO", aData.getInfraction(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createTable("CÓD. INFRAÇÃO", aitData.getFramingCode(),
+                "DESDOB.", aitData.getUnfolding(),
+                "AMPARO LEGAL", "Art." + aitData.getArticle() + " da Lei 9.503/97", true, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createQuotes("DESCRIÇÃO DA INFRAÇÃO", aitData.getInfraction(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
-        if (aData.getDescription().isEmpty()) {
-            bitmapFormat.createQuotes("NÚMERO DO TCA", aData.getTcaNumber(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        if (aitData.getDescription().isEmpty()) {
+            createTcaNumberQuotes(bitmapFormat, aitData.getTcaNumber());
         } else {
-            bitmapFormat.createQuotes("EQUIPAMENTOS/INSTRUMENTOS DE AFERIÇÃO UTILIZADO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-
-            bitmapFormat.createTable("DESCRIÇÃO", aData.getDescription(), "MARCA", aData.getEquipmentBrand(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-
-            bitmapFormat.createTable("MODELO", aData.getEquipmentModel(), "NÚMERO DE SÉRIE", aData.getSerialNumber(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-
-            bitmapFormat.createTable("MEDIÇÃO REALIZADA", aData.getMeasurementPerformed(), "LIMITE REGULAMENTADO", aData.getRegulatedValue(),
-                    true, PrintBitmapFormat.TableCellAlign.MIDDLE,
-                    PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-
-            bitmapFormat.createTable("VALOR CONSIDERADO", aData.getValueConsidered(), "NÚMERO DA AMOSTRA", aData.getAlcoholTestNumber(),
-                    true, PrintBitmapFormat.TableCellAlign.MIDDLE,
-                    PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+            createEquipmentTable(bitmapFormat, aitData);
         }
 
-        if(aData.getProcedures().isEmpty()){
-            docProcedimentos = aData.getRetreat();
-        } else if(aData.getRetreat().isEmpty()){
-            docProcedimentos = aData.getProcedures();
-        }else{
-            docProcedimentos = aData.getProcedures() + ", " + aData.getRetreat();
+        StringBuilder proceduresBuilder = new StringBuilder();
+        if (TextUtils.isEmpty(aitData.getProcedures())) {
+            proceduresBuilder.append(aitData.getRetreat());
+        } else if (TextUtils.isEmpty(aitData.getRetreat())) {
+            proceduresBuilder.append(aitData.getProcedures());
+        } else {
+            proceduresBuilder.append(aitData.getProcedures()).append(", ").append(aitData.getRetreat());
         }
+        String resultProcedure = proceduresBuilder.toString();
 
         bitmapFormat.createQuotes("PROCEDIMENTOS", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createQuotes("MEDIDAS ADMINISTRATIVAS", docProcedimentos, true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createQuotes("MEDIDAS ADMINISTRATIVAS", resultProcedure, true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
-        if(aData.getApproach().equals("0")){
-            tipoAbordagem = context.getString(R.string.sem_abordagem);
-        }else{
-            tipoAbordagem = context.getString(R.string.com_abordagem);
-        }
+        String approach = aitData.getApproach().equals("0") ? context.getString(R.string.driver_no_approached) : context.getString(R.string.driver_approach);
 
-        bitmapFormat.createObservationQuotes("OBSERVAÇÕES", aData.getObservation(), true, PrintBitmapFormat.NORMAL_FONT);
+        bitmapFormat.createObservationQuotes("OBSERVAÇÕES", aitData.getObservation(), true, PrintBitmapFormat.NORMAL_FONT);
 
-        bitmapFormat.createQuotes("ABORDAGEM", tipoAbordagem, true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createQuotes("ABORDAGEM", approach, true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
         bitmapFormat.createQuotes("6-IDENTIFICAÇÃO DA AUTORIDADE OU AGENTE AUTUADOR", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
         bitmapFormat.createNameTable("NOME", user.getEmployeeName().toUpperCase(), "MATRÍCULA", user.getRegistration(), false, PrintBitmapFormat.TableCellAlign.RIGHT,
-                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.LEFT);
 
         bitmapFormat.createSignatureQuotes("ASSINATURA", "\n\n\n", true, PrintBitmapFormat.NORMAL_FONT);
 
-        if (aData.getCpfShipper() == null){
-            fieldTitle = "CNPJ";
-            fieldText = aData.getCnpShipper();
-        } else {
-            fieldTitle = "CPF";
-            fieldText = aData.getCpfShipper();
-        }
+        String cpfOrCnpjShipperTitle = aitData.getCpfShipper() == null ? "CNPJ" : "CPF";
+        String cpfOrCnpjShipperText = aitData.getCpfShipper() == null ? aitData.getCnpShipper() : aitData.getCpfShipper();
 
         bitmapFormat.createQuotes("7-IDENTIFICAÇÃO DO EMBARCADOR OU EXPEDIDOR", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createNameTable("NOME", aData.getShipperIdentification(), fieldTitle, fieldText, true, PrintBitmapFormat.TableCellAlign.RIGHT,
-                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createNameTable("NOME", aitData.getShipperIdentification(), cpfOrCnpjShipperTitle, cpfOrCnpjShipperText, true, PrintBitmapFormat.TableCellAlign.RIGHT,
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.LEFT);
 
-        if (aData.getCpfCarrier() == null){
-            fieldTitle = "CNPJ";
-            fieldText = aData.getCnpjCarrier();
-        } else {
-            fieldTitle = "CPF";
-            fieldText = aData.getCpfCarrier();
-        }
+        String cpfOrCnpjCarrierTitle = aitData.getCpfCarrier() == null ? "CNPJ" : "CPF";
+        String cpfOrCnpjCarrierText = aitData.getCpfCarrier() == null ? aitData.getCnpjCarrier() : aitData.getCpfCarrier();
 
         bitmapFormat.createQuotes("8-IDENTIFICAÇÃO DO TRANSPORTADOR", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createNameTable("NOME", aData.getCarrierIdentification(), fieldTitle, fieldText, true, PrintBitmapFormat.TableCellAlign.RIGHT,
-                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createNameTable("NOME", aitData.getCarrierIdentification(), cpfOrCnpjCarrierTitle, cpfOrCnpjCarrierText, true, PrintBitmapFormat.TableCellAlign.RIGHT,
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.LEFT);
 
         bitmapFormat.createQuotes("9-ASSINATURA DO INFRATOR OU CONDUTOR", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
         bitmapFormat.createSignatureQuotes("\n\n\n", "\n\n\n", true, PrintBitmapFormat.NORMAL_FONT);
@@ -225,5 +225,26 @@ public class AitPrintBitmap extends BasePrintBitmap {
         return bitmapFormat.getPrintBitmap();
 
     }
+
+    private void createTcaNumberQuotes(PrintBitmapFormat bitmapFormat, String tcaNumber) {
+        bitmapFormat.createQuotes("NÚMERO DO TCA", tcaNumber, true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+    }
+
+    private void createEquipmentTable(PrintBitmapFormat bitmapFormat, AitData aData) {
+        bitmapFormat.createQuotes("EQUIPAMENTOS/INSTRUMENTOS DE AFERIÇÃO UTILIZADO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
+
+        bitmapFormat.createTable("DESCRIÇÃO", aData.getDescription(), "MARCA", aData.getEquipmentBrand(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+
+        bitmapFormat.createTable("MODELO", aData.getEquipmentModel(), "NÚMERO DE SÉRIE", aData.getSerialNumber(), true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+
+        bitmapFormat.createTable("MEDIÇÃO REALIZADA", aData.getMeasurementPerformed(), "LIMITE REGULAMENTADO", aData.getRegulatedValue(),
+                true, PrintBitmapFormat.TableCellAlign.MIDDLE,
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+
+        bitmapFormat.createTable("VALOR CONSIDERADO", aData.getValueConsidered(), "NÚMERO DA AMOSTRA", aData.getAlcoholTestNumber(),
+                true, PrintBitmapFormat.TableCellAlign.MIDDLE,
+                PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+    }
+
 }
 

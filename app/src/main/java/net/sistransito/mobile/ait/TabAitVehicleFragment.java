@@ -23,8 +23,8 @@ import net.sistransito.mobile.fragment.AnyDialogFragment;
 import net.sistransito.mobile.fragment.AnyDialogListener;
 import net.sistransito.mobile.fragment.CallBackPlate;
 import net.sistransito.mobile.network.NetworkConnection;
-import net.sistransito.mobile.number.NumberAnysListerner;
-import net.sistransito.mobile.number.NumberHttpResultAnysTask;
+import net.sistransito.mobile.number.AsyncListernerNumber;
+import net.sistransito.mobile.number.NumberHttpResultAsyncTask;
 
 import net.sistransito.mobile.plate.data.DataFromPlate;
 import net.sistransito.mobile.plate.data.PlateHttpResultAsyncTask;
@@ -39,7 +39,7 @@ import fr.ganfra.materialspinner.MaterialSpinner;
 public class TabAitVehicleFragment extends DebugFragment implements
         AnyDialogListener {
 
-    private PlateHttpResultAsyncTask httpResultAnysTask;
+    private PlateHttpResultAsyncTask httpResultAsyncTask;
     private View view;
     private MaterialSpinner spinner;
     private EditText editVehiclePlate, editVehicleBrand, editVehicleModel,
@@ -55,7 +55,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
     private ArrayAdapter<String> aalistSpecies;
 
     private AitData aitData;
-    private String sAitNumberRetained, sSearchType;
+    private String sAitNumberRetained, searchType;
     private Bundle bundle;
     private AnyDialogFragment dialogFragment;
     private LinearLayout llVehicleState, llVehicleCountry;
@@ -69,7 +69,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Salva o estado
+        // Save the state
         outState.putString("Ait_Number", aitData.getAitNumber());
     }
 
@@ -80,11 +80,10 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
         if (savedInstanceState != null) {
             sAitNumberRetained = savedInstanceState.getString("Ait_Number");
-            //Log.i("AutoNumber: ", numeroAutoRetained);
         }
 
         initializedView();
-        getObjectAuto();
+        getAitObject();
         checkAitNumber();
         return view;
     }
@@ -92,16 +91,16 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
     private void initializedView() {
 
-        tvSaveData = (TextView) view.findViewById(R.id.auto_fab);
-        tvIdAit = (TextView) view.findViewById(R.id.tv_id_auto);
-        editVehiclePlate = (EditText) view.findViewById(R.id.edit_placa_veiculo);
-        editVehicleChassi = (EditText) view.findViewById(R.id.edit_chassi_veiculo);
+        tvSaveData = (TextView) view.findViewById(R.id.ait_fab);
+        tvIdAit = (TextView) view.findViewById(R.id.tv_ait_id);
+        editVehiclePlate = (EditText) view.findViewById(R.id.edit_vehicle_plate);
+        editVehicleChassi = (EditText) view.findViewById(R.id.edit_vehicle_chassi);
         editVehicleRenavan = (EditText) view.findViewById(R.id.edit_vehicle_renavan);
-        editVehicleBrand = (EditText) view.findViewById(R.id.edit_marca_veiculo);
+        editVehicleBrand = (EditText) view.findViewById(R.id.edit_vehicle_brand);
         editVehicleModel = (EditText) view
-                .findViewById(R.id.edit_modelo_veiculo);
+                .findViewById(R.id.edit_vehicle_model);
         editVehicleColor = (EditText) view
-                .findViewById(R.id.edit_cor_veiculo);
+                .findViewById(R.id.edit_vehicle_color);
 
         listCategory = Arrays.asList(getResources().getStringArray(
                 R.array.list_category));
@@ -118,7 +117,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
                 listCategory);
         //Spinner Especie
         listSpecies = Arrays.asList(getResources().getStringArray(
-                R.array.auto_species));
+                R.array.ait_species));
         aaaSpecies = new AnyArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_spinner_item, android.R.id.text1,
                 listSpecies);
@@ -164,7 +163,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
         editVehicleRenavan.addTextChangedListener(new ChangeText(R.id.edit_vehicle_renavan));
         editVehicleChassi.addTextChangedListener(new ChangeText(
-                R.id.edit_chassi_veiculo));
+                R.id.edit_vehicle_chassi));
 
         spinnerCountry
                 .setOnItemSelectedListener(new OnItemSelectedListener() {
@@ -254,25 +253,25 @@ public class TabAitVehicleFragment extends DebugFragment implements
             @Override
             public void onClick(View v) {
 
-                sSearchType = "placa";
+                searchType = "plate";
 
                 if (!editVehiclePlate.getText().toString().equals("")) {
                     if (NetworkConnection.isNetworkAvailable(getActivity())) {
 
-                        httpResultAnysTask = new PlateHttpResultAsyncTask(
+                        httpResultAsyncTask = new PlateHttpResultAsyncTask(
                                 new CallBackPlate() {
                                     @Override
                                     public void callBack(DataFromPlate DataFromPlate, boolean isOffline) {
                                         resultCallBack(DataFromPlate, isOffline);
                                     }
-                                }, getActivity(), true, editVehiclePlate.getText().toString(), sSearchType,null);//gps.getLocation());
-                        httpResultAnysTask.execute("");
+                                }, getActivity(), true, editVehiclePlate.getText().toString(), searchType,null);//gps.getLocation());
+                        httpResultAsyncTask.execute("");
 
                     } else {
-                        Routine.showAlert(getResources().getString(R.string.sem_conexao), getActivity());
+                        Routine.showAlert(getResources().getString(R.string.no_network_connection), getActivity());
                     }
                 } else {
-                    Routine.showAlert(getResources().getString(R.string.titulo_tela_consulta_placa), getActivity());
+                    Routine.showAlert(getResources().getString(R.string.plate_search_screen_title), getActivity());
                 }
 
             }
@@ -284,10 +283,10 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
                 if(checkInput()) {
 
-                    if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).insertAidData(aitData))
+                    if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).insertAitData(aitData))
                         Routine.showAlert(getResources().getString(R.string.update_erro), getActivity());
 
-                    ((AitActivity) getActivity()).setTabAtual(1);
+                    ((AitActivity) getActivity()).setTabActual(1);
 
                 }
 
@@ -300,22 +299,17 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
         if (editVehiclePlate.getText().toString().isEmpty()) {
             editVehiclePlate.setError(getResources().getString(
-                    R.string.texto_inserir_placa));
+                    R.string.alert_insert_plate));
             editVehiclePlate.requestFocus();
             return false;
-        /*} else if (editChassiVeiculo.getText().toString().isEmpty()) {
-            editChassiVeiculo.setError(getResources().getString(
-                    R.string.texto_inserir_municipio));
-            editChassiVeiculo.requestFocus();
-            return false;*/
         } else if (editVehicleBrand.getText().toString().isEmpty()) {
             editVehicleBrand.setError(getResources().getString(
-                    R.string.texto_inserir_marca));
+                    R.string.alert_insert_brand));
             editVehicleBrand.requestFocus();
             return false;
         } else if (editVehicleModel.getText().toString().isEmpty()) {
             editVehicleModel.setError(getResources().getString(
-                    R.string.texto_inserir_modelo));
+                    R.string.alert_insert_model));
             editVehicleModel.requestFocus();
             return false;
         } else {
@@ -324,26 +318,25 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
     }
 
-    private void getObjectAuto() {
-        aitData = ObjectAit.getAitData();
+    private void getAitObject() {
+        aitData = AitObject.getAitData();
         if (aitData.isDataisNull()) {
             setViewEnable(true);
             addListener();
         } else if (aitData.isStoreFullData()) {
             setViewEnable(true);
-            getRecomandedUpdate();
+            getRecommendUpdate();
             getOtherUpdate();
             addListener();
         } else {
             setViewEnable(true);
-            getRecomandedUpdate();
+            getRecommendUpdate();
             getOtherUpdate();
             addListener();
-
         }
     }
 
-    private void getRecomandedUpdate() {
+    private void getRecommendUpdate() {
 
         editVehiclePlate.setText(aitData.getPlate());
         editVehicleBrand.setText(aitData.getVehicleBrand());
@@ -356,17 +349,20 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
     private void getOtherUpdate() {
 
-        int selection_1 = 0, selection_2 = 0, selection_3 = 0, selection_4 = 0;
+        int selectionStateVehicle = 0,
+        selectionCountry = 0,
+        selectionVehicleSpecies = 0,
+        selectionVehicleCategory = 0;
 
-        selection_1 = listStatePlate.indexOf(aitData.getStateVehicle());
-        selection_2 = listCountry.indexOf(aitData.getCountry());
-        selection_3 = listSpecies.indexOf(aitData.getVehicleSpecies());
-        selection_4 = listCategory.indexOf(aitData.getVehicleCategory());
+        selectionStateVehicle = listStatePlate.indexOf(aitData.getStateVehicle());
+        selectionCountry = listCountry.indexOf(aitData.getCountry());
+        selectionVehicleSpecies = listSpecies.indexOf(aitData.getVehicleSpecies());
+        selectionVehicleCategory = listCategory.indexOf(aitData.getVehicleCategory());
 
-        spinnerPlateState.setSelection(selection_1 + 1);
-        spinnerCountry.setSelection(selection_2 + 1);
-        spinnerSpecies.setSelection(selection_3 + 1);
-        spinnerCategory.setSelection(selection_4 + 1);
+        spinnerPlateState.setSelection(selectionStateVehicle + 1);
+        spinnerCountry.setSelection(selectionCountry + 1);
+        spinnerSpecies.setSelection(selectionVehicleSpecies + 1);
+        spinnerCategory.setSelection(selectionVehicleCategory + 1);
 
     }
 
@@ -385,19 +381,19 @@ public class TabAitVehicleFragment extends DebugFragment implements
                     case R.id.edit_vehicle_renavan:
                         aitData.setRenavam(s.toString());
                         break;
-                    case R.id.edit_chassi_veiculo:
+                    case R.id.edit_vehicle_chassi:
                         aitData.setChassi(s.toString());
                         break;
-                    case R.id.edit_placa_veiculo:
+                    case R.id.edit_vehicle_plate:
                         aitData.setPlate(s.toString());
                         break;
-                    case R.id.edit_cor_veiculo:
+                    case R.id.edit_vehicle_color:
                         aitData.setVehycleColor(s.toString());
                         break;
-                    case R.id.edit_marca_veiculo:
+                    case R.id.edit_vehicle_brand:
                         aitData.setVehicleBrand(s.toString());
                         break;
-                    case R.id.edit_modelo_veiculo:
+                    case R.id.edit_vehicle_model:
                         aitData.setVehicleModel(s.toString());
                         break;
                 }
@@ -421,10 +417,10 @@ public class TabAitVehicleFragment extends DebugFragment implements
     public void onDialogTaskWork(boolean isWork) {
         if (isWork) {
 
-            (new NumberHttpResultAnysTask(new NumberAnysListerner() {
+            (new NumberHttpResultAsyncTask(new AsyncListernerNumber() {
 
                 @Override
-                public void anysTaskComplete(boolean isComplete) {
+                public void asyncTaskComplete(boolean isComplete) {
                     if (isComplete) {
                         checkAitNumber();
                     }
@@ -439,18 +435,16 @@ public class TabAitVehicleFragment extends DebugFragment implements
     private void setViewEnable(boolean isEnable) {
 
         editVehiclePlate.setEnabled(isEnable);
-        //editUfVeiculo.setEnabled(isEnable);
         editVehicleColor.setEnabled(isEnable);
         editVehicleBrand.setEnabled(isEnable);
         editVehicleModel.setEnabled(isEnable);
 
         if(isEnable){
 
-            editVehiclePlate.addTextChangedListener(new ChangeText(R.id.edit_placa_veiculo));
-            //editUfVeiculo.addTextChangedListener(new ChangeText(R.id.editUfVeiculo));
-            editVehicleColor.addTextChangedListener(new ChangeText(R.id.edit_cor_veiculo));
-            editVehicleBrand.addTextChangedListener(new ChangeText(R.id.edit_marca_veiculo));
-            editVehicleModel.addTextChangedListener(new ChangeText(R.id.edit_modelo_veiculo));
+            editVehiclePlate.addTextChangedListener(new ChangeText(R.id.edit_vehicle_plate));
+            editVehicleColor.addTextChangedListener(new ChangeText(R.id.edit_vehicle_color));
+            editVehicleBrand.addTextChangedListener(new ChangeText(R.id.edit_vehicle_brand));
+            editVehicleModel.addTextChangedListener(new ChangeText(R.id.edit_vehicle_model));
 
         }
 
@@ -458,30 +452,30 @@ public class TabAitVehicleFragment extends DebugFragment implements
 
     private void resultCallBack(DataFromPlate plateFormat, boolean offLine) {
 
-        if (plateFormat != null) {
-
-            int selection_1 = 0, selection_2 = 0, selection_3 = 0;
-
-            selection_1 = listStatePlate.indexOf(plateFormat.getState().toUpperCase());
-            selection_2 = listSpecies.indexOf(plateFormat.getSpecies().toUpperCase());
-            selection_3 = listCategory.indexOf(plateFormat.getCategory().toUpperCase());
-
-            editVehicleRenavan.setText(plateFormat.getRenavam());
-            editVehicleChassi.setText(plateFormat.getChassi());
-            editVehicleBrand.setText(plateFormat.getBrand());
-            editVehicleModel.setText(plateFormat.getModel());
-            editVehicleColor.setText(plateFormat.getColor());
-
-            spinnerPlateState.setSelection(selection_1 + 1);
-            spinnerSpecies.setSelection(selection_2 + 1);
-            spinnerCategory.setSelection(selection_3 + 1);
-
-            Routine.closeKeyboard(editVehiclePlate, getActivity());
-
-        } else {
-            Routine.showAlert(getResources().getString(R.string.nehum_resultado_retornado), getActivity());
+        if (plateFormat == null) {
+            Routine.showAlert(getResources().getString(R.string.no_result_returned), getActivity());
+            return;
         }
 
+        String state = plateFormat.getState().toUpperCase();
+        String species = plateFormat.getSpecies().toUpperCase();
+        String category = plateFormat.getCategory().toUpperCase();
+
+        int selectionStatePlate = listStatePlate.indexOf(state);
+        int selectionSpecies = listSpecies.indexOf(species);
+        int selectionCategory = listCategory.indexOf(category);
+
+        editVehicleRenavan.setText(plateFormat.getRenavam());
+        editVehicleChassi.setText(plateFormat.getChassi());
+        editVehicleBrand.setText(plateFormat.getBrand());
+        editVehicleModel.setText(plateFormat.getModel());
+        editVehicleColor.setText(plateFormat.getColor());
+
+        spinnerPlateState.setSelection(selectionStatePlate + 1);
+        spinnerSpecies.setSelection(selectionSpecies + 1);
+        spinnerCategory.setSelection(selectionCategory + 1);
+
+        Routine.closeKeyboard(editVehiclePlate, getActivity());
     }
 
     private void checkAitNumber() {
@@ -494,9 +488,9 @@ public class TabAitVehicleFragment extends DebugFragment implements
             dialogFragment.setTargetFragment(this, 0);
             bundle = new Bundle();
             bundle.putInt(AppConstants.DIALOG_TITLE_ID,
-                    R.string.titulo_tela_sincronizacao);
+                    R.string.synchronization_screen_title);
             bundle.putInt(AppConstants.DIALOG_MGS_ID,
-                    R.string.carregando_autos);
+                    R.string.loading_ait);
             dialogFragment.setArguments(bundle);
             dialogFragment.setCancelable(false);
             dialogFragment
@@ -507,12 +501,12 @@ public class TabAitVehicleFragment extends DebugFragment implements
             if(sAitNumberRetained != null){
 
                 aitData.setAitNumber(sAitNumberRetained);
-                tvIdAit.setText(getResources().getString(R.string.ait_numero) + aitData.getAitNumber());
+                tvIdAit.setText(getResources().getString(R.string.capital_number) + aitData.getAitNumber());
 
             } else {
 
                 aitData.setAitNumber(sAitNumber);
-                tvIdAit.setText(getResources().getString(R.string.ait_numero) + aitData.getAitNumber());
+                tvIdAit.setText(getResources().getString(R.string.capital_number) + aitData.getAitNumber());
                 DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).insertAitNumber(aitData);
 
             }

@@ -42,7 +42,7 @@ public class CreateCnhRawDataFromJson {
 
 					dataFromCNH.setCnhValidity(jsonObject.getString("validade"));
 
-					dataFromCNH.setCnhPoints(jsonObject.getString("pontos"));
+					dataFromCNH.setCnhPoints(jsonObject.getString("points"));
 
 					dataFromCNH.setCnhObservation(jsonObject.getString("obs"));
 

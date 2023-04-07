@@ -19,7 +19,7 @@ public class TabInfrationSubTitleFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.auto_infracao_fragment_subtitulo, null, false);
+		view = inflater.inflate(R.layout.ait_infraction_fragment_subtitle, null, false);
 		return view;
 	}
 

@@ -49,7 +49,7 @@ public class SyncInformation extends AsyncTask<String, String, String> {
 		pDialog = new ProgressDialog(context);
 		pDialog.setMax(100);
 		pDialog.setCancelable(false);
-		pDialog.setMessage(context.getResources().getString(R.string.sincronizacao_mgs));
+		pDialog.setMessage(context.getResources().getString(R.string.message_synchronize));
 		pDialog.show();
 	}
 
@@ -66,7 +66,7 @@ public class SyncInformation extends AsyncTask<String, String, String> {
 				.tcaComposeJSONfromSQLite();
 
 		aitJson = (DatabaseCreator.getInfractionDatabaseAdapter(context))
-				.aitComposeJSONfromSQLite();
+				.aitComposeJsonFromSqLite();
 
 		Log.d("rrd", "rrd" + rrdJson);
 		Log.d("tav", "tav" + tavJson);
@@ -111,14 +111,14 @@ public class SyncInformation extends AsyncTask<String, String, String> {
 		}
 		if (syncStatus) {
 			AnyAlertDialog.dialogShow(
-					context.getResources().getString(R.string.sincronizacao_concluida),
+					context.getResources().getString(R.string.concluded_synchronization),
 					context,
-					context.getResources().getString(R.string.titulo_sincronizacao));
+					context.getResources().getString(R.string.title_sinchronization));
 		} else {
 			AnyAlertDialog.dialogShow(
-					context.getResources().getString(R.string.nao_precisa_sincronizar),
+					context.getResources().getString(R.string.no_need_synchronize),
 					context,
-					context.getResources().getString(R.string.titulo_sincronizacao));
+					context.getResources().getString(R.string.title_sinchronization));
 		}
 		Log.d("callllllpost", "a");
 		super.onPostExecute(result);

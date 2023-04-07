@@ -16,7 +16,7 @@ public class SubTitleTcaQuizFragment extends
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.tca_questionario_fragment_subtitulo,
+		view = inflater.inflate(R.layout.tca_quiz_fragment_subtitle,
 				null, false);
 		return view;
 	}

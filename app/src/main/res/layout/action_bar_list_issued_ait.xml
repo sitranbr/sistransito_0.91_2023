@@ -13,8 +13,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_back_background"
-        android:contentDescription="@string/login"
-        android:padding="@dimen/widght_margin"
+        android:contentDescription="@string/login_two"
+        android:padding="@dimen/width_margin_8"
         android:src="@drawable/btn_back" />
 
     <TextView
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="@dimen/padding_left_tab_titulo"
         android:layout_centerVertical="true"
-        android:text="@string/listar_autos"
+        android:text="@string/list_ait_issued"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

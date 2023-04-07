@@ -16,7 +16,6 @@ import net.sistransito.R;
 
 public class AnyAlertDialog{
 
-
 	public static void dialogShow(String mgs, Context context, String title) {
 		AlertDialog.Builder builder = new AlertDialog.Builder(context,
 				AlertDialog.THEME_HOLO_LIGHT);
@@ -49,36 +48,36 @@ public class AnyAlertDialog{
 		dialog.show();
 	}
 
-	public static void dialogView(final Context mycontext, String title, final String tipo){
+	public static void dialogView(final Context context, String title, final String type){
 
-		LayoutInflater linear = LayoutInflater.from(mycontext);
-		View viewCancelar = linear.inflate(R.layout.auto_cancelar, null);
-		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mycontext,
+		LayoutInflater linear = LayoutInflater.from(context);
+		View viewCancel = linear.inflate(R.layout.ait_cancel, null);
+		final AlertDialog.Builder alertDialog = new AlertDialog.Builder(context,
                 //R.style.AlertDialogTheme);
                 AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
-		alertDialog.setView(viewCancelar);
+		alertDialog.setView(viewCancel);
 
-		final EditText etReason = (EditText) viewCancelar.findViewById(R.id.edit_justificativa);
+		final EditText etReason = (EditText) viewCancel.findViewById(R.id.edit_reason);
 		alertDialog.setTitle(title);
 
-		alertDialog.setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
+		alertDialog.setPositiveButton(context.getString(R.string.btn_send), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 
 				if (etReason.getText().toString().equals("")) {
-					Routine.showAlert(mycontext.getString(R.string.auto_justificativa), mycontext);
+					Routine.showAlert(context.getString(R.string.alert_motive), context);
 				} else {
-					if(tipo.equals("auto")){
-						((AitActivity) mycontext).setCancel(mycontext, etReason.getText().toString());
+					if(type.equals("ait")){
+						((AitActivity) context).setCancel(context, etReason.getText().toString());
 					} else {
-						((AitCompanyActivity) mycontext).setCancelar(mycontext, etReason.getText().toString());
+						((AitCompanyActivity) context).setCancel(context, etReason.getText().toString());
 					}
-					((Activity) mycontext).finish();
+					((Activity) context).finish();
 				}
 
 			}
 		});
-		alertDialog.setNegativeButton("Voltar", new DialogInterface.OnClickListener() {
+		alertDialog.setNegativeButton(context.getString(R.string.btn_back), new DialogInterface.OnClickListener() {
 			@Override
 			public void onClick(DialogInterface dialog, int which) {
 				dialog.cancel();

@@ -6,6 +6,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
+    android:gravity="center_vertical"
     android:paddingBottom="@dimen/layout_margin_buttom"
     android:paddingLeft="@dimen/layout_margin_left_right"
     android:paddingRight="@dimen/layout_margin_left_right"
@@ -17,11 +18,11 @@
         android:layout_height="wrap_content"
         android:background="@color/yellow_light"
         android:drawableLeft="@drawable/signup_email"
-        android:drawablePadding="@dimen/widght_padding"
+        android:drawablePadding="@dimen/width_padding"
         android:ems="10"
         android:hint="@string/email"
         android:inputType="textEmailAddress"
-        android:padding="@dimen/widght_padding"
+        android:padding="@dimen/width_padding"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:layout_marginTop="@dimen/layout_margin_top"
@@ -31,14 +32,14 @@
         android:id="@+id/et_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/widght_margin_top"
+        android:layout_marginTop="@dimen/width_margin_top"
         android:background="@color/yellow_light"
         android:drawableLeft="@drawable/signup_password"
-        android:drawablePadding="@dimen/widght_padding"
+        android:drawablePadding="@dimen/width_padding"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        android:padding="@dimen/widght_padding"
+        android:padding="@dimen/width_padding"
         android:textColor="@color/white"
         android:textColorHint="@color/white"
         android:textCursorDrawable="@null"></EditText>
@@ -53,10 +54,10 @@
         android:layout_marginTop="@dimen/widght_margin_top_2"
         android:background="@drawable/btn_whight"
         android:drawableLeft="@drawable/signup_name_2"
-        android:drawablePadding="@dimen/widght_padding"
+        android:drawablePadding="@dimen/width_padding"
         android:gravity="left|center_vertical"
-        android:paddingLeft="@dimen/widght_padding"
-        android:text="@string/login"
+        android:paddingLeft="@dimen/width_padding"
+        android:text="@string/btn_login"
         android:textColor="@color/pink" />
 
 
@@ -75,7 +76,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:gravity="left"
-            android:text="@string/forgetPassword"
+            android:text="@string/forget_password"
             android:textColor="@color/color_state_tv" />
 
         <com.rey.material.widget.TextView

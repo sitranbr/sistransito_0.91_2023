@@ -128,8 +128,8 @@ public class NumberDatabaseAdapter {
 				NumberDatabaseHelper.RRD_NUMBER, list);
 	}
 
-	private boolean getcheck(String table_name) {
-		Cursor myCursor = this.database.query(table_name, null, null, null,
+	private boolean getCheck(String tableName) {
+		Cursor myCursor = this.database.query(tableName, null, null, null,
 				null, null, null);
 		if (myCursor.getCount() <= CHECK_NUM_SIZE) {
 			myCursor.close();
@@ -141,19 +141,19 @@ public class NumberDatabaseAdapter {
 	}
 
 	public boolean isNeedUpdateAit() {
-		return getcheck(NumberDatabaseHelper.AIT_NUMBER_TABLE);
+		return getCheck(NumberDatabaseHelper.AIT_NUMBER_TABLE);
 	}
 
 	public boolean isNeedTavUpdate() {
-		return getcheck(NumberDatabaseHelper.TAV_NUMBER_TABLE);
+		return getCheck(NumberDatabaseHelper.TAV_NUMBER_TABLE);
 	}
 
 	public boolean isNeedTcaUpdate() {
-		return getcheck(NumberDatabaseHelper.TCA_NUMBER_TABLE);
+		return getCheck(NumberDatabaseHelper.TCA_NUMBER_TABLE);
 	}
 
 	public boolean isNeedRrdUpdate() {
-		return getcheck(NumberDatabaseHelper.RRD_NUMBER_TABLE);
+		return getCheck(NumberDatabaseHelper.RRD_NUMBER_TABLE);
 	}
 
 	public int getRemainNumberRRD() {

@@ -9,7 +9,7 @@ import android.os.Vibrator;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
-import net.sistransito.SistransitoApplication;
+import net.sistransito.Application;
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.ait.lister.AitLister;
 import net.sistransito.mobile.database.DatabaseCreator;
@@ -17,9 +17,12 @@ import net.sistransito.mobile.database.TinyDB;
 import net.sistransito.mobile.http.CustomHttpClient;
 import net.sistransito.mobile.plate.lister.PlateLister;
 import net.sistransito.mobile.rrd.lister.RrdLister;
-import net.sistransito.mobile.tav.lister.TAVLister;
+import net.sistransito.mobile.tav.lister.TavLister;
 import net.sistransito.mobile.tca.lister.TcaLister;
 import net.sistransito.R;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AppObject {
     private static Vibrator vibrator;
@@ -56,7 +59,7 @@ public class AppObject {
 
     public static Intent getTavListerIntent(Context context) {
         if (tavListerIntent == null)
-            tavListerIntent = new Intent(context, TAVLister.class);
+            tavListerIntent = new Intent(context, TavLister.class);
         return tavListerIntent;
     }
 
@@ -70,7 +73,7 @@ public class AppObject {
     }
 
     public static void newInstance(Context context) {
-        getfont(context);
+        getFont(context);
         slideAndScaleAnimation = AnimationUtils.loadAnimation(context,
                 R.anim.slide_and_scale);
 
@@ -80,11 +83,11 @@ public class AppObject {
                 .getSystemService(Service.VIBRATOR_SERVICE);
         tinyDB = new TinyDB(context);
 
-        plateListIntent = new Intent(SistransitoApplication.getAppContext(), PlateLister.class);
-        aitListerIntent = new Intent(SistransitoApplication.getAppContext(), AitLister.class);
-        rrdListerIntent = new Intent(SistransitoApplication.getAppContext(), RrdLister.class);
-        tcaListerIntent = new Intent(SistransitoApplication.getAppContext(), TcaLister.class);
-        tavListerIntent = new Intent(SistransitoApplication.getAppContext(), TAVLister.class);
+        plateListIntent = new Intent(Application.getAppContext(), PlateLister.class);
+        aitListerIntent = new Intent(Application.getAppContext(), AitLister.class);
+        rrdListerIntent = new Intent(Application.getAppContext(), RrdLister.class);
+        tcaListerIntent = new Intent(Application.getAppContext(), TcaLister.class);
+        tavListerIntent = new Intent(Application.getAppContext(), TavLister.class);
     }
 
     public static Typeface getTf_normal(Context context) {
@@ -96,12 +99,12 @@ public class AppObject {
 
     public static Typeface getCurrentFont(Context context) {
         if (tfCurrent == null) {
-            getfont(context);
+            getFont(context);
         }
         return tfCurrent;
     }
 
-    public static void getfont(Context context) {
+    public static void getFont1(Context context) {
 
         String font = (DatabaseCreator.getSettingDatabaseAdapter(context))
                 .getFont();
@@ -120,7 +123,23 @@ public class AppObject {
         }
     }
 
-    public static Typeface getTitlefont(Context context) {
+    public static void getFont(Context context) {
+        String font = DatabaseCreator.getSettingDatabaseAdapter(context).getFont();
+        Map<String, String> fontMap = new HashMap<>();
+        fontMap.put(AppConstants.FONT_1, "font/Roboto-Regular.ttf");
+        fontMap.put(AppConstants.FONT_2, "font/Roboto-Regular.ttf");
+        fontMap.put(AppConstants.FONT_3, "font/Roboto-Regular.ttf");
+
+        String fontPath = fontMap.getOrDefault(font, null);
+
+        if (fontPath != null) {
+            tfCurrent = Typeface.createFromAsset(context.getAssets(), fontPath);
+        } else {
+            tfCurrent = Typeface.DEFAULT;
+        }
+    }
+
+    public static Typeface getFontTitle(Context context) {
 
         tfTitle = Typeface.createFromAsset(context.getAssets(),
                 "font/Roboto-Regular.ttf");
@@ -128,12 +147,12 @@ public class AppObject {
 
     }
 
-    public static void setfont(Context context, String font) {
+    public static void setFont(Context context, String font) {
         (DatabaseCreator.getSettingDatabaseAdapter(context)).setFont(font);
-        getfont(context);
+        getFont(context);
     }
 
-    public static Animation getSlideAndScaleAnimition(Context context) {
+    public static Animation getSlideAndScaleAnimation(Context context) {
         if (slideAndScaleAnimation == null) {
             slideAndScaleAnimation = AnimationUtils.loadAnimation(context,
                     R.anim.slide_and_scale);

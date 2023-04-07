@@ -7,7 +7,7 @@
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:padding="@dimen/widght_padding" >
+    android:padding="@dimen/width_padding" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,8 +23,8 @@
             android:layout_marginTop="@dimen/layout_margin_top"
             android:checked="false"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/widght_padding_2"
-            android:text="@string/sem_abordagem"
+            android:layout_marginBottom="@dimen/width_padding_2"
+            android:text="@string/driver_no_approached"
             android:textColor="@color/primary" />
 
         <LinearLayout
@@ -45,7 +45,7 @@
                 android:checked="false"
                 android:gravity="center"
                 android:padding="0dip"
-                android:text="@string/condutor_estrangeiro"
+                android:text="@string/foreign_driver"
                 android:textColor="@color/primary"
                 android:layout_marginBottom="@dimen/padding_top_edit"/>
 
@@ -67,10 +67,10 @@
                     app:ms_arrowColor="@color/primary"
                     app:ms_arrowSize="12dp"
                     app:ms_floatingLabelColor="@color/primary"
-                    app:ms_floatingLabelText="@string/auto_pais"
+                    app:ms_floatingLabelText="@string/ait_country_name"
                     app:ms_alignLabels="true"
                     app:ms_hintColor="@color/primary"
-                    app:ms_hint="@string/spinner_pais_condutor"
+                    app:ms_hint="@string/spinner_driver_country"
                     app:ms_multiline="true"
                     app:ms_baseColor="@color/primary" />
 
@@ -86,7 +86,7 @@
                 android:checked="false"
                 android:gravity="center"
                 android:padding="0dip"
-                android:text="@string/condutor_nao_habilitado"
+                android:text="@string/unlicensed_driver"
                 android:textColor="@color/primary"
                 android:layout_marginBottom="@dimen/padding_top_edit"/>
 
@@ -117,10 +117,10 @@
                             android:layout_height="wrap_content"
                             android:gravity="left|center_vertical"
                             android:inputType="textCapCharacters"
-                            android:hint="@string/nome_condutor"
+                            android:hint="@string/driver_name"
                             android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5"
-                            android:paddingBottom="@dimen/widght_padding_3" />
+                            android:paddingBottom="@dimen/width_padding_15" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -157,10 +157,10 @@
                             android:gravity="left"
                             android:inputType="number"
                             android:maxLength="11"
-                            android:hint="@string/CNH_PPD"
+                            android:hint="@string/ait_cnh_ppd"
                             android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5"
-                            android:paddingBottom="@dimen/widght_padding_3" />
+                            android:paddingBottom="@dimen/width_padding_15" />
                     </android.support.design.widget.TextInputLayout>
 
                         <TextView
@@ -190,10 +190,10 @@
                     app:ms_arrowColor="@color/primary"
                     app:ms_arrowSize="12dp"
                     app:ms_floatingLabelColor="@color/primary"
-                    app:ms_floatingLabelText="@string/auto_uf"
+                    app:ms_floatingLabelText="@string/ait_state"
                     app:ms_alignLabels="true"
                     app:ms_hintColor="@color/primary"
-                    app:ms_hint="@string/auto_uf"
+                    app:ms_hint="@string/ait_state"
                     app:ms_multiline="true"
                     app:ms_baseColor="@color/primary" />
 
@@ -223,10 +223,10 @@
                         app:ms_arrowColor="@color/primary"
                         app:ms_arrowSize="12dp"
                         app:ms_floatingLabelColor="@color/primary"
-                        app:ms_floatingLabelText="@string/tipo_documento_apresentado"
+                        app:ms_floatingLabelText="@string/type_document_presented"
                         app:ms_alignLabels="true"
                         app:ms_hintColor="@color/primary"
-                        app:ms_hint="@string/spinner_outro_doc"
+                        app:ms_hint="@string/spinner_another_document"
                         app:ms_multiline="true"
                         app:ms_baseColor="@color/primary" />
 
@@ -243,10 +243,10 @@
                             android:gravity="left"
                             android:inputType="number"
                             android:maxLength="11"
-                            android:hint="@string/numero_documento"
+                            android:hint="@string/document_number"
                             android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5"
-                            android:paddingBottom="@dimen/widght_padding_3" />
+                            android:paddingBottom="@dimen/width_padding_15" />
 
                     </android.support.design.widget.TextInputLayout>
 
@@ -280,7 +280,7 @@
                     android:layout_marginBottom="@dimen/padding_top_edit"
                     android:checked="false"
                     android:gravity="center"
-                    android:text="@string/cb_confirmar"
+                    android:text="@string/cb_check_data"
                     android:textColor="@color/primary" />
 
             </LinearLayout>
@@ -295,13 +295,13 @@
                 android:paddingStart="@dimen/indicator_width" >
 
                 <TextView
-                    android:id="@+id/auto_fab"
+                    android:id="@+id/ait_fab"
                     android:layout_width="65dp"
                     android:layout_height="65dp"
                     android:layout_gravity="end|bottom"
                     android:visibility="gone"
                     android:background="@drawable/ic_salvar_round_72"
-                    android:layout_marginBottom="@dimen/widght_padding_2"/>
+                    android:layout_marginBottom="@dimen/width_padding_2"/>
 
             </LinearLayout>
 

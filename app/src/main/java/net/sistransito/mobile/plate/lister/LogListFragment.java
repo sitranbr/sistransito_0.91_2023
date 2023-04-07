@@ -24,42 +24,42 @@ public class LogListFragment extends Fragment implements OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.historico_list_fragment, null, false);
+        view = inflater.inflate(R.layout.history_list_fragment, null, false);
         initializedView();
         return view;
     }
 
     private void initializedView() {
-        btnListPlate = (Button) view.findViewById(R.id.btn_listar_placas);
+        btnListPlate = (Button) view.findViewById(R.id.btn_list_plate);
         btnListPlate.setOnClickListener(this);
-        btnListAit = (Button) view.findViewById(R.id.btn_listar_autos);
+        btnListAit = (Button) view.findViewById(R.id.btn_list_ait);
         btnListAit.setOnClickListener(this);
-        btnListRrd = (Button) view.findViewById(R.id.btn_listar_rrd);
+        btnListRrd = (Button) view.findViewById(R.id.btn_list_rrd);
         btnListRrd.setOnClickListener(this);
-        btnListTca = (Button) view.findViewById(R.id.btn_listar_tca);
+        btnListTca = (Button) view.findViewById(R.id.btn_list_tca);
         btnListTca.setOnClickListener(this);
-        btnListTav = (Button) view.findViewById(R.id.btn_listar_tav);
+        btnListTav = (Button) view.findViewById(R.id.btn_list_tav);
         btnListTav.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.btn_listar_placas:
+            case R.id.btn_list_plate:
                 startActivity(AppObject.getPlateListIntent(getActivity()));
                 break;
-            case R.id.btn_listar_autos:
+            case R.id.btn_list_ait:
                 startActivity(AppObject.getAitListerIntent(getActivity()));
                 break;
 
-            case R.id.btn_listar_rrd:
+            case R.id.btn_list_rrd:
                 startActivity(AppObject.getRrdListerIntent(getActivity()));
                 break;
 
-            case R.id.btn_listar_tca:
+            case R.id.btn_list_tca:
                 startActivity(AppObject.getTcaListerIntent(getActivity()));
                 break;
-            case R.id.btn_listar_tav:
+            case R.id.btn_list_tav:
                 startActivity(AppObject.getTavListerIntent(getActivity()));
                 break;
         }

@@ -11,7 +11,7 @@ import net.sistransito.mobile.database.SetttingDatabaseHelper;
 import net.sistransito.mobile.fragment.AnyAlertDialog;
 import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.BasePrintBitmap;
 import net.sistransito.mobile.bluetoothprint.bluetooth.Bluetooth;
-import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListerner;
+import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListener;
 import net.sistransito.mobile.bluetoothprint.bluetooth.ESCP;
 import net.sistransito.mobile.util.Routine;
 import net.sistransito.R;
@@ -19,7 +19,7 @@ import net.sistransito.R;
 import java.util.Set;
 
 public abstract class BasePrintActivity extends AppCompatActivity
-        implements BluetoothPrinterListerner {
+        implements BluetoothPrinterListener {
     private Bluetooth mBth = null;
 
     @Override
@@ -81,8 +81,7 @@ public abstract class BasePrintActivity extends AppCompatActivity
 
         if (!mBth.isConnected()) {
             if (!mBth.Enable()) {
-                AnyAlertDialog.simpleAletMessage("Nao foi possivel habilitar bluetooth, tente " +
-                        "habilitar manualmente e tente novamente.", this);
+                AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.error_load_bluetooth), this);
                 return false;
             }
             String mac = null;
@@ -93,14 +92,14 @@ public abstract class BasePrintActivity extends AppCompatActivity
                 }
             }
             if (mac == null) {
-                AnyAlertDialog.simpleAletMessage("Nao foi encontrada a impressora "
-                        + nPrinter + "\n\nFaça o pareamento com o disposivo e tente novamente.", this);
+                AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.pairing_error)
+                        + " " + nPrinter + "\n\n" + getResources().getString(R.string.pairing_message), this);
                 return false;
             }
             if (!mBth.Open(mac)) {
-                AnyAlertDialog.simpleAletMessage("Nao foi possivel conectar ao dispositivo ["
+                AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.error_connection_printer) + " ["
                         + mac
-                        + "]\n\nLigue ou conecte o dispositivo e tente novamente.", this);
+                        + " ]\n\n " + getResources().getString(R.string.reconnect_printer), this);
                 return false;
             }
         }

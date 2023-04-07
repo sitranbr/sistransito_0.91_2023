@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:gravity="left"
-        android:paddingBottom="@dimen/widght_padding_2"
+        android:paddingBottom="@dimen/width_padding_2"
         android:paddingLeft="@dimen/padding_left_tab_titulo"
-        android:paddingRight="@dimen/widght_padding_2"
-        android:paddingTop="@dimen/widght_padding_2"
-        android:text="@string/titulo_rrd_avulso"
+        android:paddingRight="@dimen/width_padding_2"
+        android:paddingTop="@dimen/width_padding_2"
+        android:text="@string/rrd_loose_title"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton
@@ -26,8 +26,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
         android:background="@drawable/btn_back_background"
-        android:contentDescription="@string/login"
-        android:padding="@dimen/widght_margin_top"
+        android:contentDescription="@string/login_two"
+        android:padding="@dimen/width_margin_top"
         android:src="@drawable/btn_back" />
 
     <LinearLayout
@@ -36,29 +36,29 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_rrd_titulo"
         android:orientation="horizontal"
-        android:paddingLeft="@dimen/widght_padding"
-        android:paddingRight="@dimen/widght_padding"
-        android:paddingTop="@dimen/widght_padding" >
+        android:paddingLeft="@dimen/width_padding"
+        android:paddingRight="@dimen/width_padding"
+        android:paddingTop="@dimen/width_padding" >
 
         <ImageView
             android:id="@+id/im_btn_tab_documento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/widght_margin"
-            android:padding="@dimen/widght_padding_4"
+            android:layout_marginLeft="@dimen/width_margin_8"
+            android:padding="@dimen/width_padding_4"
             android:src="@drawable/documentation_rrd_indicator" />
 
         <View
             android:layout_width="@dimen/indicator_width"
             android:layout_height="match_parent"
-            android:layout_margin="@dimen/widght_margin"
+            android:layout_margin="@dimen/width_margin_8"
             android:background="@color/yellow_line_color" />
 
         <ImageView
             android:id="@+id/im_btn_tab_informacoes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="@dimen/widght_padding_4"
+            android:padding="@dimen/width_padding_4"
             android:src="@drawable/information_rrd_indicator" />
     </LinearLayout>
 
@@ -70,9 +70,9 @@
         android:layout_alignRight="@+id/linearLayout1"
         android:layout_below="@+id/linearLayout1"
         android:orientation="vertical"
-        android:paddingLeft="@dimen/widght_padding"
-        android:paddingRight="@dimen/widght_padding"
-        android:paddingTop="@dimen/widght_padding" >
+        android:paddingLeft="@dimen/width_padding"
+        android:paddingRight="@dimen/width_padding"
+        android:paddingTop="@dimen/width_padding" >
 
         <com.viewpagerindicator.UnderlinePageIndicator
             android:id="@+id/indicator"

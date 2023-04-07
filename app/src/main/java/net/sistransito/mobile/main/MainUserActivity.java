@@ -1,7 +1,7 @@
 package net.sistransito.mobile.main;
 
-
 import android.Manifest;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -45,7 +45,7 @@ import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.appobject.AppObject;
 import net.sistransito.mobile.ait.AitActivity;
 import net.sistransito.mobile.ait.AitData;
-import net.sistransito.mobile.ait.table.InfrationTable;
+import net.sistransito.mobile.ait.table.InfractionTable;
 import net.sistransito.mobile.aitcompany.AitCompanyActivity;
 import net.sistransito.mobile.aitcompany.pjData;
 import net.sistransito.mobile.cnh.SearchCnhFragment;
@@ -89,7 +89,7 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         setContentView(R.layout.activity_user_main);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 
-        setImageLoder();
+        setImageLoader();
         startMenu(savedInstanceState);
         checkFirstTimeAppSetup();
         getPermission();
@@ -110,7 +110,7 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         editor.apply();
     }*/
 
-    private void setImageLoder() {
+    private void setImageLoader() {
         DisplayImageOptions defaultOptions = new DisplayImageOptions.Builder()
                 .cacheInMemory(true).cacheOnDisk(true)
                 .displayer(new FadeInBitmapDisplayer(500)).build();
@@ -181,15 +181,15 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                 .build();
 
         //    result.addItem(new DividerDrawerItem());
-        result.addItem(new PrimaryDrawerItem().withName(R.string.acesso_ao_sistransito).withIcon(R.mipmap.ic_i_car_p));
-        result.addItem(new PrimaryDrawerItem().withName(R.string.texto_titulo_cpf).withIcon(R.mipmap.ic_i_id_p));
-        result.addItem(new PrimaryDrawerItem().withName(R.string.opcoes_log).withIcon(R.mipmap.ic_log_n));
+        result.addItem(new PrimaryDrawerItem().withName(R.string.renavan_search).withIcon(R.mipmap.ic_i_car_p));
+        result.addItem(new PrimaryDrawerItem().withName(R.string.search_cnh).withIcon(R.mipmap.ic_i_id_p));
+        result.addItem(new PrimaryDrawerItem().withName(R.string.document_history).withIcon(R.mipmap.ic_log_n));
         result.addItem(new DividerDrawerItem());
-        result.addItem(new PrimaryDrawerItem().withName(R.string.tabela_infracoes).withIcon(R.mipmap.ic_infracao));
+        result.addItem(new PrimaryDrawerItem().withName(R.string.infraction_table).withIcon(R.mipmap.ic_infraction));
         result.addItem(new DividerDrawerItem());
         result.addItem(new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_settting_nav));
         result.addItem(new PrimaryDrawerItem().withName(R.string.profile).withIcon(R.mipmap.ic_profile));
-        result.addItem(new PrimaryDrawerItem().withName(R.string.ajuda_sobre_app).withIcon(R.mipmap.ic_help_nav));
+        result.addItem(new PrimaryDrawerItem().withName(R.string.app_help).withIcon(R.mipmap.ic_help_nav));
         result.addItem(new DividerDrawerItem());
         result.addItem(new PrimaryDrawerItem().withName(R.string.logout).withIcon(R.mipmap.ic_logout));
         result.setOnDrawerItemClickListener(MainUserActivity.this);
@@ -214,7 +214,7 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                 data.setDataisNull(true);
                 Intent intent = new Intent(this, AitActivity.class);
                 Bundle bundle = new Bundle();
-                bundle.putSerializable(AitData.getIDAuto(), data);
+                bundle.putSerializable(AitData.getAitID(), data);
                 intent.putExtras(bundle);
                 startActivity(intent);
                 break;
@@ -229,7 +229,7 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                 break;
             case R.id.btn_overflow_rrd_avulso:
                 RrdData dados = new RrdData();
-                dados.setRrdType(getResources().getString(R.string.avulso));
+                dados.setRrdType(getResources().getString(R.string.loose));
                 Intent intents = new Intent(this, RrdActivity.class);
                 Bundle bundles = new Bundle();
                 bundles.putSerializable(RrdData.getRRDId(), dados);
@@ -238,7 +238,7 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                 break;
             case R.id.btn_overflow_tav_avulso:
                 TavData dadaTav = new TavData();
-                dadaTav.setTavType(getResources().getString(R.string.avulso));
+                dadaTav.setTavType(getResources().getString(R.string.loose));
                 Intent intentTav = new Intent(this, TavActivity.class);
                 Bundle bundleTav = new Bundle();
                 bundleTav.putSerializable(TavData.getTavId(), dadaTav);
@@ -247,7 +247,7 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                 break;
             case R.id.btn_overflow_tca_avulso:
                 TcaData dadaTca = new TcaData();
-                dadaTca.setTcaType(getResources().getString(R.string.avulso));
+                dadaTca.setTcaType(getResources().getString(R.string.loose));
                 Intent intentTca = new Intent(this, TcaActivity.class);
                 Bundle bundleTca = new Bundle();
                 bundleTca.putSerializable(TcaData.getTcaId(), dadaTca);
@@ -270,26 +270,27 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
             int title = ((Nameable) drawerItem).getNameRes();
             getSupportActionBar().setTitle(title);
             switch (title) {
-                case R.string.acesso_ao_sistransito:
+                case R.string.renavan_search:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ConsultPlateFragment.newInstance()).commit();
                     break;
-                case R.string.texto_titulo_cpf:
+                case R.string.search_cnh:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SearchCnhFragment.newInstance()).commit();
                     break;
-                case R.string.opcoes_log:
+                case R.string.document_history:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, LogListFragment.newInstance()).commit();
                     break;
-                case R.string.tabela_infracoes:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, InfrationTable.newInstance()).commit();
+                case R.string.infraction_table:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, InfractionTable.newInstance()).commit();
                     break;
                 case R.string.logout:
                     AppObject.getTinyDB(this).putBoolean(AppConstants.isLogin, false);
                     finish();
+                    //triggerRebirth(this);
                     break;
                 case R.string.setting:
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SettingFragment.newInstance()).commit();
                     break;
-                case R.string.ajuda_sobre_app:
+                case R.string.app_help:
                     //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, AjudaFragment.newInstance()).commit();
                     getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ImageFragment.newInstance()).commit();
                     //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, VolleyFragment.newInstance()).commit();
@@ -301,6 +302,15 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         }
 
         return false;
+    }
+
+    public static void triggerRebirth(Context context) {
+        PackageManager packageManager = context.getPackageManager();
+        Intent intent = packageManager.getLaunchIntentForPackage(context.getPackageName());
+        ComponentName componentName = intent.getComponent();
+        Intent mainIntent = Intent.makeRestartActivityTask(componentName);
+        context.startActivity(mainIntent);
+        Runtime.getRuntime().exit(0);
     }
 
     private void checkFirstTimeAppSetup() {
@@ -379,7 +389,7 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         data.setDataisNull(true);
         Intent intent = new Intent(this, AitActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putSerializable(AitData.getIDAuto(), data);
+        bundle.putSerializable(AitData.getAitID(), data);
         intent.putExtras(bundle);
         startActivity(intent);
 

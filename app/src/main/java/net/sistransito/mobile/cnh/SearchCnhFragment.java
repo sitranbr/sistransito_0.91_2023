@@ -45,7 +45,7 @@ public class SearchCnhFragment extends Fragment implements
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		view = inflater.inflate(R.layout.consulta_cnh_fragment, null, false);
+		view = inflater.inflate(R.layout.cnh_search_fragment, null, false);
 		initializedView();
 		return view;
 	}
@@ -53,11 +53,11 @@ public class SearchCnhFragment extends Fragment implements
 	private void initializedView() {
 		cbOfflineSearch = (CheckBox) view
 				.findViewById(R.id.cb_cnh_offline);
-		rbRegister = (RadioButton) view.findViewById(R.id.rb_cnh_registro);
-		rbIdentity = (RadioButton) view.findViewById(R.id.rb_cnh_identidade);
+		rbRegister = (RadioButton) view.findViewById(R.id.rb_cnh_number);
+		rbIdentity = (RadioButton) view.findViewById(R.id.rb_cnh_register);
 		rbCnhCpf = (RadioButton) view.findViewById(R.id.rb_cnh_cpf);
-		rbCnhName = (RadioButton) view.findViewById(R.id.rb_cnh_nome);
-		btnSearch = (Button) view.findViewById(R.id.btn_consultar_cnh);
+		rbCnhName = (RadioButton) view.findViewById(R.id.rb_cnh_name);
+		btnSearch = (Button) view.findViewById(R.id.btn_search_cnh);
 		btnSearch.setOnClickListener(this);
 		llResultParent = (LinearLayout) view
 				.findViewById(R.id.ll_result_parent);
@@ -67,25 +67,25 @@ public class SearchCnhFragment extends Fragment implements
                 .findViewById(R.id.ll_input);
 		tvShowResult = (TextView) view.findViewById(R.id.tv_show_result);
 		tvShowResult.setOnClickListener(this);
-		etRegister = (EditText) view.findViewById(R.id.et_registro_input);
+		etRegister = (EditText) view.findViewById(R.id.et_register_input);
 		etIdentity = (EditText) view.findViewById(R.id.et_cnh_input);
 		etCnhCpf = (EditText) view.findViewById(R.id.et_cpf_input);
-		etName = (EditText) view.findViewById(R.id.et_nome_input);
-		etMothersName = (EditText) view.findViewById(R.id.et_mae_input);
-		etDate = (EditText) view.findViewById(R.id.et_data_input);
+		etName = (EditText) view.findViewById(R.id.et_name_input);
+		etMothersName = (EditText) view.findViewById(R.id.et_mother_name);
+		etDate = (EditText) view.findViewById(R.id.et_date_birth);
 
 		etRegister.addTextChangedListener(new ChangeText(
-				R.id.et_registro_input));
+				R.id.et_register_input));
 		etIdentity.addTextChangedListener(new ChangeText(
 				R.id.et_cnh_input));
 		etCnhCpf.addTextChangedListener(new ChangeText(
 				R.id.et_cpf_input));
 		etName.addTextChangedListener(new ChangeText(
-				R.id.et_nome_input));
+				R.id.et_name_input));
 		etMothersName.addTextChangedListener(new ChangeText(
-				R.id.et_mae_input));
+				R.id.et_mother_name));
 		etDate.addTextChangedListener(new ChangeText(
-				R.id.et_data_input));
+				R.id.et_date_birth));
 
 		etDate.setOnClickListener(this);
 
@@ -204,7 +204,7 @@ public class SearchCnhFragment extends Fragment implements
 
 			if (s.toString() != null) {
 				switch (id) {
-					case R.id.et_registro_input:
+					case R.id.et_register_input:
 						fromCNH.setRegister(s.toString());
 						break;
 					case R.id.et_cnh_input:
@@ -213,13 +213,13 @@ public class SearchCnhFragment extends Fragment implements
 					case R.id.et_cpf_input:
 						fromCNH.setCpf(s.toString());
 						break;
-					case R.id.et_nome_input:
+					case R.id.et_name_input:
 						fromCNH.setName(s.toString());
 						break;
-					case R.id.et_mae_input:
+					case R.id.et_mother_name:
 						fromCNH.setMothersName(s.toString());
 						break;
-					case R.id.et_data_input:
+					case R.id.et_date_birth:
 						fromCNH.setBirthDate(s.toString());
 						break;
 				}
@@ -246,7 +246,7 @@ public class SearchCnhFragment extends Fragment implements
 			removeResultView();
 			enableSearchButton();
 			break;
-		case R.id.btn_consultar_cnh:
+		case R.id.btn_search_cnh:
 			setQuerySearch();
 
 			if (isCnhSearch()) {
@@ -270,7 +270,7 @@ public class SearchCnhFragment extends Fragment implements
 						return true;
 					} else {
 						AnyAlertDialog.dialogShow(
-								getResources().getString(R.string.sem_conexao),
+								getResources().getString(R.string.no_network_connection),
 								getActivity(), "info");
 						return false;
 					}
@@ -288,32 +288,32 @@ public class SearchCnhFragment extends Fragment implements
 	private boolean checkInput() {
 		if (rbRegister.isChecked() && etRegister.getText().toString().isEmpty()) {
 			etRegister.setError(getResources().getString(
-					R.string.dados_da_cnh));
+					R.string.cnh_data));
 			etIdentity.requestFocus();
 			return false;
 		} else if (rbIdentity.isChecked() && etIdentity.getText().toString().isEmpty()) {
 			etIdentity.setError(getResources().getString(
-					R.string.dados_da_cnh));
+					R.string.cnh_data));
 			etIdentity.requestFocus();
 			return false;
 		} else if (rbCnhCpf.isChecked()&& etCnhCpf.getText().toString().isEmpty()) {
 			etCnhCpf.setError(getResources().getString(
-					R.string.cpf_condutor_cnh_ppd));
+					R.string.cpf_driver_cnh_ppd));
 			etCnhCpf.requestFocus();
 			return false;
 		} else if (rbCnhName.isChecked() && etName.getText().toString().isEmpty()) {
 			etName.setError(getResources().getString(
-					R.string.nome_condutor_cnh_ppd));
+					R.string.driver_name_cnh_ppd));
 			etName.requestFocus();
 			return false;
 		} else if (rbCnhName.isChecked() && etMothersName.getText().toString().isEmpty()) {
 			etMothersName.setError(getResources().getString(
-					R.string.nome_mae_cnh_ppd));
+					R.string.name_mother_cnh_ppd));
 			etMothersName.requestFocus();
 			return false;
 		} else if (rbCnhName.isChecked() && etDate.getText().toString().isEmpty()) {
 			etDate.setError(getResources().getString(
-					R.string.data_condutor_cnh_ppd));
+					R.string.birth_condutor_cnh_ppd));
 			etDate.requestFocus();
 			return false;
 		} else {
@@ -362,7 +362,7 @@ public class SearchCnhFragment extends Fragment implements
 			} else {
 
 				tvShowResult.setText(getResources().getString(
-						R.string.nehum_resultado_retornado));
+						R.string.no_result_returned));
 				addResultView();
 				clearAllFields();
 

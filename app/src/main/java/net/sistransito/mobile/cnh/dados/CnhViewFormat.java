@@ -22,22 +22,22 @@ public class CnhViewFormat {
     public CnhViewFormat(DataFromCnh fromCNH, Context context) {
         this.context = context;
 
-        this.name = context.getResources().getString(R.string.cnh_nome_format)
+        this.name = context.getResources().getString(R.string.cnh_name_format)
                 + fromCNH.getName() + "  ";
 
-        this.register = context.getResources().getString(R.string.cnh_registro_format)
+        this.register = context.getResources().getString(R.string.cnh_register_format)
                 + fromCNH.getRegister() + "  ";
 
         this.mathersName = AppConstants.NEW_LINE
-                + context.getResources().getString(R.string.cnh_mae_format)
+                + context.getResources().getString(R.string.cnh_mother_name_format)
                 + fromCNH.getMothersName();
 
         this.state = AppConstants.NEW_LINE
-                + context.getResources().getString(R.string.uf_format)
+                + context.getResources().getString(R.string.state_format)
                 + fromCNH.getState();
 
         this.birthDate = AppConstants.NEW_LINE
-                + context.getResources().getString(R.string.cnh_nascimento_format)
+                + context.getResources().getString(R.string.cnh_birthday_format)
                 + fromCNH.getBirthDate();
 
         this.identity = AppConstants.NEW_LINE
@@ -49,16 +49,16 @@ public class CnhViewFormat {
                 + fromCNH.getCpf();
 
         this.cnhCategory = AppConstants.NEW_LINE
-                + context.getResources().getString(R.string.cnh_categoria_format)
+                + context.getResources().getString(R.string.cnh_category_format)
                 + fromCNH.getCnhCategory() + AppConstants.NEW_LINE;
 
-        this.cnhValidity = context.getResources().getString(R.string.cnh_validade_format)
+        this.cnhValidity = context.getResources().getString(R.string.cnh_validity_format)
                 + fromCNH.getCnhValidity() + AppConstants.NEW_LINE;
 
-        this.cnhPoints = context.getResources().getString(R.string.cnh_pontos_format)
+        this.cnhPoints = context.getResources().getString(R.string.cnh_points_format)
                 + fromCNH.getCnhPoints() + AppConstants.NEW_LINE;
 
-        this.chnBlock = context.getResources().getString(R.string.cnh_bloqueio_format)
+        this.chnBlock = context.getResources().getString(R.string.cnh_block_format)
                 + fromCNH.getCnhBlock() + AppConstants.TWO_LINES;
 
         this.cnhSituation = fromCNH.getCnhSituation() + AppConstants.NEW_LINE;

@@ -102,7 +102,7 @@
         <item>GOVERNO BRASILEIRO</item>
     </string-array>
 
-    <string-array name="auto_species">
+    <string-array name="ait_species">
         <item></item>
         <item>PASSAGEIRO</item>
         <item>CARGA</item>
@@ -344,7 +344,7 @@
         <item>Trincado</item>
     </string-array>
 
-    <!-- acesseroris array -->
+    <!-- acesserories array -->
 
     <string-array name="ac_0">
         <item>Normal</item>
@@ -352,54 +352,64 @@
         <item>Inoperante</item>
         <item>Quebrado </item>
     </string-array>
+
     <string-array name="ac_1">
         <item>Normal</item>
         <item>Não tem </item>
     </string-array>
+
     <string-array name="ac_2">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Rasgado</item>
         <item>Riscado </item>
     </string-array>
+
     <string-array name="ac_3">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_4">
         <item>Normal</item>
         <item>Quebrado</item>
         <item>Riscado</item>
         <item>Trincado </item>
     </string-array>
+
     <string-array name="ac_5">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_6">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Vencido </item>
     </string-array>
+
     <string-array name="ac_7">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante</item>
         <item>Quebrado</item>
     </string-array>
+
     <string-array name="ac_8">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante</item>
         <item>Quebrado</item>
     </string-array>
+
     <string-array name="ac_9">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_10">
         <item>Normal</item>
         <item>Amongado</item>
@@ -407,6 +417,7 @@
         <item>Riscado</item>
         <item>Trincado </item>
     </string-array>
+
     <string-array name="ac_11">
         <item>Normal</item>
         <item>Amongado</item>
@@ -414,26 +425,31 @@
         <item>Riscado</item>
         <item>Trincado </item>
     </string-array>
+
     <string-array name="ac_12">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_13">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_14">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_15">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_16">
         <item>Normal</item>
         <item>Não tem</item>
@@ -441,6 +457,7 @@
         <item>Quebrado</item>
         <item>Trincado </item>
     </string-array>
+
     <string-array name="ac_17">
         <item>Normal</item>
         <item>Não tem</item>
@@ -448,27 +465,32 @@
         <item>Quebrado</item>
         <item>Trincado </item>
     </string-array>
+
     <string-array name="ac_18">
         <item>Normal</item>
         <item>Parcial</item>
         <item>Não tem </item>
     </string-array>
+
     <string-array name="ac_19">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_20">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante </item>
     </string-array>
+
     <string-array name="ac_21">
         <item>Normal</item>
         <item>Não tem</item>
         <item>Inoperante</item>
         <item>Empenado</item>
     </string-array>
+
     <string-array name="overflow">
         <item>Configurar</item>
         <item>Ajuda</item>
