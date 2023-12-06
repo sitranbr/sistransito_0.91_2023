@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -39,7 +39,7 @@
                     android:textColor="@color/gray_5"
                     android:textCursorDrawable="@null" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -158,7 +158,7 @@
                 android:background="@color/gray_2"
                 android:orientation="vertical" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -177,9 +177,9 @@
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -198,7 +198,7 @@
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
         </LinearLayout>
@@ -208,7 +208,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -227,7 +227,7 @@
                     android:textColor="@color/gray_5"
                     android:textCursorDrawable="@null" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 

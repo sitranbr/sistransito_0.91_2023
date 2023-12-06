@@ -1,7 +1,7 @@
 package net.sistransito;
 
 import android.content.Context;
-import android.support.multidex.MultiDexApplication;
+import androidx.multidex.MultiDexApplication;
 
 //It is used to define the application's global context.
 public class Application extends MultiDexApplication {

@@ -60,7 +60,7 @@
                 android:orientation="vertical"
                 android:paddingRight="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -79,7 +79,7 @@
                         android:textColor="@color/gray_5"
                         android:paddingBottom="@dimen/width_padding_15" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/tv_auto_search_plate"
@@ -157,7 +157,7 @@
         </LinearLayout>
 
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -175,9 +175,9 @@
                 android:inputType="textCapCharacters"
                 android:paddingBottom="@dimen/width_padding_15" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -195,9 +195,9 @@
                 android:inputType="textCapCharacters"
                 android:paddingBottom="@dimen/width_padding_15" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -214,9 +214,9 @@
                 android:inputType="textCapCharacters"
                 android:paddingBottom="@dimen/width_padding_15" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -233,9 +233,9 @@
                 android:inputType="textCapCharacters"
                 android:paddingBottom="@dimen/width_padding_15" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -252,7 +252,7 @@
                 android:inputType="textCapCharacters"
                 android:paddingBottom="@dimen/width_padding_15" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <fr.ganfra.materialspinner.MaterialSpinner
             android:id="@+id/spinner_auto_especie"

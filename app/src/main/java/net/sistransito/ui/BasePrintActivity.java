@@ -3,8 +3,8 @@ package net.sistransito.ui;
 import android.bluetooth.BluetoothDevice;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.SetttingDatabaseHelper;

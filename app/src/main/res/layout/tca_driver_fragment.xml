@@ -15,7 +15,7 @@
         android:orientation="vertical"
         android:padding="@dimen/width_padding" >
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -33,7 +33,7 @@
                 android:inputType="textCapCharacters"
                 android:paddingBottom="@dimen/width_padding_16" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -48,7 +48,7 @@
                 android:orientation="vertical"
                 android:paddingRight="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -65,7 +65,7 @@
                         android:inputType="number"
                         android:paddingBottom="@dimen/width_padding_16" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -76,7 +76,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -93,12 +93,12 @@
                         android:inputType="number"
                         android:paddingBottom="@dimen/width_padding_16" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -115,9 +115,9 @@
                 android:inputType="number"
                 android:paddingBottom="@dimen/width_padding_16" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -134,7 +134,7 @@
                 android:inputType="number"
                 android:paddingBottom="@dimen/width_padding_16" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                 android:orientation="vertical"
                 android:paddingRight="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -166,7 +166,7 @@
                         android:inputType="textCapCharacters"
                         android:paddingBottom="@dimen/width_padding_16" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -224,7 +224,7 @@
                 android:orientation="vertical"
                 android:paddingRight="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -241,7 +241,7 @@
                         android:inputType="number"
                         android:paddingBottom="@dimen/width_padding_16" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -252,7 +252,7 @@
                 android:orientation="vertical"
                 android:paddingLeft="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -269,12 +269,12 @@
                         android:inputType="number"
                         android:paddingBottom="@dimen/width_padding_16" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
         </LinearLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColorHint="@color/primary"
@@ -291,7 +291,7 @@
                 android:inputType="textCapCharacters"
                 android:paddingBottom="@dimen/width_padding_16" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </LinearLayout>
 

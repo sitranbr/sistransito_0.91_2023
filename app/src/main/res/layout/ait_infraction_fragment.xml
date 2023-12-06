@@ -34,7 +34,7 @@
                 android:focusableInTouchMode="true"
                 android:orientation="vertical" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/til_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,7 +62,7 @@
                         android:textCursorDrawable="@null" >
                     </AutoCompleteTextView>
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:id="@+id/tv_clear_search"
@@ -92,7 +92,7 @@
                 android:orientation="vertical"
                 android:paddingEnd="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -111,7 +111,7 @@
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -125,7 +125,7 @@
                 android:paddingStart="@dimen/indicator_width"
                 android:paddingEnd="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -143,7 +143,7 @@
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -157,7 +157,7 @@
                 android:paddingStart="@dimen/indicator_width"
                 android:paddingEnd="@dimen/indicator_width" >
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textColorHint="@color/primary"
@@ -175,7 +175,7 @@
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
@@ -201,7 +201,7 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical" >
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -226,7 +226,7 @@
                     android:textColor="@color/gray_5"
                     android:textCursorDrawable="@null" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/tv_clear_obs"
@@ -252,7 +252,7 @@
             android:text="@string/rb_tca"
             android:textColor="@color/primary" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/til_auto_tca"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -270,7 +270,7 @@
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <com.rey.material.widget.CheckBox
             android:id="@+id/cb_procedimentos"
@@ -406,7 +406,7 @@
                 app:ms_multiline="true"
                 app:ms_baseColor="@color/primary" />
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -424,9 +424,9 @@
                     android:textColor="@color/gray_5"
                     android:textCursorDrawable="@null" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -443,9 +443,9 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -462,7 +462,7 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -478,7 +478,7 @@
                     android:orientation="vertical"
                     android:paddingEnd="@dimen/indicator_width" >
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/primary"
@@ -495,7 +495,7 @@
                             android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
@@ -525,7 +525,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -542,9 +542,9 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -561,9 +561,9 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -580,7 +580,7 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -607,7 +607,7 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -624,7 +624,7 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
                 android:id="@+id/rg_tipo_documento_embarcador"
@@ -653,7 +653,7 @@
 
             </RadioGroup>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_cpf_embarcador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -672,9 +672,9 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_cnpj_embarcador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -693,9 +693,9 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
@@ -712,7 +712,7 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
                 android:id="@+id/rg_tipo_documento_transportador"
@@ -741,7 +741,7 @@
 
             </RadioGroup>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_cpf_transportador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -760,9 +760,9 @@
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_cnpj_transportador"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -782,7 +782,7 @@
                     android:textColor="@color/gray_5"
                     android:layout_marginBottom="@dimen/padding_top_edit" />
 
-            </android.support.design.widget.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 

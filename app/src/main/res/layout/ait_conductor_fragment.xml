@@ -105,7 +105,7 @@
                     android:focusableInTouchMode="true"
                     android:orientation="vertical" >
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/primary"
@@ -122,7 +122,7 @@
                             android:textColor="@color/gray_5"
                             android:paddingBottom="@dimen/width_padding_15" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
@@ -143,7 +143,7 @@
                     android:orientation="vertical"
                     android:paddingRight="@dimen/indicator_width" >
 
-                        <android.support.design.widget.TextInputLayout
+                        <com.google.android.material.textfield.TextInputLayout
                             android:layout_width="match_parent"
                             android:layout_weight="5"
                             android:layout_height="wrap_content"
@@ -161,7 +161,7 @@
                             android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5"
                             android:paddingBottom="@dimen/width_padding_15" />
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                         <TextView
                             android:id="@+id/tv_auto_search_cnh"
@@ -230,7 +230,7 @@
                         app:ms_multiline="true"
                         app:ms_baseColor="@color/primary" />
 
-                    <android.support.design.widget.TextInputLayout
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/primary"
@@ -248,7 +248,7 @@
                             android:textColor="@color/gray_5"
                             android:paddingBottom="@dimen/width_padding_15" />
 
-                    </android.support.design.widget.TextInputLayout>
+                    </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
 
