@@ -83,18 +83,15 @@ public class TavVehicleFragment extends Fragment implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_tav_acessorios:
+		int id = v.getId();
+		if (id == R.id.btn_tav_acessorios) {
 			btnTavAccessories.setEnabled(false);
 			btnTavStructure.setEnabled(true);
 			pager.setCurrentItem(1);
-			break;
-
-		case R.id.btn_tav_estrutura:
+		} else if (id == R.id.btn_tav_estrutura) {
 			btnTavAccessories.setEnabled(true);
 			btnTavStructure.setEnabled(false);
 			pager.setCurrentItem(0);
-			break;
 		}
 	}
 

@@ -212,45 +212,34 @@ public class TcaQuizFragment extends Fragment implements
 	@Override
 	public void onClick(View v) {
 
-		switch (v.getId()) {
-
-		case R.id.btn_tca_check:
+		int id = v.getId();
+		if (id == R.id.btn_tca_check) {
 			AnyAlertDialog
 					.dialogShow(tcaData.getTCAViewData(getActivity()),
 							getActivity(), getActivity().getResources()
 									.getString(R.string.list_tca_issued));
-			break;
-		case R.id.btn_tca_generation:
+		} else if (id == R.id.btn_tca_generation) {
 			(DatabaseCreator.getTcaDatabaseAdapter(getActivity()))
 					.setData(tcaData);
 			getActivity().startActivity(
 					new Intent(getActivity(), TcaLister.class));
 			getActivity().finish();
-
-			break;
-
-		case R.id.btn_tca_date_picker_intoxicated_driver:
+		} else if (id == R.id.btn_tca_date_picker_intoxicated_driver) {
 			callDatePicker(R.id.btn_tca_date_picker_intoxicated_driver);
-			break;
-		case R.id.btn_tca_date_picker_drunk_driver:
+		} else if (id == R.id.btn_tca_date_picker_drunk_driver) {
 			callDatePicker(R.id.btn_tca_date_picker_drunk_driver);
-			break;
-
-		case R.id.btn_tca_time_picker_drunk_driver:
+		} else if (id == R.id.btn_tca_time_picker_drunk_driver) {
 			callTimePicker(R.id.btn_tca_time_picker_drunk_driver);
-			break;
-
-		case R.id.btn_tca_time_picker_intoxicated_driver:
+		} else if (id == R.id.btn_tca_time_picker_intoxicated_driver) {
 			callTimePicker(R.id.btn_tca_time_picker_intoxicated_driver);
-			break;
 		}
 
 	}
 
 	@Override
 	public void onCheckedChanged(RadioGroup view, int check_id) {
-		switch (view.getId()) {
-		case R.id.rg_condutor_transito:
+		int id = view.getId();
+		if (id == R.id.rg_condutor_transito) {
 			if (check_id != -1) {
 				String value = ((RadioButton) view
 						.findViewById(rgTrafficConductor
@@ -259,8 +248,7 @@ public class TcaQuizFragment extends Fragment implements
 				value = value.trim();
 				tcaData.setDriverInvolvedInCarAccident(value);
 			}
-			break;
-		case R.id.rg_condutor_alcoolica:
+		} else if (id == R.id.rg_condutor_alcoolica) {
 			if (check_id != -1) {
 				if (rgAlcoholConductor.getCheckedRadioButtonId() == R.id.rd_condutor_alcoolica_sim) {
 					addAlcoholView();
@@ -274,10 +262,7 @@ public class TcaQuizFragment extends Fragment implements
 							.setText(sButttonTextTime);
 				}
 			}
-			break;
-
-		case R.id.rg_condutor_toxica:
-
+		} else if (id == R.id.rg_condutor_toxica) {
 			if (check_id != -1) {
 
 				if (rgToxicConductor.getCheckedRadioButtonId() == R.id.rd_condutor_toxica_sim) {
@@ -295,9 +280,7 @@ public class TcaQuizFragment extends Fragment implements
 				}
 
 			}
-			break;
-
-		case R.id.rg_sabe_onde_esta:
+		} else if (id == R.id.rg_sabe_onde_esta) {
 			if (check_id != -1) {
 
 				tcaData.setKnowsWhereItIs(((RadioButton) view
@@ -306,9 +289,7 @@ public class TcaQuizFragment extends Fragment implements
 						.toString().trim());
 
 			}
-			break;
-
-		case R.id.rg_sabe_a_data_e_a_hora:
+		} else if (id == R.id.rg_sabe_a_data_e_a_hora) {
 			if (check_id != -1) {
 
 				tcaData.setKnowsTheDateAndTime(((RadioButton) view
@@ -317,8 +298,7 @@ public class TcaQuizFragment extends Fragment implements
 						.toString().trim());
 
 			}
-			break;
-		case R.id.rg_sabe_seu_enderecao:
+		} else if (id == R.id.rg_sabe_seu_enderecao) {
 			if (check_id != -1) {
 
 				tcaData.setKnowsItsAddress(((RadioButton) view
@@ -327,8 +307,7 @@ public class TcaQuizFragment extends Fragment implements
 						.toString().trim());
 
 			}
-			break;
-		case R.id.rg_lembra_dos_atos_cometidos:
+		} else if (id == R.id.rg_lembra_dos_atos_cometidos) {
 			if (check_id != -1) {
 
 				tcaData.setRememberTheActsCommitted(((RadioButton) view
@@ -337,15 +316,12 @@ public class TcaQuizFragment extends Fragment implements
 						.toString().trim());
 
 			}
-			break;
-
-		case R.id.rg_conclusao:
+		} else if (id == R.id.rg_conclusao) {
 			if (check_id != -1) {
 				tcaData.setConclusion(((RadioButton) view.findViewById(rgConclusion
 						.getCheckedRadioButtonId())).getText().toString()
 						.trim());
 			}
-			break;
 		}
 
 	}
@@ -380,17 +356,12 @@ public class TcaQuizFragment extends Fragment implements
 	public void date(String date, int view_id) {
 		Log.d("date_picker", "date_picker");
 		if (date != null) {
-			switch (view_id) {
-			case R.id.btn_tca_date_picker_intoxicated_driver:
-
+			if (view_id == R.id.btn_tca_date_picker_intoxicated_driver) {
 				btnTcaDateToxicConductor.setText(date);
 				tcaData.setDateIngestedSubstance(date);
-				break;
-				case R.id.btn_tca_date_picker_drunk_driver:
+			} else if (view_id == R.id.btn_tca_date_picker_drunk_driver) {
 				btnTcaDateAlcoholConductor.setText(date);
 				tcaData.setDateThatDrankAlcohol(date);
-
-				break;
 			}
 
 		}
@@ -400,18 +371,12 @@ public class TcaQuizFragment extends Fragment implements
 	@Override
 	public void time(String time, int view_id) {
 		if (time != null) {
-			switch (view_id) {
-
-				case R.id.btn_tca_time_picker_intoxicated_driver:
-
+			if (view_id == R.id.btn_tca_time_picker_intoxicated_driver) {
 				btnTcaTimeToxicConductor.setText(time);
 				tcaData.setTimeIngestedSubstance(time);
-				break;
-				case R.id.btn_tca_time_picker_drunk_driver:
+			} else if (view_id == R.id.btn_tca_time_picker_drunk_driver) {
 				btnTcaTimeAlcoholConductor.setText(time);
 				tcaData.setTimeThatDrankAlcohol(time);
-
-				break;
 			}
 
 		}
@@ -441,30 +406,13 @@ public class TcaQuizFragment extends Fragment implements
 	@Override
 	public void onCheckedChanged(CompoundButton view, boolean isChecked) {
 
-		switch (view.getId()) {
-		case R.id.checkBox_condutor_apresenta_1:
-		case R.id.checkBox_condutor_apresenta_2:
-		case R.id.checkBox_condutor_apresenta_3:
-		case R.id.checkBox_condutor_apresenta_4:
-		case R.id.checkBox_condutor_apresenta_5:
-		case R.id.checkBox_condutor_apresenta_6:
+		int id = view.getId();
+		if (id == R.id.checkBox_condutor_apresenta_1 || id == R.id.checkBox_condutor_apresenta_2 || id == R.id.checkBox_condutor_apresenta_3 || id == R.id.checkBox_condutor_apresenta_4 || id == R.id.checkBox_condutor_apresenta_5 || id == R.id.checkBox_condutor_apresenta_6) {
 			getConductorShowsSignsOf();
-			break;
-		case R.id.cb_atitude_ocorre_1:
-		case R.id.cb_atitude_ocorre_2:
-		case R.id.cb_atitude_ocorre_3:
-		case R.id.cb_atitude_ocorre_4:
-		case R.id.cb_atitude_ocorre_5:
-		case R.id.cb_atitude_ocorre_6:
+		} else if (id == R.id.cb_atitude_ocorre_1 || id == R.id.cb_atitude_ocorre_2 || id == R.id.cb_atitude_ocorre_3 || id == R.id.cb_atitude_ocorre_4 || id == R.id.cb_atitude_ocorre_5 || id == R.id.cb_atitude_ocorre_6) {
 			getInHisAttitudeOccurs();
-			break;
-
-		case R.id.cb_tca_em_relacao_a_sua_verbal_ocorre_1:
-		case R.id.cb_tca_em_relacao_a_sua_verbal_ocorre_2:
+		} else if (id == R.id.cb_tca_em_relacao_a_sua_verbal_ocorre_1 || id == R.id.cb_tca_em_relacao_a_sua_verbal_ocorre_2) {
 			getInRelationVerbalAbilityOccurs();
-
-			break;
-
 		}
 	}
 

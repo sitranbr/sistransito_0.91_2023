@@ -1,5 +1,6 @@
 package net.sistransito.mobile.setting;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -49,6 +50,7 @@ public class SettingFragment extends Fragment implements
     }
 
 
+    @SuppressLint("Range")
     private void initializedView() {
         etSettingState = (EditText) view.findViewById(R.id.et_setting_uf);
         etSettingPrinter = (EditText) view.findViewById(R.id.et_setting_printer);
@@ -97,56 +99,49 @@ public class SettingFragment extends Fragment implements
 
     @Override
     public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-        switch (view.getId()) {
-            case R.id.checkBoxAutoBackup:
-                if (isChecked) {
-                    database.setAutoBackup(true);
-                } else {
-                    database.setAutoBackup(false);
-                }
-                break;
-            case R.id.checkBoxRington:
-                if (isChecked) {
-                    database.setRingtone(true);
-                } else {
-                    database.setRingtone(false);
-                }
-                break;
-            case R.id.checkBoxVibarte:
-                Log.d("vibrar", database.getVibrator() + "");
-                if (isChecked) {
-                    database.setVibrator(true);
-                } else {
-                    database.setVibrator(false);
-                }
-                Log.d("não vibra", database.getVibrator() + "");
-                break;
+        int id = view.getId();
+        if (id == R.id.checkBoxAutoBackup) {
+            if (isChecked) {
+                database.setAutoBackup(true);
+            } else {
+                database.setAutoBackup(false);
+            }
+        } else if (id == R.id.checkBoxRington) {
+            if (isChecked) {
+                database.setRingtone(true);
+            } else {
+                database.setRingtone(false);
+            }
+        } else if (id == R.id.checkBoxVibarte) {
+            Log.d("vibrar", database.getVibrator() + "");
+            if (isChecked) {
+                database.setVibrator(true);
+            } else {
+                database.setVibrator(false);
+            }
+            Log.d("não vibra", database.getVibrator() + "");
         }
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_update:
-                etSettingState.setText(etSettingState.getText().toString());
-                etSettingPrinter.setText(etSettingPrinter.getText().toString());
-                if (database.setUpdatePrinterState(etSettingState.getText().toString(),
-                        etSettingPrinter.getText().toString())) {
-                    Routine.showAlert(getResources().getString(R.string.update_success), getActivity());
-                } else {
-                    Routine.showAlert(getResources().getString(R.string.update_erro), getActivity());
-                }
-                break;
-            case R.id.btn_sync:
-                if (NetworkConnection.isNetworkAvailable(getActivity())) {
-                    SyncDataInformation information = new SyncDataInformation(getActivity());
-                    information.execute("");
-                } else {
-                    Routine.showAlert(getResources().getString(R.string.no_network_connection), getActivity());
-                }
-
-                break;
-
+        int id = v.getId();
+        if (id == R.id.btn_update) {
+            etSettingState.setText(etSettingState.getText().toString());
+            etSettingPrinter.setText(etSettingPrinter.getText().toString());
+            if (database.setUpdatePrinterState(etSettingState.getText().toString(),
+                    etSettingPrinter.getText().toString())) {
+                Routine.showAlert(getResources().getString(R.string.update_success), getActivity());
+            } else {
+                Routine.showAlert(getResources().getString(R.string.update_erro), getActivity());
+            }
+        } else if (id == R.id.btn_sync) {
+            if (NetworkConnection.isNetworkAvailable(getActivity())) {
+                SyncDataInformation information = new SyncDataInformation(getActivity());
+                information.execute("");
+            } else {
+                Routine.showAlert(getResources().getString(R.string.no_network_connection), getActivity());
+            }
         }
 
     }

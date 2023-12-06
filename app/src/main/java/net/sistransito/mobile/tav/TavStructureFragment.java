@@ -192,67 +192,45 @@ public class TavStructureFragment extends Fragment implements
 
 		String value = (String) parent.getItemAtPosition(pos);
 		value = filterName.filter(value);
-		switch (parent.getId()) {
-		case R.id.cabeca_de_alavanca:
+		int id = parent.getId();
+		if (id == R.id.cabeca_de_alavanca) {
 			tavData.setLeverHead(value);
-			break;
-		case R.id.carroceria:
+		} else if (id == R.id.carroceria) {
 			tavData.setCarBody(value);
-			break;
-		case R.id.forro:
+		} else if (id == R.id.forro) {
 			tavData.setCeiling(value);
-			break;
-
-		case R.id.lataria_capo:
+		} else if (id == R.id.lataria_capo) {
 			tavData.setHoodBody(value);
-			break;
-
-		case R.id.lataria_lado_direito:
+		} else if (id == R.id.lataria_lado_direito) {
 			tavData.setBodyworkRightSide(value);
-			break;
-		case R.id.lataria_lado_esquerdo:
+		} else if (id == R.id.lataria_lado_esquerdo) {
 			tavData.setBodyWorkLeftSide(value);
-			break;
-		case R.id.lataria_tapa_porta_mala:
+		} else if (id == R.id.lataria_tapa_porta_mala) {
 			tavData.setTrunkBodywork(value);
-			break;
-		case R.id.lataria_teto:
+		} else if (id == R.id.lataria_teto) {
 			tavData.setRoofBodywork(value);
-			break;
-		case R.id.motor:
+		} else if (id == R.id.motor) {
 			tavData.setEngine(value);
-			break;
-		case R.id.painel:
+		} else if (id == R.id.painel) {
 			tavData.setDashboard(value);
-			break;
-		case R.id.pintura_capo:
+		} else if (id == R.id.pintura_capo) {
 			tavData.setHoodPaint(value);
-			break;
-		case R.id.pintura_lado_direito:
+		} else if (id == R.id.pintura_lado_direito) {
 			tavData.setRightSidePaint(value);
-			break;
-		case R.id.pintura_lado_esquerdo:
+		} else if (id == R.id.pintura_lado_esquerdo) {
 			tavData.setLeftSidePaint(value);
-			break;
-		case R.id.pintura_porta_mala:
+		} else if (id == R.id.pintura_porta_mala) {
 			tavData.setTrunkPainting(value);
-			break;
-		case R.id.pintura_teto:
+		} else if (id == R.id.pintura_teto) {
 			tavData.setHoodPainting(value);
-			break;
-		case R.id.radiador:
+		} else if (id == R.id.radiador) {
 			tavData.setRadiator(value);
-			break;
-		case R.id.vidros_laterais:
+		} else if (id == R.id.vidros_laterais) {
 			tavData.setSideGlass(value);
-			break;
-		case R.id.vidro_para_brisa:
+		} else if (id == R.id.vidro_para_brisa) {
 			tavData.setWindShield(value);
-			break;
-		case R.id.vidro_traseiro:
+		} else if (id == R.id.vidro_traseiro) {
 			tavData.setRearWindshield(value);
-			break;
-
 		}
 
 	}

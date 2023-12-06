@@ -78,15 +78,12 @@ public class PlateLister extends AppCompatActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.im_btn_back:
+		int id = v.getId();
+		if (id == R.id.im_btn_back) {
 			finish();
-			break;
-		case R.id.im_btn_delete:
+		} else if (id == R.id.im_btn_delete) {
 			finish();
 			startActivity(new Intent(PlateLister.this, PlateListerDelete.class));
-			break;
-
 		}
 	}
 

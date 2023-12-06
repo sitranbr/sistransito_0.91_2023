@@ -188,74 +188,51 @@ public class TavAccessoriesFragment extends Fragment implements
 	public void onItemSelected(AdapterView<?> parent, View v, int pos, long id) {
 		String value = (String) parent.getItemAtPosition(pos);
 		value = filterName.filter(value);
-		switch (parent.getId()) {
-		case R.id.sp_radio_antenna:
+		int parentId = parent.getId();
+		if (parentId == R.id.sp_radio_antenna) {
 			data.setAntenna(value);
-			break;
-		case R.id.sp_baggage_handler:
+		} else if (parentId == R.id.sp_baggage_handler) {
 			data.setTrunk(value);
-			break;
-		case R.id.sp_seat:
+		} else if (parentId == R.id.sp_seat) {
 			data.setSeats(value);
-			break;
-		case R.id.sp_battery:
+		} else if (parentId == R.id.sp_battery) {
 			data.setBaterry(value);
-			break;
-		case R.id.sp_hubcap:
+		} else if (parentId == R.id.sp_hubcap) {
 			data.setWheelCover(value);
-			break;
-		case R.id.sp_air_conditioner:
+		} else if (parentId == R.id.sp_air_conditioner) {
 			data.setAirConditioner(value);
-			break;
-		case R.id.sp_fire_extinguisher:
+		} else if (parentId == R.id.sp_fire_extinguisher) {
 			data.setFireExtinguisher(value);
-			break;
-		case R.id.sp_headlight:
+		} else if (parentId == R.id.sp_headlight) {
 			data.setHeadLight(value);
-			break;
-		case R.id.rear_light:
+		} else if (parentId == R.id.rear_light) {
 			data.setRearLight(value);
-			break;
-		case R.id.sp_wheel_jack:
+		} else if (parentId == R.id.sp_wheel_jack) {
 			data.setJack(value);
-			break;
-		case R.id.sp_front_bumper:
+		} else if (parentId == R.id.sp_front_bumper) {
 			data.setFrontBumper(value);
-			break;
-		case R.id.sp_rear_bumper:
+		} else if (parentId == R.id.sp_rear_bumper) {
 			data.setHearBumper(value);
-			break;
-		case R.id.sp_driver_sunshade:
+		} else if (parentId == R.id.sp_driver_sunshade) {
 			data.setDriverSunVisor(value);
-			break;
-		case R.id.sp_tires:
+		} else if (parentId == R.id.sp_tires) {
 			data.setTires(value);
-			break;
-		case R.id.sp_step_tire:
+		} else if (parentId == R.id.sp_step_tire) {
 			data.setSpareTire(value);
-			break;
-		case R.id.sp_radio:
+		} else if (parentId == R.id.sp_radio) {
 			data.setRadio(value);
-			break;
-		case R.id.sp_internal_rearview:
+		} else if (parentId == R.id.sp_internal_rearview) {
 			data.setRearviewMirror(value);
-			break;
-		case R.id.sp_right_outside_mirror:
+		} else if (parentId == R.id.sp_right_outside_mirror) {
 			data.setOutsideMirror(value);
-			break;
-		case R.id.sp_carpet:
+		} else if (parentId == R.id.sp_carpet) {
 			data.setCarpet(value);
-			break;
-		case R.id.sp_triangle:
+		} else if (parentId == R.id.sp_triangle) {
 			data.setTriangle(value);
-			break;
-		case R.id.sp_steering_wheel:
+		} else if (parentId == R.id.sp_steering_wheel) {
 			data.setSteeringWheel(value);
-			break;
-		case R.id.sp_handlebars:
+		} else if (parentId == R.id.sp_handlebars) {
 			data.setMotorcycleHandlebar(value);
-			break;
-
 		}
 
 	}

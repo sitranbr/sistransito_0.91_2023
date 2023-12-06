@@ -1,5 +1,6 @@
 package net.sistransito.mobile.rrd;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -172,6 +173,7 @@ public class TabRrdDocumentFragment extends Fragment implements
 
 	}
 
+	@SuppressLint("Range")
 	public void setAutoCompleteCity() {
 
 		cityArray = new ArrayList<String>();
@@ -293,29 +295,21 @@ public class TabRrdDocumentFragment extends Fragment implements
 		public void afterTextChanged(Editable value) {
 			String s = (value.toString()).trim();
 
-                switch (id) {
-                    case R.id.et_rrd_driver_name:
-                        rrdData.setDriverName(s);
-                        break;
-                    case R.id.et_rrd_crlv_number:
-                        rrdData.setCrlvNumber(s);
-                        break;
-                    case R.id.et_rrd_uf:
-                        rrdData.setPlateState(s);
-                        break;
-                    case R.id.et_rrd_register_number:
-                        rrdData.setRegistrationNumber(s);
-                        break;
-                    case R.id.et_rrd_uf_registro:
-                        rrdData.setRegistrationState(s);
-                        break;
-                    case R.id.btn_rrd_data:
-                        rrdData.setDateCollected(s);
-                        break;
-                    case R.id.btn_rrd_hora:
-                        rrdData.setTimeCollected(s);
-                        break;
-                }
+			if (id == R.id.et_rrd_driver_name) {
+				rrdData.setDriverName(s);
+			} else if (id == R.id.et_rrd_crlv_number) {
+				rrdData.setCrlvNumber(s);
+			} else if (id == R.id.et_rrd_uf) {
+				rrdData.setPlateState(s);
+			} else if (id == R.id.et_rrd_register_number) {
+				rrdData.setRegistrationNumber(s);
+			} else if (id == R.id.et_rrd_uf_registro) {
+				rrdData.setRegistrationState(s);
+			} else if (id == R.id.btn_rrd_data) {
+				rrdData.setDateCollected(s);
+			} else if (id == R.id.btn_rrd_hora) {
+				rrdData.setTimeCollected(s);
+			}
 
 		}
 
@@ -386,34 +380,30 @@ public class TabRrdDocumentFragment extends Fragment implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.btn_rrd_validade:
-				MyDatePicker datePicker = new MyDatePicker();
-				bundle = new Bundle();
-				bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID, R.id.btn_rrd_validade);
-				datePicker.setArguments(bundle);
-				datePicker.setTargetFragment(this, 0);
-				datePicker.show(getActivity().getSupportFragmentManager(), "date");
-				break;
-			case R.id.btn_rrd_data:
-				MyDatePicker rrdDate = new MyDatePicker();
-				bundle = new Bundle();
-				bundle.putInt(rrdDate.MY_DATE_PICKER_ID,
-						R.id.btn_rrd_data);
-				rrdDate.setArguments(bundle);
-				rrdDate.setTargetFragment(this, 0);
-				rrdDate.show(getActivity().getSupportFragmentManager(), "date2");
-				break;
-
-			case R.id.btn_rrd_hora:
-				MyTimePicker picker = new MyTimePicker();
-				bundle = new Bundle();
-				bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID,
-						R.id.btn_rrd_hora);
-				picker.setArguments(bundle);
-				picker.setTargetFragment(this, 0);
-				picker.show(getActivity().getSupportFragmentManager(), "time");
-				break;
+		int id = v.getId();
+		if (id == R.id.btn_rrd_validade) {
+			MyDatePicker datePicker = new MyDatePicker();
+			bundle = new Bundle();
+			bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID, R.id.btn_rrd_validade);
+			datePicker.setArguments(bundle);
+			datePicker.setTargetFragment(this, 0);
+			datePicker.show(getActivity().getSupportFragmentManager(), "date");
+		} else if (id == R.id.btn_rrd_data) {
+			MyDatePicker rrdDate = new MyDatePicker();
+			bundle = new Bundle();
+			bundle.putInt(rrdDate.MY_DATE_PICKER_ID,
+					R.id.btn_rrd_data);
+			rrdDate.setArguments(bundle);
+			rrdDate.setTargetFragment(this, 0);
+			rrdDate.show(getActivity().getSupportFragmentManager(), "date2");
+		} else if (id == R.id.btn_rrd_hora) {
+			MyTimePicker picker = new MyTimePicker();
+			bundle = new Bundle();
+			bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID,
+					R.id.btn_rrd_hora);
+			picker.setArguments(bundle);
+			picker.setTargetFragment(this, 0);
+			picker.show(getActivity().getSupportFragmentManager(), "time");
 		}
 	}
 

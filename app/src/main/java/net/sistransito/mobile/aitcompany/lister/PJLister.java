@@ -88,10 +88,8 @@ public class PJLister extends BasePrintActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.im_btn_back:
-                finish();
-                break;
+        if (v.getId() == R.id.im_btn_back) {
+            finish();
         }
     }
 

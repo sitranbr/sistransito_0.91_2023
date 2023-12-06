@@ -75,14 +75,11 @@ public class ListerTable extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.im_btn_back:
-                finish();
-                break;
-            case R.id.im_btn_delete:
-                finish();
-                break;
-
+        int id = v.getId();
+        if (id == R.id.im_btn_back) {
+            finish();
+        } else if (id == R.id.im_btn_delete) {
+            finish();
         }
     }
 

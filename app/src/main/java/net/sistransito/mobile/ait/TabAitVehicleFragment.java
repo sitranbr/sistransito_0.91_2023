@@ -377,25 +377,18 @@ public class TabAitVehicleFragment extends DebugFragment implements
         public void afterTextChanged(Editable s) {
 
             if (s.toString() != null) {
-                switch (id) {
-                    case R.id.edit_vehicle_renavan:
-                        aitData.setRenavam(s.toString());
-                        break;
-                    case R.id.edit_vehicle_chassi:
-                        aitData.setChassi(s.toString());
-                        break;
-                    case R.id.edit_vehicle_plate:
-                        aitData.setPlate(s.toString());
-                        break;
-                    case R.id.edit_vehicle_color:
-                        aitData.setVehycleColor(s.toString());
-                        break;
-                    case R.id.edit_vehicle_brand:
-                        aitData.setVehicleBrand(s.toString());
-                        break;
-                    case R.id.edit_vehicle_model:
-                        aitData.setVehicleModel(s.toString());
-                        break;
+                if (id == R.id.edit_vehicle_renavan) {
+                    aitData.setRenavam(s.toString());
+                } else if (id == R.id.edit_vehicle_chassi) {
+                    aitData.setChassi(s.toString());
+                } else if (id == R.id.edit_vehicle_plate) {
+                    aitData.setPlate(s.toString());
+                } else if (id == R.id.edit_vehicle_color) {
+                    aitData.setVehycleColor(s.toString());
+                } else if (id == R.id.edit_vehicle_brand) {
+                    aitData.setVehicleBrand(s.toString());
+                } else if (id == R.id.edit_vehicle_model) {
+                    aitData.setVehicleModel(s.toString());
                 }
             }
         }

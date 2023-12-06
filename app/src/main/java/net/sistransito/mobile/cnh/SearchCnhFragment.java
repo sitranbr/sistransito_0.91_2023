@@ -203,25 +203,18 @@ public class SearchCnhFragment extends Fragment implements
 		public void afterTextChanged(Editable s) {
 
 			if (s.toString() != null) {
-				switch (id) {
-					case R.id.et_register_input:
-						fromCNH.setRegister(s.toString());
-						break;
-					case R.id.et_cnh_input:
-						fromCNH.setIdentity(s.toString());
-						break;
-					case R.id.et_cpf_input:
-						fromCNH.setCpf(s.toString());
-						break;
-					case R.id.et_name_input:
-						fromCNH.setName(s.toString());
-						break;
-					case R.id.et_mother_name:
-						fromCNH.setMothersName(s.toString());
-						break;
-					case R.id.et_date_birth:
-						fromCNH.setBirthDate(s.toString());
-						break;
+				if (id == R.id.et_register_input) {
+					fromCNH.setRegister(s.toString());
+				} else if (id == R.id.et_cnh_input) {
+					fromCNH.setIdentity(s.toString());
+				} else if (id == R.id.et_cpf_input) {
+					fromCNH.setCpf(s.toString());
+				} else if (id == R.id.et_name_input) {
+					fromCNH.setName(s.toString());
+				} else if (id == R.id.et_mother_name) {
+					fromCNH.setMothersName(s.toString());
+				} else if (id == R.id.et_date_birth) {
+					fromCNH.setBirthDate(s.toString());
 				}
 			}
 
@@ -241,12 +234,11 @@ public class SearchCnhFragment extends Fragment implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.tv_show_result:
+		int id = v.getId();
+		if (id == R.id.tv_show_result) {
 			removeResultView();
 			enableSearchButton();
-			break;
-		case R.id.btn_search_cnh:
+		} else if (id == R.id.btn_search_cnh) {
 			setQuerySearch();
 
 			if (isCnhSearch()) {
@@ -254,7 +246,6 @@ public class SearchCnhFragment extends Fragment implements
 				//Log.d("Latitude", gps.getLocation().getLatitude() + " ");
 				//Log.d("Longitude", gps.getLocation().getLongitude() + " ");
 			}
-			break;
 		}
 	}
 

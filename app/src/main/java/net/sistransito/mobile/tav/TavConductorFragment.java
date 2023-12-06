@@ -124,25 +124,16 @@ public class TavConductorFragment extends Fragment implements
 		@Override
 		public void afterTextChanged(Editable editable) {
 			String s = editable.toString();
-			switch (id) {
-			case R.id.et_tav_ait:
+			if (id == R.id.et_tav_ait) {
 				tavData.setAitNumber(s);
-				break;
-			case R.id.et_tav_cpf_cnpj:
+			} else if (id == R.id.et_tav_cpf_cnpj) {
 				tavData.setCpfCnpj(s);
-				break;
-
-			case R.id.et_tav_renavan_number:
+			} else if (id == R.id.et_tav_renavan_number) {
 				tavData.setRenavamNumber(s);
-				break;
-
-			case R.id.et_tav_chassi_number:
+			} else if (id == R.id.et_tav_chassi_number) {
 				tavData.setChassisNumber(s);
-				break;
-
-			case R.id.et_tav_proprietario:
+			} else if (id == R.id.et_tav_proprietario) {
 				tavData.setOwnerName(s);
-				break;
 			}
 		}
 

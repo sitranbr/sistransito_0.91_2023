@@ -1,5 +1,6 @@
 package net.sistransito.mobile.aitcompany;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
@@ -101,6 +102,7 @@ public class TabPJAddressFragment extends
 
     }
 
+    @SuppressLint("Range")
     public void setAutoCompleteCity() {
 
         cityArray = new ArrayList<String>();
@@ -264,10 +266,8 @@ public class TabPJAddressFragment extends
         @Override
         public void afterTextChanged(Editable edit) {
             String s = (edit.toString()).trim();
-            switch (id) {
-                case R.id.et_ait_local:
-                    pjData.setPlace(s.toString());
-                    break;
+            if (id == R.id.et_ait_local) {
+                pjData.setPlace(s.toString());
             }
         }
 
@@ -285,26 +285,23 @@ public class TabPJAddressFragment extends
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_ait_pj_date:
-                MyDatePicker pickerdate = new MyDatePicker();
-                bundle = new Bundle();
-                bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID,
-                        R.id.btn_ait_pj_date);
-                pickerdate.setArguments(bundle);
-                pickerdate.setTargetFragment(this, 0);
-                pickerdate.show(getActivity().getSupportFragmentManager(), "date");
-                break;
-
-            case R.id.btn_ait_pj_time:
-                MyTimePicker picker = new MyTimePicker();
-                bundle = new Bundle();
-                bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID,
-                        R.id.btn_ait_pj_time);
-                picker.setArguments(bundle);
-                picker.setTargetFragment(this, 0);
-                picker.show(getActivity().getSupportFragmentManager(), "time");
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_ait_pj_date) {
+            MyDatePicker pickerdate = new MyDatePicker();
+            bundle = new Bundle();
+            bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID,
+                    R.id.btn_ait_pj_date);
+            pickerdate.setArguments(bundle);
+            pickerdate.setTargetFragment(this, 0);
+            pickerdate.show(getActivity().getSupportFragmentManager(), "date");
+        } else if (id == R.id.btn_ait_pj_time) {
+            MyTimePicker picker = new MyTimePicker();
+            bundle = new Bundle();
+            bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID,
+                    R.id.btn_ait_pj_time);
+            picker.setArguments(bundle);
+            picker.setTargetFragment(this, 0);
+            picker.show(getActivity().getSupportFragmentManager(), "time");
         }
 
     }

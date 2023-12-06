@@ -143,19 +143,15 @@ public class AitCompanyActivity extends AppCompatActivity implements OnClickList
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.img_pj_btn_tab_conductor:
-                setPagerPosition(0);
-                break;
-            case R.id.img_pj_btn_tab_address:
-                setPagerPosition(1);
-                break;
-            case R.id.img_pj_btn_tab_infraction:
-                setPagerPosition(2);
-                break;
-            case R.id.im_pj_btn_back:
-                AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), null);
-                break;
+        int id = v.getId();
+        if (id == R.id.img_pj_btn_tab_conductor) {
+            setPagerPosition(0);
+        } else if (id == R.id.img_pj_btn_tab_address) {
+            setPagerPosition(1);
+        } else if (id == R.id.img_pj_btn_tab_infraction) {
+            setPagerPosition(2);
+        } else if (id == R.id.im_pj_btn_back) {
+            AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), null);
         }
     }
 

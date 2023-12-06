@@ -145,25 +145,19 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-			case R.id.im_btn_tab_vehicle:
-				setPagerPosition(0);
-				break;
-			case R.id.im_btn_tab_conductor:
-				setPagerPosition(1);
-				break;
-			case R.id.im_btn_tab_address:
-				setPagerPosition(2);
-				break;
-			case R.id.im_btn_tab_infraction:
-				setPagerPosition(3);
-				break;
-			case R.id.im_btn_tab_generation:
-				setPagerPosition(4);
-				break;
-			case R.id.im_ait_btn_back:
-				AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), "ait");
-				break;
+		int id = v.getId();
+		if (id == R.id.im_btn_tab_vehicle) {
+			setPagerPosition(0);
+		} else if (id == R.id.im_btn_tab_conductor) {
+			setPagerPosition(1);
+		} else if (id == R.id.im_btn_tab_address) {
+			setPagerPosition(2);
+		} else if (id == R.id.im_btn_tab_infraction) {
+			setPagerPosition(3);
+		} else if (id == R.id.im_btn_tab_generation) {
+			setPagerPosition(4);
+		} else if (id == R.id.im_ait_btn_back) {
+			AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), "ait");
 		}
 	}
 

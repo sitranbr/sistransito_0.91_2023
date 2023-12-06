@@ -163,16 +163,12 @@ public class TcaConductorFragment extends Fragment implements
         @Override
         public void afterTextChanged(Editable value) {
             String s = (value.toString()).trim();
-            switch (id) {
-                case R.id.et_tca_endereco:
-                    tcaData.setAddress(s);
-                    break;
-                case R.id.et_tca_bairro:
-                    tcaData.setDistrict(s);
-                    break;
-                case R.id.et_tca_municipio:
-                    tcaData.setCity(s);
-                    break;
+            if (id == R.id.et_tca_endereco) {
+                tcaData.setAddress(s);
+            } else if (id == R.id.et_tca_bairro) {
+                tcaData.setDistrict(s);
+            } else if (id == R.id.et_tca_municipio) {
+                tcaData.setCity(s);
             }
         }
 

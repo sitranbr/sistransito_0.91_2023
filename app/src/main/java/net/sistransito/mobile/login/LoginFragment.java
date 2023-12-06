@@ -75,21 +75,19 @@ public class LoginFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_register:
-                anyPageChangeListener.onPageChange(AppConstants.LOGIN_FRAGMENT_1);
-                break;
-            case R.id.btn_login:
-                if (checkInput()) {
-                    if (NetworkConnection.isNetworkAvailable(getActivity())) {
-                        //imm.hideSoftInputFromWindow(btnLogin.getWindowToken(), 0);
-                        Routine.closeKeyboard(btnLogin,getActivity());
-                        userLogin();
-                    } else {
-                        DialogMaterial.getBottomSheet(getResources().getString(R.string.no_network_connection), Color.RED, getActivity()).show();
-                    }
+        int id = v.getId();
+        if (id == R.id.btn_register) {
+            anyPageChangeListener.onPageChange(AppConstants.LOGIN_FRAGMENT_1);
+        } else if (id == R.id.btn_login) {
+            if (checkInput()) {
+                if (NetworkConnection.isNetworkAvailable(getActivity())) {
+                    //imm.hideSoftInputFromWindow(btnLogin.getWindowToken(), 0);
+                    Routine.closeKeyboard(btnLogin, getActivity());
+                    userLogin();
+                } else {
+                    DialogMaterial.getBottomSheet(getResources().getString(R.string.no_network_connection), Color.RED, getActivity()).show();
                 }
-                break;
+            }
         }
     }
 

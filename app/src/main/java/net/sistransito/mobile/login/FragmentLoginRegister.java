@@ -91,25 +91,21 @@ public class FragmentLoginRegister extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_back_login:
-                anyPageChangeListener.onPageChange(AppConstants.LONGIN_FRAGMENT_0);
-                break;
-            case R.id.btn_sign_up:
-                if (NetworkConnection.isNetworkAvailable(getActivity())) {
-                    if (checkInput())
-                        userSingUp();
-                } else {
-                    DialogMaterial.getBottomSheet(getResources().getString(R.string.no_network_connection), Color.RED, getActivity()).show();
-                }
-                break;
-            case R.id.im_prifile_image:
-                // Create intent to Open Image applications like Gallery, Google Photos
-                Intent galleryIntent = new Intent(Intent.ACTION_PICK,
-                        android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                // Start the Intent
-                startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_back_login) {
+            anyPageChangeListener.onPageChange(AppConstants.LONGIN_FRAGMENT_0);
+        } else if (id == R.id.btn_sign_up) {
+            if (NetworkConnection.isNetworkAvailable(getActivity())) {
+                if (checkInput())
+                    userSingUp();
+            } else {
+                DialogMaterial.getBottomSheet(getResources().getString(R.string.no_network_connection), Color.RED, getActivity()).show();
+            }
+        } else if (id == R.id.im_prifile_image) {// Create intent to Open Image applications like Gallery, Google Photos
+            Intent galleryIntent = new Intent(Intent.ACTION_PICK,
+                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+            // Start the Intent
+            startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
         }
     }
 

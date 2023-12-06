@@ -105,16 +105,14 @@ public class PlateListerDelete extends AppCompatActivity implements OnClickListe
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.im_btn_back:
+		int id = v.getId();
+		if (id == R.id.im_btn_back) {
 			finish();
 			startActivity(new Intent(PlateListerDelete.this, PlateLister.class));
-			break;
-		case R.id.btn_delete:
+		} else if (id == R.id.btn_delete) {
 			cbCheckAll.setOnCheckedChangeListener(null);
 			(new DeleteData()).execute("");
 			cbCheckAll.setOnCheckedChangeListener(this);
-			break;
 		}
 	}
 

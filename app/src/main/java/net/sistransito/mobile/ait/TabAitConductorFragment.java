@@ -356,21 +356,16 @@ public class TabAitConductorFragment extends Fragment implements
 		public void afterTextChanged(Editable s) {
 
 			if (s.toString() != null) {
-				switch (id) {
-					case R.id.et_ait_driver_name:
-						aitData.setConductorName(s.toString());
-						break;
-					case R.id.et_register_cnh:
-						aitData.setCnhPpd(s.toString());
-						//closeKeyboard(editRegistroCondutor);
-						break;
-					case R.id.spinner_state_driver:
-						aitData.setCnhState(s.toString());
-						Routine.openKeyboard(spinnerStateDriver, getActivity());
-						break;
-					case R.id.et_document_number:
-						aitData.setDocumentNumber(s.toString());
-						break;
+				if (id == R.id.et_ait_driver_name) {
+					aitData.setConductorName(s.toString());
+				} else if (id == R.id.et_register_cnh) {
+					aitData.setCnhPpd(s.toString());
+					//closeKeyboard(editRegistroCondutor);
+				} else if (id == R.id.spinner_state_driver) {
+					aitData.setCnhState(s.toString());
+					Routine.openKeyboard(spinnerStateDriver, getActivity());
+				} else if (id == R.id.et_document_number) {
+					aitData.setDocumentNumber(s.toString());
 				}
 			}
 

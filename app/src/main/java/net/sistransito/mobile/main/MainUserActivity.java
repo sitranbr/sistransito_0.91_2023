@@ -141,7 +141,8 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                 .withActivity(this)
                 .withCompactStyle(true)
                 .withHeaderBackground(R.drawable.header)
-                .withSavedInstance(savedInstanceState).addProfiles(profile)
+                .withSavedInstance(savedInstanceState)
+                //.addProfiles(profile)
                 .build();
 
         ImageLoader.getInstance().loadImage(user.getProfileImage(),
@@ -151,8 +152,8 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                                                   Bitmap loadedImage) {
                         super.onLoadingComplete(imageUri, view, loadedImage);
                         profile = new ProfileDrawerItem().withName(user.getEmployeeName()).withEmail(user.getCompanyName()).withIcon(loadedImage);
-                        headerResult.clear();
-                        headerResult.addProfile(profile, 0);
+                       /* headerResult.clear();
+                        headerResult.addProfile(profile, 0);*/
                     }
                 });
 
@@ -208,57 +209,50 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-        switch (id) {
-            case R.id.btn_overflow_autuar:
-                AitData data = new AitData();
-                data.setDataisNull(true);
-                Intent intent = new Intent(this, AitActivity.class);
-                Bundle bundle = new Bundle();
-                bundle.putSerializable(AitData.getAitID(), data);
-                intent.putExtras(bundle);
-                startActivity(intent);
-                break;
-            case R.id.btn_overflow_autuar_pj:
-                pjData datapj = new pjData();
-                datapj.setDataisPJNull(true);
-                Intent intentPJ = new Intent(this, AitCompanyActivity.class);
-                Bundle bundlePJ = new Bundle();
-                bundlePJ.putSerializable(pjData.getIDAuto(), datapj);
-                intentPJ.putExtras(bundlePJ);
-                startActivity(intentPJ);
-                break;
-            case R.id.btn_overflow_rrd_avulso:
-                RrdData dados = new RrdData();
-                dados.setRrdType(getResources().getString(R.string.loose));
-                Intent intents = new Intent(this, RrdActivity.class);
-                Bundle bundles = new Bundle();
-                bundles.putSerializable(RrdData.getRRDId(), dados);
-                intents.putExtras(bundles);
-                startActivity(intents);
-                break;
-            case R.id.btn_overflow_tav_avulso:
-                TavData dadaTav = new TavData();
-                dadaTav.setTavType(getResources().getString(R.string.loose));
-                Intent intentTav = new Intent(this, TavActivity.class);
-                Bundle bundleTav = new Bundle();
-                bundleTav.putSerializable(TavData.getTavId(), dadaTav);
-                intentTav.putExtras(bundleTav);
-                startActivity(intentTav);
-                break;
-            case R.id.btn_overflow_tca_avulso:
-                TcaData dadaTca = new TcaData();
-                dadaTca.setTcaType(getResources().getString(R.string.loose));
-                Intent intentTca = new Intent(this, TcaActivity.class);
-                Bundle bundleTca = new Bundle();
-                bundleTca.putSerializable(TcaData.getTcaId(), dadaTca);
-                intentTca.putExtras(bundleTca);
-                startActivity(intentTca);
-                break;
-            case R.id.btn_overflow_autos_restantes:
-                DialogMaterial.getBottomSheet(DatabaseCreator
-                        .getBalanceDatabaseAdapter(this)
-                        .getShowView(), Color.BLACK, this).show();
-                break;
+        if (id == R.id.btn_overflow_autuar) {
+            AitData data = new AitData();
+            data.setDataisNull(true);
+            Intent intent = new Intent(this, AitActivity.class);
+            Bundle bundle = new Bundle();
+            bundle.putSerializable(AitData.getAitID(), data);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        } else if (id == R.id.btn_overflow_autuar_pj) {
+            pjData datapj = new pjData();
+            datapj.setDataisPJNull(true);
+            Intent intentPJ = new Intent(this, AitCompanyActivity.class);
+            Bundle bundlePJ = new Bundle();
+            bundlePJ.putSerializable(pjData.getIDAuto(), datapj);
+            intentPJ.putExtras(bundlePJ);
+            startActivity(intentPJ);
+        } else if (id == R.id.btn_overflow_rrd_avulso) {
+            RrdData dados = new RrdData();
+            dados.setRrdType(getResources().getString(R.string.loose));
+            Intent intents = new Intent(this, RrdActivity.class);
+            Bundle bundles = new Bundle();
+            bundles.putSerializable(RrdData.getRRDId(), dados);
+            intents.putExtras(bundles);
+            startActivity(intents);
+        } else if (id == R.id.btn_overflow_tav_avulso) {
+            TavData dadaTav = new TavData();
+            dadaTav.setTavType(getResources().getString(R.string.loose));
+            Intent intentTav = new Intent(this, TavActivity.class);
+            Bundle bundleTav = new Bundle();
+            bundleTav.putSerializable(TavData.getTavId(), dadaTav);
+            intentTav.putExtras(bundleTav);
+            startActivity(intentTav);
+        } else if (id == R.id.btn_overflow_tca_avulso) {
+            TcaData dadaTca = new TcaData();
+            dadaTca.setTcaType(getResources().getString(R.string.loose));
+            Intent intentTca = new Intent(this, TcaActivity.class);
+            Bundle bundleTca = new Bundle();
+            bundleTca.putSerializable(TcaData.getTcaId(), dadaTca);
+            intentTca.putExtras(bundleTca);
+            startActivity(intentTca);
+        } else if (id == R.id.btn_overflow_autos_restantes) {
+            DialogMaterial.getBottomSheet(DatabaseCreator
+                    .getBalanceDatabaseAdapter(this)
+                    .getShowView(), Color.BLACK, this).show();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -269,35 +263,25 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         if (drawerItem != null && drawerItem instanceof Nameable) {
             int title = ((Nameable) drawerItem).getNameRes();
             getSupportActionBar().setTitle(title);
-            switch (title) {
-                case R.string.renavan_search:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ConsultPlateFragment.newInstance()).commit();
-                    break;
-                case R.string.search_cnh:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SearchCnhFragment.newInstance()).commit();
-                    break;
-                case R.string.document_history:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, LogListFragment.newInstance()).commit();
-                    break;
-                case R.string.infraction_table:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, InfractionTable.newInstance()).commit();
-                    break;
-                case R.string.logout:
-                    AppObject.getTinyDB(this).putBoolean(AppConstants.isLogin, false);
-                    finish();
-                    //triggerRebirth(this);
-                    break;
-                case R.string.setting:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SettingFragment.newInstance()).commit();
-                    break;
-                case R.string.app_help:
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, AjudaFragment.newInstance()).commit();
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ImageFragment.newInstance()).commit();
-                    //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, VolleyFragment.newInstance()).commit();
-                    break;
-                case R.string.profile:
-                    getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ProfileFragment.newInstance()).commit();
-                    break;
+            if (title == R.string.renavan_search) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ConsultPlateFragment.newInstance()).commit();
+            } else if (title == R.string.search_cnh) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SearchCnhFragment.newInstance()).commit();
+            } else if (title == R.string.document_history) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, LogListFragment.newInstance()).commit();
+            } else if (title == R.string.infraction_table) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, InfractionTable.newInstance()).commit();
+            } else if (title == R.string.logout) {
+                AppObject.getTinyDB(this).putBoolean(AppConstants.isLogin, false);
+                finish();
+                //triggerRebirth(this);
+            } else if (title == R.string.setting) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SettingFragment.newInstance()).commit();
+            } else if (title == R.string.app_help) {//getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, AjudaFragment.newInstance()).commit();
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ImageFragment.newInstance()).commit();
+                //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, VolleyFragment.newInstance()).commit();
+            } else if (title == R.string.profile) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ProfileFragment.newInstance()).commit();
             }
         }
 
@@ -360,7 +344,9 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         if (result != null && result.isDrawerOpen()) {
             result.closeDrawer();
         } else {
+            super.onBackPressed();
         }
+
     }
 
     private void getPermission() {

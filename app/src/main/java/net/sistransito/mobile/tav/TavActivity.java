@@ -123,18 +123,14 @@ public class TavActivity extends AppCompatActivity implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.im_btn_tav_condutor:
+		int id = v.getId();
+		if (id == R.id.im_btn_tav_condutor) {
 			setPagerPosition(0);
-			break;
-		case R.id.im_btn_tav_veiculo:
+		} else if (id == R.id.im_btn_tav_veiculo) {
 			setPagerPosition(1);
-			break;
-		case R.id.im_btn_tav_gerar:
+		} else if (id == R.id.im_btn_tav_gerar) {
 			setPagerPosition(2);
-			break;
-
-		case R.id.im_btn_back:
+		} else if (id == R.id.im_btn_back) {
 			finish();
 		}
 	}

@@ -195,25 +195,19 @@ public class TabPJConductorFragment extends Fragment implements
         public void afterTextChanged(Editable s) {
 
             if (s.toString() != null) {
-                switch (id) {
-                    case R.id.et_pj_nome_infrator:
-                        dadosAuto.setCompanySocial(s.toString());
-                        break;
-                    case R.id.et_pj_cpf:
-                        dadosAuto.setCpf(s.toString());
-                        //closeKeyboard(editRegistroCondutor);
-                        break;
-                    case R.id.et_pj_cnpj:
-                        dadosAuto.setCnpj(s.toString());
-                        //closeKeyboard(editRegistroCondutor);
-                        break;
-                    case R.id.spinner_state_driver:
-                        dadosAuto.setState(s.toString());
-                        Routine.openKeyboard(spinnerUfCondutor, getActivity());
-                        break;
-                    case R.id.et_pj_endereco:
-                        dadosAuto.setAddress(s.toString());
-                        break;
+                if (id == R.id.et_pj_nome_infrator) {
+                    dadosAuto.setCompanySocial(s.toString());
+                } else if (id == R.id.et_pj_cpf) {
+                    dadosAuto.setCpf(s.toString());
+                    //closeKeyboard(editRegistroCondutor);
+                } else if (id == R.id.et_pj_cnpj) {
+                    dadosAuto.setCnpj(s.toString());
+                    //closeKeyboard(editRegistroCondutor);
+                } else if (id == R.id.spinner_state_driver) {
+                    dadosAuto.setState(s.toString());
+                    Routine.openKeyboard(spinnerUfCondutor, getActivity());
+                } else if (id == R.id.et_pj_endereco) {
+                    dadosAuto.setAddress(s.toString());
                 }
             }
 

@@ -1,5 +1,6 @@
 package net.sistransito.mobile.ait;
 
+import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
 import com.google.android.material.textfield.TextInputLayout;
@@ -231,6 +232,7 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 
 	}
 
+	@SuppressLint("Range")
 	private void setSpinnerDescription() {
 
 		listDescription = new ArrayList<String>();
@@ -335,6 +337,7 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 
 	}
 
+	@SuppressLint("Range")
 	private void setAutoCompleteInfraction() {
 
 		Cursor cursor = (DatabaseCreator
@@ -797,22 +800,20 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 	@Override
 	public void onCheckedChanged(RadioGroup v, int check_id) {
 
-		switch (v.getId()) {
-			case R.id.rg_recolhimento:
-				if (check_id != -1) {
-					aitData.setRetreat(((RadioButton) view
-							.findViewById(rgrRetreat.getCheckedRadioButtonId()))
-							.getText().toString());
-				}
-				break;
-			case R.id.rg_procedimentos:
-				if (check_id != -1) {
-					aitData.setProcedures(((RadioButton) view
-							.findViewById(rgProcedures
-									.getCheckedRadioButtonId())).getText()
-							.toString());
-				}
-				break;
+		int id = v.getId();
+		if (id == R.id.rg_recolhimento) {
+			if (check_id != -1) {
+				aitData.setRetreat(((RadioButton) view
+						.findViewById(rgrRetreat.getCheckedRadioButtonId()))
+						.getText().toString());
+			}
+		} else if (id == R.id.rg_procedimentos) {
+			if (check_id != -1) {
+				aitData.setProcedures(((RadioButton) view
+						.findViewById(rgProcedures
+								.getCheckedRadioButtonId())).getText()
+						.toString());
+			}
 		}
 	}
 
@@ -827,51 +828,39 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 		public void afterTextChanged(Editable edit) {
 			String s = (edit.toString()).trim();
 
-			switch (id) {
-				case R.id.et_auto_observacao:
-					aitData.setObservation(s.toString());
-					break;
-				case R.id.et_auto_marca_equipamento:
-					aitData.setEquipmentBrand(s.toString());
-					break;
-				case R.id.et_auto_numero_de_serie:
-					aitData.setSerialNumber(s.toString());
-					break;
-				case R.id.et_auto_modelo_equipamento:
-					aitData.setEquipmentModel(s.toString());
-					break;
-				case R.id.et_ait_measurement_performed:
-					//Routine.formatEditText(etMeasurementPerformed);
-					if (ifCalculate) {
-						if (calculateAmountAlcoholInBlood(s.toString())) {
-							aitData.setMeasurementPerformed(s.toString() + " " + unitMeasureCalculation);
-						}
+			if (id == R.id.et_auto_observacao) {
+				aitData.setObservation(s.toString());
+			} else if (id == R.id.et_auto_marca_equipamento) {
+				aitData.setEquipmentBrand(s.toString());
+			} else if (id == R.id.et_auto_numero_de_serie) {
+				aitData.setSerialNumber(s.toString());
+			} else if (id == R.id.et_auto_modelo_equipamento) {
+				aitData.setEquipmentModel(s.toString());
+			} else if (id == R.id.et_ait_measurement_performed) {//Routine.formatEditText(etMeasurementPerformed);
+				if (ifCalculate) {
+					if (calculateAmountAlcoholInBlood(s.toString())) {
+						aitData.setMeasurementPerformed(s.toString() + " " + unitMeasureCalculation);
 					}
-					aitData.setMeasurementPerformed(s.toString() + " " + unitMeasureCalculation);
-					break;
-				case R.id.et_auto_valor_medicao:
-					aitData.setValueConsidered(s.toString() + " " + unitMeasureCalculation);
-				case R.id.et_ait_sample_number:
-					aitData.setAlcoholTestNumber(s.toString());
-					break;
-				case R.id.et_auto_nome_transportador:
-					aitData.setCarrierIdentification(s.toString());
-					break;
-				case R.id.et_auto_nome_embarcador:
-					aitData.setCarrierIdentification(s.toString());
-					break;
-				case R.id.et_cfp_transportador:
-					aitData.setCpfCarrier(s.toString());
-					break;
-				case R.id.et_cnpj_transportador:
-					aitData.setCnpjCarrier(s.toString());
-					break;
-				case R.id.et_cpf_embarcador:
-					aitData.setCpfShipper(s.toString());
-					break;
-				case R.id.et_cnpj_embarcador:
-					aitData.setCnpShipper(s.toString());
-					break;
+				}
+				aitData.setMeasurementPerformed(s.toString() + " " + unitMeasureCalculation);
+			} else if (id == R.id.et_auto_valor_medicao) {
+				aitData.setValueConsidered(s.toString() + " " + unitMeasureCalculation);
+
+				aitData.setAlcoholTestNumber(s.toString());
+			} else if (id == R.id.et_ait_sample_number) {
+				aitData.setAlcoholTestNumber(s.toString());
+			} else if (id == R.id.et_auto_nome_transportador) {
+				aitData.setCarrierIdentification(s.toString());
+			} else if (id == R.id.et_auto_nome_embarcador) {
+				aitData.setCarrierIdentification(s.toString());
+			} else if (id == R.id.et_cfp_transportador) {
+				aitData.setCpfCarrier(s.toString());
+			} else if (id == R.id.et_cnpj_transportador) {
+				aitData.setCnpjCarrier(s.toString());
+			} else if (id == R.id.et_cpf_embarcador) {
+				aitData.setCpfShipper(s.toString());
+			} else if (id == R.id.et_cnpj_embarcador) {
+				aitData.setCnpShipper(s.toString());
 			}
 		}
 

@@ -118,15 +118,12 @@ public class TcaActivity extends FragmentActivity implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.im_btn_tab_conductor:
+		int id = v.getId();
+		if (id == R.id.im_btn_tab_conductor) {
 			setPagerPosition(0);
-			break;
-		case R.id.im_btn_tab_questionario:
+		} else if (id == R.id.im_btn_tab_questionario) {
 			setPagerPosition(1);
-
-			break;
-		case R.id.im_btn_back:
+		} else if (id == R.id.im_btn_back) {
 			finish();
 		}
 	}

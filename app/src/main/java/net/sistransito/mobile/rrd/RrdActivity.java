@@ -119,15 +119,12 @@ public class RrdActivity extends AppCompatActivity implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.im_btn_tab_documento:
+		int id = v.getId();
+		if (id == R.id.im_btn_tab_documento) {
 			setPagerPosition(0);
-			break;
-		case R.id.im_btn_tab_informacoes:
+		} else if (id == R.id.im_btn_tab_informacoes) {
 			setPagerPosition(1);
-
-			break;
-		case R.id.im_btn_back:
+		} else if (id == R.id.im_btn_back) {
 			finish();
 		}
 	}

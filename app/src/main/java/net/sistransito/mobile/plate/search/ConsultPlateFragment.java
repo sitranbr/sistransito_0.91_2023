@@ -302,48 +302,44 @@ public class ConsultPlateFragment extends Fragment implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_search_plate:
-                if (iSVehicleSearch()) {
-                    getVehicleResult();
-                      //Log.d("Latitude", gps.getLocation().getLatitude() + " ");
-                      //Log.d("Longitude", gps.getLocation().getLongitude() + " ");
+        int id = v.getId();
+        if (id == R.id.btn_search_plate) {
+            if (iSVehicleSearch()) {
+                getVehicleResult();
+                //Log.d("Latitude", gps.getLocation().getLatitude() + " ");
+                //Log.d("Longitude", gps.getLocation().getLongitude() + " ");
+            }
+        } else if (id == R.id.tv_show_result) {
+            llParentResultView.setVisibility(View.GONE);
+            enableSearch();
+            Routine.closeKeyboard(tvResultShow, getActivity());
+        } else if (id == R.id.btn_create_ait) {
+            if (dataFromPlate != null) {
+
+                if ((DatabaseCreator
+                        .getInfractionDatabaseAdapter(getActivity()))
+                        .isSamePlateExist(dataFromPlate.getPlate())) {
+
+                    openAitFragment(DatabaseCreator.getInfractionDatabaseAdapter(getActivity())
+                            .getAitDataFromPlate(dataFromPlate.getPlate()));
+
+                } else {
+                    AitData aitData = new AitData();
+                    aitData.setPlate(dataFromPlate.getPlate());
+                    aitData.setRenavam(dataFromPlate.getRenavam());
+                    aitData.setChassi(dataFromPlate.getChassi());
+                    aitData.setStateVehicle(dataFromPlate.getState());
+                    aitData.setVehicleModel(dataFromPlate.getModel());
+                    aitData.setVehicleBrand(dataFromPlate.getBrand());
+                    aitData.setVehycleColor(dataFromPlate.getColor());
+                    aitData.setVehicleSpecies(dataFromPlate.getSpecies().toUpperCase());
+                    aitData.setVehicleCategory(dataFromPlate.getCategory().toUpperCase());
+                    aitData.setStoreFullData(false);
+                    openAitFragment(aitData);
+
+                    //Log.d("aidData: ", String.valueOf(dataPlate.getCATEGORY().toUpperCase()));
                 }
-                break;
-
-            case R.id.tv_show_result:
-                llParentResultView.setVisibility(View.GONE);
-                enableSearch();
-                Routine.closeKeyboard(tvResultShow, getActivity());
-                break;
-
-            case R.id.btn_create_ait:
-                if (dataFromPlate != null) {
-
-                    if ((DatabaseCreator
-                            .getInfractionDatabaseAdapter(getActivity()))
-                            .isSamePlateExist(dataFromPlate.getPlate())) {
-
-                                openAitFragment(DatabaseCreator.getInfractionDatabaseAdapter(getActivity())
-                                        .getAitDataFromPlate(dataFromPlate.getPlate()));
-
-                    } else {
-                        AitData aitData = new AitData();
-                        aitData.setPlate(dataFromPlate.getPlate());
-                        aitData.setRenavam(dataFromPlate.getRenavam());
-                        aitData.setChassi(dataFromPlate.getChassi());
-                        aitData.setStateVehicle(dataFromPlate.getState());
-                        aitData.setVehicleModel(dataFromPlate.getModel());
-                        aitData.setVehicleBrand(dataFromPlate.getBrand());
-                        aitData.setVehycleColor(dataFromPlate.getColor());
-                        aitData.setVehicleSpecies(dataFromPlate.getSpecies().toUpperCase());
-                        aitData.setVehicleCategory(dataFromPlate.getCategory().toUpperCase());
-                        aitData.setStoreFullData(false);
-                        openAitFragment(aitData);
-
-                        //Log.d("aidData: ", String.valueOf(dataPlate.getCATEGORY().toUpperCase()));
-                    }
-                }
+            }
         }
     }
 
@@ -584,72 +580,65 @@ public class ConsultPlateFragment extends Fragment implements
         public void afterTextChanged(Editable text) {
             if (textChangeState) {
 
-                switch (id) {
-                    case R.id.et_letras_da_placa:
-
-                        etPlateLetters.setError(null);
-                        if (text.toString().length() == LENGTH_PLATE_CHARACTER) {
-                            if (etPlateNumbers.getText().toString().length() != LENGTH_PLATE_NUMBER) {
-                                etPlateNumbers.requestFocus();
-                            } else {
-                                Routine.openKeyboard(btnPlateSearch, getActivity());
-                                btnPlateSearch.setFocusableInTouchMode(true);
-                                btnPlateSearch.requestFocus();
+                if (id == R.id.et_letras_da_placa) {
+                    etPlateLetters.setError(null);
+                    if (text.toString().length() == LENGTH_PLATE_CHARACTER) {
+                        if (etPlateNumbers.getText().toString().length() != LENGTH_PLATE_NUMBER) {
+                            etPlateNumbers.requestFocus();
+                        } else {
+                            Routine.openKeyboard(btnPlateSearch, getActivity());
+                            btnPlateSearch.setFocusableInTouchMode(true);
+                            btnPlateSearch.requestFocus();
+                        }
+                    }
+                } else if (id == R.id.et_numeros_da_placa) {
+                    etPlateNumbers.setError(null);
+                    if (text.toString().length() == LENGTH_PLATE_NUMBER) {
+                        if (etPlateLetters.getText().toString().length() != LENGTH_PLATE_CHARACTER) {
+                            etPlateLetters.requestFocus();
+                        } else {
+                            //btnConsultarPlaca.setFocusableInTouchMode(true);
+                            //btnConsultarPlaca.requestFocus();
+                            if (iSVehicleSearch()) {
+                                getVehicleResult();
+                                //       Log.d("Latitude", gps.getLocation().getLatitude() + " ");
+                                //    Log.d("Longitude", gps.getLocation().getLongitude() + " ");
                             }
                         }
-                        break;
-                    case R.id.et_numeros_da_placa:
-                        etPlateNumbers.setError(null);
-                        if (text.toString().length() == LENGTH_PLATE_NUMBER) {
-                            if (etPlateLetters.getText().toString().length() != LENGTH_PLATE_CHARACTER) {
-                                etPlateLetters.requestFocus();
-                            } else {
-                                //btnConsultarPlaca.setFocusableInTouchMode(true);
-                                //btnConsultarPlaca.requestFocus();
-                                if (iSVehicleSearch()) {
-                                    getVehicleResult();
-                                    //       Log.d("Latitude", gps.getLocation().getLatitude() + " ");
-                                    //    Log.d("Longitude", gps.getLocation().getLongitude() + " ");
-                                }
+                    }
+                } else if (id == R.id.et_chassi_input) {
+                    etChassi.setError(null);
+                    if (text.toString().length() == LENGTH_CHASSI) {
+                        if (etChassi.getText().toString().length() != LENGTH_CHASSI) {
+                            etChassi.requestFocus();
+                        } else {
+                            if (iSVehicleSearch()) {
+                                getVehicleResult();
                             }
                         }
-                        break;
-                    case R.id.et_chassi_input:
-                        etChassi.setError(null);
-                        if (text.toString().length() == LENGTH_CHASSI) {
-                            if (etChassi.getText().toString().length() != LENGTH_CHASSI) {
-                                etChassi.requestFocus();
-                            } else {
-                                if (iSVehicleSearch()) {
-                                    getVehicleResult();
-                                }
+                    }
+                } else if (id == R.id.et_mercosul_input) {
+                    etPlateMercosul.setError(null);
+                    if (text.toString().length() == LENGTH_PLATE_MERCOSUL) {
+                        if (etPlateMercosul.getText().toString().length() != LENGTH_PLATE_MERCOSUL) {
+                            etPlateMercosul.requestFocus();
+                        } else {
+                            if (iSVehicleSearch()) {
+                                getVehicleResult();
                             }
                         }
-                        break;
-                    case R.id.et_mercosul_input:
-                        etPlateMercosul.setError(null);
-                        if (text.toString().length() == LENGTH_PLATE_MERCOSUL) {
-                            if (etPlateMercosul.getText().toString().length() != LENGTH_PLATE_MERCOSUL) {
-                                etPlateMercosul.requestFocus();
-                            } else {
-                                if (iSVehicleSearch()) {
-                                    getVehicleResult();
-                                }
+                    }
+                } else if (id == R.id.et_vis_input) {
+                    etVisNumber.setError(null);
+                    if (text.toString().length() == VIS_NUMBER) {
+                        if (etVisNumber.getText().toString().length() != VIS_NUMBER) {
+                            etVisNumber.requestFocus();
+                        } else {
+                            if (iSVehicleSearch()) {
+                                getVehicleResult();
                             }
                         }
-                        break;
-                    case R.id.et_vis_input:
-                        etVisNumber.setError(null);
-                        if (text.toString().length() == VIS_NUMBER) {
-                            if (etVisNumber.getText().toString().length() != VIS_NUMBER) {
-                                etVisNumber.requestFocus();
-                            } else {
-                                if (iSVehicleSearch()) {
-                                    getVehicleResult();
-                                }
-                            }
-                        }
-                        break;
+                    }
                 }
             }
         }

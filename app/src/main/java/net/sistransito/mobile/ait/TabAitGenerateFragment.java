@@ -191,25 +191,21 @@ public class TabAitGenerateFragment extends DebugFragment implements
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_check_ait:
-                frameLayout.setVisibility(view.VISIBLE);
-                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-                fragmentManager.beginTransaction()
-                        .replace(R.id.fragment_container_ait, AitPreviewFragment.newInstance()).commit();
-                break;
-            case R.id.btn_generation_ait:
-                if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).updateAitDataPhotos(aitData))
-                    Routine.showAlert(getResources().getString(R.string.update_photos), getActivity());
-                startActivity(new Intent(getActivity(), AitLister.class));
-                getActivity().finish();
-                break;
-            case R.id.btn_discard_ait:
-                AnyAlertDialog.dialogView(getActivity(), this.getResources().getString(R.string.alert_motive), "auto");
-                break;
-            case R.id.fragment_container_ait:
-                frameLayout.setVisibility(view.GONE);
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_check_ait) {
+            frameLayout.setVisibility(view.VISIBLE);
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_ait, AitPreviewFragment.newInstance()).commit();
+        } else if (id == R.id.btn_generation_ait) {
+            if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).updateAitDataPhotos(aitData))
+                Routine.showAlert(getResources().getString(R.string.update_photos), getActivity());
+            startActivity(new Intent(getActivity(), AitLister.class));
+            getActivity().finish();
+        } else if (id == R.id.btn_discard_ait) {
+            AnyAlertDialog.dialogView(getActivity(), this.getResources().getString(R.string.alert_motive), "auto");
+        } else if (id == R.id.fragment_container_ait) {
+            frameLayout.setVisibility(view.GONE);
         }
     }
 

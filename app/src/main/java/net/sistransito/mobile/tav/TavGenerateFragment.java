@@ -181,24 +181,14 @@ public class TavGenerateFragment extends Fragment implements
 		@Override
 		public void afterTextChanged(Editable editable) {
 			String s = editable.toString().trim();
-			switch (id) {
-
-			case R.id.et_odometo:
+			if (id == R.id.et_odometo) {
 				tavData.setOdometer(s);
-				break;
-
-			case R.id.et_nome_da_empresa:
+			} else if (id == R.id.et_nome_da_empresa) {
 				tavData.setCompanyName(s);
-				break;
-
-			case R.id.et_nome_do_condutor_do_guincho:
+			} else if (id == R.id.et_nome_do_condutor_do_guincho) {
 				tavData.setWinchDriverName(s);
-				break;
-
-			case R.id.et_tav_observacao:
+			} else if (id == R.id.et_tav_observacao) {
 				tavData.setObservation(s);
-				break;
-
 			}
 		}
 
@@ -215,24 +205,18 @@ public class TavGenerateFragment extends Fragment implements
 
 	@Override
 	public void onClick(View v) {
-		switch (v.getId()) {
-		case R.id.btn_tav_gerar:
+		int id = v.getId();
+		if (id == R.id.btn_tav_gerar) {
 			(DatabaseCreator.getTavDatabaseAdapter(getActivity()))
 					.setData(tavData);
 			getActivity().startActivity(
 					new Intent(getActivity(), TavLister.class));
 
 			getActivity().finish();
-
-			break;
-
-		case R.id.btn_tav_conferir:
-
+		} else if (id == R.id.btn_tav_conferir) {
 			AnyAlertDialog.dialogShow(tavData.getTAVListerView(getActivity()),
 					getActivity(), getResources()
 							.getString(R.string.list_tav_issued));
-
-			break;
 		}
 
 	}
@@ -254,27 +238,21 @@ public class TavGenerateFragment extends Fragment implements
 	@Override
 	public void onCheckedChanged(RadioGroup v, int check_id) {
 
-		switch (v.getId()) {
-		case R.id.rg_marcador_de_conbutivel_1:
+		int id = v.getId();
+		if (id == R.id.rg_marcador_de_conbutivel_1) {
 			rgFuelGauge2.setOnCheckedChangeListener(null);
 			rgFuelGauge2.clearCheck();
 			tavData.setFuelGauge(((RadioButton) (view
 					.findViewById(rgFuelGauge1
 							.getCheckedRadioButtonId()))).getText().toString());
 			rgFuelGauge2.setOnCheckedChangeListener(this);
-
-			break;
-
-		case R.id.rg_marcador_de_conbutivel_2:
+		} else if (id == R.id.rg_marcador_de_conbutivel_2) {
 			rgFuelGauge1.setOnCheckedChangeListener(null);
 			rgFuelGauge1.clearCheck();
 			tavData.setFuelGauge(((RadioButton) (view
 					.findViewById(rgFuelGauge2
 							.getCheckedRadioButtonId()))).getText().toString());
 			rgFuelGauge1.setOnCheckedChangeListener(this);
-
-			break;
-
 		}
 
 	}

@@ -44,24 +44,17 @@ public class LogListFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.btn_list_plate:
-                startActivity(AppObject.getPlateListIntent(getActivity()));
-                break;
-            case R.id.btn_list_ait:
-                startActivity(AppObject.getAitListerIntent(getActivity()));
-                break;
-
-            case R.id.btn_list_rrd:
-                startActivity(AppObject.getRrdListerIntent(getActivity()));
-                break;
-
-            case R.id.btn_list_tca:
-                startActivity(AppObject.getTcaListerIntent(getActivity()));
-                break;
-            case R.id.btn_list_tav:
-                startActivity(AppObject.getTavListerIntent(getActivity()));
-                break;
+        int id = v.getId();
+        if (id == R.id.btn_list_plate) {
+            startActivity(AppObject.getPlateListIntent(getActivity()));
+        } else if (id == R.id.btn_list_ait) {
+            startActivity(AppObject.getAitListerIntent(getActivity()));
+        } else if (id == R.id.btn_list_rrd) {
+            startActivity(AppObject.getRrdListerIntent(getActivity()));
+        } else if (id == R.id.btn_list_tca) {
+            startActivity(AppObject.getTcaListerIntent(getActivity()));
+        } else if (id == R.id.btn_list_tav) {
+            startActivity(AppObject.getTavListerIntent(getActivity()));
         }
     }
 }
