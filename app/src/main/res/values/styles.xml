@@ -10,22 +10,26 @@
         <item name="android:textStyle">bold</item>
     </style>
 
-    <style name="MaterialTheme" parent="MaterialDrawerTheme">
+    <style name="MaterialTheme" parent="Theme.Material3.Light.NoActionBar">
         <!-- ...and here we setting appcompat’s color theming attrs -->
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <item name="colorAccent">@color/accent</item>
 
+
+    </style>
+
+    <style name="MaterialDrawerStyle" parent="Widget.MaterialDrawerStyle">
+
         <!-- MaterialDrawer specific values -->
-        <item name="material_drawer_background">@color/material_drawer_background</item>
-        <item name="material_drawer_primary_text">@color/primary_text</item>
-        <item name="material_drawer_primary_icon">@color/icons</item>
-        <item name="material_drawer_secondary_text">@color/material_drawer_secondary_text</item>
-        <item name="material_drawer_hint_text">@color/material_drawer_hint_text</item>
-        <item name="material_drawer_divider">@color/material_drawer_divider</item>
-        <item name="material_drawer_selected">@color/material_drawer_selected</item>
-        <item name="material_drawer_selected_text">@color/material_drawer_selected_text</item>
-        <item name="material_drawer_header_selection_text">
+        <item name="materialDrawerBackground">@color/material_drawer_background</item>
+        <item name="materialDrawerPrimaryText">@color/primary_text</item>
+        <item name="materialDrawerPrimaryIcon">@color/icons</item>
+        <item name="materialDrawerSecondaryText">@color/material_drawer_secondary_text</item>
+        <item name="materialDrawerDividerColor">@color/material_drawer_divider</item>
+        <item name="materialDrawerSelectedBackgroundColor">@color/material_drawer_selected</item>
+        <!--  <item name="mateialDrawerSelec">@color/material_drawer_selected_text</item>-->
+        <item name="materialDrawerHeaderSelectionText">
             @color/material_drawer_header_selection_text
         </item>
     </style>

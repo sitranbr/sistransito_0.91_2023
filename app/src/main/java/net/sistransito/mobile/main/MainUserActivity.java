@@ -11,10 +11,16 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+
+import android.os.Handler;
+import android.os.Looper;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,17 +28,18 @@ import android.view.WindowManager;
 import android.widget.AdapterView;
 
 import com.gc.materialdesign.widgets.ProgressDialog;
-import com.mikepenz.materialdrawer.Drawer;
-import com.mikepenz.materialdrawer.DrawerBuilder;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeader;
-import com.mikepenz.materialdrawer.accountswitcher.AccountHeaderBuilder;
+
+import com.mikepenz.materialdrawer.holder.ImageHolder;
+import com.mikepenz.materialdrawer.holder.StringHolder;
 import com.mikepenz.materialdrawer.model.DividerDrawerItem;
 import com.mikepenz.materialdrawer.model.PrimaryDrawerItem;
 import com.mikepenz.materialdrawer.model.ProfileDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IDrawerItem;
 import com.mikepenz.materialdrawer.model.interfaces.IProfile;
 import com.mikepenz.materialdrawer.model.interfaces.Nameable;
-import com.mikepenz.materialdrawer.util.KeyboardUtil;
+
+import com.mikepenz.materialdrawer.widget.AccountHeaderView;
+import com.mikepenz.materialdrawer.widget.MaterialDrawerSliderView;
 import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -69,12 +76,16 @@ import net.sistransito.mobile.util.DialogMaterial;
 import net.sistransito.mobile.util.User;
 import net.sistransito.R;
 
-public class MainUserActivity extends AppCompatActivity implements Drawer.OnDrawerItemClickListener {
+import kotlin.jvm.functions.Function3;
+
+public class MainUserActivity extends AppCompatActivity {
     //save our header or resul
     private Context context;
     private SQLiteDatabase database;
-    private AccountHeader headerResult = null;
-    private Drawer result = null;
+    private AccountHeaderView headerResult = null;
+    ActionBarDrawerToggle actionBarDrawerToggle;
+    DrawerLayout root;
+
     private SharedPreferences preferences;
     //profile
     private IProfile profile;
@@ -82,13 +93,14 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
     private LoginData loginData;
 
     private DialogMaterial dialogMaterial;
+    private MaterialDrawerSliderView slider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_main);
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+        slider = findViewById(R.id.slider);
         setImageLoader();
         startMenu(savedInstanceState);
         checkFirstTimeAppSetup();
@@ -134,16 +146,32 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle(R.string.app_name);
         this.setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        getSupportActionBar().setHomeButtonEnabled(true);
 
-        profile = new ProfileDrawerItem().withName(user.getEmployeeName()).withEmail(user.getCompanyName());
+
+
+        toolbar.setNavigationIcon(R.drawable.ham_burger_menu);
+        root = findViewById(R.id.root);
+        actionBarDrawerToggle = new  ActionBarDrawerToggle(
+                this,
+                root,
+                toolbar,
+                com.mikepenz.materialdrawer.R.string.material_drawer_open,
+                com.mikepenz.materialdrawer.R.string.material_drawer_close
+        );
+
+        root.addDrawerListener(actionBarDrawerToggle);
+
         //create account
-        headerResult = new AccountHeaderBuilder()
-                .withActivity(this)
-                .withCompactStyle(true)
-                .withHeaderBackground(R.drawable.header)
-                .withSavedInstance(savedInstanceState)
-                //.addProfiles(profile)
-                .build();
+        headerResult = new AccountHeaderView(this);
+        headerResult.attachToSliderView(slider);
+        headerResult.addProfile(getProfileDrawerItem(user.getCompanyName(),user.getCompanyName(),null),0);
+        if(savedInstanceState != null){
+            headerResult.saveInstanceState(savedInstanceState);
+        }
+        headerResult.setHeaderBackground(new ImageHolder(R.drawable.header));
+
 
         ImageLoader.getInstance().loadImage(user.getProfileImage(),
                 new SimpleImageLoadingListener() {
@@ -151,50 +179,41 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                     public void onLoadingComplete(String imageUri, View view,
                                                   Bitmap loadedImage) {
                         super.onLoadingComplete(imageUri, view, loadedImage);
-                        profile = new ProfileDrawerItem().withName(user.getEmployeeName()).withEmail(user.getCompanyName()).withIcon(loadedImage);
-                       /* headerResult.clear();
-                        headerResult.addProfile(profile, 0);*/
+                        headerResult.removeProfile(0);
+                        headerResult.addProfile(getProfileDrawerItem(user.getCompanyName(),user.getCompanyName(),loadedImage),0);
                     }
                 });
 
-        //Create the drawer
-        result = new DrawerBuilder()
-                .withActivity(this).withActionBarDrawerToggleAnimated(true)
-                .withToolbar(toolbar).withAccountHeader(headerResult)
-                .withOnDrawerListener(new Drawer.OnDrawerListener() {
-                    @Override
-                    public void onDrawerOpened(View drawerView) {
-                        KeyboardUtil.hideKeyboard(MainUserActivity.this);
-                    }
 
-                    @Override
-                    public void onDrawerClosed(View drawerView) {
-
-                    }
-
-                    @Override
-                    public void onDrawerSlide(View drawerView, float slideOffset) {
-
-                    }
-                })
-                .withFireOnInitialOnClick(true)
-                .withSavedInstance(savedInstanceState)
-                .build();
 
         //    result.addItem(new DividerDrawerItem());
-        result.addItem(new PrimaryDrawerItem().withName(R.string.renavan_search).withIcon(R.mipmap.ic_i_car_p));
-        result.addItem(new PrimaryDrawerItem().withName(R.string.search_cnh).withIcon(R.mipmap.ic_i_id_p));
-        result.addItem(new PrimaryDrawerItem().withName(R.string.document_history).withIcon(R.mipmap.ic_log_n));
-        result.addItem(new DividerDrawerItem());
-        result.addItem(new PrimaryDrawerItem().withName(R.string.infraction_table).withIcon(R.mipmap.ic_infraction));
-        result.addItem(new DividerDrawerItem());
-        result.addItem(new PrimaryDrawerItem().withName(R.string.setting).withIcon(R.mipmap.ic_settting_nav));
-        result.addItem(new PrimaryDrawerItem().withName(R.string.profile).withIcon(R.mipmap.ic_profile));
-        result.addItem(new PrimaryDrawerItem().withName(R.string.app_help).withIcon(R.mipmap.ic_help_nav));
-        result.addItem(new DividerDrawerItem());
-        result.addItem(new PrimaryDrawerItem().withName(R.string.logout).withIcon(R.mipmap.ic_logout));
-        result.setOnDrawerItemClickListener(MainUserActivity.this);
-        result.setSelection(0);
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.renavan_search,R.mipmap.ic_i_car_p,0L));
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.search_cnh,R.mipmap.ic_i_id_p,1L));
+
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.document_history,R.mipmap.ic_log_n,2L));
+        slider.getItemAdapter().add(new DividerDrawerItem());
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.infraction_table,R.mipmap.ic_infraction,3L));
+        slider.getItemAdapter().add(new DividerDrawerItem());
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.setting,R.mipmap.ic_settting_nav,4L));
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.profile,R.mipmap.ic_profile,5L));
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.app_help,R.mipmap.ic_help_nav,6L));
+        slider.getItemAdapter().add(new DividerDrawerItem());
+        slider.getItemAdapter().add(getPrimaryDrawerItem(R.string.logout,R.mipmap.ic_logout,7L));
+
+
+        // specify a click listener
+        slider.setOnDrawerItemClickListener((view, iDrawerItem, integer) -> {
+
+
+            onItemClick(iDrawerItem);
+
+            return true;
+        });
+
+
+
+        slider.setSelection(0,true);
+        //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ConsultPlateFragment.newInstance()).commit();
 
     }
 
@@ -257,11 +276,11 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onItemClick(AdapterView<?> parent, View view, int position, long id, IDrawerItem drawerItem) {
+
+    public boolean onItemClick(IDrawerItem drawerItem) {
 
         if (drawerItem != null && drawerItem instanceof Nameable) {
-            int title = ((Nameable) drawerItem).getNameRes();
+            int title = ((Nameable) drawerItem).getName().getTextRes();
             getSupportActionBar().setTitle(title);
             if (title == R.string.renavan_search) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ConsultPlateFragment.newInstance()).commit();
@@ -284,6 +303,10 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ProfileFragment.newInstance()).commit();
             }
         }
+
+        new Handler(Looper.getMainLooper()).postDelayed(() -> {
+            root.closeDrawer(slider);
+        },200L);
 
         return false;
     }
@@ -341,8 +364,9 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
 
     @Override
     public void onBackPressed() {
-        if (result != null && result.isDrawerOpen()) {
-            result.closeDrawer();
+
+        if (root != null && root.isDrawerOpen(slider)) {
+                root.closeDrawer(slider);
         } else {
             super.onBackPressed();
         }
@@ -380,4 +404,25 @@ public class MainUserActivity extends AppCompatActivity implements Drawer.OnDraw
         startActivity(intent);
 
     }
+
+
+    public PrimaryDrawerItem getPrimaryDrawerItem(int nameId, int icon  ,Long identifier){
+        PrimaryDrawerItem item = new PrimaryDrawerItem();
+        item.setName(new StringHolder(nameId));
+        item.setIcon(new ImageHolder(icon));
+        item.setIdentifier(identifier);
+        return item;
+    }
+
+    public  ProfileDrawerItem getProfileDrawerItem(String name,String email,Bitmap bitmap){
+        ProfileDrawerItem item = new ProfileDrawerItem();
+        item.setName(new StringHolder(name));
+
+        item.setDescription(new StringHolder(email));
+        if(bitmap != null){
+            item.setIcon( new ImageHolder(bitmap));
+        }
+       return  item;
+    }
+
 }
