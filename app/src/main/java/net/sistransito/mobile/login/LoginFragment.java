@@ -139,7 +139,7 @@ public class LoginFragment extends Fragment implements OnClickListener {
                     e.printStackTrace();
                 }
 
-                //Log.d("Success", user.toString());
+                Log.d("Success", user.toString());
                 if (user.getSuccess().compareTo("1") == 0) {
                     userPassword.setPassword(dataEncrypt);
                     AppObject.getTinyDB(getActivity()).putBoolean(AppConstants.isLogin, true);

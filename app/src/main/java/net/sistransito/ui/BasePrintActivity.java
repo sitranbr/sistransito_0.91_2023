@@ -94,32 +94,38 @@ public abstract class BasePrintActivity extends AppCompatActivity
     }
 
     public boolean checkBth() {
+        if (!checkBluetoothPermission()) {
+            return false;
+        }
 
-
-        Cursor cursor = (DatabaseCreator
-                .getSettingDatabaseAdapter(getApplicationContext()))
-                .getSettingCursor();
-
-        String nPrinter = cursor.getString(cursor
-                .getColumnIndex(SetttingDatabaseHelper.SETTING_PRINTER));
+        Cursor cursor = (DatabaseCreator.getSettingDatabaseAdapter(getApplicationContext())).getSettingCursor();
+        int columnIndex = cursor.getColumnIndex(SetttingDatabaseHelper.SETTING_PRINTER);
+        if (columnIndex == -1) {
+            throw new IllegalArgumentException("Column not found");
+        }
+        String nPrinter = cursor.getString(columnIndex);
 
         if (!mBth.isConnected()) {
             if (!mBth.Enable()) {
                 AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.error_load_bluetooth), this);
                 return false;
             }
-            String mac = null;
+
             Set<BluetoothDevice> devices = mBth.GetBondedDevices();
+            String mac = null;
             for (BluetoothDevice device : devices) {
                 if (nPrinter.equals(device.getName())) {
                     mac = device.getAddress();
+                    break;
                 }
             }
+
             if (mac == null) {
                 AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.pairing_error)
-                        + " " + nPrinter + "\n\n" + getResources().getString(R.string.pairing_message), this);
+                        + " " + nPrinter + "\n" + getResources().getString(R.string.pairing_message), this);
                 return false;
             }
+
             if (!mBth.Open(mac)) {
                 AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.error_connection_printer) + " ["
                         + mac
@@ -149,7 +155,7 @@ public abstract class BasePrintActivity extends AppCompatActivity
                 if(tempPrintBitmap != null){
                     startPrint(tempPrintBitmap);
                 }else{
-                    Toast.makeText(this, "There was an error ,please re run the app.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "There was an error, please re run the app.", Toast.LENGTH_SHORT).show();
                 }
             }else{
                 Toast.makeText(this, "Please allow bluetooth permission to print.", Toast.LENGTH_SHORT).show();

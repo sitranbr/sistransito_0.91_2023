@@ -60,6 +60,7 @@ import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.sync.ImageFragment;
 import net.sistransito.mobile.equipments.AitEquipmentEntryJsonTask;
 import net.sistransito.mobile.http.WebClient;
+import net.sistransito.mobile.login.ActivityLogin;
 import net.sistransito.mobile.login.LoginData;
 import net.sistransito.mobile.number.CheckNumber;
 import net.sistransito.mobile.plate.search.ConsultPlateFragment;
@@ -204,19 +205,15 @@ public class MainUserActivity extends AppCompatActivity {
         // specify a click listener
         slider.setOnDrawerItemClickListener((view, iDrawerItem, integer) -> {
 
-
             onItemClick(iDrawerItem);
 
             return true;
         });
 
-
-
         slider.setSelection(0,true);
         //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, ConsultPlateFragment.newInstance()).commit();
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -276,7 +273,6 @@ public class MainUserActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
     public boolean onItemClick(IDrawerItem drawerItem) {
 
         if (drawerItem != null && drawerItem instanceof Nameable) {
@@ -292,8 +288,9 @@ public class MainUserActivity extends AppCompatActivity {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, InfractionTable.newInstance()).commit();
             } else if (title == R.string.logout) {
                 AppObject.getTinyDB(this).putBoolean(AppConstants.isLogin, false);
+                Intent intent = new Intent(this, ActivityLogin.class);
+                startActivity(intent);
                 finish();
-                //triggerRebirth(this);
             } else if (title == R.string.setting) {
                 getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, SettingFragment.newInstance()).commit();
             } else if (title == R.string.app_help) {//getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, AjudaFragment.newInstance()).commit();

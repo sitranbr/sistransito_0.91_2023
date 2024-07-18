@@ -1,22 +1,34 @@
 package net.sistransito.mobile.ait;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import androidx.fragment.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import net.sistransito.mobile.ait.lister.AitLister;
 import net.sistransito.mobile.database.DatabaseCreator;
@@ -27,33 +39,50 @@ import net.sistransito.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-public class TabAitGenerateFragment extends DebugFragment implements
-        OnClickListener, UpdateFragment {
+public class TabAitGenerateFragment extends Fragment implements View.OnClickListener, UpdateFragment {
+
     private View view;
     private Button btnCheckAit, btnGenerationAit, btnCancelAit;
-    private ImageView imgViewPhoto1, imgViewPhoto2, imgViewPhoto3, imgViewPhoto4;
+    private ImageView[] imgViewPhotos = new ImageView[4];
     private FrameLayout frameLayout;
     private AitData aitData;
     private String numberAitRetained, photo1Retained, photo2Retained, photo3Retained, photo4Retained;
-
-    private int REQUEST_CAMERA = 100, SELECT_FILE = 1;
-    private String userChoosenTask;
     private int photoNumber;
+    private String userChoosenTask;
     public static String pastaRoot;
+
+    private final ActivityResultLauncher<Intent> cameraLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    Log.d("TabAitGenerateFragment", "Camera result OK");
+                    onCaptureImageResult(data);
+                } else {
+                    Log.e("TabAitGenerateFragment", "Camera result not OK: " + result.getResultCode());
+                }
+            });
+
+    private final ActivityResultLauncher<Intent> galleryLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    Intent data = result.getData();
+                    Log.d("TabAitGenerateFragment", "Gallery result OK");
+                    onSelectFromGalleryResult(data);
+                } else {
+                    Log.e("TabAitGenerateFragment", "Gallery result not OK: " + result.getResultCode());
+                }
+            });
 
     public static TabAitGenerateFragment newInstance() {
         return new TabAitGenerateFragment();
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        // Save instance state
         outState.putString("aitNumber", aitData.getAitNumber());
         outState.putString("photo1", aitData.getPhoto1());
         outState.putString("photo2", aitData.getPhoto2());
@@ -61,10 +90,10 @@ public class TabAitGenerateFragment extends DebugFragment implements
         outState.putString("photo4", aitData.getPhoto4());
     }
 
+    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.ait_genaration_fragment, null, false);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        view = inflater.inflate(R.layout.ait_genaration_fragment, container, false);
 
         if (savedInstanceState != null) {
             numberAitRetained = savedInstanceState.getString("aitNumber");
@@ -72,364 +101,281 @@ public class TabAitGenerateFragment extends DebugFragment implements
             photo2Retained = savedInstanceState.getString("photo2");
             photo3Retained = savedInstanceState.getString("photo3");
             photo4Retained = savedInstanceState.getString("photo4");
-
-            imgViewPhoto2.setVisibility(View.VISIBLE);
-            imgViewPhoto3.setVisibility(View.VISIBLE);
-            imgViewPhoto4.setVisibility(View.VISIBLE);
-
         }
 
-        initializedView();
+        initializeViews();
+        loadRetainedImages();
         getAitObject();
+        addListeners();
+
         return view;
     }
 
-    private void addListener() {
+    private void initializeViews() {
+        imgViewPhotos[0] = view.findViewById(R.id.image1);
+        imgViewPhotos[1] = view.findViewById(R.id.image2);
+        imgViewPhotos[2] = view.findViewById(R.id.image3);
+        imgViewPhotos[3] = view.findViewById(R.id.image4);
 
+        btnCheckAit = view.findViewById(R.id.btn_check_ait);
+        btnGenerationAit = view.findViewById(R.id.btn_generation_ait);
+        frameLayout = view.findViewById(R.id.fragment_container_ait);
+        btnCancelAit = view.findViewById(R.id.btn_discard_ait);
+    }
+
+    private void loadRetainedImages() {
+        String[] photoPaths = {photo1Retained, photo2Retained, photo3Retained, photo4Retained};
+
+        for (int i = 0; i < photoPaths.length; i++) {
+            if (photoPaths[i] != null) {
+                File imageFile = new File(photoPaths[i]);
+                if (imageFile.exists()) {
+                    imgViewPhotos[i].setImageBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
+                }
+            }
+        }
+    }
+
+    private void getAitObject() {
+        aitData = AitObject.getAitData();
+    }
+
+    private void addListeners() {
         btnCheckAit.setOnClickListener(this);
         btnGenerationAit.setOnClickListener(this);
         btnCancelAit.setOnClickListener(this);
         frameLayout.setOnClickListener(this);
 
-        imgViewPhoto1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                photoNumber = 1;
+        for (int i = 0; i < imgViewPhotos.length; i++) {
+            int index = i;
+            imgViewPhotos[i].setOnClickListener(v -> {
+                photoNumber = index + 1;
                 selectImage();
-            }
-        });
-        imgViewPhoto2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                photoNumber = 2;
-                selectImage();
-            }
-        });
-        imgViewPhoto3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                photoNumber = 3;
-                selectImage();
-            }
-        });
-        imgViewPhoto4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                photoNumber = 4;
-                selectImage();
-            }
-        });
-
-    }
-
-    private void getAitObject() {
-        aitData = AitObject.getAitData();
-        if (aitData.isDataisNull()) {
-            addListener();
-        } else if (aitData.isStoreFullData()) {
-            addListener();
-        } else {
-            addListener();
+            });
         }
-    }
-
-    private void initializedView() {
-
-        imgViewPhoto1 = (ImageView) view.findViewById(R.id.image1);
-        imgViewPhoto2 = (ImageView) view.findViewById(R.id.image2);
-        imgViewPhoto3 = (ImageView) view.findViewById(R.id.image3);
-        imgViewPhoto4 = (ImageView) view.findViewById(R.id.image4);
-
-        btnCheckAit = (Button) view.findViewById(R.id.btn_check_ait);
-        btnGenerationAit = (Button) view.findViewById(R.id.btn_generation_ait);
-        frameLayout = (FrameLayout) view.findViewById(R.id.fragment_container_ait);
-        btnCancelAit = (Button) view.findViewById(R.id.btn_discard_ait);
-
-        imgViewPhoto2.setVisibility(View.GONE);
-        imgViewPhoto3.setVisibility(View.GONE);
-        imgViewPhoto4.setVisibility(View.GONE);
-
-        /*if(numberAitRetained != null) {
-
-            if(photo1Retained != null) {
-                File imageFile1 = new File(photo1Retained);
-                imgViewPhoto1.setImageBitmap(BitmapFactory.decodeFile(imageFile1.getAbsolutePath()));
-            }
-
-            if(photo2Retained != null) {
-                File imageFile2 = new File(photo2Retained);
-                imgViewPhoto2.setImageBitmap(BitmapFactory.decodeFile(imageFile2.getAbsolutePath()));
-            }
-
-            if(photo3Retained != null) {
-                File imageFile3 = new File(photo3Retained);
-                imgViewPhoto3.setImageBitmap(BitmapFactory.decodeFile(imageFile3.getAbsolutePath()));
-            }
-
-            if(photo4Retained != null) {
-                File imageFile4 = new File(photo4Retained);
-                imgViewPhoto4.setImageBitmap(BitmapFactory.decodeFile(imageFile4.getAbsolutePath()));
-            }
-
-        }*/
-
-        if(numberAitRetained != null) {
-            String[] photoPaths = {photo1Retained, photo2Retained, photo3Retained, photo4Retained};
-            ImageView[] imageViews = {imgViewPhoto1, imgViewPhoto2, imgViewPhoto3, imgViewPhoto4};
-
-            for (int i = 0; i < photoPaths.length; i++) {
-                if (photoPaths[i] != null) {
-                    File imageFile = new File(photoPaths[i]);
-                    if (imageFile.exists()) {
-                        imageViews[i].setImageBitmap(BitmapFactory.decodeFile(imageFile.getAbsolutePath()));
-                    }
-                }
-            }
-        }
-
     }
 
     @Override
     public void onClick(View v) {
         int id = v.getId();
         if (id == R.id.btn_check_ait) {
-            frameLayout.setVisibility(view.VISIBLE);
-            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-            fragmentManager.beginTransaction()
-                    .replace(R.id.fragment_container_ait, AitPreviewFragment.newInstance()).commit();
+            showFragment(AitPreviewFragment.newInstance());
         } else if (id == R.id.btn_generation_ait) {
-            if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).updateAitDataPhotos(aitData))
-                Routine.showAlert(getResources().getString(R.string.update_photos), getActivity());
-            startActivity(new Intent(getActivity(), AitLister.class));
-            getActivity().finish();
+            updateAitData();
         } else if (id == R.id.btn_discard_ait) {
-            AnyAlertDialog.dialogView(getActivity(), this.getResources().getString(R.string.alert_motive), "auto");
+            AnyAlertDialog.dialogView(getActivity(), getResources().getString(R.string.alert_motive), "auto");
         } else if (id == R.id.fragment_container_ait) {
-            frameLayout.setVisibility(view.GONE);
+            frameLayout.setVisibility(View.GONE);
         }
     }
 
-    @Override
-    public void Update() {
-
+    private void showFragment(Fragment fragment) {
+        frameLayout.setVisibility(View.VISIBLE);
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fragment_container_ait, fragment).commit();
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case Utility.MY_PERMISSIONS_REQUEST_READ_EXTERNAL_STORAGE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    if(userChoosenTask.equals("Câmera"))
-                        cameraIntent();
-                    else if(userChoosenTask.equals("Galeria"))
-                        galleryIntent();
-                } else {
-
-                }
-                break;
+    private void updateAitData() {
+        if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).updateAitDataPhotos(aitData)) {
+            Routine.showAlert(getResources().getString(R.string.update_photos), getActivity());
         }
+        startActivity(new Intent(getActivity(), AitLister.class));
+        getActivity().finish();
     }
 
     private void selectImage() {
-        final CharSequence[] items = { "Câmera", "Galeria",
-                "Cancelar" };
+        final CharSequence[] items = {"Câmera", "Galeria", "Cancelar"};
 
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity(),
-                android.app.AlertDialog.THEME_HOLO_LIGHT);
-
+        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(getActivity(), android.app.AlertDialog.THEME_HOLO_LIGHT);
         builder.setTitle("Adicionar fotos!");
-        builder.setItems(items, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int item) {
-                boolean result = Utility.checkPermission(getContext());
-
-                if (items[item].equals("Câmera")) {
-                    userChoosenTask = "Câmera";
-                    if(result)
-                        cameraIntent();
-                } else if (items[item].equals("Galeria")) {
-                    userChoosenTask = "Galeria";
-                    if(result)
-                        galleryIntent();
-                } else if (items[item].equals("Cancelar")) {
-                    dialog.dismiss();
+        builder.setItems(items, (dialog, item) -> {
+            if (items[item].equals("Câmera")) {
+                userChoosenTask = "Câmera";
+                if (hasPermissions()) {
+                    cameraIntent();
+                } else {
+                    requestPermissions();
                 }
-
+            } else if (items[item].equals("Galeria")) {
+                userChoosenTask = "Galeria";
+                if (hasPermissions()) {
+                    galleryIntent();
+                } else {
+                    requestPermissions();
+                }
+            } else if (items[item].equals("Cancelar")) {
+                dialog.dismiss();
             }
         });
         builder.show();
     }
 
-    private void galleryIntent()
-    {
-        Intent intent = new Intent();
-        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        getActivity().startActivityFromFragment(TabAitGenerateFragment.this, Intent.createChooser(intent, "Selecionar arquivo"), SELECT_FILE);
+    private boolean hasPermissions() {
+        int cameraPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA);
+        int readExternalStoragePermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_EXTERNAL_STORAGE);
+        int writeExternalStoragePermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            int readImagesPermission = ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_MEDIA_IMAGES);
+            return cameraPermission == PackageManager.PERMISSION_GRANTED &&
+                    readImagesPermission == PackageManager.PERMISSION_GRANTED;
+        } else {
+            return cameraPermission == PackageManager.PERMISSION_GRANTED &&
+                    readExternalStoragePermission == PackageManager.PERMISSION_GRANTED &&
+                    writeExternalStoragePermission == PackageManager.PERMISSION_GRANTED;
+        }
     }
 
-    private void cameraIntent()
-    {
-        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        getActivity().startActivityFromFragment(TabAitGenerateFragment.this, cameraIntent, REQUEST_CAMERA);
+    private void requestPermissions() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                requestPermissions(new String[]{
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_MEDIA_IMAGES
+                }, 100);
+            } else {
+                requestPermissions(new String[]{
+                        Manifest.permission.CAMERA,
+                        Manifest.permission.READ_EXTERNAL_STORAGE,
+                        Manifest.permission.WRITE_EXTERNAL_STORAGE
+                }, 100);
+            }
+        }
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode == Activity.RESULT_OK) {
-            if (requestCode == SELECT_FILE)
-                onSelectFromGalleryResult(data);
-            else if (requestCode == REQUEST_CAMERA)
-                onCaptureImageResult(data);
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            boolean allGranted = true;
+            for (int result : grantResults) {
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    allGranted = false;
+                    break;
+                }
+            }
+            if (allGranted) {
+                if ("Câmera".equals(userChoosenTask)) {
+                    cameraIntent();
+                } else if ("Galeria".equals(userChoosenTask)) {
+                    galleryIntent();
+                }
+            } else {
+                Log.e("TabAitGenerateFragment", "Permissão negada");
+                Toast.makeText(getContext(), "Permissões necessárias foram negadas", Toast.LENGTH_SHORT).show();
+            }
         }
+    }
+
+    private void galleryIntent() {
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        Log.d("TabAitGenerateFragment", "Iniciando galeria");
+        galleryLauncher.launch(intent);
+    }
+
+    private void cameraIntent() {
+        Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        Log.d("TabAitGenerateFragment", "Iniciando câmera");
+        cameraLauncher.launch(cameraIntent);
     }
 
     private void onCaptureImageResult(Intent data) {
-        if (data != null){
-            Bundle bundle = data.getExtras();
-            if (bundle != null){
-                Bitmap thumbnail = (Bitmap) bundle.get("data");
-                namedPhoto(thumbnail, data);
+        if (data != null) {
+            Bitmap thumbnail = (Bitmap) data.getExtras().get("data");
+            if (thumbnail != null) {
+                Log.d("TabAitGenerateFragment", "Imagem capturada com sucesso");
+                saveAndDisplayImage(thumbnail);
+            } else {
+                Log.e("TabAitGenerateFragment", "Falha ao capturar a imagem");
             }
+        } else {
+            Log.e("TabAitGenerateFragment", "Dados nulos ao capturar imagem");
         }
-
     }
 
-    @SuppressWarnings("deprecation")
     private void onSelectFromGalleryResult(Intent data) {
-
-        Bitmap thumbnail = null;
         if (data != null) {
             try {
-                thumbnail = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), data.getData());
+                Uri selectedImage = data.getData();
+                if (selectedImage != null) {
+                    Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), selectedImage);
+                    Log.d("TabAitGenerateFragment", "Imagem selecionada da galeria com sucesso");
+                    saveAndDisplayImage(thumbnail);
+                } else {
+                    Log.e("TabAitGenerateFragment", "URI de imagem nulo ao selecionar da galeria");
+                }
             } catch (IOException e) {
-                e.printStackTrace();
+                Log.e("TabAitGenerateFragment", "Erro ao selecionar imagem da galeria", e);
             }
+        } else {
+            Log.e("TabAitGenerateFragment", "Dados nulos ao selecionar imagem da galeria");
         }
-
-        namedPhoto(thumbnail, data);
-
     }
 
-    private void namedPhoto(Bitmap thumbnail, Intent data){
-
+    private void saveAndDisplayImage(Bitmap thumbnail) {
         ByteArrayOutputStream bytes = new ByteArrayOutputStream();
         thumbnail.compress(Bitmap.CompressFormat.JPEG, 90, bytes);
 
-        //Log.i("Photo name : ", String.valueOf(thumbnail));
+        File imageFile = createImageFile();
+        try (FileOutputStream outputStream = new FileOutputStream(imageFile)) {
+            outputStream.write(bytes.toByteArray());
+            Log.d("TabAitGenerateFragment", "Imagem salva com sucesso: " + imageFile.getAbsolutePath());
+        } catch (IOException e) {
+            Log.e("TabAitGenerateFragment", "Erro ao salvar imagem", e);
+        }
 
+        displayImage(thumbnail, imageFile.getAbsolutePath());
+    }
+
+    private File createImageFile() {
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/" + getResources().getString(R.string.folder_app));
         pastaRoot = root + myDir;
 
         if (!myDir.exists()) {
             myDir.mkdirs();
+            Log.d("TabAitGenerateFragment", "Diretório criado: " + myDir.getAbsolutePath());
         }
 
         String photoName = aitData.getAitNumber() + "_photo_" + photoNumber + ".jpg";
-        String fullName = myDir + "/" + photoName;
-        File destination = new File(myDir, photoName);
-
-        //Log.i("Photo", root + "- full way: " + fullName + " - Ait: " + dadosAuto.getNumeroAuto());
-
-        FileOutputStream outputStream;
-
-        try {
-            destination.createNewFile();
-            outputStream = new FileOutputStream(destination);
-            outputStream.write(bytes.toByteArray());
-            outputStream.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        if(photoNumber == 1){
-            imgViewPhoto1.setImageBitmap(thumbnail);
-            aitData.setPhoto1(fullName);
-            saveAitImage(aitData.getAitNumber(),"1", fullName);
-            imgViewPhoto2.setVisibility(View.VISIBLE);
-        } else if(photoNumber == 2){
-            imgViewPhoto2.setImageBitmap(thumbnail);
-            aitData.setPhoto2(fullName);
-            saveAitImage(aitData.getAitNumber(),"2", fullName);
-            imgViewPhoto3.setVisibility(View.VISIBLE);
-        } else if(photoNumber == 3){
-            imgViewPhoto3.setImageBitmap(thumbnail);
-            aitData.setPhoto3(fullName);
-            saveAitImage(aitData.getAitNumber(),"3", fullName);
-            imgViewPhoto4.setVisibility(View.VISIBLE);
-        } else {
-            imgViewPhoto4.setImageBitmap(thumbnail);
-            aitData.setPhoto4(fullName);
-            saveAitImage(aitData.getAitNumber(),"4", fullName);
-        }
-
-        compressBitmapToFile(destination);
-
-      /*  Uri selectedImage = data.getData();
-        String filePathColumn = MediaStore.Images.Media.DATA;
-
-        File photo = new File(filePathColumn + "/" + selectedImage);
-
-        Log.d("Foto: 310 ", String.valueOf(photo));
-        //photo.delete();*/
-
+        return new File(myDir, photoName);
     }
 
-    public File compressBitmapToFile(File file){
-        try {
-
-            // BitmapFactory options to downsize the image
-            BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            options.inSampleSize = 6;
-            // factor of downsizing the image
-
-            FileInputStream inputStream = new FileInputStream(file);
-            //Bitmap selectedBitmap = null;
-            BitmapFactory.decodeStream(inputStream, null, options);
-            inputStream.close();
-
-            // The new size we want to scale to
-            final int REQUIRED_SIZE=75;
-
-            // Find the correct scale value. It should be the power of 2.
-            int scale = 1;
-            while(options.outWidth / scale / 2 >= REQUIRED_SIZE &&
-                    options.outHeight / scale / 2 >= REQUIRED_SIZE) {
-                scale *= 2;
-            }
-
-            BitmapFactory.Options options1 = new BitmapFactory.Options();
-            options1.inSampleSize = scale;
-            inputStream = new FileInputStream(file);
-
-            Bitmap selectedBitmap = BitmapFactory.decodeStream(inputStream, null, options1);
-            inputStream.close();
-
-            // here i override the original image file
-            file.createNewFile();
-            FileOutputStream outputStream = new FileOutputStream(file);
-
-            selectedBitmap.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
-
-            return file;
-
-        } catch (Exception e) {
-            return null;
+    private void displayImage(Bitmap thumbnail, String imagePath) {
+        imgViewPhotos[photoNumber - 1].setImageBitmap(thumbnail);
+        saveImagePath(photoNumber, imagePath);
+        if (photoNumber < 4) {
+            imgViewPhotos[photoNumber].setVisibility(View.VISIBLE);
         }
-
     }
 
-    public void saveAitImage(String ait, String local, String photo){
+    private void saveImagePath(int photoNumber, String imagePath) {
+        switch (photoNumber) {
+            case 1:
+                aitData.setPhoto1(imagePath);
+                break;
+            case 2:
+                aitData.setPhoto2(imagePath);
+                break;
+            case 3:
+                aitData.setPhoto3(imagePath);
+                break;
+            case 4:
+                aitData.setPhoto4(imagePath);
+                break;
+        }
+        saveAitImage(aitData.getAitNumber(), String.valueOf(photoNumber), imagePath);
+    }
 
-        if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).insertAitDataPhotos(ait, local, photo))
+    public void saveAitImage(String ait, String local, String photo) {
+        if (!DatabaseCreator.getInfractionDatabaseAdapter(getActivity()).insertAitDataPhotos(ait, local, photo)) {
             Routine.showAlert(getResources().getString(R.string.update_photos), getActivity());
-
+        }
     }
 
+    @Override
+    public void Update() {
+        // Implementação do método Update se necessário
+    }
 }

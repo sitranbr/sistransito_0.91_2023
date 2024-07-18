@@ -140,7 +140,7 @@ public class TavPrintBitmap extends BasePrintBitmap {
         bitmapFormat.createTable("MARCA/MODELO", aitData.getVehicleModel(), "ESPÉCIE", aitData.getVehicleSpecies(), true, PrintBitmapFormat.TableCellAlign.MIDDLE,
                 PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
-        bitmapFormat.createQuotes("CONDIÇÕES DO VEÍCULO NO ATO DA REMOÇÃO", Paint.Align.CENTER, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
+        bitmapFormat.createQuotes("CONDIÇÕES DO VEÍCULO NO ATO DA REMOÇÃO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
 
 
         bitmapFormat.createStructureTable("QUANTO À ESTRUTURA", sStructure, "QUANTO AOS ACESSÓRIOS", sAccessories,
@@ -149,7 +149,7 @@ public class TavPrintBitmap extends BasePrintBitmap {
         bitmapFormat.createTextCaptions("LEGENDAS", sTextCaptions,  PrintBitmapFormat.NORMAL_FONT);
         //bitmapFormat.createQuotes("LEGENDAS", sTextCaptions, true, false, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.NORMAL_FONT);
 
-        bitmapFormat.createTable("ODÔMETRO", tavData.getOdometer(), "COMBUSTÍVEL", tavData.getOdometer(),
+        bitmapFormat.createTable("ODÔMETRO", tavData.getOdometer(), "COMBUSTÍVEL", tavData.getFuelGauge(),
                 true, PrintBitmapFormat.TableCellAlign.MIDDLE,
                 PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
@@ -174,7 +174,7 @@ public class TavPrintBitmap extends BasePrintBitmap {
         bitmapFormat.createObservationQuotes("OBSERVAÇÕES", tavData.getObservation(), true, PrintBitmapFormat.NORMAL_FONT);
 
         bitmapFormat.createQuotes("IDENTIFICAÇÃO DA AUTORIDADE OU AGENTE AUTUADOR", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createNameTable("NOME", user.getEmployeeName().toUpperCase(), "MATRÍCULA", user.getRegistration(), true, PrintBitmapFormat.TableCellAlign.RIGHT
+        bitmapFormat.createTwoColumns("NOME", user.getEmployeeName(), "MATRÍCULA", user.getRegistration(), true, PrintBitmapFormat.TableCellAlign.RIGHT
                 , PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.LEFT);
         bitmapFormat.createSignatureQuotes("ASSINATURA", "\n\n\n", true, PrintBitmapFormat.NORMAL_FONT);
 

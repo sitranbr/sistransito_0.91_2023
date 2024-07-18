@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -124,7 +125,7 @@ public class PrintBitmapFormat extends BasePaint {
 //        System.gc();
 //    }
 
-    public void createNameTable22(String title1, String value1, String title2, String value2, boolean isAdd, TableCellAlign align, float titleFontSize, float valueFontSize, TableCellAlign value1Align) {
+    public void createNameTable(String title1, String value1, String title2, String value2, boolean isAdd, TableCellAlign align, float titleFontSize, float valueFontSize, TableCellAlign value1Align) {
         if (!isAdd) {
             yPosition += TABLE_BORDER;
         }
@@ -179,35 +180,48 @@ public class PrintBitmapFormat extends BasePaint {
         System.gc();
     }
 
-    public void createNameTable(String title1, String value1, String title2, String value2, boolean isAdd, TableCellAlign align, float titleFontSize, float valueFontSize, TableCellAlign value1Align) {
+    public void createTwoColumns(String title1, String value1, String title2, String value2, boolean isAdd, TableCellAlign align, float titleFontSize, float valueFontSize, TableCellAlign value1Align) {
         if (!isAdd) {
             yPosition += TABLE_BORDER;
         }
         int topRowY = yPosition;
-        int secondColumnX = 0;
-        // Restante do código para definir secondColumnX com base no alinhamento...
+
+        // Define a largura de title2 como 2/3 da largura de title1
+        int totalWidth = PAGE_WIDTH;
+        int title1Width = (int) (totalWidth * 2 / 3);
+        int title2Width = totalWidth / 3 - 10;  // Ajuste para evitar que ultrapasse PAGE_WIDTH
 
         setPaintNormal();
         paint.setTextSize(titleFontSize);
         setNewLine(1);
-        drawText(title1, xTextStart, secondColumnX, yPosition, Paint.Align.LEFT);
-        yPosition = drawText(title2, secondColumnX + MARGIN_LARGE, xPositionEnd, yPosition, Paint.Align.LEFT);
+
+        drawText(title1, xTextStart, title1Width, yPosition, Paint.Align.LEFT);
+        yPosition = drawText(title2, title1Width + MARGIN_LARGE, xPositionEnd, yPosition, Paint.Align.LEFT);
 
         setNewLine(2);
+
+        // Salvar a posição yPosition após desenhar os títulos
+        int value2StartY = yPosition;
 
         setPaintBold();
         paint.setTextSize(valueFontSize);
 
-        float value1MaxWidth = secondColumnX - xPositionStart - 15;
+        // Ajustar value1MaxWidth para incluir um padding de 5 unidades à direita
+        float value1MaxWidth = title1Width - xPositionStart - 15;  // Subtrair padding da esquerda e da direita
         Paint.Align value1PaintAlign = getPaintAlign(value1Align);
 
-        yPosition = drawAlignedText(value1, xPositionStart + 15, yPosition, value1MaxWidth, value1PaintAlign, paint);
-        yPosition = drawAlignedText(value2, secondColumnX, yPosition, xPositionEnd - secondColumnX, Paint.Align.CENTER, paint);
+        int value1EndY = drawAlignedText(value1, xPositionStart + 10, yPosition, value1MaxWidth, value1PaintAlign, paint);
+
+        // Desenhar value2 no topo da célula correspondente
+        int value2EndY = drawAlignedText(value2, title1Width + MARGIN_LARGE, topRowY + 30, title2Width - MARGIN_LARGE, Paint.Align.CENTER, paint);
+
+        // Atualizar yPosition para o fim da célula que contém value1 ou value2, o que for maior
+        yPosition = Math.max(value1EndY, value2EndY);
 
         setNewLine(2);
 
-        drawBox(new Rect(xPositionStart, topRowY, secondColumnX, yPosition));
-        drawBox(new Rect(secondColumnX, topRowY, xPositionEnd, yPosition));
+        drawBox(new Rect(xPositionStart, topRowY, title1Width, yPosition));
+        drawBox(new Rect(title1Width, topRowY, title1Width + title2Width, yPosition));
         System.gc();
     }
 
@@ -308,8 +322,6 @@ public class PrintBitmapFormat extends BasePaint {
             }
         }
 
-
-
         setNewLine(1);
 
         for (String mText2 : tValue_2) {
@@ -325,7 +337,6 @@ public class PrintBitmapFormat extends BasePaint {
                 y2 = drawText(mText2.trim(), x2, xPositionEnd, y2, Paint.Align.CENTER);
             }
         }
-
 
         setNewLine(10);
 
@@ -661,7 +672,7 @@ public class PrintBitmapFormat extends BasePaint {
             }
 
             String line = s.substring(startPosition, startPosition + lineBreak).trim();
-            yPosition = drawText(line, xTextStart + 5, xPositionEnd, yPosition, align);
+            yPosition = drawText(line, xTextStart, xPositionEnd, yPosition, align);
             setNewLine(1);
 
             startPosition += lineBreak;
@@ -682,8 +693,5 @@ public class PrintBitmapFormat extends BasePaint {
 
         return lineBreak;
     }
-
-
-
 
 }

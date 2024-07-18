@@ -1,5 +1,6 @@
 package net.sistransito.mobile.rrd;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 
@@ -184,7 +185,8 @@ public class RrdData implements Serializable {
 		return AppConstants.NEW_LINE + AppConstants.NEW_LINE;
 	}
 
-	public void setRRDDataFromCursor(Cursor myCursor) {
+	@SuppressLint("Range")
+    public void setRRDDataFromCursor(Cursor myCursor) {
         setRrdNumber(myCursor.getString(myCursor
                 .getColumnIndex(RrdDatabaseHelper.RRD_NUMBER)));
 		setAitNumber(myCursor.getString(myCursor
@@ -203,8 +205,8 @@ public class RrdData implements Serializable {
 
 		setRegistrationNumber(myCursor.getString(myCursor
 				.getColumnIndex(RrdDatabaseHelper.CNH_NUMBER)));
-        setRegistrationNumber(myCursor.getString(myCursor
-                .getColumnIndex(RrdDatabaseHelper.CNH_NUMBER)));
+        setRegistrationState(myCursor.getString(myCursor
+                .getColumnIndex(RrdDatabaseHelper.CNH_STATE)));
 
 		setValidity(myCursor.getString(myCursor
 				.getColumnIndex(RrdDatabaseHelper.CNH_VALIDITY)));

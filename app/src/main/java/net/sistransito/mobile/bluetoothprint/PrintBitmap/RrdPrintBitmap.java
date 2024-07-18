@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Paint;
 import android.util.Log;
 
+import net.sistransito.R;
 import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.BasePrintBitmap;
 import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.PrintBitmapFormat;
@@ -27,12 +28,10 @@ public class RrdPrintBitmap extends BasePrintBitmap {
     public Bitmap getBitmap() {
         PrintBitmapFormat bitmapFormat = new PrintBitmapFormat(context);
 
-        Log.d("UfRegistro", rrdData.getRegistrationState());
-
         String title = "NOME DO ESTADO\n" +
                 "NOME DA SECRETARIA\n" +
                 "DEPARTAMENTO DE TRÂNSITO";
-        String subTitle = "RECIBO DE RECOLHIMENTO DE DOCUMENTOS (RRD)";
+        String subTitle = context.getString(R.string.rrd_receipt);
 
         bitmapFormat.createTitle(title, subTitle, "ic_left_title.png", "ic_right_title.png", PrintBitmapFormat.TITLE_FONT_SIZE, PrintBitmapFormat.TITLE_FONT_SIZE);
         bitmapFormat.createQuotes("IDENTIFICAÇÃO DO RECIBO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
@@ -68,7 +67,7 @@ public class RrdPrintBitmap extends BasePrintBitmap {
                 true, PrintBitmapFormat.TableCellAlign.MIDDLE, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
 
         bitmapFormat.createQuotes("RESPONSÁVEL PELO RECOLHIMENTO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createNameTable("NOME", user.getEmployeeName().toUpperCase(), "MATRÍCULA", user.getRegistration(),
+        bitmapFormat.createTwoColumns("NOME", context.getString(R.string.rrd_name), "MATRÍCULA", user.getRegistration(),
                 false, PrintBitmapFormat.TableCellAlign.LEFT,
                 PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.LEFT);
         bitmapFormat.createSignatureQuotes("ASSINATURA", "\n\n\n", true, PrintBitmapFormat.NORMAL_FONT);
@@ -76,10 +75,8 @@ public class RrdPrintBitmap extends BasePrintBitmap {
         bitmapFormat.setNewLine(2);
 
         bitmapFormat.createQuotes("ORIENTAÇÕES AO USUÁRIO:", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
-        bitmapFormat.createQuotes("A partir desta data, o condutor/proprietário tem " + rrdData.getDaysForRegularization() + " dias úteis para " +
-                "providenciar a regularização do veículo, conforme o art. 270, §§ 2º e 3º, da Lei 9.503/97, o qual ficará impedido de transitar além dos " +
-                        "limites necessários à resolução do(s) problema(s), sob pena de enquadramento no art. 232 da lei 9.503/97. O(s) domumento(s) recolhidos(s) devem(m) ser procurado(s), mediante a apresentação do veículo regularizado, na vistoria do Detran, sendo imprescindível a apresentação deste recibo.",
-                PrintBitmapFormat.MAIOR_FONT);
+        bitmapFormat.createQuotes(context.getString(R.string.rrd_observation_fist) + " " + rrdData.getDaysForRegularization() + " " + context.getString(R.string.rrd_observation_second),
+                PrintBitmapFormat.MEDIO_FONT);
 
         bitmapFormat.setNewLine(5);
 

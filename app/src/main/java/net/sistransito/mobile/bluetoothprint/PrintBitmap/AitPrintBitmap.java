@@ -45,7 +45,7 @@ public class AitPrintBitmap extends BasePrintBitmap {
         bitmapFormat.createQuotes("1-IDENTIFICAÇÃO DA AUTUAÇÃO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
 
         /*bitmapFormat.createTitle("ÓRGÃO AUTUADOR", user.getCodigoOrgao(), "NÚMERO DO AIT", aData.getNumeroAuto(), PrintBitmapFormat.NORMAL_FONT,
-               PrintBitmapFormat.MAIOR_FONT);*/
+               PrintBitmapFormat.MAIOR_FONT);*//*
 
         bitmapFormat.createNameTable("ÓRGÃO AUTUADOR", "114100", "NÚMERO DO AIT", aitData.getAitNumber(),
                 true, PrintBitmapFormat.TableCellAlign.MIDDLE,
@@ -53,7 +53,7 @@ public class AitPrintBitmap extends BasePrintBitmap {
 
         bitmapFormat.createQuotes("2-IDENTIFICAÇÃO DO VEÍCULO", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
 
-        /*if (aitData.getCountry() == null) {
+        *//*if (aitData.getCountry() == null) {
             bitmapFormat.createTable("PLACA", aitData.getPlate(), "UF",
                     aitData.getStateVehicle(), "CHASSI", aitData.getChassi(), false,
                     PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
@@ -62,8 +62,8 @@ public class AitPrintBitmap extends BasePrintBitmap {
                     aitData.getStateVehicle(), "PAIS", "BR",
                     "CHASSI", aitData.getChassi(), false,
                     PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
-        }*/
-
+        }*//*
+*/
         final String LICENSE_PLATE_COLUMN = "PLACA";
         final String STATE_COLUMN = "UF";
         final String COUNTRY_COLUMN = "PAIS";

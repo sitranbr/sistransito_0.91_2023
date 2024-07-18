@@ -166,7 +166,7 @@
     <!-- login -->
     <string name="search_off_line">Consulta off-line</string>
     <string name="lets_go">Iniciar operações</string>
-    <string name="login_hint">Login no sistema</string>
+    <string name="login_hint">Página de login</string>
     <string name="email">Email</string>
     <string name="login_register"><b><i>Login</i></b></string>
     <string name="password">Senha</string>
@@ -604,10 +604,10 @@
     <string name="setting_state">PA</string>
     <string name="setting_spinner_state">Uf para listagem de municípios</string>
     <string name="error_load_bluetooth">Nao foi possivel habilitar bluetooth, tente habilitar manualmente ou tente novamente.</string>
-    <string name="pairing_error">Nao foi encontrada MPT-III.</string>
+    <string name="pairing_error">Não foi encontrada MPT-III.</string>
     <string name="pairing_message">Faça o pareamento com o disposivo e tente novamente.</string>
-    <string name="error_connection_printer">Nao foi possivel conectar ao dispositivo [</string>
-    <string name="reconnect_printer">]\n\n Ligue ou conecte o dispositivo e tente novamente.</string>
+    <string name="error_connection_printer">Não foi possível conectar ao dispositivo </string>
+    <string name="reconnect_printer">Ligue ou conecte o dispositivo e tente novamente.</string>
     <string name="btn_printer">Aplicar</string>
     <string name="language_english_generic">Inglês (Genérico)</string>
     <string name="language_portuguese">Português (Brasil)</string>
@@ -632,6 +632,10 @@
     <string name="list_tca_issued">TCA emitidos</string>
     <string name="list_rrd_issued">RRD emitidos</string>
     <string name="rrd_loose_title">RRD Avulso</string>
+    <string name="rrd_receipt">RECIBO DE RECOLHIMENTO DE DOCUMENTOS (RRD)</string>
+    <string name="rrd_observation_fist">A partir desta data, o condutor/proprietário tem</string>
+    <string name="rrd_observation_second">dias úteis para providenciar a regularização do veículo, conforme o art. 270, §§ 2º e 3º, da Lei 9.503/97, o qual ficará impedido de transitar além dos limites necessários à resolução do(s) problema(s), sob pena de enquadramento no art. 232 da lei 9.503/97. O(s) domumento(s) recolhidos(s) devem(m) ser procurado(s), mediante a apresentação do veículo regularizado, na vistoria do Detran, sendo imprescindível a apresentação deste recibo.</string>
+    <string name="rrd_name">Maria da Conceição Soares Bitencourt Neto</string>
 
     <!-- other -->
     <string name="concluded_synchronization">Sincronização concluída.</string>

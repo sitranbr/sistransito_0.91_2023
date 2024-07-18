@@ -2,22 +2,43 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.sistransito">
 
+    <!-- Permissões de acesso à conta e rede -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="false" />
+
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- Permissões de localização -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- Permissões de Bluetooth -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+
+    <!-- Outras permissões variadas -->
+    <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+
+    <!-- Permissões de armazenamento e câmera -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission
+        android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="34" />
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="34" />
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO" />
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO" />
 
     <application
         android:name="net.sistransito.Application"
@@ -25,6 +46,8 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/MaterialTheme">
+
+        <!-- Atividades do aplicativo -->
         <activity android:name="net.sistransito.mobile.util.RetrovitActivity"></activity>
         <activity
             android:name="net.sistransito.MainActivity"
@@ -32,7 +55,6 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -41,20 +63,8 @@
             android:theme="@style/MaterialTheme" />
         <activity android:name="net.sistransito.mobile.plate.lister.PlateLister" />
         <activity android:name="net.sistransito.mobile.plate.lister.PlateListerDelete" />
-        <!--
-        receiver android:name="net.sistransito.mobile.SampleAlarmReceiver" >
-        </receiver>
-        <receiver
-            android:name="net.sistransito.mobile.SampleBootReceiver"
-            android:enabled="false" >
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" >
-                </action>
-            </intent-filter>
-        </receiver>
 
-        <service android:name="net.sistransito.mobile.SampleSchedulingService" />
-        -->
+        <!-- Receptores e serviços -->
         <receiver android:name="net.sistransito.mobile.main.BalanceAlarmReceiver" />
         <receiver
             android:name="net.sistransito.mobile.main.BalanceBootReceiver"
@@ -64,9 +74,9 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
-
         <service android:name="net.sistransito.mobile.main.BalanceSchedulingService" />
 
+        <!-- Outras atividades do aplicativo -->
         <activity
             android:name="net.sistransito.mobile.main.MainUserActivity"
             android:theme="@style/MaterialTheme" />
@@ -91,5 +101,4 @@
         <activity android:name="net.sistransito.mobile.rrd.lister.RrdLister" />
         <activity android:name="net.sistransito.mobile.database.sync.ConnectionActivity" />
     </application>
-
 </manifest>
