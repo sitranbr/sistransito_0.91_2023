@@ -17,6 +17,7 @@ public class DatabaseCreator {
 	private static TavDatabaseAdapter tavDatabaseAdapter;
 	private static BalanceDatabaseAdapter balanceDatabaseAdapter;
 	private static NumberDatabaseAdapter numberDatabaseAdapter;
+
 	private DatabaseCreator(Context context) {
 		openAllDatabase(context);
 	}
@@ -34,53 +35,54 @@ public class DatabaseCreator {
 		tavDatabaseAdapter = new TavDatabaseAdapter(context);
 		numberDatabaseAdapter = new NumberDatabaseAdapter(context);
 		balanceDatabaseAdapter = new BalanceDatabaseAdapter(context);
-
 	}
 
-	public static BalanceDatabaseAdapter getBalanceDatabaseAdapter(
-			Context context) {
-		if (balanceDatabaseAdapter == null)
+	public static BalanceDatabaseAdapter getBalanceDatabaseAdapter(Context context) {
+		if (balanceDatabaseAdapter == null) {
 			balanceDatabaseAdapter = new BalanceDatabaseAdapter(context);
+		}
 		return balanceDatabaseAdapter;
 	}
 
 	public static NumberDatabaseAdapter getNumberDatabaseAdapter(Context context) {
-		if (numberDatabaseAdapter == null)
+		if (numberDatabaseAdapter == null) {
 			numberDatabaseAdapter = new NumberDatabaseAdapter(context);
+		}
 		return numberDatabaseAdapter;
 	}
 
 	public static TavDatabaseAdapter getTavDatabaseAdapter(Context context) {
-		if (tavDatabaseAdapter == null)
+		if (tavDatabaseAdapter == null) {
 			tavDatabaseAdapter = new TavDatabaseAdapter(context);
+		}
 		return tavDatabaseAdapter;
 	}
 
 	public static TcaDatabaseAdapter getTcaDatabaseAdapter(Context context) {
-		if (tcaDatabaseAdapter == null)
+		if (tcaDatabaseAdapter == null) {
 			tcaDatabaseAdapter = new TcaDatabaseAdapter(context);
+		}
 		return tcaDatabaseAdapter;
 	}
 
 	public static RrdDatabaseAdapter getRrdDatabaseAdapter(Context context) {
-		if (rrddatabaseAdapter == null)
+		if (rrddatabaseAdapter == null) {
 			rrddatabaseAdapter = new RrdDatabaseAdapter(context);
+		}
 		return rrddatabaseAdapter;
 	}
 
-	public static InfractionDatabaseAdapter getInfractionDatabaseAdapter(
-			Context context) {
-		if (databaseAdapterAutoInfracao == null)
-			databaseAdapterAutoInfracao = new InfractionDatabaseAdapter(
-					context);
+	public static InfractionDatabaseAdapter getInfractionDatabaseAdapter(Context context) {
+		if (databaseAdapterAutoInfracao == null) {
+			databaseAdapterAutoInfracao = new InfractionDatabaseAdapter(context);
+		}
 		return databaseAdapterAutoInfracao;
 	}
 
-	public static AitPJDatabaseAdapter getAitPJDatabaseAdapter(
-			Context context) {
-		if (databaseAdapterPJInfracao == null)
-			databaseAdapterPJInfracao = new AitPJDatabaseAdapter(
-					context);
+	public static AitPJDatabaseAdapter getAitPJDatabaseAdapter(Context context) {
+		if (databaseAdapterPJInfracao == null) {
+			databaseAdapterPJInfracao = new AitPJDatabaseAdapter(context);
+		}
 		return databaseAdapterPJInfracao;
 	}
 
@@ -91,8 +93,7 @@ public class DatabaseCreator {
 		return databaseAdapterSetting;
 	}
 
-	public static SearchPlateDatabaseAdapter getSearchPlateDatabaseAdapter(
-			Context context) {
+	public static SearchPlateDatabaseAdapter getSearchPlateDatabaseAdapter(Context context) {
 		if (searchPlateDatabaseAdapter == null) {
 			searchPlateDatabaseAdapter = new SearchPlateDatabaseAdapter(context);
 		}
@@ -100,27 +101,28 @@ public class DatabaseCreator {
 	}
 
 	public synchronized void close() {
-		searchPlateDatabaseAdapter.close();
-		databaseAdapterSetting.close();
-		databaseAdapterAutoInfracao.close();
-		prepopulatedDBOpenHelper.close();
-		tcaDatabaseAdapter.close();
+		if (searchPlateDatabaseAdapter != null) searchPlateDatabaseAdapter.close();
+		if (databaseAdapterSetting != null) databaseAdapterSetting.close();
+		if (databaseAdapterAutoInfracao != null) databaseAdapterAutoInfracao.close();
+		if (prepopulatedDBOpenHelper != null) prepopulatedDBOpenHelper.close();
+		if (tcaDatabaseAdapter != null) tcaDatabaseAdapter.close();
+		if (tavDatabaseAdapter != null) tavDatabaseAdapter.close();
+		if (rrddatabaseAdapter != null) rrddatabaseAdapter.close();
+		if (balanceDatabaseAdapter != null) balanceDatabaseAdapter.close();
+		if (numberDatabaseAdapter != null) numberDatabaseAdapter.close();
 	}
 
-	public static PrepopulatedDBOpenHelper getPrepopulatedDBOpenHelper(
-			Context context) {
+	public static PrepopulatedDBOpenHelper getPrepopulatedDBOpenHelper(Context context) {
 		if (prepopulatedDBOpenHelper == null) {
 			prepopulatedDBOpenHelper = new PrepopulatedDBOpenHelper(context);
 		}
 		return prepopulatedDBOpenHelper;
 	}
 
-	public static SearchDataInCard getSearchDataInCard(
-			Context context) {
+	public static SearchDataInCard getSearchDataInCard(Context context) {
 		if (searchDataInCard == null) {
 			searchDataInCard = new SearchDataInCard(context);
 		}
 		return searchDataInCard;
 	}
-
 }

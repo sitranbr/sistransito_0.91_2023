@@ -1,36 +1,41 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
     namespace = "net.sistransito"
-    compileSdkVersion 34
+    compileSdk 34
 
     defaultConfig {
         applicationId "net.sistransito"
-        minSdkVersion 24
-        targetSdkVersion 34
+        minSdk 24
+        targetSdk 34
         versionCode 1
         versionName "0.9"
         multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
-
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'net.zetetic:android-database-sqlcipher:4.2.0@aar'
-    implementation("com.mikepenz:materialdrawer:9.0.1")
+    implementation "com.mikepenz:materialdrawer:9.0.1"
     implementation project(':materialDesign')
     implementation 'de.greenrobot:eventbus:3.0.0-beta1'
     implementation 'com.google.code.gson:gson:2.10.1'
@@ -46,7 +51,6 @@ dependencies {
     implementation 'com.android.volley:volley:1.2.1'
     implementation 'com.koushikdutta.ion:ion:2.+'
     implementation 'com.google.android.gms:play-services-location:21.0.1'
-    implementation 'com.squareup.retrofit2:retrofit:2.7.1'
-    implementation 'com.squareup.retrofit2:converter-jackson:2.5.0'
-
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }

@@ -136,7 +136,7 @@
     <string name="assessment_amout_format">Valor :&#160;</string>
     <string name="impediment_format">Impedimento admin. :&#160;</string>
     <string name="theft_format">Registro de furto :&#160;</string>
-    <string name="restriction_format">Restricoes :&#160;</string>
+    <string name="restriction_format">Restrições :&#160;</string>
     <string name="date_format">Data da consulta :&#160;</string>
     <string name="engine_format">Número do motor :&#160;</string>
     <string name="seal_format">Número do lacre :&#160;</string>

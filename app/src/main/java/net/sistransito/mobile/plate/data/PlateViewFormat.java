@@ -173,7 +173,6 @@ public class PlateViewFormat {
 
         }
 
-
     }
 
     public void setWarning() {

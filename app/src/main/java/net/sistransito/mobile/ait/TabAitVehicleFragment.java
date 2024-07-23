@@ -350,9 +350,9 @@ public class TabAitVehicleFragment extends DebugFragment implements
     private void getOtherUpdate() {
 
         int selectionStateVehicle = 0,
-        selectionCountry = 0,
-        selectionVehicleSpecies = 0,
-        selectionVehicleCategory = 0;
+                selectionCountry = 0,
+                selectionVehicleSpecies = 0,
+                selectionVehicleCategory = 0;
 
         selectionStateVehicle = listStatePlate.indexOf(aitData.getStateVehicle());
         selectionCountry = listCountry.indexOf(aitData.getCountry());

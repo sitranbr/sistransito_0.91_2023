@@ -18,7 +18,7 @@ public class WebClient {
 
     public static final String CNH_URL = BASE_URl + "op=cnh&dadoscnh=";
 
-    public static final String SEARCH_PLATE = API_URl + "vehicle/searchPlate?plate=";
+    public static final String SEARCH_PLATE = API_URl + "vehicle/searchPlate2?plate=";
     public static final String LOGIN_URl = BASE_URl + "auth/dologin?email=";
 
     public static final String URL_AIT_NUMBER = BASE_URl + "ait_number";

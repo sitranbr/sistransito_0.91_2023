@@ -51,7 +51,7 @@ public class CustomHttpClient {
 			HttpResponse response = client.execute(request);
 			HttpEntity entity = response.getEntity();
 			jsonText = EntityUtils.toString(entity, HTTP.UTF_8);
-			Log.d("jsontext: ", jsonText.toString() + "JSON");
+			Log.d("JSON: ", jsonText.toString());
 
 		} catch (UnsupportedEncodingException e) {
 
@@ -83,7 +83,7 @@ public class CustomHttpClient {
 			HttpResponse response = client.execute(request);
 			HttpEntity entity = response.getEntity();
 			jsonText = EntityUtils.toString(entity, HTTP.UTF_8);
-			Log.d("jsontext: ", jsonText.toString() + "JSON");
+			Log.d("JSON: ", jsonText.toString());
 		} catch (Exception e) {
 		}
 		return jsonText;
