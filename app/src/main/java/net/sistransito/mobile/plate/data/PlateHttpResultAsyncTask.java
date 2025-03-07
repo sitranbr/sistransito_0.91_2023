@@ -4,6 +4,7 @@ import android.content.Context;
 import android.location.Location;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.gc.materialdesign.widgets.ProgressDialog;
@@ -13,6 +14,7 @@ import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.CallBackPlate;
 import net.sistransito.mobile.http.WebClient;
 
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -62,9 +64,9 @@ public class PlateHttpResultAsyncTask {
 
     private void doInBackground(String... params) {
         if (isOffline) {
+            Log.d("offline67", Arrays.toString(params));
             try {
                 dataPlate = DatabaseCreator.getSearchDataInCard(context).getPlateData(sPlate, sType);
-
                 if (dataPlate != null) {
                     DatabaseCreator.getSearchPlateDatabaseAdapter(context).insertPlateSearchData(dataPlate);
                 }
@@ -77,7 +79,6 @@ public class PlateHttpResultAsyncTask {
                 jsonText = AppObject.getHttpClient().executeHttpGet(WebClient.SEARCH_PLATE + sPlate);
                 createPlateRawData = new CreatePlateRawDataFromJson(jsonText, context);
                 dataPlate = createPlateRawData.getDataFromPlate();
-
                 if (dataPlate != null) {
                     DatabaseCreator.getSearchPlateDatabaseAdapter(context).insertPlateSearchData(dataPlate);
                 }

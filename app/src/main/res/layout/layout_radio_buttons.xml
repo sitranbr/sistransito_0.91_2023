@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/widght_margin_top_2"
+    android:orientation="horizontal">
+
+    <RadioGroup
+        android:id="@+id/rg_type_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center|left"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_plate_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/plate_title"
+            android:checked="true"
+            android:buttonTint="@color/yellow_light"
+            android:textColor="@color/yellow_light" />
+
+        <RadioButton
+            android:id="@+id/rb_chassi_search"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/chassi_search"
+            android:checked="false"
+            android:buttonTint="@color/yellow_light"
+            android:textColor="@color/yellow_light" />
+    </RadioGroup>
+</LinearLayout>

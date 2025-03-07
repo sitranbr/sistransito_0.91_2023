@@ -101,7 +101,7 @@ public class VehicleRepository {
             case "engine":
                 return "engine";
             case "vis":
-                return "chassi";
+                return "vis";
             default:
                 throw new IllegalArgumentException("Invalid search type");
         }
@@ -125,8 +125,10 @@ public class VehicleRepository {
         dataPlate.setRenavam(getColumnValue(cursor, RENAVAM));
 
         StringTokenizer tokens = new StringTokenizer(getColumnValue(cursor, MODEL), "/");
-        dataPlate.setBrand(tokens.nextToken());
-        dataPlate.setModel(tokens.nextToken());
+        if (tokens.countTokens() >= 2) {
+            dataPlate.setBrand(tokens.nextToken());
+            dataPlate.setModel(tokens.nextToken());
+        }
 
         dataPlate.setColor(filter(getColumnValue(cursor, COLOR), COLOR));
         dataPlate.setSpecies(filter(getColumnValue(cursor, SPECIES), SPECIES));
@@ -151,21 +153,20 @@ public class VehicleRepository {
 
     private String getColumnValue(Cursor cursor, String columnName) {
         int columnIndex = cursor.getColumnIndex(columnName);
-        if (columnIndex >= 0) {
+        if (columnIndex >= 0 && !cursor.isNull(columnIndex)) {
             return cursor.getString(columnIndex);
         } else {
-            Log.e(getClass().getName(), "Column " + columnName + " not found");
-            return "";
+            Log.e(TAG, "Column " + columnName + " not found or null");
+            return null;
         }
     }
 
     private String getCityName(String id) {
         PrepopulatedDBOpenHelper database = new PrepopulatedDBOpenHelper(context);
-
         try {
             return database.getCityNameCursor(id);
         } catch (ArrayIndexOutOfBoundsException exception) {
-            Log.d("Error city: ", String.valueOf(exception));
+            Log.e(TAG, "Error city: " + exception.getMessage());
             return null;
         }
     }

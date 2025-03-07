@@ -43,4 +43,10 @@
         <dimen name="view_poager_title_height">40dip</dimen>
         <dimen name="log_margin_left">36dip</dimen>
         <dimen name="over_flow_divider_height">1dip</dimen>
+
+     <dimen name="material_padding_medium">16dp</dimen>
+     <dimen name="material_padding_small">8dp</dimen>
+     <dimen name="material_margin_medium">16dp</dimen>
+     <dimen name="material_margin_small">8dp</dimen>
+
     </resources>

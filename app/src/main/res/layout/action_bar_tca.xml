@@ -16,6 +16,7 @@
         android:paddingStart="@dimen/padding_left_tab_titulo"
         android:paddingEnd="@dimen/width_padding_2"
         android:paddingTop="@dimen/width_padding_2"
+        android:textColor="@color/white"
         android:text="@string/tca_title_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 

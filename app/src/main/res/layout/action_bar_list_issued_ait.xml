@@ -24,6 +24,7 @@
         android:paddingStart="@dimen/padding_left_tab_titulo"
         android:layout_centerVertical="true"
         android:text="@string/list_ait_issued"
+        android:textColor="@color/white"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

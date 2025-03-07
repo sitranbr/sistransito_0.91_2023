@@ -1,4 +1,4 @@
-package net.sistransito.mobile.database.sync;
+package net.sistransito.mobile.sync;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

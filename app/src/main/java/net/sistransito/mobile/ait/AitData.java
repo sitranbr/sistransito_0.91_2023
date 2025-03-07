@@ -23,11 +23,24 @@ public class AitData implements Serializable {
 		this.isDataisNull = isDataisNull;
 	}
 
-	TimeAndIme time;
+	//TimeAndIme time;
 
+	//private String aitDate;
+	//private String aitTime;
+
+	/*
 	public AitData(Context context) {
 		time = new TimeAndIme(context);
 		setAitDateTime(time.getDate() + time.getTime());
+		//setAitDateTime("09:39:10" + "05/03/2025");
+	}
+	 */
+
+	public AitData(Context context) {
+		TimeAndIme time = new TimeAndIme(context);
+		this.aitDate = time.getDate();
+		this.aitTime = time.getTime();
+		setAitDateTime(aitDate + aitTime);
 	}
 
 	public static final String IDAuto = "ait_id";

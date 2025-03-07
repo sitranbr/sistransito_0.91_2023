@@ -1,7 +1,6 @@
 package net.sistransito.mobile.util;
 
 import com.google.gson.InstanceCreator;
-
 import java.lang.reflect.Type;
 
 public class User implements InstanceCreator<User> {
@@ -10,9 +9,18 @@ public class User implements InstanceCreator<User> {
     private String registration;
     private String companyName;
     private String companyCode;
-    private String status;
-    private String success;
+    private int success;
     private String profileImage;
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
+
+    private String token;
 
     public String getProfileImage() {
         return profileImage;
@@ -54,19 +62,11 @@ public class User implements InstanceCreator<User> {
         this.companyCode = companyCode;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getSuccess() {
+    public int getSuccess() {  // Alterado de String para int
         return success;
     }
 
-    public void setSuccess(String success) {
+    public void setSuccess(int success) {
         this.success = success;
     }
 
@@ -77,6 +77,6 @@ public class User implements InstanceCreator<User> {
 
     @Override
     public String toString() {
-        return employeeName +" "+ registration +" "+ companyName +" "+ companyCode +" "+status+" "+success+" "+ profileImage;
+        return employeeName + " " + registration + " " + companyName + " " + companyCode + " " + success + " " + profileImage + " " + token;
     }
 }

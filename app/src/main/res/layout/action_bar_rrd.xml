@@ -17,6 +17,7 @@
         android:paddingRight="@dimen/width_padding_2"
         android:paddingTop="@dimen/width_padding_2"
         android:text="@string/rrd_loose_title"
+        android:textColor="@color/white"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton

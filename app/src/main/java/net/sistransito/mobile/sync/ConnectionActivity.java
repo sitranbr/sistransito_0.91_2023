@@ -1,4 +1,4 @@
-package net.sistransito.mobile.database.sync;
+package net.sistransito.mobile.sync;
 
 /**
  * Está Activity deve sar transformada em classe java para ser usada sempre que for necessário efetuar conexão

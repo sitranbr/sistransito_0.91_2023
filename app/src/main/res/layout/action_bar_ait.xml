@@ -17,6 +17,7 @@
         android:paddingEnd="@dimen/width_padding_2"
         android:paddingTop="@dimen/width_padding_2"
         android:text="@string/ait_infraction"
+        android:textColor="@color/white"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <ImageButton

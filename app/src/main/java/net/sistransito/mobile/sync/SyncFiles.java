@@ -1,4 +1,4 @@
-package net.sistransito.mobile.database.sync;
+package net.sistransito.mobile.sync;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,13 +12,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
-
 import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.database.InfractionDatabaseHelper;
 import net.sistransito.mobile.database.DatabaseCreator;
@@ -27,7 +22,6 @@ import net.sistransito.mobile.util.Routine;
 import net.sistransito.R;
 
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -48,34 +42,6 @@ public class SyncFiles {
         //database = databaseHelper.getReadableDatabase(ime.getIME());
         database = databaseHelper.getReadableDatabase();
         this.context = context;
-    }
-
-    public void sendCanceledAit(final String ait){
-
-        AitData aitData = DatabaseCreator
-                .getInfractionDatabaseAdapter(context.getApplicationContext())
-                .getDataFromAitNumber(ait);
-
-            Ion.with(context)
-                .load(WebClient.URL_REQUEST_CANCEL)
-                .setMultipartParameter(InfractionDatabaseHelper.AIT_NUMBER, aitData.getAitNumber())
-                .setMultipartParameter(InfractionDatabaseHelper.CANCEL_STATUS, aitData.getCancellationStatus())
-                .setMultipartParameter(InfractionDatabaseHelper.REASON_FOR_CANCEL, aitData.getReasonForCancellation())
-                .setMultipartParameter(InfractionDatabaseHelper.COMPLETED_STATUS, aitData.getCompletedStatus())
-                .asJsonObject()
-                .setCallback(new FutureCallback<JsonObject>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonObject result) {
-                        if(result.get("success").getAsString().equals("true")) {
-                            Log.d("Success: ", "true");
-                            (DatabaseCreator.getInfractionDatabaseAdapter(context))
-                                    .synchronizeAit(ait);
-                        }else{
-                            Log.d("Success: ", "NO");
-                        }
-                    }
-                });
-
     }
 
     public void sendAitData(final String ait){
@@ -295,6 +261,5 @@ public class SyncFiles {
 
         requestQueue.add(stringRequest);
     }
-
 
 }

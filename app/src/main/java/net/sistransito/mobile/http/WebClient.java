@@ -11,27 +11,27 @@ import net.sistransito.mobile.database.TinyDB;
 public class WebClient {
 
     //private static final String API_URl = "http://191.252.221.62:3000/";
-    private static final String API_URl = "http://api.sistran.app/api/";
-    private static final String BASE_URl = "http://api.sistran.app/api/";
+    private static final String API_URL = "http://api.sistran.app/api/";
+    private static final String BASE_URL = "http://api.sistran.app/api/";
     //private static final String BASE_URl = "http://sistransito.com.br/movel/dosis.pl?";
     //public static final String BASE_URl_TESTE = "http://131.221.217.144:8090/api/v1/renavam/consultaPorPlacaTeste?placa=QDA3455&idEstado=0";
 
-    public static final String CNH_URL = BASE_URl + "op=cnh&dadoscnh=";
+    public static final String CNH_URL = BASE_URL + "op=cnh&dadoscnh=";
 
-    public static final String SEARCH_PLATE = API_URl + "vehicle/searchPlate2?plate=";
-    public static final String LOGIN_URl = BASE_URl + "auth/dologin?email=";
+    public static final String SEARCH_PLATE = API_URL + "vehicle/searchPlate?plate=";
+    public static final String LOGIN_URl = BASE_URL + "auth/dologin?email=";
 
-    public static final String URL_AIT_NUMBER = BASE_URl + "ait_number";
-    public static final String URL_TAV_NUMBER = BASE_URl + "tav_number";
-    public static final String URL_TCA_NUMBER = BASE_URl + "tca_number";
-    public static final String URL_RRD_NUMBER = BASE_URl + "rrd_number";
-    public static final String URL_EQUIPMENTS = BASE_URl + "equipment";
-    public static final String URL_CLOGIN = BASE_URl + "clogin";
+    public static final String URL_AIT_NUMBER = BASE_URL + "ait_number";
+    public static final String URL_TAV_NUMBER = BASE_URL + "tav_number";
+    public static final String URL_TCA_NUMBER = BASE_URL + "tca_number";
+    public static final String URL_RRD_NUMBER = BASE_URL + "rrd_number";
+    public static final String URL_EQUIPMENTS = BASE_URL + "equipment";
+    public static final String URL_CLOGIN = BASE_URL + "clogin";
 
     public static final String URL_REQUEST_SSL = "https://api.sistran.app/api/ait";
-    public static final String URL_REQUEST = BASE_URl + "cancel";
+    public static final String URL_REQUEST = BASE_URL + "cancel";
 
-    public static final String URL_REQUEST_CANCEL = "https://api.sistran.app/api/ait_canceled";
+    public static final String URL_REQUEST_CANCEL = "ait_canceled";
 
     private static AsyncHttpClient client = new AsyncHttpClient();
 

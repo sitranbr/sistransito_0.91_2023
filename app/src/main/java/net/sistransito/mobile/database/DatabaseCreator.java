@@ -8,8 +8,8 @@ public class DatabaseCreator {
 
 	private static SettingDatabaseAdapter databaseAdapterSetting;
 	private static SearchPlateDatabaseAdapter searchPlateDatabaseAdapter;
-	private static InfractionDatabaseAdapter databaseAdapterAutoInfracao;
-	private static AitPJDatabaseAdapter databaseAdapterPJInfracao;
+	private static InfractionDatabaseAdapter databaseAdapterInfrationAit;
+	private static AitPJDatabaseAdapter databaseAdapterInfrationPj;
 	private static PrepopulatedDBOpenHelper prepopulatedDBOpenHelper;
 	private static SearchDataInCard searchDataInCard;
 	private static RrdDatabaseAdapter rrddatabaseAdapter;
@@ -26,8 +26,8 @@ public class DatabaseCreator {
 
 		databaseAdapterSetting = new SettingDatabaseAdapter(context);
 		searchPlateDatabaseAdapter = new SearchPlateDatabaseAdapter(context);
-		databaseAdapterAutoInfracao = new InfractionDatabaseAdapter(context);
-		databaseAdapterPJInfracao = new AitPJDatabaseAdapter(context);
+		databaseAdapterInfrationAit = new InfractionDatabaseAdapter(context);
+		databaseAdapterInfrationPj = new AitPJDatabaseAdapter(context);
 		prepopulatedDBOpenHelper = new PrepopulatedDBOpenHelper(context);
 		searchDataInCard = new SearchDataInCard(context);
 		rrddatabaseAdapter = new RrdDatabaseAdapter(context);
@@ -73,17 +73,17 @@ public class DatabaseCreator {
 	}
 
 	public static InfractionDatabaseAdapter getInfractionDatabaseAdapter(Context context) {
-		if (databaseAdapterAutoInfracao == null) {
-			databaseAdapterAutoInfracao = new InfractionDatabaseAdapter(context);
+		if (databaseAdapterInfrationAit == null) {
+			databaseAdapterInfrationAit = new InfractionDatabaseAdapter(context);
 		}
-		return databaseAdapterAutoInfracao;
+		return databaseAdapterInfrationAit;
 	}
 
 	public static AitPJDatabaseAdapter getAitPJDatabaseAdapter(Context context) {
-		if (databaseAdapterPJInfracao == null) {
-			databaseAdapterPJInfracao = new AitPJDatabaseAdapter(context);
+		if (databaseAdapterInfrationPj == null) {
+			databaseAdapterInfrationPj = new AitPJDatabaseAdapter(context);
 		}
-		return databaseAdapterPJInfracao;
+		return databaseAdapterInfrationPj;
 	}
 
 	public static SettingDatabaseAdapter getSettingDatabaseAdapter(Context cnt) {
@@ -103,7 +103,7 @@ public class DatabaseCreator {
 	public synchronized void close() {
 		if (searchPlateDatabaseAdapter != null) searchPlateDatabaseAdapter.close();
 		if (databaseAdapterSetting != null) databaseAdapterSetting.close();
-		if (databaseAdapterAutoInfracao != null) databaseAdapterAutoInfracao.close();
+		if (databaseAdapterInfrationAit != null) databaseAdapterInfrationAit.close();
 		if (prepopulatedDBOpenHelper != null) prepopulatedDBOpenHelper.close();
 		if (tcaDatabaseAdapter != null) tcaDatabaseAdapter.close();
 		if (tavDatabaseAdapter != null) tavDatabaseAdapter.close();

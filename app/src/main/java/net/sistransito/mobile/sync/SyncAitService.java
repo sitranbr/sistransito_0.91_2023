@@ -1,4 +1,4 @@
-package net.sistransito.mobile.database.sync;
+package net.sistransito.mobile.sync;
 
 import android.net.ParseException;
 import android.os.Build;

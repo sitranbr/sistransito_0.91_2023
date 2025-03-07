@@ -60,7 +60,8 @@
                 android:hint="@string/tca_city_name"
                 android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
-                android:paddingBottom="@dimen/width_padding_15"
+                android:padding="@dimen/width_padding_15"
+                android:layout_marginBottom="15dip"
                 android:imeOptions="actionDone"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textCursorDrawable="@null" >
@@ -75,9 +76,9 @@
             android:visibility="gone" >
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="5"
+                android:layout_weight="3"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
@@ -105,11 +106,10 @@
 
             </LinearLayout>
 
-
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
+                android:layout_weight="1"
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical"
@@ -151,7 +151,7 @@
 
             <Button
                 android:id="@+id/btn_ait_pj_date"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/Material.Drawable.Ripple.Wave"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/indicator_width"
@@ -163,7 +163,7 @@
 
             <Button
                 android:id="@+id/btn_ait_pj_time"
-                style="?android:attr/buttonBarButtonStyle"
+                style="@style/Material.Drawable.Ripple.Wave"
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/indicator_width"

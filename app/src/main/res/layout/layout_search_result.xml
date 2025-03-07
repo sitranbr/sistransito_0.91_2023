@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/result_layout_background"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/ll_child_result_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/result_layout_background"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_result_plate_show"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/width_margin_8"
+            android:padding="@dimen/width_padding"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@android:color/black" />
+
+        <com.rey.material.widget.Button
+            style="@style/Material.Drawable.Ripple.Wave"
+            android:id="@+id/btn_create_ait"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/width_margin_8"
+            android:background="@drawable/btn_yellow"
+            android:drawableStart="@drawable/ic_ait"
+            android:drawablePadding="@dimen/width_padding"
+            android:gravity="start|center_vertical"
+            android:paddingStart="@dimen/width_padding_2"
+            android:paddingEnd="@dimen/width_padding_2"
+            android:text="@string/btn_create_ait"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" /> <!-- Mudança de cor para melhorar o contraste -->
+    </LinearLayout>
+</LinearLayout>

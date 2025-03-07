@@ -37,7 +37,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_result_placa_show"
+                    android:id="@+id/tv_result_plate_show"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/width_margin_8"
@@ -78,7 +78,7 @@
                 android:orientation="horizontal" >
 
                 <RadioButton
-                    android:id="@+id/rb_search_placa"
+                    android:id="@+id/rb_plate_search"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -88,7 +88,7 @@
                     android:textColor="@color/yellow_light" />
 
                 <RadioButton
-                    android:id="@+id/rb_search_chassi"
+                    android:id="@+id/rb_chassi_search"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -116,7 +116,7 @@
                 android:orientation="horizontal" >
 
                 <RadioButton
-                    android:id="@+id/rb_search_mercosul"
+                    android:id="@+id/rb_mercosul_search"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -126,7 +126,7 @@
                     android:textColor="@color/yellow_light" />
 
                 <RadioButton
-                    android:id="@+id/rb_search_vis"
+                    android:id="@+id/rb_vis_search"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -140,21 +140,21 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_radio_lacre"
+            android:id="@+id/ll_radio_seal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/widght_margin_top_2"
             android:orientation="horizontal" >
 
             <RadioGroup
-                android:id="@+id/rg_type_search_lacre"
+                android:id="@+id/rg_type_search_seal"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center|left"
                 android:orientation="horizontal" >
 
                 <RadioButton
-                    android:id="@+id/rb_search_lacre"
+                    android:id="@+id/rb_search_seal"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -164,7 +164,7 @@
                     android:textColor="@color/yellow_light" />
 
                 <RadioButton
-                    android:id="@+id/rb_search_motor"
+                    android:id="@+id/rb_engine_search"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -178,7 +178,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/ll_placa_search"
+            android:id="@+id/ll_plate_search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/widght_margin_top_2"
@@ -189,7 +189,7 @@
 
             <EditText
 
-                android:id="@+id/et_letras_da_placa"
+                android:id="@+id/et_license_plate_letters"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/width_margin_top"
@@ -207,7 +207,7 @@
                 android:textCursorDrawable="@null"></EditText>
 
             <EditText
-                android:id="@+id/et_numeros_da_placa"
+                android:id="@+id/et_license_plate_numbers"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/width_margin_top"
@@ -281,7 +281,7 @@
                 android:textCursorDrawable="@null" />
 
             <EditText
-                android:id="@+id/et_lacre_input"
+                android:id="@+id/et_seal_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -299,7 +299,7 @@
                 android:textCursorDrawable="@null" />
 
             <EditText
-                android:id="@+id/et_motor_input"
+                android:id="@+id/et_engine_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
@@ -317,7 +317,7 @@
                 android:textCursorDrawable="@null" />
 
             <com.rey.material.widget.CheckBox
-                android:id="@+id/cb_pesquisa_offline"
+                android:id="@+id/cb_offline_search"
                 style="@style/Material.Drawable.CheckBox"
                 app:cbd_strokeColor="@color/primary"
                 android:layout_width="wrap_content"
@@ -331,7 +331,7 @@
                 />
 
             <com.rey.material.widget.Button
-                android:id="@+id/btn_search_plate"
+                android:id="@+id/btn_plate_search"
                 style="@style/Material.Drawable.Ripple.Wave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

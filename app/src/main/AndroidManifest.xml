@@ -72,6 +72,14 @@
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
+        <receiver android:name="net.sistransito.mobile.receiver.ShutdownReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_SHUTDOWN" />
+                <action android:name="android.intent.action.BATTERY_LOW" />
+            </intent-filter>
+        </receiver>
+
         <service android:name="net.sistransito.mobile.main.BalanceSchedulingService" />
 
         <!-- Outras atividades do aplicativo -->
@@ -97,6 +105,6 @@
             android:name="net.sistransito.mobile.rrd.RrdActivity"
             android:theme="@style/MaterialTheme" />
         <activity android:name="net.sistransito.mobile.rrd.lister.RrdLister" />
-        <activity android:name="net.sistransito.mobile.database.sync.ConnectionActivity" />
+        <activity android:name="net.sistransito.mobile.sync.ConnectionActivity" />
     </application>
 </manifest>

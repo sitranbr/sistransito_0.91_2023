@@ -13,7 +13,8 @@ import com.google.gson.GsonBuilder;
 
 import net.sistransito.R;
 import net.sistransito.mobile.ait.AitData;
-import net.sistransito.mobile.database.sync.SyncFiles;
+import net.sistransito.mobile.ait.CancelAit;
+import net.sistransito.mobile.sync.SyncFiles;
 import net.sistransito.mobile.network.NetworkConnection;
 import net.sistransito.mobile.timeandime.TimeAndIme;
 
@@ -220,7 +221,7 @@ public class InfractionDatabaseAdapter {
 				"" + motive + " | Ait number: " + data.getAitNumber());
 
 		if (update > 0 && NetworkConnection.isInternetConnected(context)) {
-			SyncFiles sync = new SyncFiles(context);
+			CancelAit sync = new CancelAit(context);
 			sync.sendCanceledAit(data.getAitNumber());
 			return true;
 		} else {

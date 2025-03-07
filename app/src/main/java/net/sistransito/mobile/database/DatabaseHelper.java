@@ -7,13 +7,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String DB_NAME = "talonario.db";
-    private static String DB_PATH;
+    private static String DB_PATH; // Caminho dinâmico para o armazenamento privado
     private SQLiteDatabase database;
     private final Context context;
 
@@ -22,34 +23,70 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public DatabaseHelper(Context context) {
         super(context, DB_NAME, null, 1);
         this.context = context;
-        // Ajuste o caminho para o diretório do cartão SD
-        DB_PATH = context.getExternalFilesDir(null).getAbsolutePath() + "/";
+        // Use o armazenamento externo privado do app
+        DB_PATH = context.getExternalFilesDir("database").getAbsolutePath() + "/";
         Log.d(TAG, "Database path set to: " + DB_PATH);
 
-        ensureDatabaseExists();
+        // Mova o arquivo para o novo local na primeira execução, se necessário
+        //moveDatabaseIfNeeded();
+    }
+
+    private void moveDatabaseIfNeeded() {
+        File newFile = new File(DB_PATH + DB_NAME);
+        if (!newFile.exists()) {
+            try {
+                // Caminho antigo no /sdcard/Download/database (ajuste conforme necessário)
+                File oldFile = new File("/sdcard/Download/database/" + DB_NAME);
+                if (oldFile.exists()) {
+                    File parentDir = new File(DB_PATH);
+                    if (!parentDir.exists()) {
+                        parentDir.mkdirs();
+                    }
+                    // Copie o arquivo para o novo local
+                    FileInputStream inputStream = new FileInputStream(oldFile);
+                    FileOutputStream outputStream = new FileOutputStream(newFile);
+                    byte[] buffer = new byte[1024];
+                    int length;
+                    while ((length = inputStream.read(buffer)) > 0) {
+                        outputStream.write(buffer, 0, length);
+                    }
+                    inputStream.close();
+                    outputStream.close();
+                    Log.d(TAG, "Database moved to: " + DB_PATH + DB_NAME);
+                    // Opcional: delete o arquivo antigo
+                    oldFile.delete();
+                }
+            } catch (IOException e) {
+                Log.e(TAG, "Erro ao mover o banco de dados: " + e.getMessage());
+            }
+        }
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(TAG, "onCreate called");
+        Log.d(TAG, "onCreate chamado");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(TAG, "onUpgrade called from version " + oldVersion + " to " + newVersion);
-        // Implementar lógica de atualização de banco de dados, se necessário
+        Log.d(TAG, "onUpgrade chamado da versão " + oldVersion + " para " + newVersion);
     }
 
     public SQLiteDatabase openDatabase() {
         String path = DB_PATH + DB_NAME;
-        Log.d(TAG, "Attempting to open database at: " + path);
+        File dbFile = new File(path);
 
-        if (database == null) {
-            Log.d(TAG, "Database instance is null, opening new database instance");
+        if (!dbFile.exists()) {
+            Log.e(TAG, "Arquivo do banco de dados não existe em: " + path);
+            throw new RuntimeException("Database file does not exist.");
+        }
+
+        if (database == null || !database.isOpen()) {
+            Log.d(TAG, "Abrindo banco de dados em: " + path);
             database = SQLiteDatabase.openDatabase(path, null, SQLiteDatabase.OPEN_READWRITE);
-            Log.d(TAG, "Database opened successfully");
+            Log.d(TAG, "Banco de dados aberto com sucesso");
         } else {
-            Log.d(TAG, "Using existing database instance");
+            Log.d(TAG, "Usando instância existente do banco de dados");
         }
 
         return database;
@@ -58,24 +95,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public synchronized void close() {
         if (database != null) {
-            Log.d(TAG, "Closing database");
+            Log.d(TAG, "Fechando banco de dados");
             database.close();
         }
         super.close();
     }
-
-    private boolean checkDatabase() {
-        File file = new File(DB_PATH + DB_NAME);
-        boolean exists = file.exists();
-        Log.d(TAG, "checkDatabase: Database " + (exists ? "exists" : "does not exist"));
-        return exists;
-    }
-
-    private void ensureDatabaseExists() {
-        if (!checkDatabase()) {
-            Log.e(TAG, "Database file does not exist at path: " + DB_PATH + DB_NAME);
-            throw new RuntimeException("Database file does not exist.");
-        }
-    }
-
 }

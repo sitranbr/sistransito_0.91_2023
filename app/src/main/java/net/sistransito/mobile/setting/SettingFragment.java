@@ -12,8 +12,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.EditText;
 
 import com.rey.material.widget.CheckBox;
@@ -21,7 +19,7 @@ import com.rey.material.widget.CheckBox;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.SettingDatabaseAdapter;
 import net.sistransito.mobile.database.SetttingDatabaseHelper;
-import net.sistransito.mobile.database.sync.SyncDataInformation;
+import net.sistransito.mobile.sync.SyncDataInformation;
 import net.sistransito.mobile.network.NetworkConnection;
 import net.sistransito.mobile.util.Routine;
 import net.sistransito.R;
@@ -29,10 +27,8 @@ import net.sistransito.R;
 public class SettingFragment extends Fragment implements
         OnCheckedChangeListener, OnClickListener {
 
-    private ImageButton im_btn_back;
     private CheckBox checkBoxVibrar, checkBoxRington, checkBoxAutoBackup;
     private SettingDatabaseAdapter database;
-    private TextView tvTitle;
     private EditText etSettingPrinter, etSettingState;
     private Button btnSync, btnUpdate;
 
@@ -59,7 +55,6 @@ public class SettingFragment extends Fragment implements
         checkBoxVibrar = (CheckBox) view.findViewById(R.id.checkBoxVibarte);
         btnSync = (Button) view.findViewById(R.id.btn_sync);
         btnUpdate = (Button) view.findViewById(R.id.btn_update);
-
 
         Cursor cursor = (DatabaseCreator
                 .getSettingDatabaseAdapter(getActivity()))

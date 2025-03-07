@@ -17,7 +17,7 @@
     <string name="deleting">Deletando</string>
     <string name="check_all">Checar tudo</string>
     <string name="menu_delete">Deletar</string>
-    <string name="app_name">Sistrânsito Mobile</string>
+    <string name="app_name">Sistrânsito</string>
     <string name="folder_app">SistransitoMobile</string>
     <string name="menu_config">Configurações</string>
     <string name="hello_world">Hello world!</string>
@@ -45,6 +45,7 @@
     <string name="cnh_name_driver">Nome</string>
     <string name="cnh_mother_driver">Nome da mãe</string>
     <string name="date_birth_driver">Data de nascimento</string>
+    <string name="permission_denied">Permissão negada</string>
 
     <!-- infraction format -->
     <string name="nature_format">Natureza</string>
@@ -205,7 +206,7 @@
     <string name="renavan_search">Consultar renavam</string>
     <string name="off_line_search">Consulta off-line</string>
     <string name="encrypt_key">SandroACosta</string>
-    <string name="no_network_connection">Sem conexão com a internet</string>
+    <string name="no_network_connection">Dispositivo sem acesso à internet</string>
     <string name="error_input">Dados inválidos</string>
     <string name="loading">Pesquisando &#8230;&#8230;&#8230;\n</string>
     <string name="login_error">Login ou senha inválido</string>
