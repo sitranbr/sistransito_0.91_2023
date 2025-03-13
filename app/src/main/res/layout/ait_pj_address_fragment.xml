@@ -44,7 +44,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_municipio"
+            android:id="@+id/input_layout_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:errorEnabled="true"
@@ -52,7 +52,7 @@
             android:layout_marginBottom="@dimen/padding_top_edit" >
 
             <AutoCompleteTextView
-                android:id="@+id/auto_auto_municipio"
+                android:id="@+id/auto_complete_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:completionThreshold="3"
@@ -70,7 +70,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <LinearLayout
-            android:id="@+id/ll_auto_municipio_uf"
+            android:id="@+id/ll_auto_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="visible" >
@@ -82,7 +82,7 @@
                 android:textColorHint="@color/primary">
 
                 <EditText
-                    android:id="@+id/et_auto_end_uf"
+                    android:id="@+id/et_auto_address_state"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:backgroundTint="@color/primary"
@@ -148,7 +148,7 @@
                 android:paddingRight="@dimen/indicator_width" >
 
                 <com.rey.material.widget.CheckBox
-                    android:id="@+id/cb_auto_confirmar"
+                    android:id="@+id/cb_ait_confirm"
                     style="@style/Material.Drawable.CheckBox"
                     app:cbd_strokeColor="@color/yellow_light"
                     android:layout_width="wrap_content"

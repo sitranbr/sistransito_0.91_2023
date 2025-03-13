@@ -2,21 +2,41 @@ package net.sistransito.mobile.rrd;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
+import android.text.SpannableString;
+import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import net.sistransito.mobile.appconstants.AppConstants;
+import net.sistransito.mobile.appobject.AppObject;
 import net.sistransito.mobile.database.RrdDatabaseHelper;
 import net.sistransito.R;
+import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.util.User;
+import net.sqlcipher.SQLException;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Consumer;
 
 public class RrdData implements Serializable {
 
 	private static final String RRD_ID = "rrd_id";
 	private static final long SERIAL_VERSION_UID = 14393750L;
-	private String idField, rrdNumber, aitNumber, driverName, documentType,
+	private String idField, rrdNumber, aitNumber, driverName, documentType, cnhNumber,
 			crlvNumber, plate, plateState, registrationNumber, registrationState, validity,
 			reasonCollected, daysForRegularization, dateCollected, timeCollected, cityCollected, stateCollected, rrdType;
+
+	private User user;
 
 	public String getStateCollected() {
 		return stateCollected;
@@ -156,9 +176,8 @@ public class RrdData implements Serializable {
 	}
 
 	public RrdData() {
-		idField = rrdNumber = aitNumber = driverName = documentType = crlvNumber = plate = registrationNumber = registrationState = validity = plateState
+		idField = rrdNumber = aitNumber = driverName = documentType = cnhNumber = crlvNumber = plate = registrationNumber = registrationState = validity = plateState
                 = daysForRegularization = reasonCollected = dateCollected = timeCollected = cityCollected = stateCollected = rrdType = "";
-
 	}
 
 	public String getRegistrationNumber() {
@@ -177,104 +196,198 @@ public class RrdData implements Serializable {
 		this.validity = validity;
 	}
 
-	private String getNewline() {
-		return AppConstants.NEW_LINE;
-	}
-
-	private String getNewline_2() {
-		return AppConstants.NEW_LINE + AppConstants.NEW_LINE;
-	}
-
-	@SuppressLint("Range")
-    public void setRRDDataFromCursor(Cursor myCursor) {
-        setRrdNumber(myCursor.getString(myCursor
-                .getColumnIndex(RrdDatabaseHelper.RRD_NUMBER)));
-		setAitNumber(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.AIT_NUMBER)));
-
-		setDriverName(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.DRIVER_NAME)));
-		
-		setDocumentType(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.DOCUMENT_TYPE)));
-		setCrlvNumber(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.CRLV_NUMBER)));
-		
-		setPlate(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.PLATE)));
-
-		setRegistrationNumber(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.CNH_NUMBER)));
-        setRegistrationState(myCursor.getString(myCursor
-                .getColumnIndex(RrdDatabaseHelper.CNH_STATE)));
-
-		setValidity(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.CNH_VALIDITY)));
-
-		setPlateState(myCursor.getString(myCursor.getColumnIndex(RrdDatabaseHelper.PLATE_STATE)));
-		setReasonCollected(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.REASON_FOR_COLLECTION)));
-		setDaysForRegularization(myCursor
-				.getString(myCursor
-						.getColumnIndex(RrdDatabaseHelper.DAYS_FOR_REGULARIZATION)));
-		setDateCollected(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.COLLECTION_DATE)));
-        setTimeCollected(myCursor.getString(myCursor
-                .getColumnIndex(RrdDatabaseHelper.COLLECTION_TIME)));
-        setCityCollected(myCursor.getString(myCursor
-                .getColumnIndex(RrdDatabaseHelper.COLLECTION_CITY)));
-		setStateCollected(myCursor.getString(myCursor
-				.getColumnIndex(RrdDatabaseHelper.COLLECTION_STATE)));
-        setRrdType(myCursor.getString(myCursor
-                .getColumnIndex(RrdDatabaseHelper.RRD_TYPE)));
-	}
-
-	public String getRRDViewData(Context context) {
-		String rrd = "";
-		return rrd;
+	private String getNewline(int qtd) {
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i < qtd; i++) {
+			sb.append(AppConstants.NEW_LINE);
+		}
+		return sb.toString();
 	}
 
 	public String getRRDListViewData(Context context) {
+		Log.d("getRRDListViewData", "chamado");
 		String rrd =
-
-		context.getResources().getString(R.string.rrd_ait_number)
-				+ getNewline()
-				+ aitNumber
-				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_number)
-				+ getNewline()
-				+ rrdNumber
-				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_get_from)
-				+ getNewline()
-				+ driverName
-				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_crlv_number)
-				+ getNewline()
-				+ crlvNumber
-				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_register_number)
-				+ getNewline()
-				+ registrationNumber
-				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_validity)
-				+ getNewline()
-				+ validity
-				+ getNewline_2()
-				+ context.getResources().getString(R.string.rrd_state)
-				+ getNewline()
-				+ plateState
-				+ getNewline_2()
-				+ context.getResources().getString(
-						R.string.rrd_qty_of_days_to_regularization)
-				+ getNewline()
-				+ daysForRegularization
-				+ getNewline_2()
-				+ context.getResources().getString(
-						R.string.ait_reason_for_collection) + getNewline()
-				+ reasonCollected + getNewline_2();
+				context.getResources().getString(R.string.rrd_ait_number)
+					+ getNewline(1)
+					+ aitNumber
+					+ getNewline(2)
+					+ context.getResources().getString(R.string.rrd_number)
+					+ getNewline(1)
+					+ rrdNumber
+					+ getNewline(2)
+					+ context.getResources().getString(R.string.rrd_get_from)
+					+ getNewline(1)
+					+ driverName
+					+ getNewline(2)
+					+ context.getResources().getString(R.string.rrd_crlv_number)
+					+ getNewline(1)
+					+ crlvNumber
+					+ getNewline(2)
+					+ context.getResources().getString(R.string.rrd_register_number)
+					+ getNewline(1)
+					+ registrationNumber
+					+ getNewline(2)
+					+ context.getResources().getString(R.string.rrd_validity)
+					+ getNewline(1)
+					+ validity
+					+ getNewline(2)
+					+ context.getResources().getString(R.string.rrd_state)
+					+ getNewline(1)
+					+ plateState
+					+ getNewline(2)
+					+ context.getResources().getString(
+					R.string.rrd_qty_of_days_to_regularization)
+					+ getNewline(1)
+					+ daysForRegularization
+					+ getNewline(2)
+					+ context.getResources().getString(
+					R.string.rrd_reason_for_collection) + getNewline(1)
+					+ reasonCollected + getNewline(2);
 
 		return rrd;
 
 	}
+
+	public void setRRDDataFromCursor(@Nullable Cursor cursor) {
+		if (cursor == null || !cursor.moveToFirst()) {
+			clearRRDData();
+			return;
+		}
+
+		try {
+			// Mapa de colunas para setters
+			Map<String, Consumer<String>> columnSetters = new HashMap<>();
+			columnSetters.put(RrdDatabaseHelper.RRD_NUMBER, this::setRrdNumber);
+			columnSetters.put(RrdDatabaseHelper.AIT_NUMBER, this::setAitNumber);
+			columnSetters.put(RrdDatabaseHelper.DRIVER_NAME, this::setDriverName);
+			columnSetters.put(RrdDatabaseHelper.DOCUMENT_TYPE, this::setDocumentType);
+			columnSetters.put(RrdDatabaseHelper.CRLV_NUMBER, this::setCrlvNumber);
+			columnSetters.put(RrdDatabaseHelper.PLATE, this::setPlate);
+			columnSetters.put(RrdDatabaseHelper.CNH_NUMBER, this::setRegistrationNumber);
+			columnSetters.put(RrdDatabaseHelper.CNH_STATE, this::setRegistrationState);
+			columnSetters.put(RrdDatabaseHelper.CNH_VALIDITY, this::setValidity);
+			columnSetters.put(RrdDatabaseHelper.PLATE_STATE, this::setPlateState);
+			columnSetters.put(RrdDatabaseHelper.REASON_FOR_COLLECTION, this::setReasonCollected);
+			columnSetters.put(RrdDatabaseHelper.DAYS_FOR_REGULARIZATION, this::setDaysForRegularization);
+			columnSetters.put(RrdDatabaseHelper.COLLECTION_DATE, this::setDateCollected);
+			columnSetters.put(RrdDatabaseHelper.COLLECTION_TIME, this::setTimeCollected);
+			columnSetters.put(RrdDatabaseHelper.COLLECTION_CITY, this::setCityCollected);
+			columnSetters.put(RrdDatabaseHelper.COLLECTION_STATE, this::setStateCollected);
+			columnSetters.put(RrdDatabaseHelper.RRD_TYPE, this::setRrdType);
+
+			// Processa cada coluna
+			columnSetters.forEach((column, setter) ->
+					setter.accept(getStringSafe(cursor, column)));
+
+		} catch (SQLException e) {
+			Log.e("RRDData", "Erro ao ler dados do cursor", e);
+			clearRRDData();
+		} finally {
+			if (cursor != null && !cursor.isClosed()) {
+				cursor.close(); // Garante que o cursor seja fechado
+			}
+		}
+	}
+
+	private String getStringSafe(@NonNull Cursor cursor, String columnName) {
+		try {
+			int columnIndex = cursor.getColumnIndexOrThrow(columnName);
+			return Objects.requireNonNullElse(cursor.getString(columnIndex), "");
+		} catch (IllegalArgumentException e) {
+			Log.w("RRDData", "Coluna não encontrada: " + columnName);
+			return "";
+		}
+	}
+
+	private void clearRRDData() {
+		setRrdNumber("");
+		setAitNumber("");
+		setDriverName("");
+		setDocumentType("");
+		setCrlvNumber("");
+		setPlate("");
+		setRegistrationNumber("");
+		setRegistrationState("");
+		setValidity("");
+		setPlateState("");
+		setReasonCollected("");
+		setDaysForRegularization("");
+		setDateCollected("");
+		setTimeCollected("");
+		setCityCollected("");
+		setStateCollected("");
+		setRrdType("");
+	}
+
+	public void fillRrdData(View dialogView, Context context) {
+
+		user = AppObject.getTinyDB(context).getObject(AppConstants.user, User.class);
+		Routine.TextAlignment normal = Routine.TextAlignment.NORMAL;
+		Routine.TextAlignment center = Routine.TextAlignment.CENTER;
+
+		LinearLayout layoutCnh = dialogView.findViewById(R.id.ll_cnh);
+		LinearLayout layoutCrlv = dialogView.findViewById(R.id.ll_crlv);
+
+		//TODO
+		boolean showDocumentLayout = false;
+
+		if (showDocumentLayout) {
+			layoutCnh.setVisibility(View.VISIBLE);
+			layoutCrlv.setVisibility(View.GONE);
+		} else {
+			layoutCrlv.setVisibility(View.VISIBLE);
+			layoutCnh.setVisibility(View.GONE);
+		}
+
+		TextView tvAitNumber = dialogView.findViewById(R.id.tv_rrd_ait_number);
+		SpannableString boldAitNumber = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_number), aitNumber, false, center);
+
+		TextView tvRrdNumber = dialogView.findViewById(R.id.tv_rrd_number);
+		SpannableString boldRrdNumber = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_number), rrdNumber, false, center);
+
+		TextView tvDriverName = dialogView.findViewById(R.id.tv_rrd_driver_name);
+		SpannableString boldDriverName = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_get_from), driverName, false, normal);
+
+		TextView tvCnhNumber = dialogView.findViewById(R.id.tv_rrd_cnh_number);
+		SpannableString boldCnhNumber = Routine.textWithBoldAndCenter(context.getString(R.string.capital_cnh_ppd_acc), cnhNumber, false, center);
+
+		TextView tvCnhValidity = dialogView.findViewById(R.id.tv_rrd_cnh_validity);
+		SpannableString boldCnhValidity = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_plate), plate, false, center);
+
+		TextView tvCnhState = dialogView.findViewById(R.id.tv_ait_cnh_state);
+		SpannableString boldCnhState = Routine.textWithBoldAndCenter(context.getString(R.string.capital_cnh_state), plate, false, center);
+
+		TextView tvPlate = dialogView.findViewById(R.id.tv_rrd_plate);
+		SpannableString boldPlate = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_plate), plate, false, center);
+
+		TextView tvCrlvNumber = dialogView.findViewById(R.id.tv_rrd_crlv_number);
+		SpannableString boldCrlvNumber = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_crlv_number), crlvNumber, false, center);
+
+		TextView tvPlateState = dialogView.findViewById(R.id.tv_rrd_plate_uf);
+		SpannableString boldPlateState = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_plate), plateState, false, center);
+
+		TextView tvReasonCollected = dialogView.findViewById(R.id.tv_rrd_reason_for_collection);
+		SpannableString boldReasonCollected = Routine.textWithBoldAndCenter(context.getString(R.string.rrd_reason_for_collection), reasonCollected, false, normal);
+
+		TextView tvAgent = dialogView.findViewById(R.id.tv_rrd_user_name);
+		SpannableString boldAgent = Routine.textWithBoldAndCenter(context.getString(R.string.capital_name), user.getCompanyName(), false, normal);
+
+		TextView tvRegisterAgent = dialogView.findViewById(R.id.tv_register_number);
+		SpannableString boldRegisterAgent = Routine.textWithBoldAndCenter(context.getString(R.string.capital_register_number), user.getRegistration(), false, center);
+
+		tvAitNumber.setText(boldAitNumber);
+		tvRrdNumber.setText(boldRrdNumber);
+		tvDriverName.setText(boldDriverName);
+		tvCnhNumber.setText(boldCnhNumber);
+		tvCnhValidity.setText(boldCnhValidity);
+		tvCnhState.setText(boldCnhState);
+		tvPlateState.setText(boldPlateState);
+		tvCrlvNumber.setText(boldCrlvNumber);
+		tvPlate.setText(boldPlate);
+		tvPlateState.setText(plateState);
+		tvReasonCollected.setText(boldReasonCollected);
+		tvAgent.setText(boldAgent);
+		tvRegisterAgent.setText(boldRegisterAgent);
+	}
+
 }

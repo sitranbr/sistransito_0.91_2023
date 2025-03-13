@@ -7,10 +7,10 @@
     android:padding="@dimen/width_padding" >
 
     <TextView
-        android:id="@+id/log_plate"
+        android:id="@+id/lv_parent_rrd_plate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/log_documento"
+        android:layout_alignLeft="@+id/lv_parent_rrd_document"
         android:layout_alignParentTop="true"
         android:text="Placa : OFM3050"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -19,11 +19,11 @@
         android:typeface="sans" />
 
     <TextView
-        android:id="@+id/log_documento"
+        android:id="@+id/lv_parent_rrd_document"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/log_plate"
+        android:layout_below="@+id/lv_parent_rrd_plate"
         android:layout_marginLeft="@dimen/width_padding"
         android:text="Documento"
         android:textAppearance="?android:attr/textAppearanceSmall"

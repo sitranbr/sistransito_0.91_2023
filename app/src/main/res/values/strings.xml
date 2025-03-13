@@ -114,7 +114,6 @@
     <string name="capital_equipment_sample_number">NÚMERO DA AMOSTRA</string>
     <string name="capital_cpf_cnpj">CPF/CNPJ</string>
 
-
     <!-- plate format -->
     <string name="plate_format">Placa :&#160;</string>
     <string name="state_format">UF :&#160;</string>
@@ -239,6 +238,7 @@
     <string name="regulated_limit">Limite regulamentado</string>
     <string name="cb_check_data">Li e confirmo os dados</string>
     <string name="cancel_ait_title">Cancelamento de Auto</string>
+    <string name="cancel_ait_message">Ait cancelado com sucesso</string>
     <string name="alert_motive">Digite uma justiticativa</string>
     <string name="alert_insert_address">Insira o endereço</string>
     <string name="alert_insert_city_name">Insira o município</string>
@@ -422,12 +422,23 @@
     <!-- tav -->
 
     <!-- rrd -->
+    <string name="capital_rrd_indentification">1- IDENTIFICAÇÃO DO RECIBO</string>
+    <string name="capital_rrd_especification">2- O DOCUMENTO ABAIXO ESPECIFICADO</string>
+    <string name="capital_rrd_date_collection">3- DATA DO RECOLHIMENTO</string>
+    <string name="capital_responsible_for_collection">4- RESPONSÁVEL PELO RECOLHIMENTO</string>
+    <string name="capital_name">NOME</string>
+    <string name="capital_register_number">MATRÍCULA</string>
+    <string name="capital_rrd_date">DATA</string>
+    <string name="capital_rrd_time">HORA</string>
+    <string name="capital_rrd_city">MUNICÍPIO</string>
+    <string name="capital_rrd_state">UF</string>
     <string name="rrd_qty_of_days_to_regularization">Dias para regularização</string>
     <string name="rrd_ait_number">Número AIT</string>
     <string name="rrd_number">Número RRD</string>
     <string name="rrd_get_from">Recebemos de</string>
     <string name="rrd_sub_title_document">Dados do Documento</string>
     <string name="rrd_document">Documento a ser recolhido</string>
+    <string name="rrd_reason_for_collection">Motivo para recolhimento</string>
     <string name="rrd_informations">Informações</string>
     <string name="rrd_crlv_number">Número CRLV</string>
     <string name="rrd_plate">Placa</string>
@@ -436,6 +447,8 @@
     <string name="rrd_validity">Validade</string>
     <string name="btn_generation_rrd">Gerar RRD</string>
     <string name="btn_preview_rrd">Visualizar RRD</string>
+    <string name="preview_rrd">Prévia</string>
+    <string name="previous_title_rrd">Prévia do RRD</string>
     <string name="print_rrd">Imprimir RRD</string>
     <string name="select_spinner_rrd">Selecione o documento</string>
     <string name="select_days_rrd">Selecione qtd dias</string>
@@ -445,7 +458,6 @@
     <string name="ait_serial_number">Número de série</string>
     <string name="ait_city_code">Código do Município</string>
     <string name="ait_vehicle_color">Cor do veículo</string>
-    <string name="ait_reason_for_collection">Motivo para recolhimento</string>
     <string name="ait_equipment_brand">Marca do equipamento</string>
     <string name="ait_equipment_model">Modelo do equipamento</string>
     <string name="ait_considered_value">Valor considerado</string>
@@ -664,11 +676,13 @@
     <string name="message_printer_not_found">Impressora bluetooth não encontrada</string>
     <string name="message_data_sent_printer">Dados enviados para impressão</string>
     <string name="message_printer_desconneted">Encerrada conexão com impressora bluetooth</string>
-    
+
     <string name="no_information_available">Sem registro</string>
 
     <!-- Infraction table -->
 
     <string name="coin_format22">R$:&#160;</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

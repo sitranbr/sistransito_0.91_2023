@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:padding="@dimen/material_padding_medium">
+    android:background="@color/gray_2">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +22,7 @@
             android:textColor="@color/primary" />
 
         <com.google.android.material.checkbox.MaterialCheckBox
-            android:id="@+id/cb_se_veiculo_estrangeiro"
+            android:id="@+id/cb_if_foreign_driver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/material_margin_small"
@@ -58,25 +57,23 @@
                         android:id="@+id/edit_vehicle_plate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/width_padding_15"
-                        android:backgroundTint="@color/primary"
-                        android:gravity="left"
+                        android:background="@drawable/textview_border_bottom"
                         android:hint="@string/ait_vehicle_plate"
+                        android:textColor="@color/gray_5"
                         android:inputType="textCapCharacters"
                         android:maxLength="7"
-                        android:paddingBottom="@dimen/width_padding_15"
-                        android:textColor="@color/gray_5" />
+                        android:paddingBottom="@dimen/width_padding_15" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
-                    android:id="@+id/tv_auto_search_plate"
+                    android:id="@+id/tv_ait_search_plate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="3dip"
                     android:layout_gravity="right|center_vertical"
-                    android:backgroundTint="@color/primary"
-                    android:background="@android:drawable/ic_menu_zoom" />
+                    android:drawableEnd="@drawable/search_24px"
+                    android:drawableTint="@color/primary" />
 
             </FrameLayout>
 
@@ -89,47 +86,41 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ll_field_uf_veiculo"
-                android:layout_width="0dp"
+                android:id="@+id/ll_ait_vehicle_state"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:hint="@string/ait_state"
-                android:textColorHint="@color/primary"
-                app:boxStrokeColor="@color/primary"
-                app:boxStrokeWidth="1dp"
-                app:boxStrokeWidthFocused="2dp">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:textColorHint="@color/primary">
 
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/spinner_uf_veiculo"
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_ait_vehicle_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:inputType="none"
-                    android:textColor="@color/gray_5"
-                    android:focusable="true"
-                    android:clickable="true"
-                    android:padding="10dp" />
+                    android:textColor="@color/gray_5" />
+
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ll_field_pais_veiculo"
-                android:layout_width="0dp"
+                android:id="@+id/ll_ait_vehicle_country"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:hint="@string/ait_country_name"
-                android:textColorHint="@color/primary"
-                app:boxStrokeColor="@color/primary"
-                app:boxStrokeWidth="1dp"
-                app:boxStrokeWidthFocused="2dp"
-                android:visibility="gone">
+                android:hint="@string/ait_state"
+                android:visibility="gone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:textColorHint="@color/primary">
 
-                <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                    android:id="@+id/spinner_auto_pais"
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_ait_country"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:inputType="none"
                     android:textColor="@color/gray_5"
                     android:focusable="true"
-                    android:clickable="true" />
+                    android:clickable="true"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -149,6 +140,7 @@
                 android:id="@+id/edit_vehicle_renavan"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:inputType="textCapCharacters"
                 android:maxLength="17"
                 android:paddingBottom="@dimen/material_padding_small"
@@ -170,6 +162,7 @@
                 android:id="@+id/edit_vehicle_chassi"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:inputType="textCapCharacters"
                 android:maxLength="17"
                 android:textColor="@color/gray_5"
@@ -191,6 +184,7 @@
                 android:id="@+id/edit_vehicle_brand"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:inputType="textCapCharacters"
                 android:textColor="@color/gray_5"
                 android:paddingBottom="@dimen/material_padding_small" />
@@ -210,7 +204,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_vehicle_model"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
+                android:background="@drawable/textview_border_bottom"
                 android:inputType="textCapCharacters"
                 android:textColor="@color/gray_5"
                 android:paddingBottom="@dimen/material_padding_small" />
@@ -230,7 +225,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_vehicle_color"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="55dp"
+                android:background="@drawable/textview_border_bottom"
                 android:inputType="textCapCharacters"
                 android:textColor="@color/gray_5"
                 android:paddingBottom="@dimen/material_padding_small" />
@@ -241,21 +237,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/species"
-            android:textColorHint="@color/primary"
             android:layout_marginBottom="@dimen/material_margin_medium"
-            app:boxStrokeColor="@color/primary"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeWidthFocused="2dp">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:textColorHint="@color/primary">
 
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/spinner_auto_especie"
+            <AutoCompleteTextView
+                android:id="@+id/spinner_specie_ait"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:inputType="none"
-                android:textColor="@color/gray_5"
-                android:focusable="true"
-                android:clickable="true"
-                android:padding="10dp" />
+                android:textColor="@color/gray_5" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -263,21 +255,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/category"
-            android:textColorHint="@color/primary"
-            android:layout_marginBottom="@dimen/material_margin_medium"
-            app:boxStrokeColor="@color/primary"
-            app:boxStrokeWidth="1dp"
-            app:boxStrokeWidthFocused="2dp">
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:textColorHint="@color/primary">
 
-            <com.google.android.material.textfield.MaterialAutoCompleteTextView
-                android:id="@+id/spinner_auto_categoria"
+            <AutoCompleteTextView
+                android:id="@+id/spinner_category_ait"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:inputType="none"
-                android:textColor="@color/gray_5"
-                android:focusable="true"
-                android:clickable="true"
-                android:padding="15dp"/>
+                android:textColor="@color/gray_5"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -288,7 +275,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.checkbox.MaterialCheckBox
-                android:id="@+id/cb_auto_confirmar"
+                android:id="@+id/cb_ait_confirm"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -303,7 +290,8 @@
                 android:layout_gravity="end|bottom"
                 android:layout_marginStart="@dimen/material_margin_medium"
                 android:visibility="gone"
-                app:srcCompat="@drawable/btn_fb"
+                android:layout_marginTop="@dimen/material_margin_medium"
+                app:srcCompat="@drawable/save_24px"
                 app:backgroundTint="@color/primary"
                 app:tint="@android:color/white" />
 

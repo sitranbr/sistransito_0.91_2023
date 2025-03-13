@@ -39,7 +39,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 	protected void bindGroupView(View view, Context arg1, Cursor cursor,
 			boolean arg3) {
 		TextView logPlate, logTime, logLicenseStatus;
-		logPlate = (TextView) view.findViewById(R.id.log_plate);
+		logPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 		logLicenseStatus = (TextView) view
 				.findViewById(R.id.log_license_status);
 		logTime = (TextView) view.findViewById(R.id.log_time);
@@ -67,7 +67,7 @@ public class PlateListerExpandableAdapter extends CursorTreeAdapter {
 
 		TextView logPlate, logTime, logLicenseStatus;
 
-		logPlate = (TextView) view.findViewById(R.id.log_plate);
+		logPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 		logLicenseStatus = (TextView) view.findViewById(R.id.log_license_status);
 		logTime = (TextView) view.findViewById(R.id.log_time);
 

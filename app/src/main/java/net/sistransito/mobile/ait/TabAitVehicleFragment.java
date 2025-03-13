@@ -8,13 +8,16 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.AutoCompleteTextView;
+import android.widget.EditText;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
+import com.google.android.material.textfield.TextInputLayout;
+
 import net.sistransito.mobile.adapter.AnyArrayAdapter;
+import net.sistransito.mobile.adapter.CustomSpinnerAdapter;
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyDialogFragment;
@@ -32,22 +35,15 @@ import net.sistransito.R;
 import java.util.Arrays;
 import java.util.List;
 
-import com.google.android.material.textfield.TextInputEditText;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.checkbox.MaterialCheckBox;
-import com.google.android.material.textfield.MaterialAutoCompleteTextView;
-import com.google.android.material.textview.MaterialTextView;
-
 public class TabAitVehicleFragment extends DebugFragment implements
         AnyDialogListener {
 
     private PlateHttpResultAsyncTask httpResultAsyncTask;
     private View view;
-    private MaterialAutoCompleteTextView spinner;
     private TextInputEditText editVehiclePlate, editVehicleBrand, editVehicleModel, editVehicleColor, editVehicleRenavan, editVehicleChassi;
     private TextView tvSearchPlate, tvIdAit;
     private FloatingActionButton tvSaveData; // Corrigido para FloatingActionButton
-    private MaterialAutoCompleteTextView spinnerSpecies, spinnerCategory, spinnerCountry, spinnerPlateState;
+    private AutoCompleteTextView spinnerSpecies, spinnerCategory, spinnerCountry, spinnerPlateState;
     private List<String> listCategory, listSpecies, listCountry, listStatePlate;
 
     private AnyArrayAdapter<String> aaaCategory, aaaSpecies, aaaCountry, aaaStatePlate;
@@ -56,7 +52,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
     private String sAitNumberRetained, searchType;
     private Bundle bundle;
     private AnyDialogFragment dialogFragment;
-    private LinearLayout llVehicleState, llVehicleCountry;
+    private TextInputLayout llVehicleState, llVehicleCountry;
     private MaterialCheckBox cbIfForeignVehicle, cbAitConfirm;
 
     public static TabAitVehicleFragment newInstance() {
@@ -101,20 +97,18 @@ public class TabAitVehicleFragment extends DebugFragment implements
         listStatePlate = Arrays.asList(getResources().getStringArray(R.array.state_array));
 
         // Configurar adapters com layouts adequados para o item principal e o dropdown
-        aaaCountry = new AnyArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, android.R.id.text1, listCountry);
-        aaaCountry.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        //aaaCountry = new AnyArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, android.R.id.text1, listCountry);
+        //aaaCountry.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        //aaaStatePlate = new AnyArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, android.R.id.text1, listStatePlate);
+        //aaaStatePlate.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 
-        aaaCategory = new AnyArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, android.R.id.text1, listCategory);
-        aaaCategory.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
-        aaaSpecies = new AnyArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, android.R.id.text1, listSpecies);
-        aaaSpecies.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-
-        aaaStatePlate = new AnyArrayAdapter<>(requireContext(), android.R.layout.simple_spinner_item, android.R.id.text1, listStatePlate);
-        aaaStatePlate.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        CustomSpinnerAdapter aaaCountry = CustomSpinnerAdapter.createStateAdapter(getActivity(), listCountry);
+        CustomSpinnerAdapter aaaStatePlate = CustomSpinnerAdapter.createStateAdapter(getActivity(), listStatePlate);
+        CustomSpinnerAdapter aaaCategory = CustomSpinnerAdapter.createStateAdapter(getActivity(), listCategory);
+        CustomSpinnerAdapter aaaSpecies = CustomSpinnerAdapter.createStateAdapter(getActivity(), listSpecies);
 
         // Inicializar os MaterialAutoCompleteTextView com configurações adicionais
-        spinnerPlateState = view.findViewById(R.id.spinner_uf_veiculo);
+        spinnerPlateState = view.findViewById(R.id.spinner_ait_vehicle_state);
         if (spinnerPlateState != null) {
             spinnerPlateState.setAdapter(aaaStatePlate);
             spinnerPlateState.setOnItemClickListener((parent, view1, position, id) -> {
@@ -143,7 +137,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
             Log.e("TabAitVehicleFragment", "spinnerPlateState is null");
         }
 
-        spinnerCountry = view.findViewById(R.id.spinner_auto_pais);
+        spinnerCountry = view.findViewById(R.id.spinner_ait_country);
         if (spinnerCountry != null) {
             spinnerCountry.setAdapter(aaaCountry);
             spinnerCountry.setOnItemClickListener((parent, view1, position, id) -> {
@@ -171,7 +165,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
             Log.e("TabAitVehicleFragment", "spinnerCountry is null");
         }
 
-        spinnerSpecies = view.findViewById(R.id.spinner_auto_especie);
+        spinnerSpecies = view.findViewById(R.id.spinner_specie_ait);
         if (spinnerSpecies != null) {
             spinnerSpecies.setAdapter(aaaSpecies);
             spinnerSpecies.setOnItemClickListener((parent, view1, position, id) -> {
@@ -199,7 +193,7 @@ public class TabAitVehicleFragment extends DebugFragment implements
             Log.e("TabAitVehicleFragment", "spinnerSpecies is null");
         }
 
-        spinnerCategory = view.findViewById(R.id.spinner_auto_categoria);
+        spinnerCategory = view.findViewById(R.id.spinner_category_ait);
         if (spinnerCategory != null) {
             spinnerCategory.setAdapter(aaaCategory);
             spinnerCategory.setOnItemClickListener((parent, view1, position, id) -> {
@@ -227,13 +221,11 @@ public class TabAitVehicleFragment extends DebugFragment implements
             Log.e("TabAitVehicleFragment", "spinnerCategory is null");
         }
 
-        spinner = view.findViewById(R.id.spinner_auto_especie);
-
-        llVehicleState = (LinearLayout) view.findViewById(R.id.ll_field_uf_veiculo);
-        llVehicleCountry = (LinearLayout) view.findViewById(R.id.ll_field_pais_veiculo);
-        cbIfForeignVehicle = (MaterialCheckBox) view.findViewById(R.id.cb_se_veiculo_estrangeiro);
-        cbAitConfirm = (MaterialCheckBox) view.findViewById(R.id.cb_auto_confirmar);
-        tvSearchPlate = (TextView) view.findViewById(R.id.edit_vehicle_plate);
+        llVehicleState = view.findViewById(R.id.ll_ait_vehicle_state);
+        llVehicleCountry = view.findViewById(R.id.ll_ait_vehicle_country);
+        cbIfForeignVehicle = view.findViewById(R.id.cb_if_foreign_driver);
+        cbAitConfirm = view.findViewById(R.id.cb_ait_confirm);
+        tvSearchPlate = view.findViewById(R.id.tv_ait_search_plate);
 
         // Adicionar logs para depuração
         Log.d("TabAitVehicleFragment", "listStatePlate: " + listStatePlate);
@@ -259,11 +251,11 @@ public class TabAitVehicleFragment extends DebugFragment implements
         cbAitConfirm.setOnClickListener(v -> {
             if (cbAitConfirm.isChecked()) {
                 tvSaveData.setVisibility(View.VISIBLE);
-                tvSaveData.show(); // Mostra o FAB (em vez de setVisibility)
+                //tvSaveData.show(); // Mostra o FAB (em vez de setVisibility)
                 Routine.closeKeyboard(requireActivity().getCurrentFocus(), requireActivity());
             } else {
                 tvSaveData.setVisibility(View.GONE);
-                tvSaveData.hide(); // Esconde o FAB (em vez de setVisibility)
+                //tvSaveData.hide(); // Esconde o FAB (em vez de setVisibility)
             }
         });
 
@@ -292,7 +284,6 @@ public class TabAitVehicleFragment extends DebugFragment implements
             if (checkInput()) {
                 if (!DatabaseCreator.getInfractionDatabaseAdapter(requireActivity()).insertAitData(aitData))
                     Routine.showAlert(getResources().getString(R.string.update_erro), requireActivity());
-
                 ((AitActivity) requireActivity()).setTabActual(1);
             }
         });

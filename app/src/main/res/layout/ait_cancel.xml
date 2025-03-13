@@ -11,7 +11,7 @@
         <View
             android:layout_marginTop="@dimen/layout_margin_top"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/indicator_height_4"
+            android:layout_height="@dimen/indicator_height_1"
             android:background="@color/line_color" />
 
         <EditText
@@ -28,10 +28,6 @@
             android:layout_marginBottom="@dimen/width_padding_15"
             android:paddingBottom="@dimen/width_padding_15"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/indicator_height_4"
-            android:background="@color/line_color"
-            android:gravity="bottom" />
+
 
 </LinearLayout>

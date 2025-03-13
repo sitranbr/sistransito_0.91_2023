@@ -76,7 +76,7 @@ public class TcaLister extends BasePrintActivity implements OnClickListener {
     private void addResultView() {
         TcaListerExpandableAdapter expandableAdapter = new TcaListerExpandableAdapter(cursor,
                 TcaLister.this);
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListViewTca);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandable_ListView_Tav);
         expandableListView.setAdapter(expandableAdapter);
     }
 

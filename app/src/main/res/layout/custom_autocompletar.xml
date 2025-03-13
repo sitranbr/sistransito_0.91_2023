@@ -1,19 +1,25 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:orientation="vertical"
     android:background="@drawable/custom_auto_complete_background" >
 
     <TextView
         android:id="@+id/autoCompleteItem"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/black" />
+        style="?android:attr/dropDownItemStyle"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:background="@android:color/white"
+        android:ellipsize="marquee"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:singleLine="true"
+        android:textAppearance="?android:attr/textAppearanceLargePopupMenu"
+        android:textColor="@color/gray_5" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="@dimen/indicator_height_4"
-        android:background="@color/line_color" />
+        android:layout_height="1dp"
+        android:background="@color/gray_3" />
 
 </LinearLayout>

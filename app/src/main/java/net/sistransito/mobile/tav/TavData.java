@@ -494,7 +494,7 @@ public class TavData implements Serializable {
 				+ getNewline_2()
 				+ context.getResources().getString(
 						R.string.tav_owner_name) + getNewline()
-				+ ownerName + getNewline_2() + getviewData(context);
+				+ ownerName + getNewline_2() + getViewData(context);
 
 		return tav;
 
@@ -638,10 +638,10 @@ public class TavData implements Serializable {
 
 	public CharSequence getTCAListViewData(Context mycontext) {
 
-		return getviewData(mycontext);
+		return getViewData(mycontext);
 	}
 
-	private String getviewData(Context context) {
+	private String getViewData(Context context) {
 
 		String data = context.getResources().getString(R.string.tav_cpf_cnpj)
 				+ getNewline()

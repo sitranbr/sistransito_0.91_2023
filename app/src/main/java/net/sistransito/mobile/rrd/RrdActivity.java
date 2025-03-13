@@ -120,9 +120,9 @@ public class RrdActivity extends AppCompatActivity implements
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		if (id == R.id.im_btn_tab_documento) {
+		if (id == R.id.im_btn_tab_document) {
 			setPagerPosition(0);
-		} else if (id == R.id.im_btn_tab_informacoes) {
+		} else if (id == R.id.im_btn_tab_information) {
 			setPagerPosition(1);
 		} else if (id == R.id.im_btn_back) {
 			finish();
@@ -153,8 +153,8 @@ public class RrdActivity extends AppCompatActivity implements
 	}
 
 	private void initializedView() {
-		imBtnTabInformations = (ImageView) findViewById(R.id.im_btn_tab_informacoes);
-		imBtnTabDocument = (ImageView) findViewById(R.id.im_btn_tab_documento);
+		imBtnTabInformations = (ImageView) findViewById(R.id.im_btn_tab_information);
+		imBtnTabDocument = (ImageView) findViewById(R.id.im_btn_tab_document);
 
 		imBtnTabInformations.setOnClickListener(this);
 		imBtnTabDocument.setOnClickListener(this);

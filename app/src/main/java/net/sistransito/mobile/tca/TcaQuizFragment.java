@@ -1,10 +1,7 @@
 package net.sistransito.mobile.tca;
 
-
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,29 +13,27 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
-
-import net.sistransito.library.datepicker.DateListener;
+import net.sistransito.mobile.fragment.BasePickerFragment;
 import net.sistransito.library.datepicker.MyDatePicker;
 import net.sistransito.library.datepicker.MyTimePicker;
-import net.sistransito.library.datepicker.TimeListener;
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyAlertDialog;
 import net.sistransito.mobile.tca.lister.TcaLister;
 import net.sistransito.R;
 
-public class TcaQuizFragment extends Fragment implements
-		OnClickListener, TimeListener, DateListener, OnCheckedChangeListener,
+public class TcaQuizFragment extends BasePickerFragment implements
+		OnClickListener, OnCheckedChangeListener,
 		CompoundButton.OnCheckedChangeListener {
 	private Bundle bundle;
 	private MyTimePicker myTimePicker;
 	private MyDatePicker myDatePicker;
 	private View view;
 	private Button btnTcaCheck, btnTcaGeneration,
-			btnTcaDateAlcoholConductor,
-			btnTcaTimeAlcoholConductor,
-			btnTcaDateToxicConductor,
-			btnTcaTimeToxicConductor;
+			tcaDateAlcoholConductor,
+			tcaTimeAlcoholConductor,
+			tcaDateToxicConductor,
+			tcaTimeToxicConductor;
 	private TcaData tcaData;
 	private RadioGroup rgTrafficConductor, rgAlcoholConductor,
 			rgToxicConductor, rgKnowsWhereItIs, rgKnowsTheDateAndTime,
@@ -71,6 +66,17 @@ public class TcaQuizFragment extends Fragment implements
 		initializedView();
 		getTcaObject();
 		addListener();
+
+		addPicker(R.id.tca_date_drunk_driver, "date");
+		addPicker(R.id.tca_time_drunk_driver, "time");
+		addPicker(R.id.tca_date_toxica, "date");
+		addPicker(R.id.tca_time_toxica, "time");
+
+		tcaDateAlcoholConductor.setOnClickListener(this);
+		tcaTimeAlcoholConductor.setOnClickListener(this);
+		tcaDateToxicConductor.setOnClickListener(this);
+		tcaTimeToxicConductor.setOnClickListener(this);
+
 		return view;
 	}
 
@@ -91,11 +97,11 @@ public class TcaQuizFragment extends Fragment implements
 		rgRememberTheActsCommitted.setOnCheckedChangeListener(this);
 		rgConclusion.setOnCheckedChangeListener(this);
 
-		btnTcaDateToxicConductor.setOnClickListener(this);
-		btnTcaTimeToxicConductor.setOnClickListener(this);
+		tcaDateToxicConductor.setOnClickListener(this);
+		tcaTimeToxicConductor.setOnClickListener(this);
 
-		btnTcaDateAlcoholConductor.setOnClickListener(this);
-		btnTcaTimeAlcoholConductor.setOnClickListener(this);
+		tcaDateAlcoholConductor.setOnClickListener(this);
+		tcaTimeAlcoholConductor.setOnClickListener(this);
 
 		cbConductorShowsSignsOf1.setOnCheckedChangeListener(this);
 		cbConductorShowsSignsOf2.setOnCheckedChangeListener(this);
@@ -160,14 +166,14 @@ public class TcaQuizFragment extends Fragment implements
 		llToxicChild = (LinearLayout) view
 				.findViewById(R.id.linear_layout_toxica_child);
 
-		btnTcaDateToxicConductor = (Button) view
-				.findViewById(R.id.btn_tca_date_picker_intoxicated_driver);
-		btnTcaTimeToxicConductor = (Button) view
-				.findViewById(R.id.btn_tca_time_picker_intoxicated_driver);
-		btnTcaDateAlcoholConductor = (Button) view
-				.findViewById(R.id.btn_tca_date_picker_drunk_driver);
-		btnTcaTimeAlcoholConductor = (Button) view
-				.findViewById(R.id.btn_tca_time_picker_drunk_driver);
+		tcaDateToxicConductor = (Button) view
+				.findViewById(R.id.tca_date_toxica);
+		tcaTimeToxicConductor = (Button) view
+				.findViewById(R.id.tca_time_toxica);
+		tcaDateAlcoholConductor = (Button) view
+				.findViewById(R.id.tca_date_drunk_driver);
+		tcaTimeAlcoholConductor = (Button) view
+				.findViewById(R.id.tca_time_drunk_driver);
 
 		removeAlcoholView();
 		removeToxicView();
@@ -224,14 +230,6 @@ public class TcaQuizFragment extends Fragment implements
 			getActivity().startActivity(
 					new Intent(getActivity(), TcaLister.class));
 			getActivity().finish();
-		} else if (id == R.id.btn_tca_date_picker_intoxicated_driver) {
-			callDatePicker(R.id.btn_tca_date_picker_intoxicated_driver);
-		} else if (id == R.id.btn_tca_date_picker_drunk_driver) {
-			callDatePicker(R.id.btn_tca_date_picker_drunk_driver);
-		} else if (id == R.id.btn_tca_time_picker_drunk_driver) {
-			callTimePicker(R.id.btn_tca_time_picker_drunk_driver);
-		} else if (id == R.id.btn_tca_time_picker_intoxicated_driver) {
-			callTimePicker(R.id.btn_tca_time_picker_intoxicated_driver);
 		}
 
 	}
@@ -256,9 +254,9 @@ public class TcaQuizFragment extends Fragment implements
 				} else if (rgAlcoholConductor.getCheckedRadioButtonId() == R.id.rd_condutor_alcoolica_nao) {
 					removeAlcoholView();
 					tcaData.setDriverClaimsToHaveDrunkAlcohol(sNo);
-					btnTcaDateAlcoholConductor
+					tcaDateAlcoholConductor
 							.setText(sButtonTextData);
-					btnTcaTimeAlcoholConductor
+					tcaTimeAlcoholConductor
 							.setText(sButttonTextTime);
 				}
 			}
@@ -273,9 +271,9 @@ public class TcaQuizFragment extends Fragment implements
 					removeToxicView();
 					tcaData.setDriverClaimsToHaveUsedToxicSubstance(sNo);
 
-					btnTcaDateToxicConductor
+					tcaDateToxicConductor
 							.setText(sButtonTextData);
-					btnTcaTimeToxicConductor
+					tcaTimeToxicConductor
 							.setText(sButttonTextTime);
 				}
 
@@ -330,77 +328,22 @@ public class TcaQuizFragment extends Fragment implements
 		if (llAlcoholChild.getParent() != null)
 			llAlcoholParent
 					.removeView(llAlcoholChild);
-
 	}
 
 	private void addAlcoholView() {
 		if (llAlcoholChild.getParent() == null)
 			llAlcoholParent
 					.addView(llAlcoholChild);
-
 	}
 
 	private void removeToxicView() {
 		if (llToxicChild.getParent() != null)
 			llToxicParent.removeView(llToxicChild);
-
 	}
 
 	private void addToxicView() {
 		if (llToxicChild.getParent() == null)
 			llToxicParent.addView(llToxicChild);
-
-	}
-
-	@Override
-	public void date(String date, int view_id) {
-		Log.d("date_picker", "date_picker");
-		if (date != null) {
-			if (view_id == R.id.btn_tca_date_picker_intoxicated_driver) {
-				btnTcaDateToxicConductor.setText(date);
-				tcaData.setDateIngestedSubstance(date);
-			} else if (view_id == R.id.btn_tca_date_picker_drunk_driver) {
-				btnTcaDateAlcoholConductor.setText(date);
-				tcaData.setDateThatDrankAlcohol(date);
-			}
-
-		}
-
-	}
-
-	@Override
-	public void time(String time, int view_id) {
-		if (time != null) {
-			if (view_id == R.id.btn_tca_time_picker_intoxicated_driver) {
-				btnTcaTimeToxicConductor.setText(time);
-				tcaData.setTimeIngestedSubstance(time);
-			} else if (view_id == R.id.btn_tca_time_picker_drunk_driver) {
-				btnTcaTimeAlcoholConductor.setText(time);
-				tcaData.setTimeThatDrankAlcohol(time);
-			}
-
-		}
-
-	}
-
-	private void callTimePicker(int id) {
-		bundle = new Bundle();
-		myTimePicker = new MyTimePicker();
-		myTimePicker.setTargetFragment(this, 0);
-		bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID, id);
-		myTimePicker.setArguments(bundle);
-		myTimePicker.show(getActivity().getSupportFragmentManager(), "time");
-
-	}
-
-	private void callDatePicker(int id) {
-		bundle = new Bundle();
-		myDatePicker = new MyDatePicker();
-		myDatePicker.setTargetFragment(this, 0);
-		bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID, id);
-		myDatePicker.setArguments(bundle);
-		myDatePicker.show(getActivity().getSupportFragmentManager(), "date");
-
 	}
 
 	@Override
@@ -500,6 +443,23 @@ public class TcaQuizFragment extends Fragment implements
 			sFormat = (sFormat.substring(AppConstants.NEW_LINE.length()));
 			sFormat = sFormat.trim();
 			tcaData.setInRelationToTheirMotorAndVerbalAbilityOccurs(sFormat);
+		}
+	}
+
+	@Override
+	protected void handlePickerResult(String selectedValue, int viewId) {
+		if (viewId == R.id.tca_date_drunk_driver) {
+			tcaData.setTimeThatDrankAlcohol(selectedValue);
+			tcaDateAlcoholConductor.setText(tcaData.getTimeThatDrankAlcohol());
+		} else if (viewId == R.id.tca_time_drunk_driver) {
+			tcaData.setDateThatDrankAlcohol(selectedValue);
+			tcaTimeAlcoholConductor.setText(tcaData.getDateThatDrankAlcohol());
+		} else if (viewId == R.id.tca_date_toxica) {
+			tcaData.setDateIngestedSubstance(selectedValue);
+			tcaDateToxicConductor.setText(tcaData.getDateIngestedSubstance());
+		} else if (viewId == R.id.tca_time_toxica) {
+			tcaData.setTimeIngestedSubstance(selectedValue);
+			tcaTimeToxicConductor.setText(tcaData.getTimeIngestedSubstance());
 		}
 	}
 

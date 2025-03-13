@@ -77,7 +77,7 @@ public class TavLister extends BasePrintActivity implements OnClickListener {
     private void addResultView() {
         TAVListerExpandableAdapter expandableAdapter = new TAVListerExpandableAdapter(cursor,
                 TavLister.this);
-        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandableListViewTca);
+        ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandable_ListView_Tav);
         expandableListView.setAdapter(expandableAdapter);
     }
 

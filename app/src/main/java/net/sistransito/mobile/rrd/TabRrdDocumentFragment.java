@@ -6,25 +6,26 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import androidx.appcompat.widget.AppCompatButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
-
+import net.sistransito.mobile.fragment.BasePickerFragment;
 import net.sistransito.library.datepicker.DateListener;
 import net.sistransito.library.datepicker.MyDatePicker;
 import net.sistransito.library.datepicker.MyTimePicker;
 import net.sistransito.library.datepicker.TimeListener;
 import net.sistransito.mobile.adapter.AnyArrayAdapter;
+import net.sistransito.mobile.adapter.CustomSpinnerAdapter;
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
@@ -40,20 +41,20 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TabRrdDocumentFragment extends Fragment implements
-		AnyDialogListener, OnClickListener, DateListener, TimeListener  {
+public class TabRrdDocumentFragment extends BasePickerFragment implements
+		AnyDialogListener, OnClickListener  {
 	private View view;
-	private AutoCompleteTextView autoCompleteCity;
+	private AutoCompleteTextView autoCompleteCity, spinnerDocument;
     private TextView tvAitNumber, tvRrdTitle;
-	private EditText etDriverName,
+	private EditText etDriverName, btnValidity,
 			etCrlvNumber, etPlate, etState, etRegisterNumber, etRegisterState;
-	private Spinner spinnerDocument;
 	private RrdData rrdData;
 	private List<String> listDocument;
 	private AnyArrayAdapter<String> aaaAdapter;
 	private AnyDialogFragment anyDialogFragment;
 	private Bundle bundle;
-	private Button btnDate, btnTime, btnValidity;
+	private Button btnDate, btnTime;
+	private AppCompatButton btnValidity2;
 
 	private List<String> cityArray, codeArray, stateArray;
 	private ArrayAdapter<String> aaCity;
@@ -71,27 +72,32 @@ public class TabRrdDocumentFragment extends Fragment implements
 		initializedView();
 		getAitObject();
 		checkAitNumber();
+
+		addPicker(R.id.et_rrd_validity, "date");
+
+		btnValidity.setOnClickListener(this);
+
 		return view;
 	}
 
 	private void initializedView() {
 
 		btnDate = (Button) view.findViewById(R.id.btn_rrd_data);
-		btnTime = (Button) view.findViewById(R.id.btn_rrd_hora);
+		btnTime = (Button) view.findViewById(R.id.btn_rrd_time);
 
 		autoCompleteCity = (AutoCompleteTextView) view
-				.findViewById(R.id.actv_rrd_municipio);
+				.findViewById(R.id.actv_rrd_city);
 
 		tvRrdTitle = (TextView) view.findViewById(R.id.tv_rrd_titulo);
 		llPlateState = (LinearLayout) view
-				.findViewById(R.id.layout_hide_placa_uf);
+				.findViewById(R.id.layout_hide_plate_state);
 		llValidityRegister = (LinearLayout) view
-				.findViewById(R.id.layout_hide_registro_validade);
+				.findViewById(R.id.layout_hide_cnh_validity);
 
 		llDateAndTime = (LinearLayout) view
-				.findViewById(R.id.ll_rrd_data_hora);
+				.findViewById(R.id.ll_rrd_date_time);
 
-		tvAitNumber = (TextView) view.findViewById(R.id.tv_rrd_numero_auto);
+		tvAitNumber = (TextView) view.findViewById(R.id.text_rrd_ait_number);
 
 		etDriverName = (EditText) view
 				.findViewById(R.id.et_rrd_driver_name);
@@ -99,58 +105,43 @@ public class TabRrdDocumentFragment extends Fragment implements
 		//etRrdNomeCondutor.setEnabled(false);
 
 		etCrlvNumber = (EditText) view.findViewById(R.id.et_rrd_crlv_number);
-		etPlate = (EditText) view.findViewById(R.id.et_rrd_placa);
+		etPlate = (EditText) view.findViewById(R.id.et_rrd_plate);
 
-		etState = (EditText) view.findViewById(R.id.et_rrd_uf);
+		etState = (EditText) view.findViewById(R.id.et_rrd_plate_state);
 
 		etRegisterNumber = (EditText) view
 				.findViewById(R.id.et_rrd_register_number);
 
 		etRegisterState = (EditText) view
-				.findViewById(R.id.et_rrd_uf_registro);
+				.findViewById(R.id.et_rrd_register_state);
 
-		btnValidity = (Button) view.findViewById(R.id.btn_rrd_validade);
+		btnValidity = (EditText) view.findViewById(R.id.et_rrd_validity);
 
 		listDocument = Arrays.asList(getResources().getStringArray(
 				R.array.rrd_document));
 
-		aaaAdapter = new AnyArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_spinner_item, android.R.id.text1,
-				listDocument);
-
-		spinnerDocument = (Spinner) view
-				.findViewById(R.id.spinner_rrd_documento);
+		CustomSpinnerAdapter aaaAdapter = CustomSpinnerAdapter.createStateAdapter(getActivity(), listDocument);
+		spinnerDocument = view.findViewById(R.id.spinner_rrd_document);
 		spinnerDocument.setAdapter(aaaAdapter);
 
 		llPlateState.removeView(llPlateState);
 
-		spinnerDocument
-				.setOnItemSelectedListener(new OnItemSelectedListener() {
+		spinnerDocument.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				String selectedItem = (String) parent.getItemAtPosition(position);
+				rrdData.setDocumentType(selectedItem);
+				Log.d("Escolha", String.valueOf(position));
 
-					@Override
-					public void onItemSelected(AdapterView<?> parent,
-											   View view, int pos, long id) {
-						rrdData.setDocumentType((String) parent
-								.getItemAtPosition(pos));
-
-						if (pos == -1) {
-                            hideLayoutPlateView();;
-                            hideLayoutRegisterView();
-						} else if (pos == 0) {
-                            showLayoutPlacaView();
-                            hideLayoutRegisterView();
-                        } else {
-                            showLayoutRegistroView();
-                            hideLayoutPlateView();;
-						}
-
-					}
-
-					@Override
-					public void onNothingSelected(AdapterView<?> arg0) {
-
-					}
-				});
+				if (position == 0) {
+					showLayoutViewPlate();
+					hideLayoutRegisterView();
+				} else {
+					showLayoutRegisterView();
+					hideLayoutPlateView();
+				}
+			}
+		});
 
 	}
 
@@ -158,12 +149,12 @@ public class TabRrdDocumentFragment extends Fragment implements
 
 		etDriverName.addTextChangedListener(new ChangeText(R.id.et_rrd_driver_name));
 		etCrlvNumber.addTextChangedListener(new ChangeText(R.id.et_rrd_crlv_number));
-		etState.addTextChangedListener(new ChangeText(R.id.et_rrd_uf));
+		etState.addTextChangedListener(new ChangeText(R.id.et_rrd_plate_state));
 		etRegisterNumber.addTextChangedListener(new ChangeText(R.id.et_rrd_register_number));
-		etRegisterState.addTextChangedListener(new ChangeText(R.id.et_rrd_uf_registro));
+		etRegisterState.addTextChangedListener(new ChangeText(R.id.et_rrd_register_state));
 
 		btnDate.addTextChangedListener(new ChangeText(R.id.btn_rrd_data));
-		btnTime.addTextChangedListener(new ChangeText(R.id.btn_rrd_hora));
+		btnTime.addTextChangedListener(new ChangeText(R.id.btn_rrd_time));
 
 		btnDate.setOnClickListener(this);
 		btnTime.setOnClickListener(this);
@@ -259,11 +250,10 @@ public class TabRrdDocumentFragment extends Fragment implements
 		// etRrdUf.setText("");
 	}
 
-
-
 	private void getRecomandedUpdate() {
-
+		Log.d("getRrdType", rrdData.getRrdType());
 		if(rrdData.getRrdType().equals("avulso")) {
+
 			tvAitNumber.setVisibility(View.GONE);
 			llDateAndTime.setVisibility(View.VISIBLE);
 			autoCompleteCity.setVisibility(View.VISIBLE);
@@ -299,15 +289,15 @@ public class TabRrdDocumentFragment extends Fragment implements
 				rrdData.setDriverName(s);
 			} else if (id == R.id.et_rrd_crlv_number) {
 				rrdData.setCrlvNumber(s);
-			} else if (id == R.id.et_rrd_uf) {
+			} else if (id == R.id.et_rrd_plate_state) {
 				rrdData.setPlateState(s);
 			} else if (id == R.id.et_rrd_register_number) {
 				rrdData.setRegistrationNumber(s);
-			} else if (id == R.id.et_rrd_uf_registro) {
+			} else if (id == R.id.et_rrd_register_state) {
 				rrdData.setRegistrationState(s);
 			} else if (id == R.id.btn_rrd_data) {
 				rrdData.setDateCollected(s);
-			} else if (id == R.id.btn_rrd_hora) {
+			} else if (id == R.id.btn_rrd_time) {
 				rrdData.setTimeCollected(s);
 			}
 
@@ -346,7 +336,7 @@ public class TabRrdDocumentFragment extends Fragment implements
 
 	}
 
-	private void showLayoutPlacaView() {
+	private void showLayoutViewPlate() {
 
 		//if (layoutPlacaUf.getParent() == null) {
 			//layoutPlacaUf.addView(layoutPlacaUf);
@@ -357,7 +347,7 @@ public class TabRrdDocumentFragment extends Fragment implements
 
 	}
 
-	private void showLayoutRegistroView() {
+	private void showLayoutRegisterView() {
 
 	    llValidityRegister.setVisibility(View.VISIBLE);
         btnValidity.setVisibility(View.VISIBLE);
@@ -379,51 +369,10 @@ public class TabRrdDocumentFragment extends Fragment implements
 	}
 
 	@Override
-	public void onClick(View v) {
-		int id = v.getId();
-		if (id == R.id.btn_rrd_validade) {
-			MyDatePicker datePicker = new MyDatePicker();
-			bundle = new Bundle();
-			bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID, R.id.btn_rrd_validade);
-			datePicker.setArguments(bundle);
-			datePicker.setTargetFragment(this, 0);
-			datePicker.show(getActivity().getSupportFragmentManager(), "date");
-		} else if (id == R.id.btn_rrd_data) {
-			MyDatePicker rrdDate = new MyDatePicker();
-			bundle = new Bundle();
-			bundle.putInt(rrdDate.MY_DATE_PICKER_ID,
-					R.id.btn_rrd_data);
-			rrdDate.setArguments(bundle);
-			rrdDate.setTargetFragment(this, 0);
-			rrdDate.show(getActivity().getSupportFragmentManager(), "date2");
-		} else if (id == R.id.btn_rrd_hora) {
-			MyTimePicker picker = new MyTimePicker();
-			bundle = new Bundle();
-			bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID,
-					R.id.btn_rrd_hora);
-			picker.setArguments(bundle);
-			picker.setTargetFragment(this, 0);
-			picker.show(getActivity().getSupportFragmentManager(), "time");
-		}
-	}
-
-	@Override
-	public void date(String date, int view_id) {
-		if (view_id == R.id.btn_rrd_validade) {
-			btnValidity.setText(date);
-			rrdData.setValidity(date);
-		}
-		if (view_id == R.id.btn_rrd_data) {
-			btnDate.setText(date);
-			rrdData.setDateCollected(date);
-		}
-	}
-
-	@Override
-	public void time(String time, int view_id) {
-		if (view_id == R.id.btn_rrd_hora) {
-			btnTime.setText(time);
-			rrdData.setTimeCollected(time);
+	protected void handlePickerResult(String selectedValue, int viewId) {
+		if (viewId == R.id.et_rrd_validity) {
+			rrdData.setValidity(selectedValue);
+			btnValidity.setText(rrdData.getValidity());
 		}
 	}
 

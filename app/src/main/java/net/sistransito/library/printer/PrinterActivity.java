@@ -36,7 +36,7 @@ public class PrinterActivity extends AppCompatActivity {
 			mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 
 			if (mBluetoothAdapter == null) {
-				showMessage("Dispositivo bluetooth n�o encontrado");
+				showMessage("Dispositivo bluetooth não encontrado");
 			}
 
 			if (!mBluetoothAdapter.isEnabled()) {

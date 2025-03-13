@@ -7,7 +7,7 @@
     android:orientation="horizontal">
 
     <TextView
-        android:id="@+id/tv_auto_titulo"
+        android:id="@+id/tv_ait_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
@@ -35,7 +35,7 @@
         android:id="@+id/linearLayout1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_auto_titulo"
+        android:layout_below="@+id/tv_ait_title"
         android:orientation="horizontal"
         android:paddingStart="@dimen/width_padding"
         android:paddingEnd="@dimen/width_padding"

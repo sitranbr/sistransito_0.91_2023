@@ -14,7 +14,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -30,6 +29,7 @@ import android.widget.TextView;
 import com.rey.material.widget.CheckBox;
 
 import net.sistransito.mobile.adapter.AnyArrayAdapter;
+import net.sistransito.mobile.adapter.CustomSpinnerAdapter;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
 import net.sistransito.mobile.fragment.AnyAlertDialog;
@@ -47,7 +47,6 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 		UpdateFragment, OnCheckedChangeListener {
 
 	private View view, separator;
-	private AutoCompleteTextView autoCompleteInfraction;
 	private AitData aitData;
 	private RadioGroup rgProcedures, rgrRetreat, rgShipperIdentification, rgCarrierIdentification;
 	private RadioButton rbAlcoholTestNumber, rbTca, rbCpfShipper, rbCnpjShipper,
@@ -59,7 +58,8 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 			etCarrierName, etCarrierCpf, etCarrierCnpj;
 	private TextInputLayout tilAutoTca,tilCpfEmbarcador, tilCnpjEmbarcador, tilCpfTransportador, tilCnpjTransportador;
 	private TextView tvClearSearch, tvClearObs, tvAitObservation, TvSaveData;
-	private Spinner spinnerAitDescription, spinnerMeasuringUnit;
+	private AutoCompleteTextView autoCompleteInfraction, spinnerAitDescription;
+	private Spinner spinnerMeasuringUnit;
 	private List<String> listDescription, listBrand, listModel, listMeasurement,
 			listSerialNumber, listAitArray, listInfractionArray,
 			listAitObservation, listAitUnfolding, listArticle, listAitFramingCode;
@@ -91,53 +91,53 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 	private void initializedView() {
 
 		llFramingCode = (LinearLayout) view.findViewById(R.id.ll_enquadramento);
-		llEquipment = (LinearLayout) view.findViewById(R.id.ll_auto_equipamento);
-		llProcedures = (LinearLayout) view.findViewById(R.id.ll_auto_procedimentos);
-		llCarrier = (LinearLayout) view.findViewById(R.id.ll_auto_transportador);
+		llEquipment = (LinearLayout) view.findViewById(R.id.ll_auto_equipment);
+		llProcedures = (LinearLayout) view.findViewById(R.id.ll_auto_procedures);
+		llCarrier = (LinearLayout) view.findViewById(R.id.ll_auto_transporter);
 
 		flObservation = (FrameLayout) view.findViewById(R.id.fl_auto_obs);
 
-		autoCompleteInfraction = (AutoCompleteTextView) view.findViewById(R.id.tv_autocomplete_infracao);
+		autoCompleteInfraction = (AutoCompleteTextView) view.findViewById(R.id.tv_auto_complete_infraction);
 		cbTca = (CheckBox) view.findViewById(R.id.cb_auto_tca);
-		cbEquipment = (CheckBox) view.findViewById(R.id.cb_equipamento_afericao);
+		cbEquipment = (CheckBox) view.findViewById(R.id.cb_measuring_equipment);
 		cbProcedures = (CheckBox) view.findViewById(R.id.cb_procedimentos);
-		cbCarrier = (CheckBox) view.findViewById(R.id.cb_transportador);
-		cbConfirm = (CheckBox) view.findViewById(R.id.cb_auto_confirmar);
+		cbCarrier = (CheckBox) view.findViewById(R.id.cb_transporter);
+		cbConfirm = (CheckBox) view.findViewById(R.id.cb_ait_confirm);
 
-		etTcaNumber = (EditText) view.findViewById(R.id.et_auto_numero_tca);
+		etTcaNumber = (EditText) view.findViewById(R.id.et_auto_tca_number);
 		etFramingCode = (EditText) view.findViewById(R.id.et_auto_enquadramento);
 		etCategorization = (EditText) view.findViewById(R.id.et_auto_desdobramento);
 		etArticle = (EditText) view.findViewById(R.id.et_auto_amparo_legal);
-		etObservation = (EditText) view.findViewById(R.id.et_auto_observacao);
+		etObservation = (EditText) view.findViewById(R.id.et_auto_observation);
 
-		etEquipmentBrand = (EditText) view.findViewById(R.id.et_auto_marca_equipamento);
+		etEquipmentBrand = (EditText) view.findViewById(R.id.et_auto_brand_equipment);
 		etEquipmentModel = (EditText) view
-				.findViewById(R.id.et_auto_modelo_equipamento);
+				.findViewById(R.id.et_auto_equipment_model);
 
 		etSerialNumber = (EditText) view
-				.findViewById(R.id.et_auto_numero_de_serie);
+				.findViewById(R.id.et_auto_serie_number);
 
 		etMeasurementPerformed = (EditText) view
 				.findViewById(R.id.et_ait_measurement_performed);
 
 		etMeasurementPerformed.setKeyListener(DigitsKeyListener.getInstance("0123456789."));
 
-		etRegulatedValue = (EditText) view.findViewById(R.id.et_auto_limite_regulamentado);
-		etValueConsidered = (EditText) view.findViewById(R.id.et_auto_valor_medicao);
+		etRegulatedValue = (EditText) view.findViewById(R.id.et_auto_regulated_limit);
+		etValueConsidered = (EditText) view.findViewById(R.id.et_auto_measurement_value);
 		//etAutoValor.setEnabled(false);
 		etAlcoholSampleNumber = (EditText) view
 				.findViewById(R.id.et_ait_sample_number);
 
-		etShipperName = (EditText) view.findViewById(R.id.et_auto_nome_embarcador) ;
-		etCarrierName = (EditText) view.findViewById(R.id.et_auto_nome_transportador);
+		etShipperName = (EditText) view.findViewById(R.id.et_auto_shipper_name) ;
+		etCarrierName = (EditText) view.findViewById(R.id.et_auto_transporter_name);
 
-		etShipperCpf = (EditText) view.findViewById(R.id.et_cpf_embarcador);
-		etShipperCnpj = (EditText) view.findViewById(R.id.et_cnpj_embarcador);
-		etCarrierCpf = (EditText) view.findViewById(R.id.et_cfp_transportador);
-		etCarrierCnpj = (EditText) view.findViewById(R.id.et_cnpj_transportador);
+		etShipperCpf = (EditText) view.findViewById(R.id.et_shipper_cpf);
+		etShipperCnpj = (EditText) view.findViewById(R.id.et_shipper_cnpj);
+		etCarrierCpf = (EditText) view.findViewById(R.id.et_transporter_cpf);
+		etCarrierCnpj = (EditText) view.findViewById(R.id.et_transporter_cnpj);
 
 		tilAutoTca = (TextInputLayout) view.findViewById(R.id.til_auto_tca);
-		tilCpfEmbarcador = (TextInputLayout) view.findViewById(R.id.til_cpf_embarcador);
+		tilCpfEmbarcador = (TextInputLayout) view.findViewById(R.id.til_shipper_cpf);
 		tilCnpjEmbarcador = (TextInputLayout) view.findViewById(R.id.til_cnpj_embarcador);
 		tilCpfTransportador = (TextInputLayout) view.findViewById(R.id.til_cpf_transportador);
 		tilCnpjTransportador = (TextInputLayout) view.findViewById(R.id.til_cnpj_transportador);
@@ -145,14 +145,14 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 		rgrRetreat = (RadioGroup) view.findViewById(R.id.rg_recolhimento);
 		rgProcedures = (RadioGroup) view
 				.findViewById(R.id.rg_procedimentos);
-		rgShipperIdentification = (RadioGroup) view.findViewById(R.id.rg_tipo_documento_embarcador);
+		rgShipperIdentification = (RadioGroup) view.findViewById(R.id.rg_type_shipper_document);
 		rgCarrierIdentification = (RadioGroup) view.findViewById(R.id.rg_tipo_documento_transportador);
 		//sampleRadio = (RadioButton) view.findViewById(R.id.sample_radio);
 		//tcaRadio = (RadioButton) view.findViewById(R.id.tca_radio);
-		rbCpfShipper = (RadioButton) view.findViewById(R.id.rg_cpf_embarcador);
-		rbCnpjShipper = (RadioButton) view.findViewById(R.id.rg_cnpj_embarcador);
-		rbCpfCarrier = (RadioButton) view.findViewById(R.id.rg_cpf_transportador);
-		rbCnpjCarrier = (RadioButton) view.findViewById(R.id.rg_cnpj_transportador);
+		rbCpfShipper = (RadioButton) view.findViewById(R.id.rg_shipper_cpf);
+		rbCnpjShipper = (RadioButton) view.findViewById(R.id.rg_shipper_cnpj);
+		rbCpfCarrier = (RadioButton) view.findViewById(R.id.rg_transporter_cpf);
+		rbCnpjCarrier = (RadioButton) view.findViewById(R.id.rg_transporter_cnpj);
 		separator = (View) view.findViewById(R.id.separador);
 
 		etFramingCode.setEnabled(false);
@@ -191,7 +191,7 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 				android.R.layout.simple_spinner_item, android.R.id.text1,
 				listMeasurement);
 
-		spinnerMeasuringUnit = (Spinner) view.findViewById(R.id.spinner_medicao_unidade);
+		spinnerMeasuringUnit = (Spinner) view.findViewById(R.id.spinner_measurement_unit);
 		spinnerMeasuringUnit.setAdapter(aaaMeasuringUnit);
 
 		spinnerMeasuringUnit
@@ -214,22 +214,13 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 
 	}
 
-	private void hideComponents(){
+	private void setComponentVisibility(boolean show) {
+		int visibility = show ? View.VISIBLE : View.GONE;
 
-		tvClearSearch.setVisibility(TextView.GONE);
-		tvClearObs.setVisibility(TextView.GONE);
-		llFramingCode.setVisibility(EditText.GONE);
-		flObservation.setVisibility(view.GONE);
-
-	}
-
-	private void  showComponents(){
-
-		tvClearSearch.setVisibility(TextView.VISIBLE);
-		tvClearObs.setVisibility(TextView.VISIBLE);
-		llFramingCode.setVisibility(EditText.VISIBLE);
-		flObservation.setVisibility(view.VISIBLE);
-
+		tvClearSearch.setVisibility(visibility);
+		tvClearObs.setVisibility(visibility);
+		llFramingCode.setVisibility(visibility);
+		flObservation.setVisibility(visibility);
 	}
 
 	@SuppressLint("Range")
@@ -271,69 +262,55 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 				R.layout.spinner_custom_item, android.R.id.text1,
 				listDescription);
 
-		spinnerAitDescription = (Spinner) view.findViewById(R.id.spinner_auto_descricao_equipamento);
+		CustomSpinnerAdapter aaaEquipmentDescription = CustomSpinnerAdapter.createStateAdapter(getActivity(), listDescription);
+		spinnerAitDescription = (AutoCompleteTextView) view.findViewById(R.id.spinner_auto_equipment_description);
 		spinnerAitDescription.setAdapter(aaaEquipmentDescription);
 
-		spinnerAitDescription
-				.setOnItemSelectedListener(new OnItemSelectedListener() {
+		spinnerAitDescription.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				aitData.setDescription((String) parent.getItemAtPosition(position));
 
-					@Override
-					public void onItemSelected(AdapterView<?> parent, View arg1, int pos, long arg3) {
+				int realPosition = listDescription.indexOf(aitData.getDescription());
 
-						aitData.setDescription((String) parent.getItemAtPosition(pos));
+				if (realPosition == 0) {
+					ifCalculate = true;
+					spinnerMeasuringUnit.setSelection(4);
+					spinnerMeasuringUnit.setEnabled(false);
+					etRegulatedValue.setEnabled(false);
+					etValueConsidered.setEnabled(false);
+					etMeasurementPerformed.setText("");
+					etMeasurementPerformed.requestFocus();
+					etValueConsidered.setText("");
+					etRegulatedValue.setText("");
+					etRegulatedValue.setText("0,00 Mg/L");
+					aitData.setRegulatedValue("0,00 Mg/L");
+				} else {
+					ifCalculate = false;
+					spinnerMeasuringUnit.setSelection(3);
+					spinnerMeasuringUnit.setEnabled(true);
+					etRegulatedValue.setEnabled(true);
+					etValueConsidered.setEnabled(true);
+					etMeasurementPerformed.setText("");
+					etMeasurementPerformed.requestFocus();
+					etValueConsidered.setText("");
+					etRegulatedValue.setText("");
+					aitData.setRegulatedValue(null);
+				}
 
-						int realPosition = listDescription.indexOf(aitData.getDescription());
+				if (realPosition == -1) {
+					clearAllEquipamentFields();
+				} else {
+					aitData.setEquipmentBrand(listBrand.get(realPosition));
+					aitData.setEquipmentModel(listModel.get(realPosition));
+					aitData.setSerialNumber(listSerialNumber.get(realPosition));
 
-						if (realPosition == 0){
-							ifCalculate = true;
-							spinnerMeasuringUnit.setSelection(4);
-							spinnerMeasuringUnit.setEnabled(false);
-							etRegulatedValue.setEnabled(false);
-							etValueConsidered.setEnabled(false);
-							etMeasurementPerformed.setText("");
-							etMeasurementPerformed.requestFocus();
-							etValueConsidered.setText("");
-							etRegulatedValue.setText("");
-							etRegulatedValue.setText("0,00 Mg/L");
-							aitData.setRegulatedValue("0,00 Mg/L");
-						} else {
-							ifCalculate = false;
-							spinnerMeasuringUnit.setSelection(3);
-							spinnerMeasuringUnit.setEnabled(true);
-							etRegulatedValue.setEnabled(true);
-							etValueConsidered.setEnabled(true);
-							etMeasurementPerformed.setText("");
-							etMeasurementPerformed.requestFocus();
-							etValueConsidered.setText("");
-							etRegulatedValue.setText("");
-							aitData.setRegulatedValue(null);
-						}
-
-						//Toast.makeText(getActivity(), "Posição " + realPosition, Toast.LENGTH_SHORT).show();
-
-						if (realPosition == -1) {
-							clearAllEquipamentFields();
-						} else {
-							aitData.setEquipmentBrand(listBrand.get(realPosition));
-							aitData.setEquipmentModel(listModel.get(realPosition));
-							aitData.setSerialNumber(listSerialNumber.get(realPosition));
-
-							etEquipmentBrand.setText(aitData.getEquipmentBrand());
-							etEquipmentModel.setText(aitData.getEquipmentModel());
-							etSerialNumber.setText(aitData.getSerialNumber());
-
-						}
-
-						//Toast.makeText(getActivity(), "Posição atual" + realPosition, Toast.LENGTH_SHORT).show();
-
-					}
-
-					@Override
-					public void onNothingSelected(AdapterView<?> arg0) {
-						// TODO Auto-generated method stub
-
-					}
-				});
+					etEquipmentBrand.setText(aitData.getEquipmentBrand());
+					etEquipmentModel.setText(aitData.getEquipmentModel());
+					etSerialNumber.setText(aitData.getSerialNumber());
+				}
+			}
+		});
 
 	}
 
@@ -344,37 +321,32 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 				.getPrepopulatedDBOpenHelper(getActivity()))
 				.getInfrationCursor();
 
-		listInfractionArray = new ArrayList<String>();
-		listAitArray = new ArrayList<String>();
-		listAitUnfolding = new ArrayList<String>();
-		listArticle = new ArrayList<String>();
-		listAitFramingCode = new ArrayList<String>();
-		listAitObservation = new ArrayList<String>();
+		listInfractionArray = new ArrayList<>();
+		listAitArray = new ArrayList<>();
+		listAitUnfolding = new ArrayList<>();
+		listArticle = new ArrayList<>();
+		listAitFramingCode = new ArrayList<>();
+		listAitObservation = new ArrayList<>();
 
-		for (int i = 0; i < cursor.getCount(); i++) {
+		// Movendo o cursor para a primeira posição antes de iterar
+		if (cursor.moveToFirst()) {
+			do {
+				listAitArray.add(
+						cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_ARTICLE)) + " - " +
+								cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_DESCRIPTION))
+				);
+				listInfractionArray
+						.add(cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_DESCRIPTION)));
+				listAitFramingCode
+						.add(cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_FLAMING_CODE)));
+				listAitUnfolding
+						.add(cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_UNFOLDING)));
+				listArticle.add(cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_ARTICLE)));
 
-			listAitArray.add(
-					cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_ARTICLE)) + " - " +
-							cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_DESCRIPTION))
-			);
-			listInfractionArray
-					.add(cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_DESCRIPTION))
-					);
-			listAitFramingCode
-					.add(cursor.getString(cursor
-							.getColumnIndex(PrepopulatedDBOpenHelper.AIT_FLAMING_CODE)));
-			listAitUnfolding
-					.add(cursor.getString(cursor
-							.getColumnIndex(PrepopulatedDBOpenHelper.AIT_UNFOLDING)));
-			listArticle.add(cursor.getString(cursor
-					.getColumnIndex(PrepopulatedDBOpenHelper.AIT_ARTICLE)));
+				listAitObservation
+						.add(cursor.getString(cursor.getColumnIndex(PrepopulatedDBOpenHelper.AIT_OBSERVATION)));
 
-			listAitObservation
-					.add(cursor.getString(cursor
-							.getColumnIndex(PrepopulatedDBOpenHelper.AIT_OBSERVATION)));
-
-			cursor.moveToNext();
-
+			} while (cursor.moveToNext());
 		}
 		cursor.close();
 
@@ -384,41 +356,26 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 
 		autoCompleteInfraction.setAdapter(infractionArrayAdapter);
 
-		autoCompleteInfraction
-				.setOnItemClickListener(new OnItemClickListener() {
+		autoCompleteInfraction.setOnItemClickListener((parent, view, pos, id) -> {
+			Routine.closeKeyboard(autoCompleteInfraction, getActivity());
 
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-											int pos, long id) {
+			int realPosition = listAitArray.indexOf(parent.getItemAtPosition(pos));
 
-						Routine.closeKeyboard(autoCompleteInfraction, getActivity());
+			// Atualizando aitData com os dados da infração selecionada
+			aitData.setInfraction(listInfractionArray.get(realPosition));
+			aitData.setFramingCode(listAitFramingCode.get(realPosition));
+			aitData.setUnfolding(listAitUnfolding.get(realPosition));
+			aitData.setArticle(listArticle.get(realPosition));
+			aitData.setObservation(listAitObservation.get(realPosition));
 
-						aitData.setInfraction((String) parent.getItemAtPosition(pos));
-						int realPosition = listAitArray.indexOf(aitData.getInfraction());
+			// Atualizando os campos da tela com os dados da infração
+			etFramingCode.setText(aitData.getFramingCode());
+			etCategorization.setText(aitData.getUnfolding());
+			etArticle.setText(aitData.getArticle());
+			etObservation.setText(replaceStringObs(aitData.getObservation()));
 
-						aitData.setInfraction(listInfractionArray.get(realPosition));
-						//etAutoEnquadra.setText(dadosAuto.getCodigoInfracao());
-
-						aitData.setFramingCode(listAitFramingCode.get(realPosition));
-						etFramingCode.setText(aitData.getFramingCode());
-
-						aitData.setUnfolding(listAitUnfolding.get(realPosition));
-						etCategorization.setText(aitData.getUnfolding());
-
-						aitData.setArticle(listArticle.get(realPosition));
-						etArticle.setText(aitData.getArticle());
-
-						aitData.setObservation(listAitObservation.get(realPosition));
-
-						String obs = aitData.getObservation();
-
-						etObservation.setText(replaceStringObs(obs));
-
-						showComponents();
-
-					}
-				});
-
+			setComponentVisibility(true);
+		});
 	}
 
 	public String replaceStringObs(String obs){
@@ -436,20 +393,20 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 
 	private void addListener() {
 
-		etObservation.addTextChangedListener(new ChangeText(R.id.et_auto_observacao));
-		etEquipmentBrand.addTextChangedListener(new ChangeText(R.id.et_auto_marca_equipamento));
-		etSerialNumber.addTextChangedListener(new ChangeText(R.id.et_auto_numero_de_serie));
-		etEquipmentModel.addTextChangedListener(new ChangeText(R.id.et_auto_modelo_equipamento));
+		etObservation.addTextChangedListener(new ChangeText(R.id.et_auto_observation));
+		etEquipmentBrand.addTextChangedListener(new ChangeText(R.id.et_auto_brand_equipment));
+		etSerialNumber.addTextChangedListener(new ChangeText(R.id.et_auto_serie_number));
+		etEquipmentModel.addTextChangedListener(new ChangeText(R.id.et_auto_equipment_model));
 		etMeasurementPerformed.addTextChangedListener(new ChangeText(R.id.et_ait_measurement_performed));
-		etRegulatedValue.addTextChangedListener(new ChangeText(R.id.et_auto_limite_regulamentado));
-		etValueConsidered.addTextChangedListener(new ChangeText(R.id.et_auto_valor_medicao));
+		etRegulatedValue.addTextChangedListener(new ChangeText(R.id.et_auto_regulated_limit));
+		etValueConsidered.addTextChangedListener(new ChangeText(R.id.et_auto_measurement_value));
 		etAlcoholSampleNumber.addTextChangedListener(new ChangeText(R.id.et_ait_sample_number));
-		etShipperName.addTextChangedListener(new ChangeText(R.id.et_auto_nome_embarcador));
-		etCarrierName.addTextChangedListener(new ChangeText(R.id.et_auto_nome_transportador));
-		etShipperCpf.addTextChangedListener(new ChangeText(R.id.et_cpf_embarcador));
-		etShipperCnpj.addTextChangedListener(new ChangeText(R.id.et_cnpj_embarcador));
-		etCarrierCpf.addTextChangedListener(new ChangeText(R.id.et_cfp_transportador));
-		etCarrierCnpj.addTextChangedListener(new ChangeText(R.id.et_cnpj_transportador));
+		etShipperName.addTextChangedListener(new ChangeText(R.id.et_auto_shipper_name));
+		etCarrierName.addTextChangedListener(new ChangeText(R.id.et_auto_transporter_name));
+		etShipperCpf.addTextChangedListener(new ChangeText(R.id.et_shipper_cpf));
+		etShipperCnpj.addTextChangedListener(new ChangeText(R.id.et_shipper_cnpj));
+		etCarrierCpf.addTextChangedListener(new ChangeText(R.id.et_transporter_cpf));
+		etCarrierCnpj.addTextChangedListener(new ChangeText(R.id.et_transporter_cnpj));
 
 		rgProcedures.setOnCheckedChangeListener(this);
 		rgrRetreat.setOnCheckedChangeListener(this);
@@ -467,7 +424,7 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 
 				Routine.openKeyboard(autoCompleteInfraction, getActivity());
 
-				hideComponents();
+				setComponentVisibility(false);
 			}
 		});
 
@@ -828,13 +785,13 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 		public void afterTextChanged(Editable edit) {
 			String s = (edit.toString()).trim();
 
-			if (id == R.id.et_auto_observacao) {
+			if (id == R.id.et_auto_observation) {
 				aitData.setObservation(s.toString());
-			} else if (id == R.id.et_auto_marca_equipamento) {
+			} else if (id == R.id.et_auto_brand_equipment) {
 				aitData.setEquipmentBrand(s.toString());
-			} else if (id == R.id.et_auto_numero_de_serie) {
+			} else if (id == R.id.et_auto_serie_number) {
 				aitData.setSerialNumber(s.toString());
-			} else if (id == R.id.et_auto_modelo_equipamento) {
+			} else if (id == R.id.et_auto_equipment_model) {
 				aitData.setEquipmentModel(s.toString());
 			} else if (id == R.id.et_ait_measurement_performed) {//Routine.formatEditText(etMeasurementPerformed);
 				if (ifCalculate) {
@@ -843,23 +800,23 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 					}
 				}
 				aitData.setMeasurementPerformed(s.toString() + " " + unitMeasureCalculation);
-			} else if (id == R.id.et_auto_valor_medicao) {
+			} else if (id == R.id.et_auto_measurement_value) {
 				aitData.setValueConsidered(s.toString() + " " + unitMeasureCalculation);
 
 				aitData.setAlcoholTestNumber(s.toString());
 			} else if (id == R.id.et_ait_sample_number) {
 				aitData.setAlcoholTestNumber(s.toString());
-			} else if (id == R.id.et_auto_nome_transportador) {
+			} else if (id == R.id.et_auto_transporter_name) {
 				aitData.setCarrierIdentification(s.toString());
-			} else if (id == R.id.et_auto_nome_embarcador) {
+			} else if (id == R.id.et_auto_shipper_name) {
 				aitData.setCarrierIdentification(s.toString());
-			} else if (id == R.id.et_cfp_transportador) {
+			} else if (id == R.id.et_transporter_cpf) {
 				aitData.setCpfCarrier(s.toString());
-			} else if (id == R.id.et_cnpj_transportador) {
+			} else if (id == R.id.et_transporter_cnpj) {
 				aitData.setCnpjCarrier(s.toString());
-			} else if (id == R.id.et_cpf_embarcador) {
+			} else if (id == R.id.et_shipper_cpf) {
 				aitData.setCpfShipper(s.toString());
-			} else if (id == R.id.et_cnpj_embarcador) {
+			} else if (id == R.id.et_shipper_cnpj) {
 				aitData.setCnpShipper(s.toString());
 			}
 		}

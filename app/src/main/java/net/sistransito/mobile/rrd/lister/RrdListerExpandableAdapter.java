@@ -33,15 +33,15 @@ public class RrdListerExpandableAdapter extends CursorTreeAdapter {
 
 	@Override
 	protected void bindChildView(View arg0, Context arg1, Cursor arg2,
-			boolean arg3) {
+								 boolean arg3) {
 	}
 
 	@Override
 	protected void bindGroupView(View view, Context arg1, Cursor cursor,
-			boolean arg3) {
+								 boolean arg3) {
 		TextView tvLogPlate, tvLogDocument;
-		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
-		tvLogDocument = (TextView) view.findViewById(R.id.log_documento);
+		tvLogPlate = (TextView) view.findViewById(R.id.lv_parent_rrd_plate);
+		tvLogDocument = (TextView) view.findViewById(R.id.lv_parent_rrd_document);
 
 		if(cursor.getString(cursor.getColumnIndex(RrdDatabaseHelper.RRD_TYPE)).equals("avulso")) {
 			tvLogPlate.setText(cursor.getString(cursor
@@ -57,18 +57,18 @@ public class RrdListerExpandableAdapter extends CursorTreeAdapter {
 
 	@Override
 	protected View newChildView(Context arg0, Cursor arg1, boolean arg2,
-			ViewGroup arg3) {
+								ViewGroup arg3) {
 		return null;
 	}
 
 	@Override
 	protected View newGroupView(Context context, Cursor cursor,
-			boolean isExpendable, ViewGroup parent) {
+								boolean isExpendable, ViewGroup parent) {
 		View view = mInflator
 				.inflate(R.layout.rrd_list_listview_parent, null);
 		TextView tvLogPlate, tvLogDocument;
-		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
-		tvLogDocument = (TextView) view.findViewById(R.id.log_documento);
+		tvLogPlate = (TextView) view.findViewById(R.id.lv_parent_rrd_plate);
+		tvLogDocument = (TextView) view.findViewById(R.id.lv_parent_rrd_document);
 
 		tvLogPlate.setText(cursor.getString(cursor.getColumnIndex(RrdDatabaseHelper.RRD_NUMBER)));
 		tvLogDocument.setText(cursor.getString(cursor
@@ -87,7 +87,7 @@ public class RrdListerExpandableAdapter extends CursorTreeAdapter {
 
 	@Override
 	public View getChildView(int groupPosition, int childPosition,
-			boolean isLastChild, View view, ViewGroup parent) {
+							 boolean isLastChild, View view, ViewGroup parent) {
 		// final int gPosition = groupPosition;
 		TextView verRrdChildview;
 		Button btnRrdPrint;
@@ -99,11 +99,11 @@ public class RrdListerExpandableAdapter extends CursorTreeAdapter {
 					parent, false);
 		}
 		verRrdChildview = (TextView) mView
-				.findViewById(R.id.ver_rrd_childview);
+				.findViewById(R.id.rrd_show_childview);
 		final RrdData RRDData = new RrdData();
 		RRDData.setRRDDataFromCursor(getGroup(groupPosition));
 		verRrdChildview.setText(RRDData.getRRDListViewData(mycontext));
-		btnRrdPrint = (Button) mView.findViewById(R.id.btn_rrd_print);
+		btnRrdPrint = (Button) mView.findViewById(R.id.rl_btn_rrd_print);
 		btnRrdPrint.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

@@ -66,12 +66,12 @@ public class TabPJAddressFragment extends
 
     private void initializedView() {
 
-        llAitState = (LinearLayout) view.findViewById(R.id.ll_auto_municipio_uf);
+        llAitState = (LinearLayout) view.findViewById(R.id.ll_auto_state);
 
         aitCompleteCities = (AutoCompleteTextView) view
-                .findViewById(R.id.auto_auto_municipio);
+                .findViewById(R.id.auto_complete_city);
 
-        etAitInfractionState = (EditText) view.findViewById(R.id.et_auto_end_uf);
+        etAitInfractionState = (EditText) view.findViewById(R.id.et_auto_address_state);
 
         etAitInfractionAddress = (EditText) view.findViewById(R.id.et_ait_local);
         btnInfractionDate = (Button) view
@@ -80,7 +80,7 @@ public class TabPJAddressFragment extends
                 .findViewById(R.id.btn_ait_pj_time);
 
         tvSaveData = (TextView) view.findViewById(R.id.ait_fab);
-        cbAitConfirm = (CheckBox) view.findViewById(R.id.cb_auto_confirmar);
+        cbAitConfirm = (CheckBox) view.findViewById(R.id.cb_ait_confirm);
 
         etAitInfractionState.setEnabled(false);
 

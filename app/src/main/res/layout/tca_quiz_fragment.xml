@@ -116,7 +116,7 @@
                 android:paddingTop="@dimen/width_padding_15" >
 
                 <Button
-                    android:id="@+id/btn_tca_date_picker_drunk_driver"
+                    android:id="@+id/tca_date_drunk_driver"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -128,7 +128,7 @@
                     android:textColor="@color/white" />
 
                 <Button
-                    android:id="@+id/btn_tca_time_picker_drunk_driver"
+                    android:id="@+id/tca_time_drunk_driver"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -193,7 +193,7 @@
                 android:paddingTop="@dimen/width_padding_15" >
 
                 <Button
-                    android:id="@+id/btn_tca_date_picker_intoxicated_driver"
+                    android:id="@+id/tca_date_toxica"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -205,7 +205,7 @@
                     android:textColor="@color/white" />
 
                 <Button
-                    android:id="@+id/btn_tca_time_picker_intoxicated_driver"
+                    android:id="@+id/tca_time_toxica"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"

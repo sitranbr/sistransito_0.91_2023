@@ -12,10 +12,12 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import net.sistransito.R;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.InfractionDatabaseHelper;
 import net.sistransito.mobile.http.WebClient;
 import net.sistransito.mobile.http.services.ApiServiceCancelAit;
+import net.sistransito.mobile.util.Routine;
 
 public class CancelAit {
 
@@ -60,7 +62,6 @@ public class CancelAit {
                 if (response.isSuccessful() && response.body() != null) {
                     JsonObject result = response.body();
                     if (result.get("success").getAsString().equals("true")) {
-                        Log.d("Success: ", "true");
                         DatabaseCreator.getInfractionDatabaseAdapter(context).synchronizeAit(ait);
                     } else {
                         Log.d("Success: ", "NO");

@@ -31,46 +31,70 @@
                 android:id="@+id/et_ait_local"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:maxLength="80"
                 android:gravity="left|center_vertical"
                 android:inputType="textCapCharacters|textMultiLine"
                 android:hint="@string/ait_infraction_address"
                 android:paddingBottom="@dimen/width_padding_15"
-                android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
                 android:textCursorDrawable="@null" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/input_layout_municipio"
+        <FrameLayout
+            android:id="@+id/fl_auto_obs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:errorEnabled="true"
-            android:textColorHint="@color/primary"
-            android:layout_marginBottom="@dimen/padding_top_edit" >
+            android:baselineAligned="false"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical" >
 
-            <AutoCompleteTextView
-                android:id="@+id/auto_auto_municipio"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:completionThreshold="3"
-                android:gravity="left|center_vertical"
-                android:inputType="textCapCharacters"
-                android:hint="@string/tca_city_name"
-                android:backgroundTint="@color/primary"
-                android:textColor="@color/gray_5"
-                android:padding="@dimen/width_padding_15"
-                android:layout_marginBottom="15dip"
-                android:imeOptions="actionDone"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textCursorDrawable="@null" >
-            </AutoCompleteTextView>
+                android:textColorHint="@color/primary"
+                app:errorEnabled="true"
+                android:layout_marginTop="@dimen/layout_margin_top"
+                android:layout_marginBottom="@dimen/padding_top_edit" >
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <AutoCompleteTextView
+                    android:id="@+id/auto_complete_city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
+                    android:completionThreshold="3"
+                    android:gravity="left|center_vertical"
+                    android:inputType="textCapCharacters|textMultiLine"
+                    android:hint="@string/tca_city_name"
+                    android:textSize="16sp"
+                    android:paddingStart="@dimen/width_padding_15"
+                    android:paddingEnd="@dimen/width_padding_15"
+                    android:paddingTop="@dimen/width_padding_15"
+                    android:paddingBottom="@dimen/width_padding_15"
+                    android:textColor="@color/gray_5"
+                    android:imeOptions="actionDone"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textCursorDrawable="@null" >
+                </AutoCompleteTextView>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_clear_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dip"
+                android:layout_gravity="right|center_vertical"
+                android:drawableEnd="@drawable/close_24px"
+                android:drawableTint="@color/primary"
+                android:onClick="onClearDataClick" />
+
+        </FrameLayout>
 
         <LinearLayout
-            android:id="@+id/ll_auto_municipio_uf"
+            android:id="@+id/ll_auto_state"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone" >
@@ -91,13 +115,13 @@
                     android:layout_marginBottom="@dimen/padding_top_edit" >
 
                     <EditText
-                        android:id="@+id/et_auto_end_codigo_municipio"
+                        android:id="@+id/et_auto_city_code"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/textview_border_bottom"
                         android:hint="@string/ait_city_code"
                         android:gravity="left"
-                        android:inputType="number"
-                        android:backgroundTint="@color/primary"
+                        android:inputType="none"
                         android:textColor="@color/gray_5"
                         android:paddingBottom="@dimen/width_padding_15"
                         android:textCursorDrawable="@null" />
@@ -122,14 +146,14 @@
                     android:layout_marginBottom="@dimen/padding_top_edit" >
 
                     <EditText
-                        android:id="@+id/et_auto_end_uf"
+                        android:id="@+id/et_auto_address_state"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/textview_border_bottom"
                         android:gravity="center"
                         android:hint="@string/ait_state"
-                        android:inputType="textCapSentences"
+                        android:inputType="none"
                         android:paddingBottom="@dimen/width_padding_15"
-                        android:backgroundTint="@color/primary"
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
@@ -143,36 +167,51 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/width_margin_8"
-            android:baselineAligned="false"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:orientation="horizontal"
-            android:paddingTop="@dimen/width_padding_15" >
+            android:paddingTop="@dimen/width_padding_15">
 
-            <Button
+            <EditText
                 android:id="@+id/btn_ait_pj_date"
-                style="@style/Material.Drawable.Ripple.Wave"
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/indicator_width"
-                android:layout_weight="1"
-                android:background="@drawable/btn_yellow_2"
-                android:padding="@dimen/width_padding"
-                android:text="@string/date_field"
-                android:textColor="@color/white" />
+                android:layout_weight=".8"
+                android:background="@drawable/textview_border_bottom"
+                android:drawableEnd="@drawable/calendar_month_24px"
+                android:drawableTint="@color/primary"
+                android:textColorHint="@color/primary"
+                android:hint="@string/date_field"
+                android:textSize="16sp"
+                android:textColor="@color/gray_5"
+                android:paddingStart="@dimen/width_padding_15"
+                android:paddingEnd="@dimen/width_padding_15"
+                android:paddingTop="@dimen/width_padding_15"
+                android:paddingBottom="@dimen/width_padding_15"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"
+                android:cursorVisible="false" />
 
-            <Button
+            <EditText
                 android:id="@+id/btn_ait_pj_time"
-                style="@style/Material.Drawable.Ripple.Wave"
-                android:layout_width="0dip"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/indicator_width"
-                android:layout_weight="1"
-                android:background="@drawable/btn_yellow_2"
-                android:padding="@dimen/width_padding"
-                android:text="@string/time_field"
-                android:textColor="@color/white"
-                android:layout_marginBottom="@dimen/padding_top_edit" />
+                android:layout_weight=".8"
+                android:background="@drawable/textview_border_bottom"
+                android:drawableEnd="@drawable/schedule_24px"
+                android:drawableTint="@color/primary"
+                android:textColorHint="@color/primary"
+                android:paddingStart="@dimen/width_padding_15"
+                android:paddingEnd="@dimen/width_padding_15"
+                android:paddingTop="@dimen/width_padding_15"
+                android:paddingBottom="@dimen/width_padding_15"
+                android:hint="@string/time_field"
+                android:textSize="16sp"
+                android:textColor="@color/gray_5"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"
+                android:cursorVisible="false" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -190,7 +229,7 @@
                 android:paddingRight="@dimen/indicator_width" >
 
                 <com.rey.material.widget.CheckBox
-                    android:id="@+id/cb_auto_confirmar"
+                    android:id="@+id/cb_ait_confirm"
                     style="@style/Material.Drawable.CheckBox"
                     app:cbd_strokeColor="@color/yellow_light"
                     android:layout_width="wrap_content"

@@ -1,28 +1,21 @@
 package net.sistransito.mobile.ait;
 
-import android.annotation.SuppressLint;
 import android.database.Cursor;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.rey.material.widget.CheckBox;
-
-import net.sistransito.library.datepicker.DateListener;
-import net.sistransito.library.datepicker.MyDatePicker;
-import net.sistransito.library.datepicker.MyTimePicker;
-import net.sistransito.library.datepicker.TimeListener;
+import net.sistransito.mobile.fragment.BasePickerFragment;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
 import net.sistransito.mobile.database.SetttingDatabaseHelper;
@@ -32,17 +25,15 @@ import net.sistransito.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TabAitAddressFragment extends
-		Fragment implements
-		View.OnClickListener, TimeListener, DateListener {
+public class TabAitAddressFragment extends BasePickerFragment implements View.OnClickListener {
 
 	private View view;
 	private AutoCompleteTextView cityAutoComplete;
 	private AitData aitData;
-	private EditText etAddressInfration, etCityCode, etState;
-	private Button btnAitDate, btnAitTime;
+	private EditText etAddressInfraction, etCityCode,
+			btnAitDate, btnAitTime, etState;
 	private LinearLayout llCityState;
-	private TextView tvSaveData;
+	private TextView tvClearData, tvSaveData;
 	private CheckBox cbConfirm;
 
 	private List<String> cityArray, codeArray, stateArray;
@@ -60,124 +51,140 @@ public class TabAitAddressFragment extends
 		view = inflater.inflate(R.layout.ait_address_fragment, null, false);
 		initializedView();
 		getAitObject();
+
+		addPicker(R.id.btn_ait_pj_date, "date");
+		addPicker(R.id.btn_ait_pj_time, "time");
+
+		btnAitDate.setOnClickListener(this);
+		btnAitTime.setOnClickListener(this);
+
 		return view;
 	}
 
 	private void initializedView() {
 
-		llCityState = (LinearLayout) view.findViewById(R.id.ll_auto_municipio_uf);
+		llCityState = (LinearLayout) view.findViewById(R.id.ll_auto_state);
 
 		cityAutoComplete = (AutoCompleteTextView) view
-				.findViewById(R.id.auto_auto_municipio);
+				.findViewById(R.id.auto_complete_city);
 
 		etCityCode = (EditText) view
-				.findViewById(R.id.et_auto_end_codigo_municipio);
-		etState = (EditText) view.findViewById(R.id.et_auto_end_uf);
+				.findViewById(R.id.et_auto_city_code);
+		etState = (EditText) view.findViewById(R.id.et_auto_address_state);
 
-		etAddressInfration = (EditText) view.findViewById(R.id.et_ait_local);
-		btnAitDate = (Button) view
+		etAddressInfraction = (EditText) view.findViewById(R.id.et_ait_local);
+		btnAitDate = (EditText) view
 				.findViewById(R.id.btn_ait_pj_date);
-		btnAitTime = (Button) view
+		btnAitTime = (EditText) view
 				.findViewById(R.id.btn_ait_pj_time);
 
 		tvSaveData = (TextView) view.findViewById(R.id.ait_fab);
-		cbConfirm = (CheckBox) view.findViewById(R.id.cb_auto_confirmar);
+		cbConfirm = (CheckBox) view.findViewById(R.id.cb_ait_confirm);
 
-		etCityCode.setEnabled(false);
-		etState.setEnabled(false);
-
-		setCityAutoComplete();
-		hideComponents();
-
-	}
-
-	private void hideComponents(){
+		tvClearData = (TextView) view.findViewById(R.id.tv_clear_data);
 
 		llCityState.setVisibility(LinearLayout.GONE);
+		setCityAutoComplete();
+
+		tvClearData.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View view) {
+				cityAutoComplete.setText("");
+				cityAutoComplete.requestFocus();
+				setCityStateVisibility(false);
+			}
+		});
 
 	}
 
-	private void  showComponents(){
+	private void setCityStateVisibility(boolean show) {
+		int visibility = show ? View.VISIBLE : View.GONE;
+		llCityState.setVisibility(visibility);
+		llCityState.setVisibility(LinearLayout.GONE);
 
-		llCityState.setVisibility(LinearLayout.VISIBLE);
-		Routine.closeKeyboard(cityAutoComplete, getActivity());
+		if (show) {
+			Routine.closeKeyboard(cityAutoComplete, getActivity());
+			cityAutoComplete.setText("");
+			cityAutoComplete.requestFocus();
+			etCityCode.setEnabled(true);
+			etState.setEnabled(true);
 
+		} else {
+			etCityCode.setEnabled(false);
+			etState.setEnabled(false);
+		}
 	}
-	@SuppressLint("Range")
+
 	public void setCityAutoComplete() {
 
-		cityArray = new ArrayList<String>();
-		codeArray = new ArrayList<String>();
-		stateArray = new ArrayList<String>();
+		cityArray = new ArrayList<>();
+		codeArray = new ArrayList<>();
+		stateArray = new ArrayList<>();
 		Cursor myCursor;
 
-		Cursor cursor = (DatabaseCreator
-				.getSettingDatabaseAdapter(getActivity()))
-				.getSettingCursor();
+		Cursor cursor = (DatabaseCreator.getSettingDatabaseAdapter(getActivity())).getSettingCursor();
 
-		String stateCity = cursor.getString(cursor.getColumnIndex(SetttingDatabaseHelper.SETTING_STATE));
+		int stateColumnIndex = cursor.getColumnIndex(SetttingDatabaseHelper.SETTING_STATE);
+		String stateCity = (stateColumnIndex != -1) ? cursor.getString(stateColumnIndex) : null;
 
-		//Log.d("UfLocal", stateCity);
-
-		myCursor = ((DatabaseCreator
-				.getPrepopulatedDBOpenHelper(getActivity()))
-				.getInitialsStateCursor(stateCity));
-
-		if (myCursor.getCount() <= 0) {
-			myCursor = ((DatabaseCreator
-					.getPrepopulatedDBOpenHelper(getActivity()))
-					.getCityCursor());
+		if (stateCity != null) {
+			myCursor = (DatabaseCreator.getPrepopulatedDBOpenHelper(getActivity())).getInitialsStateCursor(stateCity);
+		} else {
+			myCursor = (DatabaseCreator.getPrepopulatedDBOpenHelper(getActivity())).getCityCursor();
 		}
 
-		do {
-			cityArray.add(myCursor.getString(myCursor.getColumnIndex(PrepopulatedDBOpenHelper.CITY_NAME)));
-			stateArray.add(myCursor.getString(myCursor.getColumnIndex(PrepopulatedDBOpenHelper.STATE)));
-			codeArray.add(myCursor.getString(myCursor.getColumnIndex(PrepopulatedDBOpenHelper.CITY_CODE)));
-		} while (myCursor.moveToNext());
-		myCursor.close();
+		if (myCursor != null && myCursor.moveToFirst()) {
+			int cityNameIndex = myCursor.getColumnIndex(PrepopulatedDBOpenHelper.CITY_NAME);
+			int stateIndex = myCursor.getColumnIndex(PrepopulatedDBOpenHelper.STATE);
+			int cityCodeIndex = myCursor.getColumnIndex(PrepopulatedDBOpenHelper.CITY_CODE);
+
+			do {
+				if (cityNameIndex != -1) {
+					cityArray.add(myCursor.getString(cityNameIndex));
+				}
+				if (stateIndex != -1) {
+					stateArray.add(myCursor.getString(stateIndex));
+				}
+				if (cityCodeIndex != -1) {
+					codeArray.add(myCursor.getString(cityCodeIndex));
+				}
+			} while (myCursor.moveToNext());
+			myCursor.close();
+		}
 
 		cityAdapter = new ArrayAdapter<String>(getActivity(), R.layout.custom_autocompletar, R.id.autoCompleteItem, cityArray);
 		cityAutoComplete.setAdapter(cityAdapter);
 
-		cityAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		cityAutoComplete.setOnItemClickListener((parent, view, position, id) -> {
+			aitData.setCity((String) parent.getItemAtPosition(position));
+			int real_position = cityArray.indexOf(parent.getItemAtPosition(position));
 
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-									int pos, long arg3) {
+			aitData.setCityCode(codeArray.get(real_position));
+			etCityCode.setText(aitData.getCityCode());
 
-				aitData.setCity((String) parent.getItemAtPosition(pos));
-				int real_position = cityArray.indexOf(parent.getItemAtPosition(pos));
+			aitData.setState(stateArray.get(real_position));
+			etState.setText(aitData.getState());
 
-				aitData.setCityCode(codeArray.get(real_position));
-				etCityCode.setText(aitData.getCityCode());
-
-				aitData.setState(stateArray.get(real_position));
-				etState.setText(aitData.getState());
-
-				showComponents();
-
-			}
+			setCityStateVisibility(true);
 		});
 	}
 
 	private void addListener() {
 
-		etAddressInfration.addTextChangedListener(new ChangeText(
+		etAddressInfraction.addTextChangedListener(new ChangeText(
 				R.id.et_ait_local));
 
 		btnAitDate.setOnClickListener(this);
 		btnAitTime.setOnClickListener(this);
 
-		hideComponents();
+		setCityStateVisibility(true);
 
 		cbConfirm.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				if(cbConfirm.isChecked()) {
-					tvSaveData.setVisibility(view.VISIBLE);
+				tvSaveData.setVisibility(cbConfirm.isChecked() ? View.VISIBLE : View.GONE);
+				if(cbConfirm.isChecked()){
 					Routine.closeKeyboard(tvSaveData, getActivity());
-				}else{
-					tvSaveData.setVisibility(view.GONE);
 				}
 			}
 		});
@@ -200,49 +207,45 @@ public class TabAitAddressFragment extends
 
 	}
 
-	private boolean checkInput(){
-
-		//Log.d("TextoData", btnDataInfracao.getText().toString());
-		//Log.d("TextoHora", btnHoraInfracao.getText().toString());
-
-		if (etAddressInfration.getText().toString().isEmpty()) {
-			etAddressInfration.setError(getResources().getString(
-					R.string.alert_insert_address));
-			etAddressInfration.requestFocus();
+	private boolean checkInput() {
+		if (etAddressInfraction.getText().toString().isEmpty()) {
+			etAddressInfraction.setError(getResources().getString(R.string.alert_insert_address));
+			etAddressInfraction.requestFocus();
 			return false;
-		} else if (cityAutoComplete.getText().toString().isEmpty()) {
-			cityAutoComplete.setError(getResources().getString(
-					R.string.alert_insert_city_name));
+		}
+
+		if (cityAutoComplete.getText().toString().isEmpty()) {
+			cityAutoComplete.setError(getResources().getString(R.string.alert_insert_city_name));
 			cityAutoComplete.requestFocus();
 			return false;
-		} else if (btnAitDate.getText().toString().equals("Data")) {
+		}
+
+		if (btnAitDate.getText().toString().equals("Data")) {
 			Routine.showAlert(getActivity().getString(R.string.alert_insert_date), getActivity());
 			btnAitDate.requestFocus();
 			return false;
-		} else if (btnAitTime.getText().toString().equals("Hora")) {
-				Routine.showAlert(getActivity().getString(R.string.alert_insert_time), getActivity());
-				btnAitTime.requestFocus();
-				return false;
-		} else {
-			return true;
 		}
 
+		if (btnAitTime.getText().toString().equals("Hora")) {
+			Routine.showAlert(getActivity().getString(R.string.alert_insert_time), getActivity());
+			btnAitTime.requestFocus();
+			return false;
+		}
+
+		return true;
 	}
 
 	private void getAitObject() {
 		aitData = AitObject.getAitData();
 
-		if (aitData.isDataisNull()) {
-			addListener();
-		} else if (aitData.isStoreFullData()) {
+		if (aitData.isStoreFullData()) {
 			getRecomandedUpdate();
-			addListener();
 			setNewAitView();
 		} else {
-			addListener();
 			initializedSelectetItems();
 		}
 
+		addListener();
 	}
 
 	private void initializedSelectetItems() {
@@ -260,7 +263,7 @@ public class TabAitAddressFragment extends
 
 		etCityCode.setText(aitData.getCityCode());
 		etState.setText(aitData.getState());
-		etAddressInfration.setText(aitData.getAddress());
+		etAddressInfraction.setText(aitData.getAddress());
 
 	}
 
@@ -282,7 +285,6 @@ public class TabAitAddressFragment extends
 		@Override
 		public void beforeTextChanged(CharSequence arg0, int arg1, int arg2,
 									  int arg3) {
-
 		}
 
 		@Override
@@ -292,44 +294,14 @@ public class TabAitAddressFragment extends
 	}
 
 	@Override
-	public void onClick(View v) {
-		int id = v.getId();
-		if (id == R.id.btn_ait_pj_date) {
-			MyDatePicker pickerdate = new MyDatePicker();
-			bundle = new Bundle();
-			bundle.putInt(MyDatePicker.MY_DATE_PICKER_ID,
-					R.id.btn_ait_pj_date);
-			pickerdate.setArguments(bundle);
-			pickerdate.setTargetFragment(this, 0);
-			pickerdate.show(getActivity().getSupportFragmentManager(), "date");
-		} else if (id == R.id.btn_ait_pj_time) {
-			MyTimePicker picker = new MyTimePicker();
-			bundle = new Bundle();
-			bundle.putInt(MyTimePicker.MY_TIME_PICKER_ID,
-					R.id.btn_ait_pj_time);
-			picker.setArguments(bundle);
-			picker.setTargetFragment(this, 0);
-			picker.show(getActivity().getSupportFragmentManager(), "time");
-		}
-
-	}
-
-	@Override
-	public void time(String time, int view_id) {
-		if (time != null) {
-			aitData.setAitTime(time);
+	protected void handlePickerResult(String selectedValue, int viewId) {
+		if (viewId == R.id.btn_ait_pj_date) {
+			aitData.setAitDate(selectedValue);
+			btnAitDate.setText(aitData.getAitDate());
+		} else if (viewId == R.id.btn_ait_pj_time) {
+			aitData.setAitTime(selectedValue);
 			btnAitTime.setText(aitData.getAitTime());
 		}
-
-	}
-
-	@Override
-	public void date(String date, int view_id) {
-		if (date != null) {
-			aitData.setAitDate(date);
-			btnAitDate.setText(aitData.getAitDate());
-		}
-
 	}
 
 	private void setNewAitView() {

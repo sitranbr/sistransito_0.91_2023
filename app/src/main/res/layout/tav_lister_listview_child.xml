@@ -13,7 +13,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/ver_tav_print"
+            android:id="@+id/show_tav_print"
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -23,7 +23,7 @@
             android:background="@drawable/print_normal" />
 
         <TextView
-            android:id="@+id/tv_rrd_subtitulo"
+            android:id="@+id/tv_tav_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
@@ -49,7 +49,7 @@
             android:background="@color/line_color" />
 
         <TextView
-            android:id="@+id/ver_tav_childview"
+            android:id="@+id/show_tav_childview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/width_padding"

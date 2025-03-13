@@ -44,9 +44,6 @@
     <color name="material_drawer_dark_selected">#202020</color>
     <color name="material_drawer_dark_selected_text">@color/material_drawer_primary</color>
     <color name="material_drawer_dark_header_selection_text">#FFF</color>
-
-
-
     <color name="black">#000</color>
     <color name="red">#D85445</color>
     <color name="yellow">#fc8a00</color>

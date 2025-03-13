@@ -21,7 +21,7 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/tv_rrd_numero_auto"
+                android:id="@+id/text_rrd_ait_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/width_padding"
@@ -48,31 +48,35 @@
                     android:id="@+id/et_rrd_driver_name"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left"
                     android:hint="@string/driver_name"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5"
                     android:inputType="textCapCharacters"
                     android:paddingBottom="@dimen/width_padding_16" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-            <fr.ganfra.materialspinner.MaterialSpinner
-                android:id="@+id/spinner_rrd_documento"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:ms_arrowColor="@color/primary"
-                app:ms_arrowSize="12dp"
-                app:ms_floatingLabelColor="@color/primary"
-                app:ms_floatingLabelText="@string/select_spinner_rrd"
-                app:ms_alignLabels="true"
-                app:ms_hintColor="@color/primary"
-                app:ms_hint="@string/rrd_document"
-                app:ms_multiline="true"
-                app:ms_baseColor="@color/primary" />
+                android:hint="@string/select_spinner_rrd"
+                android:layout_marginBottom="@dimen/material_margin_medium"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:textColorHint="@color/primary">
 
-                <LinearLayout
-                    android:id="@+id/layout_hide_placa_uf"
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_rrd_document"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
+                    android:inputType="none"
+                    android:textColor="@color/gray_5" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <LinearLayout
+                    android:id="@+id/layout_hide_plate_state"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
@@ -87,9 +91,9 @@
                             android:id="@+id/et_rrd_crlv_number"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/textview_border_bottom"
                             android:gravity="left"
                             android:hint="@string/rrd_crlv_number"
-                            android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5"
                             android:inputType="textCapCharacters"
                             android:paddingBottom="@dimen/width_padding_16" />
@@ -119,12 +123,12 @@
                                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                                 <EditText
-                                    android:id="@+id/et_rrd_placa"
+                                    android:id="@+id/et_rrd_plate"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@drawable/textview_border_bottom"
                                     android:gravity="start"
                                     android:hint="@string/rrd_plate"
-                                    android:backgroundTint="@color/primary"
                                     android:textColor="@color/gray_5"
                                     android:inputType="textCapCharacters"
                                     android:paddingBottom="@dimen/width_padding_16" />
@@ -149,12 +153,12 @@
                                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                                 <EditText
-                                    android:id="@+id/et_rrd_uf"
+                                    android:id="@+id/et_rrd_plate_state"
                                     android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@drawable/textview_border_bottom"
                                     android:gravity="left"
                                     android:hint="@string/rrd_state"
-                                    android:backgroundTint="@color/primary"
                                     android:textColor="@color/gray_5"
                                     android:inputType="textCapCharacters"
                                     android:paddingBottom="@dimen/width_padding_16" />
@@ -169,7 +173,7 @@
                 </LinearLayout>
 
             <LinearLayout
-                    android:id="@+id/layout_hide_registro_validade"
+                    android:id="@+id/layout_hide_cnh_validity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical" >
@@ -198,12 +202,12 @@
 
                                 <EditText
                                     android:id="@+id/et_rrd_register_number"
-                                    android:layout_width="320dp"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@drawable/textview_border_bottom"
                                     android:gravity="left"
                                     android:hint="@string/rrd_register_number"
                                     android:maxLength="11"
-                                    android:backgroundTint="@color/primary"
                                     android:textColor="@color/gray_5"
                                     android:inputType="number"
                                     android:paddingBottom="@dimen/width_padding_16" />
@@ -228,13 +232,13 @@
                                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                                 <EditText
-                                    android:id="@+id/et_rrd_uf_registro"
-                                    android:layout_width="100dp"
+                                    android:id="@+id/et_rrd_register_state"
+                                    android:layout_width="fill_parent"
                                     android:layout_height="wrap_content"
+                                    android:background="@drawable/textview_border_bottom"
                                     android:gravity="left"
                                     android:maxLength="2"
                                     android:hint="@string/rrd_state"
-                                    android:backgroundTint="@color/primary"
                                     android:textColor="@color/gray_5"
                                     android:inputType="textCapCharacters"
                                     android:paddingBottom="@dimen/width_padding_16" />
@@ -249,24 +253,38 @@
                 </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_rrd_validade"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="right|center_horizontal" >
+                android:orientation="vertical" >
 
-                <Button
-                    android:id="@+id/btn_rrd_validade"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="120dp"
-                    android:layout_height="42dp"
-                    android:background="@drawable/btn_yellow_2"
-                    android:padding="@dimen/width_padding"
-                    android:text="@string/rrd_validity"
-                    android:textColor="@color/white" />
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColorHint="@color/primary"
+                    android:gravity="start"
+                    android:layout_marginBottom="@dimen/padding_top_edit">
+
+                    <EditText
+                        android:id="@+id/et_rrd_validity"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textview_border_bottom"
+                        android:drawableEnd="@drawable/calendar_month_24px"
+                        android:drawableTint="@color/primary"
+                        android:hint="@string/rrd_validity"
+                        android:textColor="@color/gray_5"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:inputType="none"
+                        android:cursorVisible="false" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
             </LinearLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/input_layout_municipio"
+                android:id="@+id/input_layout_city"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:errorEnabled="true"
@@ -274,7 +292,7 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <AutoCompleteTextView
-                    android:id="@+id/actv_rrd_municipio"
+                    android:id="@+id/actv_rrd_city"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:completionThreshold="3"
@@ -292,7 +310,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <LinearLayout
-                android:id="@+id/ll_rrd_data_hora"
+                android:id="@+id/ll_rrd_date_time"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/width_margin_8"
@@ -315,7 +333,7 @@
                     android:textColor="@color/white" />
 
                 <Button
-                    android:id="@+id/btn_rrd_hora"
+                    android:id="@+id/btn_rrd_time"
                     style="?android:attr/buttonBarButtonStyle"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"

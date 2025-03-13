@@ -9,14 +9,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.rey.material.widget.CheckBox;
 
 import net.sistransito.mobile.adapter.AnyArrayAdapter;
+import net.sistransito.mobile.adapter.CustomSpinnerAdapter;
 import net.sistransito.mobile.cnh.dados.CnhHttpResultAsyncTask;
 import net.sistransito.mobile.cnh.dados.DataFromCnh;
 import net.sistransito.mobile.database.DatabaseCreator;
@@ -35,7 +36,7 @@ public class TabAitConductorFragment extends Fragment implements
 	private View view;
 	private AitData aitData;
 	private EditText editDriverName, editDriverDocument, editDriverDocumentNumber;
-	private Spinner spinnerStateDriver, spinnerCountryDriver, spinnerDocumentType;
+	private AutoCompleteTextView spinnerStateDriver, spinnerCountryDriver, spinnerDocumentType;
 	private List<String> listStateDriver, listCountryDriver, listDocumentType;
 	private AnyArrayAdapter<String> aaaStateDriver, aaaCountryDriver, aaaDocumentType;
 	private LinearLayout llHideAllLayout, llDriverDocument, llSpinnerStateDriver, llDocumentType,
@@ -82,31 +83,38 @@ public class TabAitConductorFragment extends Fragment implements
 		listDocumentType = Arrays.asList(getResources().getStringArray(
 				R.array.other_document_type));
 
-		aaaDocumentType = new AnyArrayAdapter<String>(getActivity(),
-				android.R.layout.simple_spinner_item, android.R.id.text1,
-				listDocumentType);
-
-		spinnerCountryDriver = (Spinner) view.findViewById(R.id.spinner_driver_country);
+		CustomSpinnerAdapter aaaCountryDriver = CustomSpinnerAdapter.createStateAdapter(getActivity(), listCountryDriver);
+		spinnerCountryDriver = (AutoCompleteTextView) view.findViewById(R.id.spinner_driver_country);
 		spinnerCountryDriver.setAdapter(aaaCountryDriver);
 
-		spinnerStateDriver = (Spinner) view.findViewById(R.id.spinner_state_driver);
-		spinnerStateDriver.setAdapter(aaaStateDriver);
+		CustomSpinnerAdapter stateAdapter = CustomSpinnerAdapter.createStateAdapter(getActivity(), listStateDriver);
+		spinnerStateDriver = (AutoCompleteTextView) view.findViewById(R.id.spinner_state_driver);
+		spinnerStateDriver.setAdapter(stateAdapter);
+		spinnerStateDriver.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				String selectedState = (String) parent.getItemAtPosition(position);
+				aitData.setCnhState(selectedState);
+				Routine.closeKeyboard(spinnerStateDriver, getActivity());
+			}
+		});
 
-		spinnerDocumentType = (Spinner) view.findViewById(R.id.spinner_another_document);
+		CustomSpinnerAdapter aaaDocumentType = CustomSpinnerAdapter.createStateAdapter(getActivity(), listDocumentType);
+		spinnerDocumentType = (AutoCompleteTextView) view.findViewById(R.id.spinner_another_document);
 		spinnerDocumentType.setAdapter(aaaDocumentType);
 
 		editDriverDocumentNumber = (EditText) view
 				.findViewById(R.id.et_document_number);
 
 		llDriverDocument = (LinearLayout) view.findViewById(R.id.ll_register);
-		llSpinnerStateDriver = (LinearLayout) view.findViewById(R.id.ll_spinner_uf_registro);
+		llSpinnerStateDriver = (LinearLayout) view.findViewById(R.id.ll_spinner_state_register);
 		llHideAllLayout = (LinearLayout) view.findViewById(R.id.ll_hide_all);
-		llDocumentType = (LinearLayout) view.findViewById(R.id.ll_documento_condutor);
-		llspinnerCountryDriver = (LinearLayout) view.findViewById(R.id.ll_spinner_pais_condutor);
+		llDocumentType = (LinearLayout) view.findViewById(R.id.ll_driver_document);
+		llspinnerCountryDriver = (LinearLayout) view.findViewById(R.id.ll_spinner_driver_country);
 		cbIfDriverWasSpproached = (CheckBox) view.findViewById(R.id.cb_se_condutor_abordado);
-		cbUnqualifiedDriver = (CheckBox) view.findViewById(R.id.cb_se_nao_habilitado);
-		cbIfDriverForeign = (CheckBox) view.findViewById(R.id.cb_se_condutor_estrangeiro);
-		cbAitConfirm = (CheckBox) view.findViewById(R.id.cb_auto_confirmar);
+		cbUnqualifiedDriver = (CheckBox) view.findViewById(R.id.cb_if_no_have_cnh);
+		cbIfDriverForeign = (CheckBox) view.findViewById(R.id.cb_if_a_foreign_driver);
+		cbAitConfirm = (CheckBox) view.findViewById(R.id.cb_ait_confirm);
 		tvSearchCNH = (TextView) view.findViewById(R.id.tv_auto_search_cnh);
 		tvSaveData = (TextView) view.findViewById(R.id.ait_fab);
 
@@ -172,20 +180,6 @@ public class TabAitConductorFragment extends Fragment implements
 							editDriverDocumentNumber.setVisibility(View.VISIBLE);
 						}
 
-					}
-
-					@Override
-					public void onNothingSelected(AdapterView<?> arg0) {
-					}
-				});
-
-		spinnerStateDriver
-				.setOnItemSelectedListener(new OnItemSelectedListener() {
-					@Override
-					public void onItemSelected(AdapterView<?> parent,
-											   View view, int pos, long Id) {
-						aitData.setCnhState((String) parent.getItemAtPosition(pos));
-						Routine.closeKeyboard(spinnerStateDriver, getActivity());
 					}
 
 					@Override
@@ -313,7 +307,7 @@ public class TabAitConductorFragment extends Fragment implements
 			editDriverName.setText(fromCNH.getName());
 			editDriverDocument.setText(fromCNH.getRegister());
 
-			spinnerStateDriver.setSelection(selection_1 + 1);
+			spinnerStateDriver.setText(fromCNH.getState());
 
 		} else {
 			Routine.showAlert(getResources().getString(R.string.no_result_returned), getActivity());
@@ -336,7 +330,7 @@ public class TabAitConductorFragment extends Fragment implements
 		selection_3 = listDocumentType.indexOf(aitData.getDocumentType());
 
 		spinnerCountryDriver.setSelection(selection_1 + 1);
-		spinnerStateDriver.setSelection(selection_2 + 1);
+		spinnerStateDriver.setText(aitData.getCnhState());
 		spinnerDocumentType.setSelection(selection_3 + 1);
 
 		editDriverName.setText(aitData.getConductorName());

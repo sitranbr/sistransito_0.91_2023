@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/preview_ait"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/gray_2"
+    android:orientation="vertical"
+    android:padding="@dimen/width_padding">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/width_margin_8"
+        android:paddingTop="@dimen/width_margin_8"
+        android:text="@string/capital_rrd_indentification"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ll_ait_code"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_rrd_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_preview_left_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/rrd_number"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_rrd_ait_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_preview_right_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/rrd_ait_number"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_rrd_driver_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_border_ait"
+        android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+        android:padding="@dimen/width_padding_5"
+        android:text="@string/rrd_get_from"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/width_margin_8"
+        android:paddingTop="@dimen/width_margin_8"
+        android:text="@string/capital_rrd_especification"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ll_cnh"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_rrd_cnh_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/textview_left_corner_border"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_cnh_ppd_acc"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_rrd_cnh_validity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/textview_preview_right_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/rrd_validity"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_ait_cnh_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:background="@drawable/textview_preview_right_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_cnh_state"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_crlv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_rrd_crlv_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:background="@drawable/textview_left_corner_border"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/rrd_crlv_number"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_rrd_plate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/textview_preview_right_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/rrd_plate"
+            android:textAllCaps="true"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_rrd_plate_uf"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:background="@drawable/textview_preview_right_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_cnh_state"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_rrd_reason_for_collection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/textview_border_ait"
+        android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+        android:padding="@dimen/width_padding_5"
+        android:text="@string/rrd_reason_for_collection"
+        android:textAllCaps="true"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/width_margin_8"
+        android:paddingTop="@dimen/width_margin_8"
+        android:text="@string/capital_rrd_date_collection"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ll_brand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_rrd_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_preview_left_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_rrd_date"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_rrd_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_preview_right_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_rrd_time"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_specie_category"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_rrd_city"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_preview_left_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_rrd_city"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_rrd_state"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_preview_right_top_corner"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_rrd_state"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/width_margin_8"
+        android:paddingTop="@dimen/width_margin_8"
+        android:text="@string/capital_responsible_for_collection"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ll_cnh_driver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_rrd_user_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_left_corner_border"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_name"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/tv_register_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/textview_right_corner_border"
+            android:lineSpacingExtra="@dimen/line_pacing_title_subtitle"
+            android:padding="@dimen/width_padding_5"
+            android:text="@string/capital_register_number"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="start"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+</LinearLayout>

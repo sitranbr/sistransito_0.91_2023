@@ -44,18 +44,18 @@
                     android:layout_marginBottom="@dimen/padding_top_edit" >
 
                     <AutoCompleteTextView
-                        android:id="@+id/tv_autocomplete_infracao"
+                        android:id="@+id/tv_auto_complete_infraction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/textview_border_bottom"
                         android:completionThreshold="3"
                         android:gravity="left|center_vertical"
                         android:inputType="textCapCharacters|textMultiLine"
                         android:hint="@string/search_infraction"
                         android:paddingStart="@dimen/width_padding"
                         android:paddingEnd="@dimen/width_padding_15"
-                        android:paddingTop="@dimen/width_padding_2"
+                        android:paddingTop="@dimen/width_padding_15"
                         android:paddingBottom="@dimen/width_padding_15"
-                        android:backgroundTint="@color/primary"
                         android:textColor="@color/gray_5"
                         android:imeOptions="actionDone"
                         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -66,12 +66,12 @@
 
                 <TextView
                     android:id="@+id/tv_clear_search"
-                    android:layout_width="32dip"
-                    android:layout_height="32dip"
-                    android:layout_marginEnd="2dip"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="3dip"
                     android:layout_gravity="right|center_vertical"
-                    android:visibility="gone"
-                    android:background="@drawable/btn_clear_text" />
+                    android:drawableEnd="@drawable/close_24px"
+                    android:drawableTint="@color/primary" />
 
             </FrameLayout>
 
@@ -107,7 +107,6 @@
                         android:inputType="textCapSentences"
                         android:paddingBottom="@dimen/width_padding_15"
                         android:hint="@string/ait_framing_code"
-                        android:backgroundTint="@color/primary"
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
@@ -139,7 +138,6 @@
                         android:hint="@string/ait_unfold_code"
                         android:inputType="textCapSentences"
                         android:paddingBottom="@dimen/width_padding_15"
-                        android:backgroundTint="@color/primary"
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
@@ -171,7 +169,6 @@
                         android:hint="@string/ait_legal_support"
                         android:inputType="textCapSentences"
                         android:paddingBottom="@dimen/width_padding_15"
-                        android:backgroundTint="@color/primary"
                         android:textColor="@color/gray_5"
                         android:textCursorDrawable="@null" />
 
@@ -208,9 +205,10 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_observacao"
+                    android:id="@+id/et_auto_observation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:layout_marginTop="@dimen/width_padding_15"
                     android:ellipsize="start"
                     android:ems="10"
@@ -222,7 +220,6 @@
                     android:paddingStart="@dimen/width_padding"
                     android:paddingEnd="@dimen/width_padding_15"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5"
                     android:textCursorDrawable="@null" />
 
@@ -230,12 +227,12 @@
 
             <TextView
                 android:id="@+id/tv_clear_obs"
-                android:layout_width="32dip"
-                android:layout_height="32dip"
-                android:layout_marginEnd="2dip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="3dip"
                 android:layout_gravity="right|center_vertical"
-                android:visibility="gone"
-                android:background="@drawable/btn_clear_text" />
+                android:drawableEnd="@drawable/close_24px"
+                android:drawableTint="@color/primary" />
 
         </FrameLayout>
 
@@ -260,14 +257,14 @@
             android:layout_marginBottom="@dimen/padding_top_edit" >
 
             <EditText
-                android:id="@+id/et_auto_numero_tca"
+                android:id="@+id/et_auto_tca_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:gravity="left|center_vertical"
                 android:inputType="number"
                 android:hint="@string/rb_tca"
                 android:paddingBottom="@dimen/width_padding_15"
-                android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -286,7 +283,7 @@
             android:textColor="@color/primary" />
 
         <LinearLayout
-            android:id="@+id/ll_auto_procedimentos"
+            android:id="@+id/ll_auto_procedures"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -301,7 +298,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:orientation="vertical">
-                android:padding="@dimen/widght_padding" >
+                android:padding="@dimen/widght_padding">
 
                 <RadioGroup
                     android:id="@+id/rg_recolhimento"
@@ -369,7 +366,7 @@
         </LinearLayout>
 
         <com.rey.material.widget.CheckBox
-            android:id="@+id/cb_equipamento_afericao"
+            android:id="@+id/cb_measuring_equipment"
             style="@style/Material.Drawable.CheckBox"
             app:cbd_strokeColor="@color/yellow_light"
             android:layout_width="wrap_content"
@@ -382,7 +379,7 @@
             android:layout_marginBottom="@dimen/width_padding_2" />
 
         <LinearLayout
-            android:id="@+id/ll_auto_equipamento"
+            android:id="@+id/ll_auto_equipment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -391,20 +388,22 @@
             android:focusableInTouchMode="true"
             android:orientation="vertical">
 
-            <fr.ganfra.materialspinner.MaterialSpinner
-                android:id="@+id/spinner_auto_descricao_equipamento"
+            <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
-                app:ms_arrowColor="@color/primary"
-                app:ms_arrowSize="12dp"
-                app:ms_floatingLabelColor="@color/primary"
-                app:ms_floatingLabelText="@string/ait_used_measurement_equipment"
-                app:ms_alignLabels="true"
-                app:ms_hintColor="@color/primary"
-                app:ms_hint="@string/ait_select_measurement_equipment"
-                app:ms_multiline="true"
-                app:ms_baseColor="@color/primary" />
+                android:hint="@string/ait_used_measurement_equipment"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                android:textColorHint="@color/primary">
+
+                <AutoCompleteTextView
+                    android:id="@+id/spinner_auto_equipment_description"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
+                    android:inputType="none"
+                    android:textColor="@color/gray_5"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -413,14 +412,14 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_marca_equipamento"
+                    android:id="@+id/et_auto_brand_equipment"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:hint="@string/ait_equipment_brand"
                     android:inputType="textCapSentences"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5"
                     android:textCursorDrawable="@null" />
 
@@ -433,14 +432,14 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_modelo_equipamento"
+                    android:id="@+id/et_auto_equipment_model"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:hint="@string/ait_equipment_model"
                     android:inputType="textCapSentences"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -452,14 +451,14 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_numero_de_serie"
+                    android:id="@+id/et_auto_serie_number"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:hint="@string/ait_serial_number"
                     android:gravity="left|center_vertical"
                     android:inputType="textCapSentences"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -488,11 +487,11 @@
                             android:id="@+id/et_ait_measurement_performed"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/textview_border_bottom"
                             android:gravity="left|center_vertical"
                             android:hint="@string/ait_measuremet_performed"
                             android:inputType="numberDecimal"
                             android:paddingBottom="@dimen/width_padding_15"
-                            android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5" />
 
                     </com.google.android.material.textfield.TextInputLayout>
@@ -509,7 +508,7 @@
                     android:paddingStart="@dimen/indicator_width" >
 
                     <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinner_medicao_unidade"
+                        android:id="@+id/spinner_measurement_unit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:ms_arrowColor="@color/primary"
@@ -532,14 +531,14 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_limite_regulamentado"
+                    android:id="@+id/et_auto_regulated_limit"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:hint="@string/regulated_limit"
                     android:inputType="textCapSentences"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -551,14 +550,14 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_valor_medicao"
+                    android:id="@+id/et_auto_measurement_value"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:hint="@string/ait_considered_value"
                     android:inputType="textCapSentences"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -573,11 +572,11 @@
                     android:id="@+id/et_ait_sample_number"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:inputType="number"
                     android:hint="@string/ait_sample_number"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -585,7 +584,7 @@
         </LinearLayout>
 
         <com.rey.material.widget.CheckBox
-            android:id="@+id/cb_transportador"
+            android:id="@+id/cb_transporter"
             style="@style/Material.Drawable.CheckBox"
             app:cbd_strokeColor="@color/yellow_light"
             android:layout_width="wrap_content"
@@ -598,7 +597,7 @@
             android:layout_marginBottom="@dimen/width_padding_15" />
 
         <LinearLayout
-            android:id="@+id/ll_auto_transportador"
+            android:id="@+id/ll_auto_transporter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:visibility="gone"
@@ -614,27 +613,27 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_nome_embarcador"
+                    android:id="@+id/et_auto_shipper_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:inputType="textCapCharacters"
                     android:hint="@string/ait_shipper_name"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <RadioGroup
-                android:id="@+id/rg_tipo_documento_embarcador"
+                android:id="@+id/rg_type_shipper_document"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="@dimen/width_padding_2" >
 
                 <RadioButton
-                    android:id="@+id/rg_cpf_embarcador"
+                    android:id="@+id/rg_shipper_cpf"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -643,7 +642,7 @@
                     android:buttonTint="@color/primary" />
 
                 <RadioButton
-                    android:id="@+id/rg_cnpj_embarcador"
+                    android:id="@+id/rg_shipper_cnpj"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -654,22 +653,22 @@
             </RadioGroup>
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/til_cpf_embarcador"
+                android:id="@+id/til_shipper_cpf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textColorHint="@color/primary"
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_cpf_embarcador"
+                    android:id="@+id/et_shipper_cpf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:hint="@string/shipper_number_cpf"
                     android:maxLength="11"
                     android:inputType="number"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -682,15 +681,15 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_cnpj_embarcador"
+                    android:id="@+id/et_shipper_cnpj"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:hint="@string/shipper_number_cnpj"
                     android:maxLength="14"
                     android:inputType="number"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -702,14 +701,14 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_nome_transportador"
+                    android:id="@+id/et_auto_transporter_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:inputType="textCapCharacters"
                     android:hint="@string/ait_carrier_name"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -722,7 +721,7 @@
                 android:layout_marginBottom="@dimen/width_padding_2" >
 
                 <RadioButton
-                    android:id="@+id/rg_cpf_transportador"
+                    android:id="@+id/rg_transporter_cpf"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -731,7 +730,7 @@
                     android:buttonTint="@color/primary" />
 
                 <RadioButton
-                    android:id="@+id/rg_cnpj_transportador"
+                    android:id="@+id/rg_transporter_cnpj"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -749,15 +748,15 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_cfp_transportador"
+                    android:id="@+id/et_transporter_cpf"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:inputType="number"
                     android:maxLength="11"
                     android:hint="@string/carrier_number_cpf"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -770,15 +769,15 @@
                 android:layout_marginTop="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_cnpj_transportador"
+                    android:id="@+id/et_transporter_cnpj"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/textview_border_bottom"
                     android:gravity="left|center_vertical"
                     android:inputType="number"
                     android:maxLength="14"
                     android:hint="@string/carrier_number_cnpj"
                     android:paddingBottom="@dimen/width_padding_15"
-                    android:backgroundTint="@color/primary"
                     android:textColor="@color/gray_5"
                     android:layout_marginBottom="@dimen/padding_top_edit" />
 
@@ -808,7 +807,7 @@
                 android:paddingEnd="@dimen/indicator_width" >
 
                 <com.rey.material.widget.CheckBox
-                    android:id="@+id/cb_auto_confirmar"
+                    android:id="@+id/cb_ait_confirm"
                     style="@style/Material.Drawable.CheckBox"
                     app:cbd_strokeColor="@color/yellow_light"
                     android:layout_width="wrap_content"

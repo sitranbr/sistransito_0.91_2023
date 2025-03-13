@@ -1,56 +1,39 @@
 package net.sistransito.library.datepicker;
 
-import java.util.Calendar;
-
-import android.app.Activity;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import androidx.fragment.app.DialogFragment;
 import android.widget.TimePicker;
 
-public class MyTimePicker extends DialogFragment implements
-		TimePickerDialog.OnTimeSetListener {
-	TimeListener dateTimeListener;
-	private int view_id;
+import androidx.fragment.app.DialogFragment;
+
+import java.util.Calendar;
+import java.util.Locale;
+
+public class MyTimePicker extends DialogFragment implements TimePickerDialog.OnTimeSetListener {
+
 	public static final String MY_TIME_PICKER_ID = "my_time_picker_id";
 
 	@Override
-	public void onAttach(Activity activity) {
-
-		super.onAttach(activity);
-		dateTimeListener = (TimeListener) getTargetFragment();
-	}
-
-	@Override
 	public Dialog onCreateDialog(Bundle savedInstanceState) {
-		view_id = getArguments().getInt(MY_TIME_PICKER_ID);
-		// Use the current time as the default values for the picker
+		int viewId = getArguments().getInt(MY_TIME_PICKER_ID);
+
 		final Calendar c = Calendar.getInstance();
 		int hour = c.get(Calendar.HOUR_OF_DAY);
 		int minute = c.get(Calendar.MINUTE);
-		
-		// Create a new instance of TimePickerDialog and return it
-		return new TimePickerDialog(getActivity(), this, hour, minute,
-				true);
+
+		return new TimePickerDialog(getActivity(), this, hour, minute, true);
 	}
 
 	@Override
 	public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-		String minutos = ""; String horas = "";
-		if (minute < 10) { minutos = "0" + minute;
-		} else { minutos = String.valueOf(minute); }
-		if (hourOfDay < 10) { horas = "0" + hourOfDay;
-		} else { horas = String.valueOf(hourOfDay); }
+		String time = String.format(Locale.getDefault(), "%02d:%02d", hourOfDay, minute);
 
-		dateTimeListener.time(horas + ":" + minutos, view_id);
+		Bundle result = new Bundle();
+		result.putString("selectedValue", time);
+		result.putInt("viewId", getArguments().getInt(MY_TIME_PICKER_ID));
+
+		getParentFragmentManager().setFragmentResult("pickerResult", result);
+		dismiss();
 	}
-
-	@Override
-	public void onCancel(DialogInterface dialog) {
-		super.onCancel(dialog);
-		dateTimeListener.time(null, view_id);
-	}
-
 }

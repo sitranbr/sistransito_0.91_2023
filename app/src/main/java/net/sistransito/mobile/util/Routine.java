@@ -1,5 +1,6 @@
 package net.sistransito.mobile.util;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -44,8 +45,8 @@ public class Routine {
             int size = cursor.getCount();
             String dataPlate = aitData.getPlate();
             for (int i=0; i<size; i++){
-                String placa = cursor.getString(cursor.getColumnIndex(PlateSearchDatabaseHelper.PLATE));
-                if (dataPlate.equalsIgnoreCase(placa)) {
+                String plate = cursor.getString(cursor.getColumnIndex(PlateSearchDatabaseHelper.PLATE));
+                if (dataPlate.equalsIgnoreCase(plate)) {
                     ifPlateExist = true;
                     break;
                 }

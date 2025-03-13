@@ -36,7 +36,7 @@
             android:orientation="vertical" >
 
             <com.rey.material.widget.CheckBox
-                android:id="@+id/cb_se_condutor_estrangeiro"
+                android:id="@+id/cb_if_a_foreign_driver"
                 style="@style/Material.Drawable.CheckBox"
                 app:cbd_strokeColor="@color/yellow_light"
                 android:layout_width="wrap_content"
@@ -50,7 +50,7 @@
                 android:layout_marginBottom="@dimen/padding_top_edit"/>
 
             <LinearLayout
-                android:id="@+id/ll_spinner_pais_condutor"
+                android:id="@+id/ll_spinner_driver_country"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
@@ -60,24 +60,27 @@
                 android:visibility="gone"
                 android:paddingStart="@dimen/indicator_width" >
 
-                <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/spinner_driver_country"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_arrowColor="@color/primary"
-                    app:ms_arrowSize="12dp"
-                    app:ms_floatingLabelColor="@color/primary"
-                    app:ms_floatingLabelText="@string/ait_country_name"
-                    app:ms_alignLabels="true"
-                    app:ms_hintColor="@color/primary"
-                    app:ms_hint="@string/spinner_driver_country"
-                    app:ms_multiline="true"
-                    app:ms_baseColor="@color/primary" />
+                    android:hint="@string/spinner_driver_country"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:textColorHint="@color/primary">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/spinner_driver_country"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textview_border_bottom"
+                        android:inputType="none"
+                        android:textColor="@color/gray_5" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
             <com.rey.material.widget.CheckBox
-                android:id="@+id/cb_se_nao_habilitado"
+                android:id="@+id/cb_if_no_have_cnh"
                 style="@style/Material.Drawable.CheckBox"
                 app:cbd_strokeColor="@color/yellow_light"
                 android:layout_width="wrap_content"
@@ -115,14 +118,16 @@
                             android:id="@+id/et_ait_driver_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="left|center_vertical"
-                            android:inputType="textCapCharacters"
+                            android:background="@drawable/textview_border_bottom"
                             android:hint="@string/driver_name"
-                            android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5"
+                            android:inputType="textCapCharacters"
+                            android:maxLength="30"
                             android:paddingBottom="@dimen/width_padding_15" />
 
                     </com.google.android.material.textfield.TextInputLayout>
+
+
 
                 </LinearLayout>
 
@@ -143,65 +148,66 @@
                     android:orientation="vertical"
                     android:paddingRight="@dimen/indicator_width" >
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:layout_width="match_parent"
-                            android:layout_weight="5"
-                            android:layout_height="wrap_content"
-                            android:textColorHint="@color/primary"
-                            android:layout_marginBottom="@dimen/padding_top_edit" >
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColorHint="@color/primary"
+                        android:layout_marginBottom="@dimen/padding_top_edit" >
 
                         <EditText
                             android:id="@+id/et_register_cnh"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/textview_border_bottom"
                             android:gravity="left"
                             android:inputType="number"
                             android:maxLength="11"
                             android:hint="@string/ait_cnh_ppd"
-                            android:backgroundTint="@color/primary"
-                            android:textColor="@color/gray_5"
                             android:paddingBottom="@dimen/width_padding_15" />
+
                     </com.google.android.material.textfield.TextInputLayout>
 
-                        <TextView
-                            android:id="@+id/tv_auto_search_cnh"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginRight="-6dip"
-                            android:layout_gravity="right|center_vertical"
-                            android:backgroundTint="@color/primary"
-                            android:background="@android:drawable/ic_menu_zoom" />
+                    <TextView
+                        android:id="@+id/tv_auto_search_cnh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="3dip"
+                        android:layout_gravity="right|center_vertical"
+                        android:drawableEnd="@drawable/search_24px"
+                        android:drawableTint="@color/primary" />
 
                 </FrameLayout>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_spinner_uf_registro"
+                android:id="@+id/ll_spinner_state_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:baselineAligned="false" >
 
-                <fr.ganfra.materialspinner.MaterialSpinner
-                    android:id="@+id/spinner_state_driver"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:ms_arrowColor="@color/primary"
-                    app:ms_arrowSize="12dp"
-                    app:ms_floatingLabelColor="@color/primary"
-                    app:ms_floatingLabelText="@string/ait_state"
-                    app:ms_alignLabels="true"
-                    app:ms_hintColor="@color/primary"
-                    app:ms_hint="@string/ait_state"
-                    app:ms_multiline="true"
-                    app:ms_baseColor="@color/primary" />
+                    android:hint="@string/ait_state"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                    android:textColorHint="@color/primary">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/spinner_state_driver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/textview_border_bottom"
+                        android:inputType="none"
+                        android:textColor="@color/gray_5"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 
-
             <LinearLayout
-                android:id="@+id/ll_documento_condutor"
+                android:id="@+id/ll_driver_document"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:focusable="true"
@@ -214,21 +220,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:baselineAligned="false"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
-                    <fr.ganfra.materialspinner.MaterialSpinner
-                        android:id="@+id/spinner_another_document"
+                    <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:ms_arrowColor="@color/primary"
-                        app:ms_arrowSize="12dp"
-                        app:ms_floatingLabelColor="@color/primary"
-                        app:ms_floatingLabelText="@string/type_document_presented"
-                        app:ms_alignLabels="true"
-                        app:ms_hintColor="@color/primary"
-                        app:ms_hint="@string/spinner_another_document"
-                        app:ms_multiline="true"
-                        app:ms_baseColor="@color/primary" />
+                        android:hint="@string/type_document_presented"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:textColorHint="@color/primary"
+                        android:layout_marginBottom="@dimen/padding_top_edit">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/spinner_another_document"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/textview_border_bottom"
+                            android:inputType="none"
+                            android:textColor="@color/gray_5" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
@@ -240,11 +250,11 @@
                             android:id="@+id/et_document_number"
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
+                            android:background="@drawable/textview_border_bottom"
                             android:gravity="left"
                             android:inputType="number"
                             android:maxLength="11"
                             android:hint="@string/document_number"
-                            android:backgroundTint="@color/primary"
                             android:textColor="@color/gray_5"
                             android:paddingBottom="@dimen/width_padding_15" />
 
@@ -271,7 +281,7 @@
                 android:paddingRight="@dimen/indicator_width" >
 
                 <com.rey.material.widget.CheckBox
-                    android:id="@+id/cb_auto_confirmar"
+                    android:id="@+id/cb_ait_confirm"
                     style="@style/Material.Drawable.CheckBox"
                     app:cbd_strokeColor="@color/yellow_light"
                     android:layout_width="wrap_content"

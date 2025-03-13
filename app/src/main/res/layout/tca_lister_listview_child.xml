@@ -23,7 +23,7 @@
             android:background="@drawable/print_normal" />
 
         <TextView
-            android:id="@+id/tv_rrd_subtitulo"
+            android:id="@+id/tv_tav_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"

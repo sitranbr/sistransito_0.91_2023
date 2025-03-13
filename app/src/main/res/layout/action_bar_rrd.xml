@@ -42,7 +42,7 @@
         android:paddingTop="@dimen/width_padding" >
 
         <ImageView
-            android:id="@+id/im_btn_tab_documento"
+            android:id="@+id/im_btn_tab_document"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/width_margin_8"
@@ -56,7 +56,7 @@
             android:background="@color/yellow_line_color" />
 
         <ImageView
-            android:id="@+id/im_btn_tab_informacoes"
+            android:id="@+id/im_btn_tab_information"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/width_padding_4"

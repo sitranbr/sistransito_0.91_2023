@@ -12,9 +12,12 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
+import android.widget.AutoCompleteTextView;
+
+import androidx.appcompat.widget.AppCompatButton;
 import android.widget.EditText;
-import android.widget.Spinner;
+
+import net.sistransito.mobile.adapter.CustomSpinnerAdapter;
 
 import net.sistransito.mobile.adapter.AnyArrayAdapter;
 import net.sistransito.mobile.database.DatabaseCreator;
@@ -28,12 +31,12 @@ import java.util.List;
 public class TabRrdInformationFragment extends Fragment {
 	private View view;
 	private EditText etReasonForCollecting;
-	private Spinner spinnerDays;
+	private AutoCompleteTextView autoCompleteDays;
 	private RrdData rrdData;
 	private List<String> listQuantity;
 	private AnyArrayAdapter<String> aaaQuantity;
 
-	private Button btnRrdCheck, btnRrdPrint;
+	private AppCompatButton btnRrdCheck, btnRrdPrint;
 
 	public static TabRrdInformationFragment newInstance() {
 		return new TabRrdInformationFragment();
@@ -63,18 +66,18 @@ public class TabRrdInformationFragment extends Fragment {
 
 	private void initializedSelectetItems() {
 		etReasonForCollecting.setText("");
-		spinnerDays.setSelection(4);
+		//autoCompleteDays.setText(listQuantity.get(4));
 	}
 
 	private void initializedView() {
 
-		btnRrdCheck = (Button) view.findViewById(R.id.btn_rrd_conferir);
-		btnRrdPrint = (Button) view.findViewById(R.id.btn_rrd_imprimir);
+		btnRrdCheck = (AppCompatButton) view.findViewById(R.id.btn_rrd_check);
+		btnRrdPrint = (AppCompatButton) view.findViewById(R.id.ll_btn_rrd_print);
 
 		etReasonForCollecting = (EditText) view
-				.findViewById(R.id.et_rrd_motivo_recolhimento);
+				.findViewById(R.id.et_rrd_reason_for_collection);
 		etReasonForCollecting.addTextChangedListener(new ChangeText(
-				R.id.et_rrd_motivo_recolhimento));
+				R.id.et_rrd_reason_for_collection));
 
 		listQuantity = Arrays.asList(getResources().getStringArray(
 				R.array.array_quantity));
@@ -82,27 +85,20 @@ public class TabRrdInformationFragment extends Fragment {
 				android.R.layout.simple_spinner_item, android.R.id.text1,
 				listQuantity);
 
-		spinnerDays = (Spinner) view
-				.findViewById(R.id.spinner_rrd_dias_regularizacao);
-		spinnerDays.setAdapter(aaaQuantity);
+		CustomSpinnerAdapter aaaQuantity = CustomSpinnerAdapter.createStateAdapter(getActivity(), listQuantity);
+		autoCompleteDays = view.findViewById(R.id.spinner_rrd_days_to_regularize);
+		autoCompleteDays.setAdapter(aaaQuantity);
 
-		spinnerDays
-				.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-					@Override
-					public void onItemSelected(AdapterView<?> parent,
-							View view, int pos, long id) {
-						rrdData.setDaysForRegularization((String) parent
-								.getItemAtPosition(pos));
-					}
-
-					@Override
-					public void onNothingSelected(AdapterView<?> arg0) {
-
-					}
-				});
-
-
+		autoCompleteDays.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				String selectedItem = (String) parent.getItemAtPosition(position);
+				// Faça algo com o item selecionado, como:
+				rrdData.setDaysForRegularization(selectedItem); // Atualiza o objeto rrdData
+				// ou exiba um Toast:
+				// Toast.makeText(getContext(), "Selecionado: " + selectedItem, Toast.LENGTH_SHORT).show();
+			}
+		});
 
 
 		btnRrdPrint.setOnClickListener(new OnClickListener() {
@@ -118,12 +114,9 @@ public class TabRrdInformationFragment extends Fragment {
 		});
 
 		btnRrdCheck.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View arg0) {
-				AnyAlertDialog.dialogShow(rrdData.getRRDListViewData(getActivity()),
-						getActivity(), getResources()
-								.getString(R.string.list_rrd_issued));
+				AnyAlertDialog.dialogShow(rrdData, getActivity(), getResources().getString(R.string.previous_title_rrd));
 			}
 		});
 
@@ -142,7 +135,7 @@ public class TabRrdInformationFragment extends Fragment {
 
 		@Override
 		public void afterTextChanged(Editable s) {
-			if (id == R.id.et_rrd_motivo_recolhimento) {
+			if (id == R.id.et_rrd_reason_for_collection) {
 				rrdData.setReasonCollected((s.toString()).trim());
 			}
 		}

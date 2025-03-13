@@ -69,13 +69,13 @@ public class TabPJInfracaoFragment extends Fragment implements View.OnClickListe
 
         frameLayoutObs = (FrameLayout) view.findViewById(R.id.fl_auto_obs);
 
-        autoCompleteInfracao = (AutoCompleteTextView) view.findViewById(R.id.tv_autocomplete_infracao);
+        autoCompleteInfracao = (AutoCompleteTextView) view.findViewById(R.id.tv_pj_auto_complete_infraction);
         cbAutoConfirmar = (CheckBox) view.findViewById(R.id.cb_pj_confirmar);
 
         etAutoEnquadra = (EditText) view.findViewById(R.id.et_auto_enquadramento);
         etAutoDesdob = (EditText) view.findViewById(R.id.et_auto_desdobramento);
         etAutoArt = (EditText) view.findViewById(R.id.et_auto_amparo_legal);
-        etAutoObservacao = (EditText) view.findViewById(R.id.et_auto_observacao);
+        etAutoObservacao = (EditText) view.findViewById(R.id.et_auto_observation);
 
         separador = (View) view.findViewById(R.id.separador);
 

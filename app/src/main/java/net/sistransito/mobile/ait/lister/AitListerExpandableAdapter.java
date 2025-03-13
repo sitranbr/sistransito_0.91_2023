@@ -54,7 +54,7 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 			boolean arg3) {
 		TextView logPlate, logModel, logArticle, logAit;
 
-		logPlate = (TextView) view.findViewById(R.id.log_plate);
+		logPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 		logModel = (TextView) view.findViewById(R.id.log_model);
 		logArticle = (TextView) view.findViewById(R.id.log_art);
 		logAit = (TextView) view.findViewById(R.id.log_ait);
@@ -100,7 +100,7 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		TextView logPlate, logModel, logArticle, logAit;
 		ImageView imgSync;
 
-		logPlate = (TextView) view.findViewById(R.id.log_plate);
+		logPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 		logModel = (TextView) view.findViewById(R.id.log_model);
 		logArticle = (TextView) view.findViewById(R.id.log_art);
 		logAit = (TextView) view.findViewById(R.id.log_ait);

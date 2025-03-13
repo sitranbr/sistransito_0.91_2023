@@ -1,11 +1,8 @@
 package net.sistransito.ui;
 
-import android.app.Activity;
 import android.bluetooth.BluetoothDevice;
-import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.PackageManagerCompat;
 
 import android.Manifest;
 import android.widget.Toast;
@@ -29,8 +25,6 @@ import net.sistransito.mobile.bluetoothprint.bluetooth.ESCP;
 import net.sistransito.mobile.util.Routine;
 import net.sistransito.R;
 
-import java.security.Permission;
-import java.util.Arrays;
 import java.util.Set;
 
 public abstract class BasePrintActivity extends AppCompatActivity
@@ -107,7 +101,7 @@ public abstract class BasePrintActivity extends AppCompatActivity
 
         if (!mBth.isConnected()) {
             if (!mBth.Enable()) {
-                AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.error_load_bluetooth), this);
+                AnyAlertDialog.simpleAlertMessage(getResources().getString(R.string.error_load_bluetooth), this);
                 return false;
             }
 
@@ -121,13 +115,13 @@ public abstract class BasePrintActivity extends AppCompatActivity
             }
 
             if (mac == null) {
-                AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.pairing_error)
+                AnyAlertDialog.simpleAlertMessage(getResources().getString(R.string.pairing_error)
                         + " " + nPrinter + "\n" + getResources().getString(R.string.pairing_message), this);
                 return false;
             }
 
             if (!mBth.Open(mac)) {
-                AnyAlertDialog.simpleAletMessage(getResources().getString(R.string.error_connection_printer) + " ["
+                AnyAlertDialog.simpleAlertMessage(getResources().getString(R.string.error_connection_printer) + " ["
                         + mac
                         + " ]\n\n " + getResources().getString(R.string.reconnect_printer), this);
                 return false;

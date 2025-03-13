@@ -46,7 +46,7 @@ public class PlateListerDeleteExpendableAdapter extends CursorTreeAdapter {
 		ImageView imageView;
 
 		TextView tvLogPlate, tvLogTime, tvLogLicenseStatus;
-		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
+		tvLogPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 		tvLogLicenseStatus = (TextView) view
 				.findViewById(R.id.log_license_status);
 		tvLogTime = (TextView) view.findViewById(R.id.log_time);
@@ -77,7 +77,7 @@ public class PlateListerDeleteExpendableAdapter extends CursorTreeAdapter {
 		ImageView imageView;
 
 		TextView tvLogPlate, tvLogTime, tvLogLicenseStatus;
-		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
+		tvLogPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 		tvLogLicenseStatus = (TextView) view
 				.findViewById(R.id.log_license_status);
 		tvLogTime = (TextView) view.findViewById(R.id.log_time);
@@ -102,7 +102,7 @@ public class PlateListerDeleteExpendableAdapter extends CursorTreeAdapter {
 				null);
 
 		TextView tvLogPlate, tvLogTime, tvLogLicenseStatus;
-		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
+		tvLogPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 		tvLogLicenseStatus = (TextView) view
 				.findViewById(R.id.log_license_status);
 		tvLogTime = (TextView) view.findViewById(R.id.log_time);

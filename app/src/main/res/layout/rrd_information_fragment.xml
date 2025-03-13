@@ -15,19 +15,25 @@
         android:orientation="vertical"
         android:padding="@dimen/width_padding" >
 
-        <fr.ganfra.materialspinner.MaterialSpinner
-            android:id="@+id/spinner_rrd_dias_regularizacao"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:ms_arrowColor="@color/primary"
-            app:ms_arrowSize="12dp"
-            app:ms_floatingLabelColor="@color/primary"
-            app:ms_floatingLabelText="@string/select_days_rrd"
-            app:ms_alignLabels="true"
-            app:ms_hintColor="@color/primary"
-            app:ms_hint="@string/hint_days_rrd"
-            app:ms_multiline="true"
-            app:ms_baseColor="@color/primary" />
+            android:hint="@string/hint_days_rrd"
+            android:layout_marginBottom="@dimen/material_margin_medium"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:textColorHint="@color/primary">
+
+            <AutoCompleteTextView
+                android:id="@+id/spinner_rrd_days_to_regularize"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
+                android:inputType="none"
+                android:textColor="@color/gray_5" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/input_layout"
@@ -37,19 +43,19 @@
             android:layout_marginBottom="@dimen/padding_top_edit" >
 
             <EditText
-                android:id="@+id/et_rrd_motivo_recolhimento"
+                android:id="@+id/et_rrd_reason_for_collection"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/textview_border_bottom"
                 android:layout_marginTop="@dimen/width_padding_15"
                 android:ellipsize="start"
                 android:ems="10"
                 android:scrollbars="vertical"
-                android:hint="@string/ait_reason_for_collection"
+                android:hint="@string/rrd_reason_for_collection"
                 android:gravity="top"
                 android:inputType="textMultiLine|textCapCharacters"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:paddingBottom="@dimen/width_padding_16"
-                android:backgroundTint="@color/primary"
                 android:textColor="@color/gray_5"
                 android:textCursorDrawable="@null" />
 
@@ -58,31 +64,30 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:paddingTop="@dimen/width_padding" >
-
-            <Button
-                android:id="@+id/btn_rrd_conferir"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dip"
+            android:paddingTop="@dimen/width_padding"
+            android:orientation="horizontal">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btn_rrd_check"
+                style="?android:attr/buttonStyle"  android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/indicator_width"
-                android:layout_weight="1"
-                android:background="@drawable/btn_yellow_2"
-                android:padding="@dimen/width_padding"
-                android:text="@string/btn_verify"
-                android:textColor="@color/white" />
+                android:layout_weight="1"  android:layout_marginEnd="8dp"  android:layout_marginBottom="30dp"
+                android:text="@string/preview_rrd"
+                android:background="@drawable/button_background_normal"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textColor="@color/gray_2"/>
 
-            <Button
-                android:id="@+id/btn_rrd_imprimir"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="0dip"
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/ll_btn_rrd_print"
+                style="?android:attr/buttonStyle"  android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/indicator_width"
-                android:layout_weight="1"
-                android:background="@drawable/btn_yellow_2"
-                android:padding="@dimen/width_padding"
-                android:text="@string/btn_generation"
-                android:textColor="@color/white" />
+                android:layout_weight="1"  android:layout_marginBottom="30dp"
+                android:text="@string/print_rrd"
+                android:background="@drawable/button_background"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                android:textColor="@color/gray_2"/>
+
         </LinearLayout>
 
     </LinearLayout>

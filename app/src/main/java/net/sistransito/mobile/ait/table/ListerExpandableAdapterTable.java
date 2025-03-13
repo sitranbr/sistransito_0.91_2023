@@ -1,6 +1,7 @@
 package net.sistransito.mobile.ait.table;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.text.SpannableString;
 import android.text.TextUtils;
@@ -15,6 +16,9 @@ import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
 import net.sistransito.R;
 import net.sistransito.mobile.util.Routine;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class ListerExpandableAdapterTable extends CursorTreeAdapter {
     private LayoutInflater layoutInflater;
     private final Context context;
@@ -28,7 +32,6 @@ public class ListerExpandableAdapterTable extends CursorTreeAdapter {
     @Override
     protected void bindChildView(View arg0, Context arg1, Cursor arg2,
                                  boolean arg3) {
-
     }
 
     @Override
@@ -100,103 +103,79 @@ public class ListerExpandableAdapterTable extends CursorTreeAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition,
-                             boolean isLastChild, View view, ViewGroup parent) {
-        final int gPosition = groupPosition;
+    public View getChildView(int groupPosition, int childPosition, boolean isLastChild,
+                             View convertView, ViewGroup parent) {
+        View view = convertView != null
+                ? convertView
+                : layoutInflater.inflate(R.layout.table_listview_child, parent, false);
 
-        final String gravity = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_GRAVITY));
+        // Obtém o Cursor do grupo
+        Cursor cursor = getGroup(groupPosition);
 
-        final String responsible = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_RESPONSIBLE));
+        // Mapeamento de colunas para valores com segurança
+        Map<String, String> dataMap = new LinkedHashMap<>();
+        String[] columns = {
+                PrepopulatedDBOpenHelper.AIT_GRAVITY,
+                PrepopulatedDBOpenHelper.AIT_RESPONSIBLE,
+                PrepopulatedDBOpenHelper.AIT_POINTS,
+                PrepopulatedDBOpenHelper.AIT_AMOUNT,
+                PrepopulatedDBOpenHelper.AIT_TRANSIT_AUTHORITY,
+                PrepopulatedDBOpenHelper.AIT_ADMINISTRATIVE_PROCEDURE,
+                PrepopulatedDBOpenHelper.AIT_OBSERVATION,
+                PrepopulatedDBOpenHelper.AIT_ANNOTATIONS
+        };
 
-        final String points = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_POINTS));
-
-        final String amount = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_AMOUNT));
-
-        final String transitCompetency = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_TRANSIT_AUTHORITY));
-
-        String procedures = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_ADMINISTRATIVE_PROCEDURE));
-
-        String observations = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_OBSERVATION));
-
-        String notes = getGroup(gPosition).getString(
-                getGroup(gPosition).getColumnIndex(
-                        PrepopulatedDBOpenHelper.AIT_ANNOTATIONS));
-
-        View mView = null;
-        if (view != null) {
-            mView = view;
-        } else {
-            mView = layoutInflater.inflate(R.layout.table_listview_child,
-                    parent, false);
+        for (String column : columns) {
+            int columnIndex = cursor.getColumnIndex(column);
+            dataMap.put(column, columnIndex >= 0 ? cursor.getString(columnIndex) : "");
         }
 
-        final TextView tvGravity, tvPoints, tvAmount, tvResponsible,
-                tvCompetency, tvProcedures, tvObservation, tvNotes;
+        // Extrai valores do mapa
+        String gravity = dataMap.get(PrepopulatedDBOpenHelper.AIT_GRAVITY);
+        String responsible = dataMap.get(PrepopulatedDBOpenHelper.AIT_RESPONSIBLE);
+        String points = dataMap.get(PrepopulatedDBOpenHelper.AIT_POINTS);
+        String amount = dataMap.get(PrepopulatedDBOpenHelper.AIT_AMOUNT);
+        String transitCompetency = dataMap.get(PrepopulatedDBOpenHelper.AIT_TRANSIT_AUTHORITY);
+        String procedures = TextUtils.isEmpty(dataMap.get(PrepopulatedDBOpenHelper.AIT_ADMINISTRATIVE_PROCEDURE))
+                ? context.getString(R.string.no_information_available)
+                : dataMap.get(PrepopulatedDBOpenHelper.AIT_ADMINISTRATIVE_PROCEDURE);
+        String observations = TextUtils.isEmpty(dataMap.get(PrepopulatedDBOpenHelper.AIT_OBSERVATION))
+                ? context.getString(R.string.no_information_available)
+                : dataMap.get(PrepopulatedDBOpenHelper.AIT_OBSERVATION);
+        String notes = TextUtils.isEmpty(dataMap.get(PrepopulatedDBOpenHelper.AIT_ANNOTATIONS))
+                ? context.getString(R.string.no_information_available)
+                : dataMap.get(PrepopulatedDBOpenHelper.AIT_ANNOTATIONS);
 
-        tvGravity = (TextView) mView.findViewById(R.id.tv_gravity_table);
-        tvPoints = (TextView) mView.findViewById(R.id.tv_points_table);
-        tvAmount = (TextView) mView.findViewById(R.id.tv_amount_table);
-        tvResponsible = (TextView) mView.findViewById(R.id.tv_responsible_table);
-        tvCompetency = (TextView) mView.findViewById(R.id.tv_competency_table);
-        tvProcedures = (TextView) mView.findViewById(R.id.tv_procedure_table);
-        tvObservation = (TextView) mView.findViewById(R.id.tv_observation_table);
-        tvNotes = (TextView) mView.findViewById(R.id.tv_notes_table);
+        // Configuração dos TextViews
+        TextView tvGravity = view.findViewById(R.id.tv_gravity_table);
+        TextView tvPoints = view.findViewById(R.id.tv_points_table);
+        TextView tvAmount = view.findViewById(R.id.tv_amount_table);
+        TextView tvResponsible = view.findViewById(R.id.tv_responsible_table);
+        TextView tvCompetency = view.findViewById(R.id.tv_competency_table);
+        TextView tvProcedures = view.findViewById(R.id.tv_procedure_table);
+        TextView tvObservation = view.findViewById(R.id.tv_observation_table);
+        TextView tvNotes = view.findViewById(R.id.tv_notes_table);
 
-        // Call method to apply bold to string
-
-        final String NO_INFORMATION_AVAILABLE = context.getString(R.string.no_information_available);
-
-        if (TextUtils.isEmpty(procedures)) {
-            procedures = NO_INFORMATION_AVAILABLE;
-        }
-
-        if (TextUtils.isEmpty(observations)) {
-            observations = NO_INFORMATION_AVAILABLE;
-        }
-
-        if (TextUtils.isEmpty(notes)) {
-            notes = NO_INFORMATION_AVAILABLE;
-        }
-
+        // Configurações de formatação
+        Resources res = context.getResources();
         Routine.TextAlignment normal = Routine.TextAlignment.NORMAL;
         Routine.TextAlignment center = Routine.TextAlignment.CENTER;
 
-        SpannableString boldGravity = Routine.textWithBoldAndCenter((context.getString(R.string.nature_format).toString()), gravity, true, center);
-        SpannableString boldPoint = Routine.textWithBoldAndCenter((context.getString(R.string.points_format).toString()), points, true, center);
-        SpannableString boldAmount = Routine.textWithBoldAndCenter((context.getString(R.string.value_format).toString()), context.getResources().getString(R.string.coin_format) + amount, true, center);
-        SpannableString boldResponsible = Routine.textWithBoldAndCenter((context.getString(R.string.responsible_format).toString()), responsible, true, center);
-        SpannableString boldTransitCompetency = Routine.textWithBoldAndCenter((context.getString(R.string.competency_format).toString()), transitCompetency, true, center);
+        // Formatação dos textos com negrito e alinhamento
+        Map<TextView, SpannableString> textViewMap = new LinkedHashMap<>();
+        textViewMap.put(tvGravity, Routine.textWithBoldAndCenter(res.getString(R.string.nature_format), gravity, true, center));
+        textViewMap.put(tvPoints, Routine.textWithBoldAndCenter(res.getString(R.string.points_format), points, true, center));
+        textViewMap.put(tvAmount, Routine.textWithBoldAndCenter(res.getString(R.string.value_format), res.getString(R.string.coin_format) + amount, true, center));
+        textViewMap.put(tvResponsible, Routine.textWithBoldAndCenter(res.getString(R.string.responsible_format), responsible, true, center));
+        textViewMap.put(tvCompetency, Routine.textWithBoldAndCenter(res.getString(R.string.competency_format), transitCompetency, true, center));
+        textViewMap.put(tvProcedures, Routine.applyBold(res.getString(R.string.administrative_measure_format) + procedures));
+        textViewMap.put(tvObservation, Routine.applyBold(res.getString(R.string.observation_format) + observations));
+        textViewMap.put(tvNotes, Routine.applyBold(res.getString(R.string.notes_format) + notes));
 
-        SpannableString boldProcedures = Routine.applyBold(context.getString(R.string.administrative_measure_format) + procedures);
-        SpannableString boldObservation = Routine.applyBold(context.getResources().getString(R.string.observation_format) + observations);
-        SpannableString boldNotes = Routine.applyBold(context.getResources().getString(R.string.notes_format) + notes);
+        // Aplica os textos aos TextViews
+        textViewMap.forEach(TextView::setText);
 
-
-        tvGravity.setText(boldGravity);
-        tvPoints.setText(boldPoint);
-        tvAmount.setText(boldAmount);
-        tvResponsible.setText(boldResponsible);
-        tvCompetency.setText(boldTransitCompetency);
-        tvProcedures.setText(boldProcedures);
-        tvObservation.setText(boldObservation);
-        tvNotes.setText(boldNotes);
-
-        return mView;
-
+        return view;
     }
 
 

@@ -7,7 +7,7 @@
     android:padding="@dimen/width_padding" >
 
     <TextView
-        android:id="@+id/log_plate"
+        android:id="@+id/lv_rrd_plate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/log_nome_do_proprietario"
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/log_plate"
+        android:layout_below="@+id/lv_rrd_plate"
         android:layout_marginLeft="@dimen/log_margin_left"
         android:text="nome_do_proprietario"
         android:textAppearance="?android:attr/textAppearanceSmall"
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/log_plate"
+        android:layout_alignTop="@+id/lv_rrd_plate"
         android:layout_marginRight="@dimen/width_margin_8"
         android:text="number_do_auto: "
         android:textAppearance="?android:attr/textAppearanceSmall"

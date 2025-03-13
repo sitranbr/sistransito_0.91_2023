@@ -40,7 +40,7 @@ public class TAVListerExpandableAdapter extends CursorTreeAdapter {
 			boolean arg3) {
 		TextView tvLogPlate, tvLogOwnerName, etLogAitNumber;
 
-		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
+		tvLogPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 
 		tvLogOwnerName = (TextView) view
 				.findViewById(R.id.log_nome_do_proprietario);
@@ -71,7 +71,7 @@ public class TAVListerExpandableAdapter extends CursorTreeAdapter {
 				.inflate(R.layout.tav_lister_listview_parent, null);
 		TextView tvLogPlate, tvLogOwnerName, tvLogAitNumber;
 
-		tvLogPlate = (TextView) view.findViewById(R.id.log_plate);
+		tvLogPlate = (TextView) view.findViewById(R.id.lv_rrd_plate);
 
 		tvLogOwnerName = (TextView) view
 				.findViewById(R.id.log_nome_do_proprietario);
@@ -111,14 +111,14 @@ public class TAVListerExpandableAdapter extends CursorTreeAdapter {
 					parent, false);
 		}
 		tvTavChildview = (TextView) mView
-				.findViewById(R.id.ver_tav_childview);
+				.findViewById(R.id.show_tav_childview);
 		final TavData tavData = new TavData();
 
 		tavData.setTAVDataFromCursor(getGroup(groupPosition));
 
 		tvTavChildview.setText(tavData.getTCAListViewData(mycontext));
 
-		btnTavPrint = (Button) mView.findViewById(R.id.ver_tav_print);
+		btnTavPrint = (Button) mView.findViewById(R.id.show_tav_print);
 		btnTavPrint.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

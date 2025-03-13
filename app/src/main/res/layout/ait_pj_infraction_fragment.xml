@@ -44,7 +44,7 @@
                     android:layout_marginBottom="@dimen/padding_top_edit" >
 
                     <AutoCompleteTextView
-                        android:id="@+id/tv_autocomplete_infracao"
+                        android:id="@+id/tv_pj_auto_complete_infraction"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:completionThreshold="3"
@@ -208,7 +208,7 @@
                 android:layout_marginBottom="@dimen/padding_top_edit" >
 
                 <EditText
-                    android:id="@+id/et_auto_observacao"
+                    android:id="@+id/et_auto_observation"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/width_padding_15"
