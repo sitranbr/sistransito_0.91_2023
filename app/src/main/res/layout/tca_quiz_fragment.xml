@@ -103,7 +103,7 @@
             android:id="@+id/linear_layout_alcoolica_parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linear_layout_alcoolica_child"
@@ -113,31 +113,40 @@
                 android:layout_marginTop="@dimen/width_margin_8"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
-                android:paddingTop="@dimen/width_padding_15" >
+                android:paddingTop="@dimen/width_padding_15">
 
-                <Button
+                <EditText
                     android:id="@+id/tca_date_drunk_driver"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dip"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/indicator_width"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_yellow_2"
-                    android:padding="@dimen/width_padding"
-                    android:text="@string/date_field"
-                    android:textColor="@color/white" />
+                    android:background="@drawable/textview_border_bottom"
+                    android:drawableEnd="@drawable/calendar_month_24px"
+                    android:drawableTint="@color/yellow"
+                    android:hint="@string/date_field"
+                    android:textColor="@color/gray_5"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:inputType="none"
+                    android:cursorVisible="false"
+                    android:layout_marginEnd="4dp"/>
 
-                <Button
-                    android:id="@+id/tca_time_drunk_driver"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dip"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/indicator_width"
-                    android:layout_weight="1"
-                    android:background="@drawable/btn_yellow_2"
-                    android:padding="@dimen/width_padding"
-                    android:text="@string/time_field"
-                    android:textColor="@color/white" />
+                <EditText
+                android:id="@+id/tca_time_drunk_driver"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/textview_border_bottom"
+                android:drawableEnd="@drawable/schedule_24px"
+                android:drawableTint="@color/yellow"
+                android:hint="@string/time_field"
+                android:textColor="@color/gray_5"
+                android:focusable="false"
+                android:clickable="true"
+                android:inputType="none"
+                android:cursorVisible="false"
+                android:layout_marginStart="4dp"/>
+
             </LinearLayout>
         </LinearLayout>
 
@@ -190,32 +199,42 @@
                 android:layout_marginTop="@dimen/width_margin_8"
                 android:baselineAligned="false"
                 android:orientation="horizontal"
-                android:paddingTop="@dimen/width_padding_15" >
+                android:paddingTop="@dimen/width_padding_15">
 
-                <Button
+                <EditText
                     android:id="@+id/tca_date_toxica"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dip"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/indicator_width"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_yellow_2"
-                    android:padding="@dimen/width_padding"
-                    android:text="@string/date_field"
-                    android:textColor="@color/white" />
+                    android:background="@drawable/textview_border_bottom"
+                    android:drawableEnd="@drawable/calendar_month_24px"
+                    android:drawableTint="@color/yellow"
+                    android:hint="@string/date_field"
+                    android:textColor="@color/gray_5"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:inputType="none"
+                    android:cursorVisible="false"
+                    android:layout_marginEnd="4dp"/>
 
-                <Button
+                <EditText
                     android:id="@+id/tca_time_toxica"
-                    style="?android:attr/buttonBarButtonStyle"
-                    android:layout_width="0dip"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/indicator_width"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_yellow_2"
-                    android:padding="@dimen/width_padding"
-                    android:text="@string/time_field"
-                    android:textColor="@color/white" />
+                    android:background="@drawable/textview_border_bottom"
+                    android:drawableEnd="@drawable/schedule_24px"
+                    android:drawableTint="@color/yellow"
+                    android:hint="@string/time_field"
+                    android:textColor="@color/gray_5"
+                    android:focusable="false"
+                    android:clickable="true"
+                    android:inputType="none"
+                    android:cursorVisible="false"
+                    android:layout_marginStart="4dp"/>
+
             </LinearLayout>
+
         </LinearLayout>
 
         <TextView

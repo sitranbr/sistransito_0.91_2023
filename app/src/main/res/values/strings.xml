@@ -684,5 +684,7 @@
     <string name="coin_format22">R$:&#160;</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="clear_data">Botão para apagar dados</string>
+    <string name="save_button">Botão para salvar dados</string>
 
 </resources>

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.rey.material.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -26,11 +27,9 @@ public class TcaQuizFragment extends BasePickerFragment implements
 		OnClickListener, OnCheckedChangeListener,
 		CompoundButton.OnCheckedChangeListener {
 	private Bundle bundle;
-	private MyTimePicker myTimePicker;
-	private MyDatePicker myDatePicker;
 	private View view;
-	private Button btnTcaCheck, btnTcaGeneration,
-			tcaDateAlcoholConductor,
+	private Button btnTcaCheck, btnTcaGeneration;
+	private EditText tcaDateAlcoholConductor,
 			tcaTimeAlcoholConductor,
 			tcaDateToxicConductor,
 			tcaTimeToxicConductor;
@@ -166,13 +165,13 @@ public class TcaQuizFragment extends BasePickerFragment implements
 		llToxicChild = (LinearLayout) view
 				.findViewById(R.id.linear_layout_toxica_child);
 
-		tcaDateToxicConductor = (Button) view
+		tcaDateToxicConductor = (EditText) view
 				.findViewById(R.id.tca_date_toxica);
-		tcaTimeToxicConductor = (Button) view
+		tcaTimeToxicConductor = (EditText) view
 				.findViewById(R.id.tca_time_toxica);
-		tcaDateAlcoholConductor = (Button) view
+		tcaDateAlcoholConductor = (EditText) view
 				.findViewById(R.id.tca_date_drunk_driver);
-		tcaTimeAlcoholConductor = (Button) view
+		tcaTimeAlcoholConductor = (EditText) view
 				.findViewById(R.id.tca_time_drunk_driver);
 
 		removeAlcoholView();
@@ -217,21 +216,24 @@ public class TcaQuizFragment extends BasePickerFragment implements
 
 	@Override
 	public void onClick(View v) {
-
 		int id = v.getId();
-		if (id == R.id.btn_tca_check) {
-			AnyAlertDialog
-					.dialogShow(tcaData.getTCAViewData(getActivity()),
-							getActivity(), getActivity().getResources()
-									.getString(R.string.list_tca_issued));
-		} else if (id == R.id.btn_tca_generation) {
-			(DatabaseCreator.getTcaDatabaseAdapter(getActivity()))
-					.setData(tcaData);
-			getActivity().startActivity(
-					new Intent(getActivity(), TcaLister.class));
-			getActivity().finish();
+
+		// Lógica dos Pickers delegada ao BasePickerFragment
+		if (id == R.id.tca_date_drunk_driver || id == R.id.tca_time_drunk_driver ||
+				id == R.id.tca_date_toxica || id == R.id.tca_time_toxica) {
+			super.onClick(v); // Chama o onClick do BasePickerFragment
+			return; // Retorna para evitar a lógica abaixo
 		}
 
+		// Lógica existente para outros cliques
+		if (id == R.id.btn_tca_check) {
+			AnyAlertDialog.dialogShow(tcaData.getTCAViewData(getActivity()),
+					getActivity(), getActivity().getResources().getString(R.string.list_tca_issued));
+		} else if (id == R.id.btn_tca_generation) {
+			(DatabaseCreator.getTcaDatabaseAdapter(getActivity())).setData(tcaData);
+			getActivity().startActivity(new Intent(getActivity(), TcaLister.class));
+			getActivity().finish();
+		}
 	}
 
 	@Override

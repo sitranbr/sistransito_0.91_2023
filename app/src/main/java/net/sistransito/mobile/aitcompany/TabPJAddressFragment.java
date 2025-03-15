@@ -73,7 +73,7 @@ public class TabPJAddressFragment extends
 
         etAitInfractionState = (EditText) view.findViewById(R.id.et_auto_address_state);
 
-        etAitInfractionAddress = (EditText) view.findViewById(R.id.et_ait_local);
+        etAitInfractionAddress = (EditText) view.findViewById(R.id.et_ait_address);
         btnInfractionDate = (Button) view
                 .findViewById(R.id.btn_ait_pj_date);
         btnInfractionTime = (Button) view
@@ -160,7 +160,7 @@ public class TabPJAddressFragment extends
     private void addListener() {
 
         etAitInfractionAddress.addTextChangedListener(new TabPJAddressFragment.ChangeText(
-                R.id.et_ait_local));
+                R.id.et_ait_address));
 
         btnInfractionDate.setOnClickListener(this);
         btnInfractionTime.setOnClickListener(this);
@@ -266,7 +266,7 @@ public class TabPJAddressFragment extends
         @Override
         public void afterTextChanged(Editable edit) {
             String s = (edit.toString()).trim();
-            if (id == R.id.et_ait_local) {
+            if (id == R.id.et_ait_address) {
                 pjData.setPlace(s.toString());
             }
         }

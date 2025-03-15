@@ -95,7 +95,7 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 		llProcedures = (LinearLayout) view.findViewById(R.id.ll_auto_procedures);
 		llCarrier = (LinearLayout) view.findViewById(R.id.ll_auto_transporter);
 
-		flObservation = (FrameLayout) view.findViewById(R.id.fl_auto_obs);
+		flObservation = (FrameLayout) view.findViewById(R.id.fl_auto_city);
 
 		autoCompleteInfraction = (AutoCompleteTextView) view.findViewById(R.id.tv_auto_complete_infraction);
 		cbTca = (CheckBox) view.findViewById(R.id.cb_auto_tca);

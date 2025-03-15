@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.viewpagerindicator.UnderlinePageIndicator;
@@ -25,6 +26,8 @@ import net.sistransito.mobile.viewpager.ZoomOutPageTransformer;
 import net.sistransito.R;
 
 import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AitActivity extends AppCompatActivity implements OnClickListener {
 	private AnySwipeableViewPager pager;
@@ -32,14 +35,19 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	private Field mScroller;
 	private FixedSpeedScroller scroller;
 	private UnderlinePageIndicator indicator;
-	private ImageView imBtnTabVehicle, imBtnTabConductor, imBtnTabAddress, imBtnTabInfraction,
-			imBtnTabGeneration, imBtnBack;
+	private ImageView imBtnBack;
 	private TabAitStartSectionsPagerAdapter adapter;
 	private AitData aitData;
 
-	private int tabActual;
+	private ImageView[] tabButtons;
 
-	String tabConductor;
+	private static final int TAB_VEHICLE = 0;
+	private static final int TAB_CONDUCTOR = 1;
+	private static final int TAB_ADDRESS = 2;
+	private static final int TAB_INFRACTION = 3;
+	private static final int TAB_GENERATION = 4;
+
+	private Map<Integer, Runnable> actionMap = new HashMap<>();
 
 	@Override
 	protected void onCreate(Bundle arg0) {
@@ -48,6 +56,7 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 
 		getAitObject();
 		initializedView();
+		setupActionMap();
 		setMainPager();
 		setPagerSubtitle();
 		setIndicatorTitle();
@@ -134,7 +143,7 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	public void sendToFragment(String tab){
 		TabAitVehicleFragment vehicleFragment = new TabAitVehicleFragment();
 		Bundle args = new Bundle();
-		args.putString("idTag",tab);
+		args.putString("idTag", tab);
 		vehicleFragment.setArguments(args);
 	}
 
@@ -143,21 +152,20 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 			Routine.showAlert(getResources().getString(R.string.update_erro), context);
 	}
 
+	private void setupActionMap() {
+		actionMap.put(R.id.im_btn_tab_vehicle, () -> setPagerPosition(TAB_VEHICLE));
+		actionMap.put(R.id.im_btn_tab_conductor, () -> setPagerPosition(TAB_CONDUCTOR));
+		actionMap.put(R.id.im_btn_tab_address, () -> setPagerPosition(TAB_ADDRESS));
+		actionMap.put(R.id.im_btn_tab_infraction, () -> setPagerPosition(TAB_INFRACTION));
+		actionMap.put(R.id.im_btn_tab_generation, () -> setPagerPosition(TAB_GENERATION));
+		actionMap.put(R.id.im_ait_btn_back, () -> AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), "ait"));
+	}
+
 	@Override
 	public void onClick(View v) {
-		int id = v.getId();
-		if (id == R.id.im_btn_tab_vehicle) {
-			setPagerPosition(0);
-		} else if (id == R.id.im_btn_tab_conductor) {
-			setPagerPosition(1);
-		} else if (id == R.id.im_btn_tab_address) {
-			setPagerPosition(2);
-		} else if (id == R.id.im_btn_tab_infraction) {
-			setPagerPosition(3);
-		} else if (id == R.id.im_btn_tab_generation) {
-			setPagerPosition(4);
-		} else if (id == R.id.im_ait_btn_back) {
-			AnyAlertDialog.dialogView(this, this.getResources().getString(R.string.alert_motive), "ait");
+		Runnable action = actionMap.get(v.getId());
+		if (action != null) {
+			action.run();
 		}
 	}
 
@@ -170,61 +178,31 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 		pager.setCurrentItem(position);
 	}
 
-	private void setCurrentTabSelectedItens(int position) {
-		switch (position) {
-		case 0:
-      		imBtnTabVehicle.setSelected(true);
-			imBtnTabConductor.setSelected(false);
-			imBtnTabAddress.setSelected(false);
-			imBtnTabInfraction.setSelected(false);
-			imBtnTabGeneration.setSelected(false);
-			break;
-		case 1:
-			imBtnTabVehicle.setSelected(false);
-			imBtnTabConductor.setSelected(true);
-			imBtnTabAddress.setSelected(false);
-			imBtnTabInfraction.setSelected(false);
-			imBtnTabGeneration.setSelected(false);
-			break;
-		case 2:
-			imBtnTabVehicle.setSelected(false);
-			imBtnTabConductor.setSelected(false);
-			imBtnTabAddress.setSelected(true);
-			imBtnTabInfraction.setSelected(false);
-			imBtnTabGeneration.setSelected(false);
-			break;
-		case 3:
-		  imBtnTabVehicle.setSelected(false);
-			imBtnTabConductor.setSelected(false);
-			imBtnTabAddress.setSelected(false);
-			imBtnTabInfraction.setSelected(true);
-			imBtnTabGeneration.setSelected(false);
-			break;
-		case 4:
-			imBtnTabVehicle.setSelected(false);
-			imBtnTabConductor.setSelected(false);
-			imBtnTabAddress.setSelected(false);
-			imBtnTabInfraction.setSelected(false);
-			imBtnTabGeneration.setSelected(true);
-			break;
-		}
-	}
-
 	private void initializedView() {
-        imBtnTabVehicle = (ImageView) findViewById(R.id.im_btn_tab_vehicle);
-        imBtnTabConductor = (ImageView) findViewById(R.id.im_btn_tab_conductor);
-		imBtnTabAddress = (ImageView) findViewById(R.id.im_btn_tab_address);
-		imBtnTabInfraction = (ImageView) findViewById(R.id.im_btn_tab_infraction);
-		imBtnTabGeneration = (ImageView) findViewById(R.id.im_btn_tab_generation);
+		tabButtons = new ImageView[]{ // Inicializa o array
+			(ImageView) findViewById(R.id.im_btn_tab_vehicle),
+			(ImageView) findViewById(R.id.im_btn_tab_conductor),
+			(ImageView) findViewById(R.id.im_btn_tab_address),
+			(ImageView) findViewById(R.id.im_btn_tab_infraction),
+			(ImageView) findViewById(R.id.im_btn_tab_generation)
+		};
 
-        imBtnTabVehicle.setOnClickListener(this);
-        imBtnTabConductor.setOnClickListener(this);
-		imBtnTabAddress.setOnClickListener(this);
-		imBtnTabInfraction.setOnClickListener(this);
-		imBtnTabGeneration.setOnClickListener(this);
+		for (ImageView tabButton : tabButtons) {
+			tabButton.setOnClickListener(this);
+		}
 
 		imBtnBack = (ImageView) findViewById(R.id.im_ait_btn_back);
 		imBtnBack.setOnClickListener(this);
+	}
+
+	private void setCurrentTabSelectedItens(int position) {
+		if (tabButtons != null) { // Verifica se o array foi inicializado
+			for (int i = 0; i < tabButtons.length; i++) {
+				if (tabButtons[i] != null) { // Verifica se o ImageView não é nulo
+					tabButtons[i].setSelected(i == position);
+				}
+			}
+		}
 	}
 
 	public void setTabActual(int tabActual) { setPagerPosition(tabActual); }

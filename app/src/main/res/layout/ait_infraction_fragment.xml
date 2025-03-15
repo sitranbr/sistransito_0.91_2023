@@ -190,7 +190,7 @@
             android:textColor="@color/gray_5" />
 
         <FrameLayout
-            android:id="@+id/fl_auto_obs"
+            android:id="@+id/fl_auto_city"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:baselineAligned="false"

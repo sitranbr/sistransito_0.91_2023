@@ -29,7 +29,7 @@
             android:layout_marginBottom="@dimen/padding_top_edit" >
 
             <EditText
-                android:id="@+id/et_ait_local"
+                android:id="@+id/et_ait_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLength="30"
