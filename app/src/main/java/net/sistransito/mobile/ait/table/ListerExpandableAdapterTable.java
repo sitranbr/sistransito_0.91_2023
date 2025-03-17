@@ -14,7 +14,7 @@ import android.widget.TextView;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
 import net.sistransito.R;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

@@ -22,7 +22,7 @@ import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.BasePrintBitmap;
 import net.sistransito.mobile.bluetoothprint.bluetooth.Bluetooth;
 import net.sistransito.mobile.bluetoothprint.bluetooth.BluetoothPrinterListener;
 import net.sistransito.mobile.bluetoothprint.bluetooth.ESCP;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 import java.util.Set;

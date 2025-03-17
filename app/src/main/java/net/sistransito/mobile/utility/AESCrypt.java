@@ -1,4 +1,4 @@
-package net.sistransito.mobile.util;
+package net.sistransito.mobile.utility;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;

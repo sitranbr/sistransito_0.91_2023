@@ -21,7 +21,7 @@ import net.sistransito.mobile.adapter.AnyArrayAdapter;
 import net.sistransito.mobile.ait.AitActivity;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyDialogListener;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 import java.util.List;

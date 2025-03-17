@@ -9,7 +9,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.checkbox.MaterialCheckBox;
@@ -29,7 +28,7 @@ import net.sistransito.mobile.number.NumberHttpResultAsyncTask;
 
 import net.sistransito.mobile.plate.data.DataFromPlate;
 import net.sistransito.mobile.plate.data.PlateHttpResultAsyncTask;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 import java.util.Arrays;

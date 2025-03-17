@@ -24,7 +24,7 @@ import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyDialogListener;
 import net.sistransito.mobile.fragment.CallBackCnh;
 import net.sistransito.mobile.network.NetworkConnection;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 import java.util.Arrays;

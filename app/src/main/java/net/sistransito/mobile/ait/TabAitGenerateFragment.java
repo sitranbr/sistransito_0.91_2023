@@ -2,7 +2,6 @@ package net.sistransito.mobile.ait;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -25,7 +24,6 @@ import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,7 +32,7 @@ import net.sistransito.mobile.ait.lister.AitLister;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyAlertDialog;
 import net.sistransito.mobile.fragment.UpdateFragment;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 import java.io.ByteArrayOutputStream;

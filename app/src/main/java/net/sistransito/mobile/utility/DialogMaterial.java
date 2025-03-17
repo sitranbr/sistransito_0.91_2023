@@ -1,4 +1,4 @@
-package net.sistransito.mobile.util;
+package net.sistransito.mobile.utility;
 
 import android.content.Context;
 import android.view.LayoutInflater;

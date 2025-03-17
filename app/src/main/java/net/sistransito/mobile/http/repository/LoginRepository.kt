@@ -1,6 +1,6 @@
 package net.sistransito.mobile.http.repository
 
-import net.sistransito.mobile.util.User
+import net.sistransito.mobile.utility.User
 import net.sistransito.mobile.http.services.LoginService
 import net.sistransito.mobile.http.RetrofitClient
 

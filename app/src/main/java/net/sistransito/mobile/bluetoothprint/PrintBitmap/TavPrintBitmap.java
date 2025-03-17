@@ -9,13 +9,10 @@ import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.BasePrintBitmap;
 import net.sistransito.mobile.bluetoothprint.PrintBitmap.base.PrintBitmapFormat;
 import net.sistransito.mobile.tav.TavData;
-import net.sistransito.mobile.util.User;
+import net.sistransito.mobile.utility.User;
 
 import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * Created on 8/15/2016.

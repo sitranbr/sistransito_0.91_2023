@@ -68,8 +68,8 @@ import net.sistransito.mobile.tav.TavActivity;
 import net.sistransito.mobile.tav.TavData;
 import net.sistransito.mobile.tca.TcaActivity;
 import net.sistransito.mobile.tca.TcaData;
-import net.sistransito.mobile.util.DialogMaterial;
-import net.sistransito.mobile.util.User;
+import net.sistransito.mobile.utility.DialogMaterial;
+import net.sistransito.mobile.utility.User;
 
 import java.util.concurrent.Executors;
 

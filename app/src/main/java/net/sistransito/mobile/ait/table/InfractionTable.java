@@ -22,7 +22,7 @@ import net.sistransito.mobile.database.DatabaseCreator;
 
 import java.util.List;
 import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 public class InfractionTable extends Fragment implements View.OnClickListener {

@@ -1,4 +1,4 @@
-package net.sistransito.mobile.util;
+package net.sistransito.mobile.utility;
 
 import android.util.Base64;
 import android.util.Log;

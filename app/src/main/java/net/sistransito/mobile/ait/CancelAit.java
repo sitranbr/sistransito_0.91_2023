@@ -12,12 +12,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import net.sistransito.R;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.InfractionDatabaseHelper;
-import net.sistransito.mobile.http.WebClient;
 import net.sistransito.mobile.http.services.ApiServiceCancelAit;
-import net.sistransito.mobile.util.Routine;
 
 public class CancelAit {
 

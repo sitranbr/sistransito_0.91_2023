@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.appobject.AppObject;
-import net.sistransito.mobile.util.Routine;
-import net.sistransito.mobile.util.User;
+import net.sistransito.mobile.utility.Routine;
+import net.sistransito.mobile.utility.User;
 
 import net.sistransito.R;
 

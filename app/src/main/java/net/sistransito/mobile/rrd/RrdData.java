@@ -1,8 +1,6 @@
 package net.sistransito.mobile.rrd;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.text.SpannableString;
 import android.util.Log;
@@ -17,13 +15,12 @@ import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.appobject.AppObject;
 import net.sistransito.mobile.database.RrdDatabaseHelper;
 import net.sistransito.R;
-import net.sistransito.mobile.util.Routine;
-import net.sistransito.mobile.util.User;
+import net.sistransito.mobile.utility.Routine;
+import net.sistransito.mobile.utility.User;
 import net.sqlcipher.SQLException;
 
 import java.io.Serializable;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.Consumer;

@@ -32,7 +32,7 @@ import net.sistransito.mobile.fragment.AnyPageChangeListener;
 import net.sistransito.mobile.http.WebClient;
 import net.sistransito.mobile.network.NetworkConnection;
 import net.sistransito.mobile.timeandime.TimeAndIme;
-import net.sistransito.mobile.util.DialogMaterial;
+import net.sistransito.mobile.utility.DialogMaterial;
 import net.sistransito.R;
 
 import org.json.JSONObject;

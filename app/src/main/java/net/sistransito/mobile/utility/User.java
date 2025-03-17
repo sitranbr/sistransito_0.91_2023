@@ -1,4 +1,4 @@
-package net.sistransito.mobile.util;
+package net.sistransito.mobile.utility;
 
 import com.google.gson.InstanceCreator;
 import java.lang.reflect.Type;

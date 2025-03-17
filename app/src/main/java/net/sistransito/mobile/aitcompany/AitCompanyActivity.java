@@ -18,7 +18,7 @@ import net.sistransito.mobile.adapter.TabPJSubTitleSectionsPagerAdapter;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.fragment.AnyAlertDialog;
 import net.sistransito.mobile.fragment.UpdateFragment;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.mobile.viewpager.AnySwipeableViewPager;
 import net.sistransito.mobile.viewpager.DepthPageTransformer;
 import net.sistransito.mobile.viewpager.FixedSpeedScroller;

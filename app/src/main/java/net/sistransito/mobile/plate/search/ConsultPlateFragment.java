@@ -5,7 +5,6 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -30,7 +29,7 @@ import net.sistransito.mobile.network.NetworkConnection;
 import net.sistransito.mobile.plate.data.PlateHttpResultAsyncTask;
 import net.sistransito.mobile.plate.data.DataFromPlate;
 import net.sistransito.mobile.plate.data.PlateViewFormat;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 public class ConsultPlateFragment extends Fragment implements

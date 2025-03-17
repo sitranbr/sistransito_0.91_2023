@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.appobject.AppObject;
-import net.sistransito.mobile.util.User;
+import net.sistransito.mobile.utility.User;
 
 /**
  * Created by Sandro A Costa on 13/09/2016.

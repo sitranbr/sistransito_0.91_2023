@@ -22,7 +22,7 @@ import net.sistransito.mobile.aitcompany.lister.PJLister;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.PrepopulatedDBOpenHelper;
 import net.sistransito.mobile.fragment.UpdateFragment;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 import java.util.ArrayList;

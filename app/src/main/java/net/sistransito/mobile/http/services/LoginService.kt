@@ -1,6 +1,6 @@
 package net.sistransito.mobile.http.services
 
-import net.sistransito.mobile.util.User
+import net.sistransito.mobile.utility.User
 import retrofit2.http.GET
 import retrofit2.http.Query
 

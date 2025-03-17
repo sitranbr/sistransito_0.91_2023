@@ -8,12 +8,11 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import net.sistransito.mobile.ait.AitActivity;
 import net.sistransito.mobile.aitcompany.AitCompanyActivity;
 import net.sistransito.mobile.rrd.RrdData;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 public class AnyAlertDialog {

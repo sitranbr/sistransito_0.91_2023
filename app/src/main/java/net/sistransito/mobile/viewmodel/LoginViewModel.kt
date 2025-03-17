@@ -6,7 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import net.sistransito.mobile.util.User
+import net.sistransito.mobile.utility.User
 import net.sistransito.mobile.http.repository.LoginRepository
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {

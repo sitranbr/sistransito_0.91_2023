@@ -22,7 +22,7 @@ import net.sistransito.mobile.ait.AitData;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.http.WebClient;
 import net.sistransito.mobile.network.NetworkConnection;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 import org.json.JSONObject;

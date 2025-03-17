@@ -21,7 +21,7 @@ import net.sistransito.mobile.database.SettingDatabaseAdapter;
 import net.sistransito.mobile.database.SetttingDatabaseHelper;
 import net.sistransito.mobile.sync.SyncDataInformation;
 import net.sistransito.mobile.network.NetworkConnection;
-import net.sistransito.mobile.util.Routine;
+import net.sistransito.mobile.utility.Routine;
 import net.sistransito.R;
 
 public class SettingFragment extends Fragment implements

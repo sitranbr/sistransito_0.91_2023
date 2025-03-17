@@ -1,18 +1,13 @@
-package net.sistransito.mobile.util;
+package net.sistransito.mobile.utility;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.text.Editable;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.text.style.AlignmentSpan;
 import android.text.style.ParagraphStyle;
 import android.text.style.StyleSpan;
@@ -20,7 +15,6 @@ import android.util.Base64;
 import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import net.sistransito.mobile.ait.AitData;
