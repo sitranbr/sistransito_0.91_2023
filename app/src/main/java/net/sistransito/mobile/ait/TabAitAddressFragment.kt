@@ -62,7 +62,7 @@ class TabAitAddressFragment : BasePickerFragment() {
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1001
-
+        @JvmStatic
         fun newInstance() = TabAitAddressFragment()
     }
 
@@ -116,14 +116,14 @@ class TabAitAddressFragment : BasePickerFragment() {
             tvClearAddress to View.OnClickListener { clearAddressFields() },
             tvClearData to View.OnClickListener { clearCityFieldsAndVisibility() },
             cbConfirm to View.OnClickListener { toggleSaveDataVisibility() },
-            tvSaveData to View.OnClickListener { saveDataIfValid() }
+            tvSaveData to View.OnClickListener { saveDataIfValid() },
+            etAitDate to this@TabAitAddressFragment,
+            etAitTime to this@TabAitAddressFragment
         )
 
         listeners.forEach { (view, listener) -> view.setOnClickListener(listener) }
-
         etAddressInfraction.addTextChangedListener(ChangeText(R.id.et_ait_address))
-        etAitDate.setOnClickListener { addPicker(R.id.btn_ait_pj_date, "date") }
-        etAitTime.setOnClickListener { addPicker(R.id.btn_ait_pj_time, "time") }
+
     }
 
     private fun toggleSaveDataVisibility() {

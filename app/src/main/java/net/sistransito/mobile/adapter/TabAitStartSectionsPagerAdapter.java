@@ -5,6 +5,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import net.sistransito.mobile.ait.TabAitInfractionFragment;
+import net.sistransito.mobile.ait.TabAitAddressFragment;
 import net.sistransito.mobile.ait.TabAitConductorFragment;
 import net.sistransito.mobile.ait.TabAitGenerateFragment;
 import net.sistransito.mobile.ait.TabAitVehicleFragment;
@@ -24,7 +25,7 @@ public class TabAitStartSectionsPagerAdapter extends FragmentPagerAdapter {
 		case 1:
 			return TabAitConductorFragment.newInstance();
 		case 2:
-			return TabAitAddressFragment2.newInstance();
+			return TabAitAddressFragment.newInstance();
 		case 3:
 			return TabAitInfractionFragment.newInstance();
 		case 4:

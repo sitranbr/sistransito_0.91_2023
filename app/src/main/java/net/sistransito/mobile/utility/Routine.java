@@ -18,6 +18,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
 import net.sistransito.mobile.ait.AitData;
+import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.database.DatabaseCreator;
 import net.sistransito.mobile.database.PlateSearchDatabaseHelper;
 import net.sistransito.mobile.plate.data.DataFromPlate;
@@ -169,6 +170,14 @@ public class Routine {
         }*/
 
         return spannableString;
+    }
+
+    public static String getNewline(int qtd) {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < qtd; i++) {
+            sb.append(AppConstants.NEW_LINE);
+        }
+        return sb.toString();
     }
 
 }

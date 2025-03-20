@@ -11,6 +11,7 @@ import android.view.View;
 import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.network.NetworkConnection;
 import net.sistransito.R;
+import net.sistransito.mobile.utility.Routine;
 
 public class AnyDialogFragment extends DialogFragment {
 	private int mgsId;
@@ -38,8 +39,8 @@ public class AnyDialogFragment extends DialogFragment {
 		titleId = getArguments().getInt(AppConstants.DIALOG_TITLE_ID);
 
 		if (!isNetConnected) {
-			mgs = getResources().getString(mgsId) + AppConstants.NEW_LINE
-					+ AppConstants.NEW_LINE
+			mgs = getResources().getString(mgsId)
+					+ Routine.getNewline(2)
 					+ getResources().getString(R.string.no_network_connection);
 		} else {
 			mgs = getResources().getString(mgsId);

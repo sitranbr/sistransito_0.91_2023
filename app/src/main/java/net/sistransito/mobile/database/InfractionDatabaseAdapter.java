@@ -25,6 +25,7 @@ import org.json.JSONObject;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 //import net.sqlcipher.database.SQLiteDatabase;
 
@@ -392,24 +393,64 @@ public class InfractionDatabaseAdapter {
 
 	}
 
+	public boolean insertAitPhoto(String aitNumber, String photoPath) {
+		ContentValues values = new ContentValues();
+		values.put(InfractionDatabaseHelper.PHOTO_AIT_NUMBER, aitNumber);
+		values.put(InfractionDatabaseHelper.PHOTO_PATH, photoPath);
+
+		long insertId = database.insert(InfractionDatabaseHelper.PHOTO_TABLE_NAME, null, values);
+		return insertId != -1; // Retorna true se a inserção foi bem-sucedida
+	}
+
+	public List<String> getAitPhotos(String aitNumber) {
+		List<String> photos = new ArrayList<>();
+		Cursor cursor = database.query(
+				InfractionDatabaseHelper.PHOTO_TABLE_NAME,
+				new String[]{InfractionDatabaseHelper.PHOTO_PATH},
+				InfractionDatabaseHelper.PHOTO_AIT_NUMBER + " = ?",
+				new String[]{aitNumber},
+				null, null, null);
+
+		if (cursor != null) {
+			while (cursor.moveToNext()) {
+				photos.add(cursor.getString(cursor.getColumnIndexOrThrow(InfractionDatabaseHelper.PHOTO_PATH)));
+			}
+			cursor.close();
+		}
+		return photos;
+	}
+
+	public boolean updateAitData(AitData aitData) {
+		ContentValues values = new ContentValues();
+		values.put(InfractionDatabaseHelper.COMPLETED_STATUS, "1");
+
+		int update = database.update(
+				InfractionDatabaseHelper.TABLE_NAME,
+				values,
+				InfractionDatabaseHelper.AIT_NUMBER + " = ?",
+				new String[]{aitData.getAitNumber()}
+		);
+
+		if (update > 0 && NetworkConnection.isInternetConnected(context)) {
+			SyncFiles sync = new SyncFiles(context);
+			sync.sendAitData(aitData.getAitNumber());
+			return true;
+		}
+		return false;
+	}
+
+	public boolean deleteAitPhoto(String aitNumber, String photoPath) {
+		int deletedRows = database.delete(
+				InfractionDatabaseHelper.PHOTO_TABLE_NAME,
+				InfractionDatabaseHelper.PHOTO_AIT_NUMBER + " = ? AND " + InfractionDatabaseHelper.PHOTO_PATH + " = ?",
+				new String[]{aitNumber, photoPath}
+		);
+		return deletedRows > 0;
+	}
+
 	public boolean insertAitDataPhotos(String ait, String local, String photo) {
 
 		ContentValues values = new ContentValues();
-
-		switch (local){
-			case "1":
-				values.put(InfractionDatabaseHelper.AIT_PHOTO1, photo);
-				break;
-			case "2":
-				values.put(InfractionDatabaseHelper.AIT_PHOTO2, photo);
-				break;
-			case "3":
-				values.put(InfractionDatabaseHelper.AIT_PHOTO3, photo);
-				break;
-			case "4":
-				values.put(InfractionDatabaseHelper.AIT_PHOTO4, photo);
-				break;
-		}
 
 		int update = this.database.update(InfractionDatabaseHelper.TABLE_NAME,
 				values, InfractionDatabaseHelper.AIT_NUMBER + "= ? ",
@@ -729,15 +770,6 @@ public class InfractionDatabaseAdapter {
 						aitData.getCancellationStatus());
 				map.put(InfractionDatabaseHelper.REASON_FOR_CANCEL,
 						aitData.getReasonForCancellation());
-				map.put(InfractionDatabaseHelper.AIT_PHOTO1,
-						aitData.getPhoto1());
-				//compressBitmapToFile(destination);
-				map.put(InfractionDatabaseHelper.AIT_PHOTO2,
-						aitData.getPhoto2());
-				map.put(InfractionDatabaseHelper.AIT_PHOTO3,
-						aitData.getPhoto3());
-				map.put(InfractionDatabaseHelper.AIT_PHOTO4,
-						aitData.getPhoto4());
 				map.put(InfractionDatabaseHelper.SYNC_STATUS,
 						aitData.getSyncStatus());
 

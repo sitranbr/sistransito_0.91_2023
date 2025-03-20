@@ -193,53 +193,47 @@ public class RrdData implements Serializable {
 		this.validity = validity;
 	}
 
-	private String getNewline(int qtd) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < qtd; i++) {
-			sb.append(AppConstants.NEW_LINE);
-		}
-		return sb.toString();
-	}
+
 
 	public String getRRDListViewData(Context context) {
 		Log.d("getRRDListViewData", "chamado");
 		String rrd =
 				context.getResources().getString(R.string.rrd_ait_number)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ aitNumber
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(R.string.rrd_number)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ rrdNumber
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(R.string.rrd_get_from)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ driverName
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(R.string.rrd_crlv_number)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ crlvNumber
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(R.string.rrd_register_number)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ registrationNumber
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(R.string.rrd_validity)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ validity
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(R.string.rrd_state)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ plateState
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(
 					R.string.rrd_qty_of_days_to_regularization)
-					+ getNewline(1)
+					+ Routine.getNewline(1)
 					+ daysForRegularization
-					+ getNewline(2)
+					+ Routine.getNewline(2)
 					+ context.getResources().getString(
-					R.string.rrd_reason_for_collection) + getNewline(1)
-					+ reasonCollected + getNewline(2);
+					R.string.rrd_reason_for_collection) + Routine.getNewline(1)
+					+ reasonCollected + Routine.getNewline(2);
 
 		return rrd;
 

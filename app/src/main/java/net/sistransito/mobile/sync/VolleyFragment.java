@@ -123,12 +123,12 @@ public class VolleyFragment extends Fragment{
                             .getInfractionDatabaseAdapter(getActivity())
                             .getDataFromAitNumber("TL00009191");
 
-                    Bitmap bitmap = BitmapFactory.decodeFile(aitData.getPhoto1());
+                    Bitmap bitmap = BitmapFactory.decodeFile(aitData.getConductorName());
                     String stringImage = Routine.getStringImage(bitmap);
 
                     Map<String, String> params = new HashMap<>();
                     params.put("name", aitData.getConductorName());
-                    params.put("photo", aitData.getPhoto1().substring(lengthRoot));
+                    params.put("photo", aitData.getCity().substring(lengthRoot));
                     params.put("image", stringImage);
                     return params;
 

@@ -1,148 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/gray_2"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical"
-    android:padding="@dimen/width_padding" >
+    android:padding="@dimen/width_padding">
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayoutButtons"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="@dimen/width_padding">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/photo_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/width_margin_8"
+                android:paddingTop="@dimen/width_padding" />
+
+            <com.rey.material.widget.Button
+                android:id="@+id/btn_add_photo"
+                style="?android:attr/buttonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="30dp"
+                android:background="@drawable/btn_grey"
+                android:drawablePadding="@dimen/width_padding"
+                android:gravity="center|center_vertical"
+                android:padding="@dimen/width_padding"
+                android:text="Inserir foto"
+                android:textSize="14sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
+        android:id="@+id/linearLayoutButtons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
-        android:orientation="vertical"
-        android:padding="@dimen/width_padding" >
+        android:orientation="horizontal"
+        android:paddingTop="@dimen/width_padding"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
-            android:id="@+id/ll_imageView1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/width_margin_8"
-            android:visibility="visible"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/width_padding" >
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_check_ait"
+            style="?android:attr/buttonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_white"
+            android:drawablePadding="@dimen/width_padding"
+            android:gravity="center|center_vertical"
+            android:padding="@dimen/width_padding"
+            android:text="@string/ait_check_data"
+            android:textSize="14sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/yellow_basic" />
 
-            <ImageView
-                android:id="@+id/image1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="120dp"
-                android:maxHeight="120dp"
-                android:scaleType="fitCenter"
-                android:layout_marginStart="@dimen/padding_left_foto"
-                android:src="@drawable/photo" />
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_discard_ait"
+            style="?android:attr/buttonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_grey"
+            android:drawablePadding="@dimen/width_padding"
+            android:gravity="center|center_vertical"
+            android:padding="@dimen/width_padding"
+            android:text="@string/ait_btn_discart"
+            android:textSize="14sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
 
-            <ImageView
-                android:id="@+id/image2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="120dp"
-                android:maxHeight="120dp"
-                android:scaleType="fitCenter"
-                android:layout_marginStart="@dimen/padding_foto"
-                android:src="@drawable/photo" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_imageView2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/width_margin_8"
-            android:visibility="visible"
-            android:gravity="center_horizontal"
-            android:paddingTop="@dimen/width_padding" >
-
-            <ImageView
-                android:id="@+id/image3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="120dp"
-                android:maxHeight="120dp"
-                android:scaleType="fitCenter"
-                android:layout_marginStart="@dimen/padding_left_foto"
-                android:src="@drawable/photo" />
-
-            <ImageView
-                android:id="@+id/image4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
-                android:maxWidth="120dp"
-                android:maxHeight="120dp"
-                android:scaleType="fitCenter"
-                android:layout_marginStart="@dimen/padding_foto"
-                android:src="@drawable/photo" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingTop="@dimen/width_padding"
-            android:orientation="vertical">
-
-            <com.rey.material.widget.Button
-                style="@style/Material.Drawable.Ripple.Wave"
-                android:id="@+id/btn_check_ait"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/width_margin_top"
-                android:layout_marginTop="@dimen/width_margin_top"
-                android:background="@drawable/btn_orange"
-                android:drawablePadding="@dimen/width_padding"
-                android:gravity="center|center_vertical"
-                android:padding="@dimen/width_padding"
-                android:text="@string/ait_check_data"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/white" />
-
-            <FrameLayout
-                android:id="@+id/fragment_container_ait"
-                android:background="@color/material_drawer_background"
-                android:layout_below="@id/btn_check_ait"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-
-            <com.rey.material.widget.Button
-                style="@style/Material.Drawable.Ripple.Wave"
-                android:id="@+id/btn_discard_ait"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/width_margin_top"
-                android:layout_marginTop="@dimen/width_margin_top"
-                android:background="@drawable/btn_orange"
-                android:drawablePadding="@dimen/width_padding"
-                android:gravity="center|center_vertical"
-                android:padding="@dimen/width_padding"
-                android:text="@string/ait_btn_discart"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/white" />
-
-            <com.rey.material.widget.Button
-                style="@style/Material.Drawable.Ripple.Wave"
-                android:id="@+id/btn_generation_ait"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/width_margin_top"
-                android:layout_marginTop="@dimen/width_margin_top"
-                android:background="@drawable/btn_orange"
-                android:drawablePadding="@dimen/width_padding"
-                android:gravity="center|center_vertical"
-                android:padding="@dimen/width_padding"
-                android:text="@string/end_ait_button"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/white" />
-
-        </LinearLayout>
+        <com.rey.material.widget.Button
+            android:id="@+id/btn_generation_ait"
+            style="?android:attr/buttonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/btn_yellow"
+            android:drawablePadding="@dimen/width_padding"
+            android:gravity="center|center_vertical"
+            android:padding="@dimen/width_padding"
+            android:text="@string/end_ait_button"
+            android:textSize="14sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/white" />
 
     </LinearLayout>
 
-</ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

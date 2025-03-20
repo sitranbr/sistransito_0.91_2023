@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class InfractionDatabaseHelper extends SQLiteOpenHelper {
 
 	public static final String DATABASE_NAME = "database_ait.db";
-	public static final int VERSION = 1;
+	public static final int VERSION = 2;
 	public static final String TABLE_NAME = "tb_infraction";
 
 	// conductor TAB
@@ -72,10 +72,6 @@ public class InfractionDatabaseHelper extends SQLiteOpenHelper {
 	public static final String AIT_LATITUDE = "latitude";
 	public static final String AIT_LONGITUDE = "longitude";
 	public static final String AIT_DATE_TIME = "date_time_ait";
-	public static final String AIT_PHOTO1 = "photo1";
-	public static final String AIT_PHOTO2 = "photo2";
-	public static final String AIT_PHOTO3 = "photo3";
-	public static final String AIT_PHOTO4 = "photo4";
 	public static final String COMPLETED_STATUS = "status_completed";
 	public static final String TIME_CREATION = "creation_time";
 	public static final String TIME_LIMIT = "timeout"; //limit time to sync ait
@@ -113,13 +109,21 @@ public class InfractionDatabaseHelper extends SQLiteOpenHelper {
 			+ AIT_LATITUDE + " TEXT, "
 			+ AIT_LONGITUDE + " TEXT, "
 			+ AIT_DATE_TIME + " TEXT, "
-			+ AIT_PHOTO1 + " TEXT, "
-			+ AIT_PHOTO2 + " TEXT, "
-			+ AIT_PHOTO3 + " TEXT, "
-			+ AIT_PHOTO4 + " TEXT, "
 			+ COMPLETED_STATUS + " TEXT, "
 			+ TIME_CREATION + " TEXT, "
 			+ TIME_LIMIT + " TEXT )";
+
+	public static final String PHOTO_TABLE_NAME = "tb_ait_photos";
+	public static final String PHOTO_COLUMN_ID = "_id";
+	public static final String PHOTO_AIT_NUMBER = "ait_number"; // Chave estrangeira
+	public static final String PHOTO_PATH = "photo_path";
+
+	public static final String PHOTO_TABLE_SQL = "CREATE TABLE " + PHOTO_TABLE_NAME + " ("
+			+ PHOTO_COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+			+ PHOTO_AIT_NUMBER + " TEXT NOT NULL, "
+			+ PHOTO_PATH + " TEXT NOT NULL, "
+			+ "FOREIGN KEY (" + PHOTO_AIT_NUMBER + ") REFERENCES " + TABLE_NAME + "(" + AIT_NUMBER + ")"
+			+ ")";
 
 	public InfractionDatabaseHelper(Context context) {
 		super(context, DATABASE_NAME, null, VERSION);
@@ -127,13 +131,15 @@ public class InfractionDatabaseHelper extends SQLiteOpenHelper {
 
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		//Log.d("TABLE SQL", TABLE_SQL);
 		db.execSQL(TABLE_SQL);
+		db.execSQL(PHOTO_TABLE_SQL);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldV, int newV) {
-		// UPGRADE LOGIC
+		db.execSQL("DROP TABLE IF EXISTS " + PHOTO_TABLE_NAME);
+		db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+		onCreate(db);
 	}
 
 }

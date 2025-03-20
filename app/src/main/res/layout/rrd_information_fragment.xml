@@ -68,22 +68,27 @@
             android:orientation="horizontal">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_rrd_check"
-                style="?android:attr/buttonStyle"  android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"  android:layout_marginEnd="8dp"  android:layout_marginBottom="30dp"
+                style="?android:attr/buttonStyle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="30dp"
                 android:text="@string/preview_rrd"
-                android:background="@drawable/button_background_normal"
+                android:background="@drawable/btn_white"
                 android:textAllCaps="false"
                 android:textSize="14sp"
-                android:textColor="@color/gray_2"/>
+                android:textColor="@color/yellow_basic"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/ll_btn_rrd_print"
-                style="?android:attr/buttonStyle"  android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"  android:layout_marginBottom="30dp"
+                style="?android:attr/buttonStyle"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="1"
+                android:layout_marginBottom="30dp"
                 android:text="@string/print_rrd"
-                android:background="@drawable/button_background"
+                android:background="@drawable/btn_yellow"
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:textColor="@color/gray_2"/>

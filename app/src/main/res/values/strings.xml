@@ -491,9 +491,9 @@
     <string name="ait_measurement_unit">Unidade</string>
     <string name="ait_measuremet_equipment_model">Modelo</string>
     <string name="ait_measuremet_performed">Medição realizada</string>
-    <string name="end_ait_button">Finalizar Auto</string>
-    <string name="ait_btn_discart">Descartar Auto</string>
-    <string name="ait_check_data">Conferir Auto</string>
+    <string name="end_ait_button">Finalizar</string>
+    <string name="ait_btn_discart">Descartar</string>
+    <string name="ait_check_data">Conferir</string>
     <string name="btn_verify">Conferir</string>
     <string name="clear">Apagar</string>
     <string name="ait_cnh_collection">Recolhimento da CNH</string>
@@ -686,5 +686,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="clear_data">Botão para apagar dados</string>
     <string name="save_button">Botão para salvar dados</string>
+    <string name="delete_photo">Deletar foto</string>
 
 </resources>

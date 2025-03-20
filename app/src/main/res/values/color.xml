@@ -50,6 +50,8 @@
     <color name="yellow_light">#fda740</color>
     <color name="yellow_deep">#ff9702</color>
     <color name="yellow_deep_2">#f67a00</color>
+    <color name="yellow_basic">#f5912f</color>
+    <color name="yellow_basic_p">#F8902B</color>
     <color name="yellow_gray">#fedcb2</color>
     <color name="yellow_white">#F7F0E8</color>
     <color name="gray_1">#999999</color>
@@ -57,6 +59,8 @@
     <color name="gray_3">#e7e8e9</color>
     <color name="gray_4">#dfdedf</color>
     <color name="gray_5">#646464</color>
+    <color name="gray_6">#b5b5b5</color>
+    <color name="gray_6_p">#b5b5b9</color>
     <color name="white">#ffffff</color>
     <color name="line_color">#c5c5c5</color>
     <color name="background_color">#e4e4e4</color>

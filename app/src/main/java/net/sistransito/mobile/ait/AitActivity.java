@@ -179,7 +179,7 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	}
 
 	private void initializedView() {
-		tabButtons = new ImageView[]{ // Inicializa o array
+		tabButtons = new ImageView[]{
 			(ImageView) findViewById(R.id.im_btn_tab_vehicle),
 			(ImageView) findViewById(R.id.im_btn_tab_conductor),
 			(ImageView) findViewById(R.id.im_btn_tab_address),
@@ -196,9 +196,9 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 	}
 
 	private void setCurrentTabSelectedItens(int position) {
-		if (tabButtons != null) { // Verifica se o array foi inicializado
+		if (tabButtons != null) {
 			for (int i = 0; i < tabButtons.length; i++) {
-				if (tabButtons[i] != null) { // Verifica se o ImageView não é nulo
+				if (tabButtons[i] != null) {
 					tabButtons[i].setSelected(i == position);
 				}
 			}

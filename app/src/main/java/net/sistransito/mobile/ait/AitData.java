@@ -7,6 +7,7 @@ import net.sistransito.mobile.appconstants.AppConstants;
 import net.sistransito.mobile.database.InfractionDatabaseHelper;
 import net.sistransito.mobile.timeandime.TimeAndIme;
 import net.sistransito.R;
+import net.sistransito.mobile.utility.Routine;
 
 import java.io.Serializable;
 
@@ -100,7 +101,6 @@ public class AitData implements Serializable {
 	private String AitLatitude;
 	private String AitLongitude;
 	private String aitDateTime;
-	private String photo1, photo2, photo3, photo4;
 	private String completedStatus;
 
 	public String getApproach() {
@@ -109,38 +109,6 @@ public class AitData implements Serializable {
 
 	public void setApproach(String approach) {
 		this.approach = approach;
-	}
-
-	public String getPhoto1() {
-		return photo1;
-	}
-
-	public void setPhoto1(String photo1) {
-		this.photo1 = photo1;
-	}
-
-	public String getPhoto2() {
-		return photo2;
-	}
-
-	public void setPhoto2(String photo2) {
-		this.photo2 = photo2;
-	}
-
-	public String getPhoto3() {
-		return photo3;
-	}
-
-	public void setPhoto3(String photo3) {
-		this.photo3 = photo3;
-	}
-
-	public String getPhoto4() {
-		return photo4;
-	}
-
-	public void setPhoto4(String photo4) {
-		this.photo4 = photo4;
 	}
 
 	public String getTcaNumber() {
@@ -605,7 +573,7 @@ public class AitData implements Serializable {
 		address = aitDate = aitTime = idAit = plate = vehicleModel = chassi = renavam = vehycleColor = vehicleSpecies = vehicleCategory = approach = conductorName =
 				foreignDriver = driverCountry = qualifiedDriver = documentNumber = cnhPpd = cnhState = documentType = infraction =
 						framingCode = unfolding = article = cityCode =
-				city = state = address = aitDate = aitTime = description = equipmentBrand = equipmentModel = serialNumber = measurementPerformed
+				city = state = description = equipmentBrand = equipmentModel = serialNumber = measurementPerformed
                         = regulatedValue = valueConsidered = tcaNumber = alcoholTestNumber = retreat = procedures =
 				observation = shipperIdentification = cpfShipper = cnpShipper =
 						carrierIdentification = cpfCarrier = cnpjCarrier = cancellationStatus = reasonForCancellation
@@ -613,315 +581,252 @@ public class AitData implements Serializable {
 	}
 
 	public void setAitDataFromCursor(Cursor myCursor) {
-
-		this.setAitNumber(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_NUMBER)));
-		this.setPlate(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.PLATE)));
-		this.setStateVehicle(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.VEHICLE_STATE)));
-		this.setRenavam(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.RENAVAM)));
-		this.setChassi(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CHASSI)));
-		this.setCountry(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.COUNTRY)));
-        this.setVehicleBrand(myCursor.getString(myCursor
-                .getColumnIndex(InfractionDatabaseHelper.VEHICLE_BRAND)));
-		this.setVehicleModel(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.VEHICLE_MODEL)));
-		this.setVehycleColor(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.VEHICLE_COLOR)));
-		this.setVehicleSpecies(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.SPECIES)));
-		this.setVehicleCategory(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CATEGORY)));
-		this.setApproach(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.APPROACH)));
-		this.setConductorName(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.DRIVER_NAME)));
-		this.setForeignDriver(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.DRIVER_FOREIGN)));
-		this.setDriverCountry(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.DRIVER_COUNTRY)));
-		this.setQualifiedDriver(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.ENABLED_DRIVER)));
-		this.setCnhPpd(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.DRIVER_LICENSE)));
-		this.setCnhState(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.DRIVER_LICENSE_STATE)));
-		this.setDocumentType(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.DOCUMENT_TYPE)));
-		this.setDocumentNumber(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.DOCUMENT_NUMBER)));
-		this.setInfraction(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.INFRACTION)));
-		this.setFramingCode(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.FLAMING_CODE)));
-		this.setUnfolding(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.UNFOLDING)));
-		this.setArticle(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.ARTICLE)));
-		this.setCityCode(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CITY_CODE)));
-		this.setCity(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CITY)));
-		this.setState(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.STATE)));
-		this.setAddress(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.ADDRESS)));
-		this.setAitDate(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_DATE)));
-		this.setAitTime(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_TIME)));
-		this.setDescription(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.EQUIPMENT_DESCRIPTION)));
-		this.setEquipmentBrand(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.EQUIPMENT_BRAND)));
-		this.setEquipmentModel(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.EQUIPMENT_MODEL)));
-		this.setSerialNumber(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.EQUIPMENT_SERIAL)));
-		this.setMeasurementPerformed(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.MEASUREMENT_PERFORMED)));
-        this.setRegulatedValue(myCursor.getString(myCursor
-                .getColumnIndex(InfractionDatabaseHelper.REGULATED_VALUE)));
-		this.setValueConsidered(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.VALUE_CONSIDERED)));
-		this.setTcaNumber(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.TCA_NUMBER)));
-		this.setAlcoholTestNumber(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.ALCOHOL_TEST_NUMBER)));
-		this.setRetreat(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.RETREAT)));
-		this.setProcedures(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.PROCEDURES)));
-		this.setObservation(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.OBSERVATION)));
-		this.setShipperIdentification(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.SHIPPER_IDENTIFICATION)));
-		this.setCpfShipper(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CPF_SHIPPER)));
-		this.setCnpShipper(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CNPJ_SHIPPER)));
-		this.setCarrierIdentification(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CARRIER_IDENTIFICATION)));
-		this.setCpfCarrier(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CPF_CARRIER)));
-		this.setCnpjCarrier(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CNPJ_CARRIER)));
-		this.setCancellationStatus(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.CANCEL_STATUS)));
-		this.setReasonForCancellation(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.REASON_FOR_CANCEL)));
-		this.setSyncStatus(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.SYNC_STATUS)));
-		this.setAitDateTime(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_DATE_TIME)));
-		this.setPhoto1(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_PHOTO1)));
-		this.setPhoto2(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_PHOTO2)));
-		this.setPhoto3(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_PHOTO3)));
-		this.setPhoto4(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.AIT_PHOTO4)));
-		this.setCompletedStatus(myCursor.getString(myCursor
-				.getColumnIndex(InfractionDatabaseHelper.COMPLETED_STATUS)));
+		setColumnString(myCursor, InfractionDatabaseHelper.AIT_NUMBER, value -> this.setAitNumber(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.PLATE, value -> this.setPlate(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.VEHICLE_STATE, value -> this.setStateVehicle(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.RENAVAM, value -> this.setRenavam(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CHASSI, value -> this.setChassi(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.COUNTRY, value -> this.setCountry(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.VEHICLE_BRAND, value -> this.setVehicleBrand(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.VEHICLE_MODEL, value -> this.setVehicleModel(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.VEHICLE_COLOR, value -> this.setVehycleColor(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.SPECIES, value -> this.setVehicleSpecies(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CATEGORY, value -> this.setVehicleCategory(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.APPROACH, value -> this.setApproach(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.DRIVER_NAME, value -> this.setConductorName(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.DRIVER_FOREIGN, value -> this.setForeignDriver(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.DRIVER_COUNTRY, value -> this.setDriverCountry(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.ENABLED_DRIVER, value -> this.setQualifiedDriver(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.DRIVER_LICENSE, value -> this.setCnhPpd(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.DRIVER_LICENSE_STATE, value -> this.setCnhState(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.DOCUMENT_TYPE, value -> this.setDocumentType(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.DOCUMENT_NUMBER, value -> this.setDocumentNumber(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.INFRACTION, value -> this.setInfraction(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.FLAMING_CODE, value -> this.setFramingCode(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.UNFOLDING, value -> this.setUnfolding(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.ARTICLE, value -> this.setArticle(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CITY_CODE, value -> this.setCityCode(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CITY, value -> this.setCity(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.STATE, value -> this.setState(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.ADDRESS, value -> this.setAddress(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.AIT_DATE, value -> this.setAitDate(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.AIT_TIME, value -> this.setAitTime(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.EQUIPMENT_DESCRIPTION, value -> this.setDescription(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.EQUIPMENT_BRAND, value -> this.setEquipmentBrand(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.EQUIPMENT_MODEL, value -> this.setEquipmentModel(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.EQUIPMENT_SERIAL, value -> this.setSerialNumber(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.MEASUREMENT_PERFORMED, value -> this.setMeasurementPerformed(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.REGULATED_VALUE, value -> this.setRegulatedValue(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.VALUE_CONSIDERED, value -> this.setValueConsidered(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.TCA_NUMBER, value -> this.setTcaNumber(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.ALCOHOL_TEST_NUMBER, value -> this.setAlcoholTestNumber(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.RETREAT, value -> this.setRetreat(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.PROCEDURES, value -> this.setProcedures(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.OBSERVATION, value -> this.setObservation(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.SHIPPER_IDENTIFICATION, value -> this.setShipperIdentification(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CPF_SHIPPER, value -> this.setCpfShipper(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CNPJ_SHIPPER, value -> this.setCnpShipper(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CARRIER_IDENTIFICATION, value -> this.setCarrierIdentification(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CPF_CARRIER, value -> this.setCpfCarrier(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CNPJ_CARRIER, value -> this.setCnpjCarrier(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.CANCEL_STATUS, value -> this.setCancellationStatus(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.REASON_FOR_CANCEL, value -> this.setReasonForCancellation(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.SYNC_STATUS, value -> this.setSyncStatus(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.AIT_DATE_TIME, value -> this.setAitDateTime(value));
+		setColumnString(myCursor, InfractionDatabaseHelper.COMPLETED_STATUS, value -> this.setCompletedStatus(value));
 
 		this.setStoreFullData(true);
+	}
 
+	private void setColumnString(Cursor cursor, String columnName, java.util.function.Consumer<String> setter) {
+		int columnIndex = cursor.getColumnIndex(columnName);
+		if (columnIndex >= 0) {
+			setter.accept(cursor.getString(columnIndex));
+		}
 	}
 
 	public String getAitListViewData(Context context) {
 		String aitCheckData =
 				context.getResources().getString(R.string.plate_title)
-						+ getNewLine()
+						+ Routine.getNewline(1)
 						+ plate
-						+ getTwoLines()
+						+ Routine.getNewline(2)
 						+ context.getResources().getString(R.string.renavam_number)
-						+ getNewLine()
+						+ Routine.getNewline(1)
 						+ renavam
-						+ getTwoLines()
-				+ context.getResources().getString(R.string.chassi_number)
-				+ getNewLine()
-				+ chassi
-				+ getTwoLines()
-		        + context.getResources().getString(R.string.rrd_state)
-				+ getNewLine()
-				+ state
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_country_name)
-				+ getNewLine()
-				+ country
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.chassi_number)
+						+ Routine.getNewline(1)
+						+ chassi
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.rrd_state)
+						+ Routine.getNewline(1)
+						+ state
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_country_name)
+						+ Routine.getNewline(1)
+						+ country
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.ait_vehicle_color)
-				+ getNewLine()
-				+ vehycleColor
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.species)
-				+ getNewLine()
-				+ vehicleSpecies
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.category)
-				+ getNewLine()
-				+ vehicleCategory
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.driver_name)
-				+ getNewLine()
-				+ conductorName
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.case_driver_is_foreign)
-				+ getNewLine()
-				+ foreignDriver
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.driver_country)
-				+ getNewLine()
-				+ driverCountry
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.case_driver_qualified)
-				+ getNewLine()
-				+ qualifiedDriver
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_cnh_ppd)
-				+ getNewLine()
-				+ cnhPpd
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_state_cnh)
-				+ getNewLine()
-				+ cnhState
-				+ getTwoLines()
+						+ Routine.getNewline(1)
+						+ vehycleColor
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.species)
+						+ Routine.getNewline(1)
+						+ vehicleSpecies
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.category)
+						+ Routine.getNewline(1)
+						+ vehicleCategory
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.driver_name)
+						+ Routine.getNewline(1)
+						+ conductorName
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.case_driver_is_foreign)
+						+ Routine.getNewline(1)
+						+ foreignDriver
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.driver_country)
+						+ Routine.getNewline(1)
+						+ driverCountry
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.case_driver_qualified)
+						+ Routine.getNewline(1)
+						+ qualifiedDriver
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_cnh_ppd)
+						+ Routine.getNewline(1)
+						+ cnhPpd
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_state_cnh)
+						+ Routine.getNewline(1)
+						+ cnhState
+						+ Routine.getNewline(2)
 
-				+ context.getResources().getString(
+						+ context.getResources().getString(
 						R.string.type_document_presented)
-				+ getNewLine()
-				+ documentType
-				+ getNewLine()
-				+ documentNumber
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.infraction)
-				+ getNewLine()
-				+ infraction
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_framing_code)
-				+ getNewLine()
-				+ framingCode
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_unfold_code)
-				+ getNewLine()
-				+ unfolding
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_legal_support)
-				+ getNewLine()
-				+ article
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_city_name)
-				+ getNewLine()
-				+ city
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(1)
+						+ documentType
+						+ Routine.getNewline(1)
+						+ documentNumber
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.infraction)
+						+ Routine.getNewline(1)
+						+ infraction
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_framing_code)
+						+ Routine.getNewline(1)
+						+ framingCode
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_unfold_code)
+						+ Routine.getNewline(1)
+						+ unfolding
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_legal_support)
+						+ Routine.getNewline(1)
+						+ article
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_city_name)
+						+ Routine.getNewline(1)
+						+ city
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.ait_city_code)
-				+ getNewLine()
-				+ cityCode
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_state)
-				+ getNewLine()
-				+ state
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_location)
-				+ getNewLine()
-				+ address
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.date_field)
-				+ getNewLine()
-				+ aitDate
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.time_field)
-				+ getNewLine()
-				+ aitTime
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(1)
+						+ cityCode
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_state)
+						+ Routine.getNewline(1)
+						+ state
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_location)
+						+ Routine.getNewline(1)
+						+ address
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.date_field)
+						+ Routine.getNewline(1)
+						+ aitDate
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.time_field)
+						+ Routine.getNewline(1)
+						+ aitTime
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.ait_equipment_description)
-				+ getNewLine()
-				+ description
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_equipment_brand)
-				+ getNewLine()
-				+ equipmentBrand
-				+ getTwoLines()
+						+ Routine.getNewline(1)
+						+ description
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_equipment_brand)
+						+ Routine.getNewline(1)
+						+ equipmentBrand
+						+ Routine.getNewline(2)
 
-				+ context.getResources().getString(R.string.ait_equipment_model)
-				+ getNewLine()
-				+ equipmentModel
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ context.getResources().getString(R.string.ait_equipment_model)
+						+ Routine.getNewline(1)
+						+ equipmentModel
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.ait_serial_number)
-				+ getNewLine()
-				+ serialNumber
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_measuremet_performed)
-				+ getNewLine()
-				+ measurementPerformed
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(1)
+						+ serialNumber
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_measuremet_performed)
+						+ Routine.getNewline(1)
+						+ measurementPerformed
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.ait_considered_value)
-				+ getNewLine()
-				+ valueConsidered
-						+ getTwoLines()
+						+ Routine.getNewline(1)
+						+ valueConsidered
+						+ Routine.getNewline(2)
 						+ context.getResources().getString(
 						R.string.ait_tca_number)
-						+ getNewLine()
+						+ Routine.getNewline(1)
 						+ tcaNumber
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.ait_sample_number_in_tca)
-				+ getNewLine()
-				+ alcoholTestNumber
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(1)
+						+ alcoholTestNumber
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.collection_documents)
-				+ getNewLine()
-				+ retreat
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.procedures)
-				+ getNewLine()
-				+ procedures
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.observations)
-				+ getNewLine()
-				+ observation
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(1)
+						+ retreat
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.procedures)
+						+ Routine.getNewline(1)
+						+ procedures
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.observations)
+						+ Routine.getNewline(1)
+						+ observation
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.ait_shipper_identification)
-				+ getNewLine()
-				+ shipperIdentification
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_cnpj_cpf_text)
-				+ getNewLine()
-				+ cpfShipper
-				+ getTwoLines()
-				+ context.getResources().getString(
+						+ Routine.getNewline(1)
+						+ shipperIdentification
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_cnpj_cpf_text)
+						+ Routine.getNewline(1)
+						+ cpfShipper
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(
 						R.string.carrier_identification)
-				+ getTwoLines()
-				+ carrierIdentification
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.ait_cnpj_cpf_text)
-				+ getTwoLines()
-				+ cpfCarrier
-				+ getTwoLines()
-				+ context.getResources().getString(R.string.cancel_ait_title)
-				+ getTwoLines()
-				+ reasonForCancellation +
-				getNewLine();
+						+ Routine.getNewline(2)
+						+ carrierIdentification
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.ait_cnpj_cpf_text)
+						+ Routine.getNewline(2)
+						+ cpfCarrier
+						+ Routine.getNewline(2)
+						+ context.getResources().getString(R.string.cancel_ait_title)
+						+ Routine.getNewline(2)
+						+ reasonForCancellation +
+						Routine.getNewline(1);
 		return aitCheckData;
 	}
 
-	public String getNewLine() {
-		return AppConstants.NEW_LINE;
-	}
-
-	public String getTwoLines() {
-		return AppConstants.NEW_LINE + AppConstants.NEW_LINE;
-	}
 }

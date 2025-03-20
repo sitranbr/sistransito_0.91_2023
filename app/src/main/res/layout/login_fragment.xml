@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/widght_margin_top_2"
         android:layout_marginTop="@dimen/widght_margin_top_2"
-        android:background="@drawable/btn_whight"
+        android:background="@drawable/btn_white"
         android:drawableLeft="@drawable/signup_name_2"
         android:drawablePadding="@dimen/width_padding"
         android:gravity="left|center_vertical"
