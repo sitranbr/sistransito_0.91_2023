@@ -202,4 +202,19 @@ public class TcaDatabaseAdapter {
 				TcaDatabaseHelper.NUMERO_TCA + "=?",
 				new String[] { numero_tca });
 	}
+
+	/**
+	 * Exclui todos os dados da tabela TCA
+	 * @return Número de registros excluídos
+	 */
+	public int deleteAllTcaData() {
+		try {
+			int deletedRows = this.database.delete(TcaDatabaseHelper.TABLE_NAME, null, null);
+			android.util.Log.d("TcaDatabaseAdapter", "Excluídos " + deletedRows + " TCAs");
+			return deletedRows;
+		} catch (Exception e) {
+			android.util.Log.e("TcaDatabaseAdapter", "Erro ao excluir todos os TCAs", e);
+			return 0;
+		}
+	}
 }

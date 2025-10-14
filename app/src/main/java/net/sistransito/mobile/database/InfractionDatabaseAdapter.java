@@ -448,6 +448,27 @@ public class InfractionDatabaseAdapter {
 		return deletedRows > 0;
 	}
 
+	/**
+	 * Exclui todos os dados da tabela de infrações (AITs)
+	 * @return Número de registros excluídos
+	 */
+	public int deleteAllInfractions() {
+		try {
+			// Primeiro excluir todas as fotos relacionadas
+			int photosDeleted = database.delete(InfractionDatabaseHelper.PHOTO_TABLE_NAME, null, null);
+			Log.d("InfractionDatabaseAdapter", "Excluídas " + photosDeleted + " fotos de AIT");
+			
+			// Depois excluir todos os AITs
+			int infractionsDeleted = database.delete(InfractionDatabaseHelper.TABLE_NAME, null, null);
+			Log.d("InfractionDatabaseAdapter", "Excluídos " + infractionsDeleted + " AITs");
+			
+			return infractionsDeleted;
+		} catch (Exception e) {
+			Log.e("InfractionDatabaseAdapter", "Erro ao excluir todos os AITs", e);
+			return 0;
+		}
+	}
+
 	public boolean insertAitDataPhotos(String ait, String local, String photo) {
 
 		ContentValues values = new ContentValues();

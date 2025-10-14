@@ -430,4 +430,19 @@ public class TavDatabaseAdapter {
 			}
 		}
 	}
+
+	/**
+	 * Exclui todos os dados da tabela TAV
+	 * @return Número de registros excluídos
+	 */
+	public int deleteAllTavData() {
+		try {
+			int deletedRows = this.database.delete(TavDatabaseHelper.TABLE_NAME, null, null);
+			Log.d("TavDatabaseAdapter", "Excluídos " + deletedRows + " TAVs");
+			return deletedRows;
+		} catch (Exception e) {
+			Log.e("TavDatabaseAdapter", "Erro ao excluir todos os TAVs", e);
+			return 0;
+		}
+	}
 }

@@ -47,7 +47,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="left|center_vertical"
+                android:gravity="start|center_vertical"
                 android:orientation="vertical" >
 
                 <TextView
@@ -63,7 +63,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:gravity="right|center_vertical"
+                android:gravity="end|center_vertical"
                 android:orientation="vertical" >
 
                 <EditText
@@ -115,7 +115,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="left|center_vertical"
+                android:gravity="start|center_vertical"
                 android:orientation="vertical" >
 
                 <TextView
@@ -131,7 +131,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="0.5"
-                android:gravity="right|center_vertical"
+                android:gravity="end|center_vertical"
                 android:orientation="vertical" >
 
                 <EditText
@@ -167,9 +167,9 @@
             android:padding="@dimen/width_padding"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentTop="true"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             android:text="@string/btn_update" />
 
 
@@ -206,7 +206,7 @@
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="left|center_vertical"
+                    android:gravity="start|center_vertical"
                     android:orientation="vertical" >
 
                     <TextView
@@ -221,7 +221,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="right|center_vertical"
+                    android:gravity="end|center_vertical"
                     android:orientation="vertical" >
 
                     <com.rey.material.widget.CheckBox
@@ -230,7 +230,8 @@
                         android:id="@+id/checkBoxVibarte"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true" />
+                        android:checked="true"
+                        android:contentDescription="@string/vibrate" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -257,7 +258,7 @@
                     android:layout_width="0dip"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="left|center_vertical"
+                    android:gravity="start|center_vertical"
                     android:orientation="vertical" >
 
                     <TextView
@@ -272,7 +273,7 @@
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:gravity="right|center_vertical"
+                    android:gravity="end|center_vertical"
                     android:orientation="vertical" >
 
                     <com.rey.material.widget.CheckBox
@@ -281,7 +282,8 @@
                         android:id="@+id/checkBoxRington"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="true" />
+                        android:checked="true"
+                        android:contentDescription="@string/ringtone" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -324,7 +326,7 @@
                 android:layout_width="0dip"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="left|center_vertical"
+                android:gravity="start|center_vertical"
                 android:orientation="vertical" >
 
                 <TextView
@@ -339,7 +341,7 @@
                 android:layout_width="0dip"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="right|center_vertical"
+                android:gravity="end|center_vertical"
                 android:orientation="vertical" >
 
                 <com.rey.material.widget.CheckBox
@@ -348,7 +350,8 @@
                     android:id="@+id/checkBoxAutoBackup"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:checked="true" />
+                    android:checked="true"
+                    android:contentDescription="@string/ait_backup" />
             </LinearLayout>
         </LinearLayout>
 
@@ -393,27 +396,75 @@
                 android:padding="@dimen/width_padding"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
                 android:layout_alignParentTop="true"
                 android:text="@string/start_sync" />
 
             <TextView
-                android:paddingRight="@dimen/width_padding_15"
+                android:paddingEnd="@dimen/width_padding_15"
                 android:id="@+id/textView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/btn_sync"
-                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_toLeftOf="@+id/btn_sync"
-                android:gravity="left|center_vertical"
+                android:layout_toStartOf="@+id/btn_sync"
+                android:gravity="start|center_vertical"
                 android:text="@string/start_sync_info"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textColor="@color/gray_5"
                 android:layout_marginBottom="@dimen/width_padding_2" />
         </RelativeLayout>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/width_margin_8"
+            android:paddingTop="@dimen/width_padding"
+            android:text="@string/factory_reset_title"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/gray_5"
+            android:textStyle="bold" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/indicator_height_4"
+            android:background="@color/line_color" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/width_margin_8" >
+
+            <com.rey.material.widget.Button
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:background="@drawable/btn_red"
+                style="@style/Material.Drawable.Ripple.Wave"
+                android:id="@+id/btn_factory_reset"
+                android:padding="@dimen/width_padding"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentTop="true"
+                android:text="@string/factory_reset_button" />
+
+            <TextView
+                android:paddingEnd="@dimen/width_padding_15"
+                android:id="@+id/tv_factory_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/btn_factory_reset"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_toStartOf="@+id/btn_factory_reset"
+                android:gravity="start|center_vertical"
+                android:text="@string/factory_reset_info"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/gray_5"
+                android:layout_marginBottom="@dimen/width_padding_2" />
+        </RelativeLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 

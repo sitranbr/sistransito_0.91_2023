@@ -352,4 +352,19 @@ public class AitPJDatabaseAdapter {
                 new String[] { ait });
     }
 
+    /**
+     * Exclui todos os dados da tabela auto_pj
+     * @return Número de registros excluídos
+     */
+    public int deleteAllPJData() {
+        try {
+            int deletedRows = this.database.delete(AitPJDatabaseHelper.TABLE_NAME, null, null);
+            Log.d("AitPJDatabaseAdapter", "Excluídos " + deletedRows + " registros PJ");
+            return deletedRows;
+        } catch (Exception e) {
+            Log.e("AitPJDatabaseAdapter", "Erro ao excluir todos os dados PJ", e);
+            return 0;
+        }
+    }
+
 }

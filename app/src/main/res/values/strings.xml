@@ -689,4 +689,9 @@
     <string name="save_button">Botão para salvar dados</string>
     <string name="delete_photo">Deletar foto</string>
 
+    <!-- Factory Reset Strings -->
+    <string name="factory_reset_title">Reset de Fábrica</string>
+    <string name="factory_reset_button">Fábrica</string>
+    <string name="factory_reset_info">Exclui todos os dados do sistema</string>
+
 </resources>

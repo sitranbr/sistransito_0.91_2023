@@ -105,6 +105,21 @@ public class RrdDatabaseAdapter {
 		return database.delete(tableName, whereClause, whereArgs);
 	}
 
+	/**
+	 * Exclui todos os dados da tabela RRD
+	 * @return Número de registros excluídos
+	 */
+	public int deleteAllRrdData() {
+		try {
+			int deletedRows = database.delete(RrdDatabaseHelper.TABLE_NAME, null, null);
+			android.util.Log.d("RrdDatabaseAdapter", "Excluídos " + deletedRows + " RRDs");
+			return deletedRows;
+		} catch (Exception e) {
+			android.util.Log.e("RrdDatabaseAdapter", "Erro ao excluir todos os RRDs", e);
+			return 0;
+		}
+	}
+
 	public Cursor getRrdCursorFromID(int id) {
 		Cursor myCursor = this.database.query(RrdDatabaseHelper.TABLE_NAME, null,
 				RrdDatabaseHelper.COLUMN_ID + "=?", new String[] { id + "" },
