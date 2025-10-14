@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.viewpagerindicator.UnderlinePageIndicator;
@@ -173,7 +172,7 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 		if (aitData.isStoreFullData() && position == 0) {
 			return;
 		}
-		setCurrentTabSelectedItens(position);
+		setCurrentTabSelectedItems(position);
 		pageSubtitle.setCurrentItem(position);
 		pager.setCurrentItem(position);
 	}
@@ -195,7 +194,7 @@ public class AitActivity extends AppCompatActivity implements OnClickListener {
 		imBtnBack.setOnClickListener(this);
 	}
 
-	private void setCurrentTabSelectedItens(int position) {
+	private void setCurrentTabSelectedItems(int position) {
 		if (tabButtons != null) {
 			for (int i = 0; i < tabButtons.length; i++) {
 				if (tabButtons[i] != null) {

@@ -12,15 +12,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/show_tav_print"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/width_margin_8"
-            android:background="@drawable/print_normal" />
+            android:layout_marginTop="4dp"
+            android:background="@drawable/print_button_background"
+            android:src="@drawable/ic_printer_vector"
+            android:contentDescription="@string/printing"
+            android:scaleType="centerInside"
+            android:padding="8dp" />
 
         <TextView
             android:id="@+id/tv_tav_subtitle"
@@ -29,7 +33,8 @@
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/width_margin_8"
-            android:text="Print data"
+            android:layout_marginRight="60dp"
+            android:text="@string/printing"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/black"
             android:textStyle="bold"

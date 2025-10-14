@@ -106,7 +106,7 @@ public class TavPrintBitmap extends BasePrintBitmap {
         bitmapFormat.createQuotes("NUMERAÇÃO DO TAV", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
         bitmapFormat.createNameTable("NÚMERO DO TAV", tavData.getTavNumber(), "NÚMERO DO AIT", aitData.getAitNumber(), true, PrintBitmapFormat.TableCellAlign.MIDDLE,
                 PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT, PrintBitmapFormat.TableCellAlign.MIDDLE);
-        bitmapFormat.createQuotes("MOTIVO PARA O RECOLHIMENTO", aitData.getArticle().toUpperCase(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
+        bitmapFormat.createQuotes("MOTIVO PARA O RECOLHIMENTO", "aitData.getArticle().toUpperCase()", true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);
 
         bitmapFormat.createQuotes("IDENTIFICAÇÃO DO LOCAL, DATA E HORA", Paint.Align.LEFT, true, false, PrintBitmapFormat.SUB_TITLE_FONT_SIZE);
         bitmapFormat.createQuotes("LOCAL", aitData.getAddress(), true, false, PrintBitmapFormat.NORMAL_FONT, PrintBitmapFormat.MEDIO_FONT);

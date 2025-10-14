@@ -285,6 +285,10 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 					etRegulatedValue.setText("");
 					etRegulatedValue.setText("0,00 Mg/L");
 					aitData.setRegulatedValue("0,00 Mg/L");
+					// Remover máscara de peso para equipamento de álcool
+					etMeasurementPerformed.removeTextChangedListener(new WeightMaskTextWatcher(etMeasurementPerformed, "measurement"));
+					etRegulatedValue.removeTextChangedListener(new WeightMaskTextWatcher(etRegulatedValue, "regulated"));
+					etValueConsidered.removeTextChangedListener(new WeightMaskTextWatcher(etValueConsidered, "considered"));
 				} else {
 					ifCalculate = false;
 					spinnerMeasuringUnit.setSelection(3);
@@ -296,6 +300,10 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 					etValueConsidered.setText("");
 					etRegulatedValue.setText("");
 					aitData.setRegulatedValue(null);
+					// Aplicar máscara de peso para equipamentos que não são de álcool
+					etMeasurementPerformed.addTextChangedListener(new WeightMaskTextWatcher(etMeasurementPerformed, "measurement"));
+					etRegulatedValue.addTextChangedListener(new WeightMaskTextWatcher(etRegulatedValue, "regulated"));
+					etValueConsidered.addTextChangedListener(new WeightMaskTextWatcher(etValueConsidered, "considered"));
 				}
 
 				if (realPosition == -1) {
@@ -831,18 +839,20 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 		public void onTextChanged(CharSequence arg0, int arg1, int arg2,
 								  int arg3) {
 
-			if (ifCalculate) {
-				if (etMeasurementPerformed.getText().toString().length() == 4) {
-				    etMeasurementPerformed.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
-				    etRegulatedValue.setEnabled(false);
-					etValueConsidered.setEnabled(false);
-					//etAitSampleNumber.requestFocus();
-				}
-			}else{
-				aitData.setRegulatedValue(etRegulatedValue.getText().toString() + " " + unitMeasureCalculation);
-				etRegulatedValue.setEnabled(true);
-				etValueConsidered.setEnabled(true);
+		if (ifCalculate) {
+			if (etMeasurementPerformed.getText().toString().length() == 4) {
+			    etMeasurementPerformed.setFilters(new InputFilter[]{new InputFilter.LengthFilter(4)});
+			    etRegulatedValue.setEnabled(false);
+				etValueConsidered.setEnabled(false);
+				//etAitSampleNumber.requestFocus();
 			}
+		}else{
+			// Remover filtros de tamanho quando não está calculando
+			etMeasurementPerformed.setFilters(new InputFilter[0]);
+			aitData.setRegulatedValue(etRegulatedValue.getText().toString() + " " + unitMeasureCalculation);
+			etRegulatedValue.setEnabled(true);
+			etValueConsidered.setEnabled(true);
+		}
 
 			if (etShipperCpf.getText().toString().length() == 11) {
 
@@ -886,6 +896,127 @@ public class TabAitInfractionFragment extends Fragment implements OnClickListene
 	@Override
 	public void onClick(View v) {
 
+	}
+
+	/**
+	 * TextWatcher para aplicar máscara de peso (formato: 999.999,99)
+	 */
+	private class WeightMaskTextWatcher implements TextWatcher {
+		private boolean isUpdating = false;
+		private String oldText = "";
+		private EditText targetField;
+		private String fieldType;
+
+		public WeightMaskTextWatcher(EditText field, String type) {
+			this.targetField = field;
+			this.fieldType = type;
+		}
+
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+			oldText = s.toString();
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count) {
+			// Não processar se já está atualizando para evitar loop infinito
+			if (isUpdating) return;
+
+			String newText = s.toString();
+			
+			// Remover todos os caracteres não numéricos exceto vírgula e ponto
+			String cleanText = newText.replaceAll("[^0-9.,]", "");
+			
+			// Se não há texto, não fazer nada
+			if (cleanText.isEmpty()) {
+				isUpdating = true;
+				targetField.setText("");
+				targetField.setSelection(0);
+				isUpdating = false;
+				return;
+			}
+
+			// Garantir que há apenas uma vírgula (para decimais)
+			int commaCount = cleanText.length() - cleanText.replace(",", "").length();
+			if (commaCount > 1) {
+				cleanText = cleanText.replace(",", "").replaceFirst("(\\d+)(\\d{2})$", "$1,$2");
+			}
+
+			// Garantir que há apenas pontos para milhares
+			String[] parts = cleanText.split(",");
+			if (parts.length > 0) {
+				// Formatar a parte inteira com pontos para milhares
+				String integerPart = parts[0].replaceAll("\\D", "");
+				if (!integerPart.isEmpty()) {
+					// Adicionar pontos para milhares (a cada 3 dígitos)
+					StringBuilder formatted = new StringBuilder();
+					for (int i = 0; i < integerPart.length(); i++) {
+						if (i > 0 && (integerPart.length() - i) % 3 == 0) {
+							formatted.append(".");
+						}
+						formatted.append(integerPart.charAt(i));
+					}
+					parts[0] = formatted.toString();
+				}
+			}
+
+			// Reconstruir o texto formatado
+			String formattedText = parts[0];
+			if (parts.length > 1) {
+				// Limitar a parte decimal a 2 dígitos
+				String decimalPart = parts[1].replaceAll("\\D", "");
+				if (decimalPart.length() > 2) {
+					decimalPart = decimalPart.substring(0, 2);
+				}
+				formattedText += "," + decimalPart;
+			}
+
+			// Atualizar o campo apenas se o texto mudou
+			if (!formattedText.equals(oldText)) {
+				isUpdating = true;
+				targetField.setText(formattedText);
+				// Posicionar o cursor no final
+				targetField.setSelection(formattedText.length());
+				isUpdating = false;
+			}
+		}
+
+		@Override
+		public void afterTextChanged(Editable s) {
+			// Atualizar o aitData com o valor formatado
+			if (!isUpdating && s != null) {
+				String value = s.toString().replace(".", "").replace(",", ".");
+				try {
+					Double.parseDouble(value); // Validar se é um número válido
+					
+					// Atualizar o campo específico no aitData
+					switch (fieldType) {
+						case "measurement":
+							aitData.setMeasurementPerformed(s.toString() + " " + unitMeasureCalculation);
+							break;
+						case "regulated":
+							aitData.setRegulatedValue(s.toString() + " " + unitMeasureCalculation);
+							break;
+						case "considered":
+							aitData.setValueConsidered(s.toString() + " " + unitMeasureCalculation);
+							break;
+					}
+				} catch (NumberFormatException e) {
+					// Se não conseguir converter, usar o texto como está
+					switch (fieldType) {
+						case "measurement":
+							aitData.setMeasurementPerformed(s.toString() + " " + unitMeasureCalculation);
+							break;
+						case "regulated":
+							aitData.setRegulatedValue(s.toString() + " " + unitMeasureCalculation);
+							break;
+						case "considered":
+							aitData.setValueConsidered(s.toString() + " " + unitMeasureCalculation);
+							break;
+					}
+				}
+			}
+		}
 	}
 
 }

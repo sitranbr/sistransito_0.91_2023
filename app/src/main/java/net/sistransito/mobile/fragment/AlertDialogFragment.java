@@ -3,6 +3,8 @@ package net.sistransito.mobile.fragment;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.appcompat.app.AlertDialog;
 
@@ -20,6 +22,7 @@ public class AlertDialogFragment extends DialogFragment {
         return frag;
     }
 
+    @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         int title = getArguments().getInt("title");

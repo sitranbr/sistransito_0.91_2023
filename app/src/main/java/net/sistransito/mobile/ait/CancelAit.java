@@ -23,7 +23,7 @@ public class CancelAit {
 
     private Context context;
 
-    String BASE_URL = "http://api.sistran.app/api/";
+    String BASE_URL = "http://talonario.sistran.app/api/";
 
     public CancelAit(Context context) {
         databaseHelper = new InfractionDatabaseHelper(context);

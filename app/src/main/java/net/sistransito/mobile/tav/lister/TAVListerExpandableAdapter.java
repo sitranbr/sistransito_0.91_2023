@@ -102,7 +102,7 @@ public class TAVListerExpandableAdapter extends CursorTreeAdapter {
 			boolean isLastChild, View view, ViewGroup parent) {
 		// final int gPosition = groupPosition;
 		TextView tvTavChildview;
-		Button btnTavPrint;
+		android.widget.ImageButton btnTavPrint;
 		View mView = null;
 		if (view != null) {
 			mView = view;
@@ -118,7 +118,7 @@ public class TAVListerExpandableAdapter extends CursorTreeAdapter {
 
 		tvTavChildview.setText(tavData.getTCAListViewData(mycontext));
 
-		btnTavPrint = (Button) mView.findViewById(R.id.show_tav_print);
+		btnTavPrint = (android.widget.ImageButton) mView.findViewById(R.id.show_tav_print);
 		btnTavPrint.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

@@ -11,8 +11,8 @@ import net.sistransito.mobile.database.TinyDB;
 public class WebClient {
 
     //private static final String API_URl = "http://191.252.221.62:3000/";
-    private static final String API_URL = "http://api.sistran.app/api/";
-    private static final String BASE_URL = "http://api.sistran.app/api/";
+    private static final String API_URL = "http://talonario.sistran.app/api/";
+    private static final String BASE_URL = "http://talonario.sistran.app/api/";
     //private static final String BASE_URl = "http://sistransito.com.br/movel/dosis.pl?";
     //public static final String BASE_URl_TESTE = "http://131.221.217.144:8090/api/v1/renavam/consultaPorPlacaTeste?placa=QDA3455&idEstado=0";
 
@@ -28,7 +28,7 @@ public class WebClient {
     public static final String URL_EQUIPMENTS = BASE_URL + "equipment";
     public static final String URL_CLOGIN = BASE_URL + "clogin";
 
-    public static final String URL_REQUEST_SSL = "https://api.sistran.app/api/ait";
+    public static final String URL_REQUEST_SSL = "https://talonario.sistran.app/api/ait";
     public static final String URL_REQUEST = BASE_URL + "cancel";
 
     public static final String URL_REQUEST_CANCEL = "ait_canceled";

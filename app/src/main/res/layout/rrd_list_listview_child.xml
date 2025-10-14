@@ -12,23 +12,28 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/rl_btn_rrd_print"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/width_margin_8"
-            android:background="@drawable/print_normal" />
+            android:layout_marginTop="4dp"
+            android:background="@drawable/print_button_background"
+            android:src="@drawable/ic_printer_vector"
+            android:contentDescription="@string/print_rrd"
+            android:scaleType="centerInside"
+            android:padding="8dp" />
 
         <TextView
-            android:id="@+id/tv_tav_subtitle"
+            android:id="@+id/tv_rrd_subtitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/width_margin_8"
+            android:layout_marginRight="60dp"
             android:text="@string/print_rrd"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/black"
@@ -36,26 +41,590 @@
             android:typeface="sans" />
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/width_margin_8"
         android:layout_marginRight="@dimen/width_margin_8"
-        android:orientation="vertical" >
+        android:background="@color/white"
+                        android:padding="4dp">
+
+        <LinearLayout
+            android:id="@+id/rrd_table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical"
+            android:padding="1dp">
+
+            <!-- Cabeçalho do documento -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="2dp">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="6dp" />
+
+               
+
+            </LinearLayout>
+
+            <!-- IDENTIFICAÇÃO DO RECIBO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="IDENTIFICAÇÃO DO RECIBO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingBottom="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NÚMERO DO RRD"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_rrd_number_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="RD000003"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NÚMERO DO AIT"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_ait_number_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="TL000011"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="4dp" />
+
+            </LinearLayout>
+
+            <!-- RECEBEMOS DE -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RECEBEMOS DE"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="normal"
+                    android:gravity="start"
+                    android:padding="2dp" />
+
+                <TextView
+                    android:id="@+id/tv_driver_name_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="AGUINALDO LEIVA"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                    android:paddingStart="2dp" />
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/indicator_height_1"
-            android:background="@color/line_color" />
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="8dp" />
+
+            </LinearLayout>
+
+            <!-- O DOCUMENTO ABAIXO ESPECIFICADO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="O DOCUMENTO ABAIXO ESPECIFICADO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                    android:paddingBottom="6dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="3"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="CNH/PPD/ACC"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_registration_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="00852122525"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="VALIDADE"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_validity_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="30/04/2026"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
 
         <TextView
-            android:id="@+id/rrd_show_childview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/width_padding"
-            android:text="child"
+                            android:text="UF"
             android:textAppearance="?android:attr/textAppearanceSmall"
-            android:textColor="@color/black" />
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_state_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="PA"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="4dp" />
+
     </LinearLayout>
+
+            <!-- MOTIVO PARA O RECOLHIMENTO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="MOTIVO PARA O RECOLHIMENTO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="normal"
+                    android:gravity="start"
+                            android:padding="2dp" />
+
+                <TextView
+                    android:id="@+id/tv_reason_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="EXCESSO DE PESO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="start"
+                            android:padding="2dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="4dp" />
+
+            </LinearLayout>
+
+            <!-- DATA DO RECOLHIMENTO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="DATA DO RECOLHIMENTO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                            android:padding="2dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="DATA"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_date_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="13/10/2025"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="HORA"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_time_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="07:18"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="4dp" />
+
+            </LinearLayout>
+
+            <!-- MUNICÍPIO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="MUNICÍPIO"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_city_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="BELEM"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="UF"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_collection_state_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="PA"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="4dp" />
+
+            </LinearLayout>
+
+            <!-- RESPONSÁVEL PELO RECOLHIMENTO -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:background="@color/white"
+                android:padding="4dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="RESPONSÁVEL PELO RECOLHIMENTO"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:gravity="center"
+                            android:padding="2dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="NOME"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_agent_name_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Maria da Conceição Soares Bitencourt Neto"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:padding="4dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="MATRÍCULA"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="normal"
+                            android:gravity="start" />
+
+                        <TextView
+                            android:id="@+id/tv_agent_registration_value"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="5721333"
+                            android:textAppearance="?android:attr/textAppearanceSmall"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:padding="1dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/line_color"
+                    android:layout_marginVertical="4dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>

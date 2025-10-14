@@ -196,56 +196,86 @@ public class RrdData implements Serializable {
 
 
 	public String getRRDListViewData(Context context) {
-		Log.d("getRRDListViewData", "chamado");
-		String rrd =
-				context.getResources().getString(R.string.rrd_ait_number)
-					+ Routine.getNewline(1)
-					+ aitNumber
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(R.string.rrd_number)
-					+ Routine.getNewline(1)
-					+ rrdNumber
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(R.string.rrd_get_from)
-					+ Routine.getNewline(1)
-					+ driverName
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(R.string.rrd_crlv_number)
-					+ Routine.getNewline(1)
-					+ crlvNumber
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(R.string.rrd_register_number)
-					+ Routine.getNewline(1)
-					+ registrationNumber
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(R.string.rrd_validity)
-					+ Routine.getNewline(1)
-					+ validity
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(R.string.rrd_state)
-					+ Routine.getNewline(1)
-					+ plateState
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(
-					R.string.rrd_qty_of_days_to_regularization)
-					+ Routine.getNewline(1)
-					+ daysForRegularization
-					+ Routine.getNewline(2)
-					+ context.getResources().getString(
-					R.string.rrd_reason_for_collection) + Routine.getNewline(1)
-					+ reasonCollected + Routine.getNewline(2);
+		Log.d("getRRDListViewData", "chamado - AIT: " + aitNumber + ", RRD: " + rrdNumber);
+		
+		try {
+			StringBuilder rrd = new StringBuilder();
+			
+			// Número AIT
+			rrd.append(context.getResources().getString(R.string.rrd_ait_number))
+			   .append(Routine.getNewline(1))
+			   .append(aitNumber != null ? aitNumber : "")
+			   .append(Routine.getNewline(2));
+			
+			// Número RRD
+			rrd.append(context.getResources().getString(R.string.rrd_number))
+			   .append(Routine.getNewline(1))
+			   .append(rrdNumber != null ? rrdNumber : "")
+			   .append(Routine.getNewline(2));
+			
+			// Recebemos de
+			rrd.append(context.getResources().getString(R.string.rrd_get_from))
+			   .append(Routine.getNewline(1))
+			   .append(driverName != null ? driverName : "")
+			   .append(Routine.getNewline(2));
+			
+			// Número CRLV
+			rrd.append(context.getResources().getString(R.string.rrd_crlv_number))
+			   .append(Routine.getNewline(1))
+			   .append(crlvNumber != null ? crlvNumber : "")
+			   .append(Routine.getNewline(2));
+			
+			// Registro
+			rrd.append(context.getResources().getString(R.string.rrd_register_number))
+			   .append(Routine.getNewline(1))
+			   .append(registrationNumber != null ? registrationNumber : "")
+			   .append(Routine.getNewline(2));
+			
+			// Validade
+			rrd.append(context.getResources().getString(R.string.rrd_validity))
+			   .append(Routine.getNewline(1))
+			   .append(validity != null ? validity : "")
+			   .append(Routine.getNewline(2));
+			
+			// UF
+			rrd.append(context.getResources().getString(R.string.rrd_state))
+			   .append(Routine.getNewline(1))
+			   .append(plateState != null ? plateState : "")
+			   .append(Routine.getNewline(2));
+			
+			// Dias para regularização
+			rrd.append(context.getResources().getString(R.string.rrd_qty_of_days_to_regularization))
+			   .append(Routine.getNewline(1))
+			   .append(daysForRegularization != null ? daysForRegularization : "")
+			   .append(Routine.getNewline(2));
+			
+			// Motivo para recolhimento
+			rrd.append(context.getResources().getString(R.string.rrd_reason_for_collection))
+			   .append(Routine.getNewline(1))
+			   .append(reasonCollected != null ? reasonCollected : "")
+			   .append(Routine.getNewline(2));
 
-		return rrd;
-
+			String result = rrd.toString();
+			Log.d("getRRDListViewData", "Resultado gerado com " + result.length() + " caracteres");
+			return result;
+			
+		} catch (Exception e) {
+			Log.e("getRRDListViewData", "Erro ao gerar dados da lista", e);
+			return "Erro ao carregar dados do documento";
+		}
 	}
 
 	public void setRRDDataFromCursor(@Nullable Cursor cursor) {
-		if (cursor == null || !cursor.moveToFirst()) {
+		if (cursor == null) {
+			Log.w("RRDData", "Cursor é null");
 			clearRRDData();
 			return;
 		}
 
 		try {
+			// Não mover o cursor, apenas ler da posição atual
+			// O adapter já posicionou o cursor corretamente
+			
 			// Mapa de colunas para setters
 			Map<String, Consumer<String>> columnSetters = new HashMap<>();
 			columnSetters.put(RrdDatabaseHelper.RRD_NUMBER, this::setRrdNumber);
@@ -270,14 +300,17 @@ public class RrdData implements Serializable {
 			columnSetters.forEach((column, setter) ->
 					setter.accept(getStringSafe(cursor, column)));
 
+			Log.d("RRDData", "Dados carregados: AIT=" + aitNumber + ", RRD=" + rrdNumber);
+
 		} catch (SQLException e) {
 			Log.e("RRDData", "Erro ao ler dados do cursor", e);
 			clearRRDData();
-		} finally {
-			if (cursor != null && !cursor.isClosed()) {
-				cursor.close(); // Garante que o cursor seja fechado
-			}
+		} catch (Exception e) {
+			Log.e("RRDData", "Erro geral ao processar cursor", e);
+			clearRRDData();
 		}
+		// Removido o bloco finally que fechava o cursor
+		// O cursor deve ser gerenciado pelo adapter, não por este método
 	}
 
 	private String getStringSafe(@NonNull Cursor cursor, String columnName) {

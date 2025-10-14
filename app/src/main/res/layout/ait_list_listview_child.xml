@@ -57,15 +57,19 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal" >
 
-        <Button
+        <ImageButton
             android:id="@+id/btn_print_ait"
-            style="?android:attr/buttonStyleSmall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
             android:layout_marginRight="@dimen/width_margin_8"
-            android:background="@drawable/print_normal" />
+            android:layout_marginTop="4dp"
+            android:background="@drawable/print_button_background"
+            android:src="@drawable/ic_printer_vector"
+            android:contentDescription="@string/ait_print_title"
+            android:scaleType="centerInside"
+            android:padding="8dp" />
 
         <Button
             android:id="@+id/btn_new_ait"

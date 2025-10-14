@@ -148,7 +148,8 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		// final int gPosition = groupPosition;
 		TextView tvAitChildView;
 		FrameLayout fragmentContainerAit;
-		Button btnOpenTav, btnOpenTca, btnOpenRrd, btnPrintAit, btnNewAit;
+		Button btnOpenTav, btnOpenTca, btnOpenRrd, btnNewAit;
+		android.widget.ImageButton btnPrintAit;
 
 		View mView = view != null ? view : mInflator.inflate(R.layout.ait_list_listview_child,
 				parent, false);
@@ -171,7 +172,7 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		btnOpenTav = (Button) mView.findViewById(R.id.btn_open_tav);
 		btnOpenTca = (Button) mView.findViewById(R.id.btn_open_tca);
 		btnOpenRrd = (Button) mView.findViewById(R.id.btn_open_rrd);
-		btnPrintAit = (Button) mView.findViewById(R.id.btn_print_ait);
+		btnPrintAit = (android.widget.ImageButton) mView.findViewById(R.id.btn_print_ait);
 		btnNewAit = (Button) mView.findViewById(R.id.btn_new_ait);
 
 		btnNewAit.setOnClickListener(new OnClickListener() {
