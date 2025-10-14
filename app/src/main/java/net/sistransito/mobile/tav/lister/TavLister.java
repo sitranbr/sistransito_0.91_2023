@@ -21,11 +21,23 @@ import net.sistransito.R;
 
 public class TavLister extends BasePrintActivity implements OnClickListener {
     private Cursor cursor;
+    private TavData expandTavData;
+    private boolean shouldExpand = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tav_lister_main);
+        
+        // Verificar se deve expandir um TAV específico
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            shouldExpand = extras.getBoolean("SHOULD_EXPAND", false);
+            if (shouldExpand) {
+                expandTavData = (TavData) extras.getSerializable("EXPAND_TAV_DATA");
+            }
+        }
+        
         initializedView();
     }
 
@@ -79,6 +91,37 @@ public class TavLister extends BasePrintActivity implements OnClickListener {
                 TavLister.this);
         ExpandableListView expandableListView = (ExpandableListView) findViewById(R.id.expandable_ListView_Tav);
         expandableListView.setAdapter(expandableAdapter);
+        
+        // Se deve expandir um TAV específico, encontrar e expandir
+        if (shouldExpand && expandTavData != null) {
+            expandSpecificTav(expandableListView, expandableAdapter);
+        }
+    }
+
+    /**
+     * Expande automaticamente o TAV específico na listagem
+     */
+    private void expandSpecificTav(ExpandableListView expandableListView, TAVListerExpandableAdapter adapter) {
+        try {
+            // Buscar o grupo que corresponde ao TAV específico
+            for (int i = 0; i < adapter.getGroupCount(); i++) {
+                android.database.Cursor groupCursor = adapter.getGroup(i);
+                if (groupCursor != null && !groupCursor.isClosed()) {
+                    String tavNumber = groupCursor.getString(groupCursor.getColumnIndex(net.sistransito.mobile.database.TavDatabaseHelper.TAV_NUMBER));
+                    String aitNumber = groupCursor.getString(groupCursor.getColumnIndex(net.sistransito.mobile.database.TavDatabaseHelper.AIT_NUMBER));
+                    
+                    // Verificar se é o TAV que queremos expandir
+                    if (expandTavData.getTavNumber().equals(tavNumber) && 
+                        expandTavData.getAitNumber().equals(aitNumber)) {
+                        // Expandir este grupo
+                        expandableListView.expandGroup(i);
+                        break;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            android.util.Log.e("TavLister", "Erro ao expandir TAV específico", e);
+        }
     }
 
     @Override

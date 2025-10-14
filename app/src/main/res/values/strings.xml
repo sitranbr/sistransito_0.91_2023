@@ -633,6 +633,7 @@
     <string name="rrd_loose">RRD avulso</string>
     <string name="tav_loose">TAV avulso</string>
     <string name="tca_loose">TCA avulso</string>
+    <string name="info_tav">Informações do TAV</string>
     <string name="tav">TAV</string>
     <string name="tca">TCA</string>
     <string name="rrd">RRD</string>

@@ -371,4 +371,63 @@ public class TavDatabaseAdapter {
 				TavDatabaseHelper.TAV_NUMBER + "=?",
 				new String[] { numero_tav });
 	}
+
+	/**
+	 * Verifica se já existe um TAV associado ao número do AIT
+	 * @param aitNumber Número do AIT
+	 * @return true se existe TAV para o AIT, false caso contrário
+	 */
+	public boolean existsTavForAit(String aitNumber) {
+		Cursor cursor = null;
+		try {
+			cursor = this.database.query(
+				TavDatabaseHelper.TABLE_NAME,
+				new String[]{TavDatabaseHelper.TAV_NUMBER},
+				TavDatabaseHelper.AIT_NUMBER + "=?",
+				new String[]{aitNumber},
+				null, null, null
+			);
+			return cursor.getCount() > 0;
+		} catch (Exception e) {
+			Log.e("TavDatabaseAdapter", "Erro ao verificar TAV para AIT: " + aitNumber, e);
+			return false;
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+	}
+
+	/**
+	 * Busca o TAV existente associado ao número do AIT
+	 * @param aitNumber Número do AIT
+	 * @return TavData do TAV encontrado ou null se não existir
+	 */
+	public TavData getTavByAitNumber(String aitNumber) {
+		Cursor cursor = null;
+		try {
+			cursor = this.database.query(
+				TavDatabaseHelper.TABLE_NAME,
+				null,
+				TavDatabaseHelper.AIT_NUMBER + "=?",
+				new String[]{aitNumber},
+				null, null, null
+			);
+			
+			if (cursor.getCount() > 0) {
+				cursor.moveToFirst();
+				TavData tavData = new TavData();
+				tavData.setTAVDataFromCursor(cursor);
+				return tavData;
+			}
+			return null;
+		} catch (Exception e) {
+			Log.e("TavDatabaseAdapter", "Erro ao buscar TAV por AIT: " + aitNumber, e);
+			return null;
+		} finally {
+			if (cursor != null) {
+				cursor.close();
+			}
+		}
+	}
 }

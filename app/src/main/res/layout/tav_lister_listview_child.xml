@@ -34,7 +34,7 @@
             android:layout_centerVertical="true"
             android:layout_marginLeft="@dimen/width_margin_8"
             android:layout_marginRight="60dp"
-            android:text="@string/printing"
+            android:text="@string/info_tav"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/black"
             android:textStyle="bold"

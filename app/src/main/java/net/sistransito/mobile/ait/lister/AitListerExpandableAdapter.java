@@ -175,6 +175,18 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		btnPrintAit = (android.widget.ImageButton) mView.findViewById(R.id.btn_print_ait);
 		btnNewAit = (Button) mView.findViewById(R.id.btn_new_ait);
 
+		// Verificar se já existe TAV para este AIT e ajustar visual e comportamento
+		boolean tavExists = DatabaseCreator.getTavDatabaseAdapter(context).existsTavForAit(aitData.getAitNumber());
+		if (tavExists) {
+			btnOpenTav.setEnabled(true);
+			btnOpenTav.setBackgroundResource(R.drawable.btn_tav_view);
+			btnOpenTav.setText(context.getString(R.string.tav) + " (Ver)");
+		} else {
+			btnOpenTav.setEnabled(true);
+			btnOpenTav.setBackgroundResource(R.drawable.btn_green);
+			btnOpenTav.setText(context.getString(R.string.tav));
+		}
+
 		btnNewAit.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -194,13 +206,21 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 
 			@Override
 			public void onClick(View arg0) {
-				TavData data = new TavData();
-				data.setPlate(aitData.getPlate());
-				data.setAitNumber(aitData.getAitNumber());
-				data.setChassisNumber(aitData.getChassi());
-				data.setRenavamNumber(aitData.getRenavam());
-				openTAV(data);
-
+				// Verificar se já existe TAV para este AIT
+				boolean tavExists = DatabaseCreator.getTavDatabaseAdapter(context).existsTavForAit(aitData.getAitNumber());
+				
+				if (tavExists) {
+					// Se TAV já existe, navegar para o TAV existente
+					openExistingTav(aitData.getAitNumber());
+				} else {
+					// Se TAV não existe, criar novo TAV
+					TavData data = new TavData();
+					data.setPlate(aitData.getPlate());
+					data.setAitNumber(aitData.getAitNumber());
+					data.setChassisNumber(aitData.getChassi());
+					data.setRenavamNumber(aitData.getRenavam());
+					openTAV(data);
+				}
 			}
 		});
 
@@ -341,6 +361,114 @@ public class AitListerExpandableAdapter extends CursorTreeAdapter {
 		intent.putExtras(bundle);
 		context.startActivity(intent);
 		((Activity) context).finish();
+	}
+
+	/**
+	 * Abre o TAV existente associado ao AIT em um diálogo
+	 * @param aitNumber Número do AIT
+	 */
+	private void openExistingTav(String aitNumber) {
+		try {
+			TavData existingTav = DatabaseCreator.getTavDatabaseAdapter(context).getTavByAitNumber(aitNumber);
+			if (existingTav != null) {
+				showTavInfoDialog(existingTav);
+			} else {
+				android.widget.Toast.makeText(context, "TAV não encontrado", android.widget.Toast.LENGTH_SHORT).show();
+			}
+		} catch (Exception e) {
+			android.util.Log.e("AitListerAdapter", "Erro ao buscar TAV existente", e);
+			android.widget.Toast.makeText(context, "Erro ao carregar informações do TAV", android.widget.Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	/**
+	 * Mostra um diálogo com as informações do TAV
+	 * @param tavData Dados do TAV
+	 */
+	private void showTavInfoDialog(TavData tavData) {
+		android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(context);
+		builder.setTitle("Informações do TAV");
+		
+		// Criar layout para mostrar as informações
+		android.widget.LinearLayout layout = new android.widget.LinearLayout(context);
+		layout.setOrientation(android.widget.LinearLayout.VERTICAL);
+		layout.setPadding(32, 32, 32, 32);
+		
+		// Adicionar informações do TAV
+		addInfoRow(layout, "Número do TAV:", tavData.getTavNumber());
+		addInfoRow(layout, "Número do AIT:", tavData.getAitNumber());
+		addInfoRow(layout, "Placa:", tavData.getPlate());
+		addInfoRow(layout, "Nome do Proprietário:", tavData.getOwnerName());
+		addInfoRow(layout, "Chassi:", tavData.getChassisNumber());
+		addInfoRow(layout, "Renavam:", tavData.getRenavamNumber());
+		
+		builder.setView(layout);
+		builder.setPositiveButton("Fechar", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
+		
+		// Opção para ir para a listagem completa
+		builder.setNeutralButton("Ver Lista Completa", new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+				// Navegar para a listagem completa com o TAV específico para expansão
+				openTavListerWithExpansion(tavData);
+			}
+		});
+		
+		android.app.AlertDialog dialog = builder.create();
+		dialog.show();
+	}
+
+	/**
+	 * Navega para o TavLister com o TAV específico para expansão automática
+	 * @param tavData Dados do TAV que deve ser expandido
+	 */
+	private void openTavListerWithExpansion(TavData tavData) {
+		try {
+			Intent intent = new Intent(context, net.sistransito.mobile.tav.lister.TavLister.class);
+			Bundle bundle = new Bundle();
+			bundle.putSerializable("EXPAND_TAV_DATA", tavData);
+			bundle.putBoolean("SHOULD_EXPAND", true);
+			intent.putExtras(bundle);
+			context.startActivity(intent);
+			((Activity) context).finish();
+		} catch (Exception e) {
+			android.util.Log.e("AitListerAdapter", "Erro ao abrir TavLister com expansão", e);
+			android.widget.Toast.makeText(context, "Erro ao abrir listagem de TAVs", android.widget.Toast.LENGTH_SHORT).show();
+		}
+	}
+
+	/**
+	 * Adiciona uma linha de informação ao layout
+	 */
+	private void addInfoRow(android.widget.LinearLayout layout, String label, String value) {
+		android.widget.LinearLayout rowLayout = new android.widget.LinearLayout(context);
+		rowLayout.setOrientation(android.widget.LinearLayout.HORIZONTAL);
+		rowLayout.setPadding(0, 8, 0, 8);
+		
+		TextView labelView = new TextView(context);
+		labelView.setText(label);
+		labelView.setTextAppearance(context, android.R.style.TextAppearance_Medium);
+		labelView.setTextColor(android.graphics.Color.BLACK);
+		labelView.setTypeface(null, android.graphics.Typeface.BOLD);
+		labelView.setLayoutParams(new android.widget.LinearLayout.LayoutParams(0, 
+			android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 0.4f));
+		
+		TextView valueView = new TextView(context);
+		valueView.setText(value != null ? value : "N/A");
+		valueView.setTextAppearance(context, android.R.style.TextAppearance_Medium);
+		valueView.setTextColor(android.graphics.Color.BLACK);
+		valueView.setLayoutParams(new android.widget.LinearLayout.LayoutParams(0, 
+			android.widget.LinearLayout.LayoutParams.WRAP_CONTENT, 0.6f));
+		
+		rowLayout.addView(labelView);
+		rowLayout.addView(valueView);
+		layout.addView(rowLayout);
 	}
 
 }
